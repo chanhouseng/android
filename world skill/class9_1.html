@@ -58,6 +58,8 @@ findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
     <button class="accordion">畫畫</button>
     <div class="panel">
         <pre>
+import android.graphics.Path
+        
 class MainActivity2 : AppCompatActivity() {
     private lateinit var main: ConstraintLayout
     private lateinit var imageView: ImageView
@@ -83,7 +85,7 @@ class MainActivity2 : AppCompatActivity() {
             strokeWidth = 30f    <span>//線條寬度設為 30 像素。</span>
             isAntiAlias = true    <span>//讓斜線或圓弧的邊緣不會有鋸齒狀的馬賽克。</span>
             strokeJoin = Paint.Join.ROUND    <span>//線條轉角和結尾都是圓滑的</span>
-            strokeCap = Paint.Cap.ROUND     <span>//讓線條更平滑、没有鋸齒</span>
+            strokeCap = Paint.Cap.ROUND     <span>//「線條的頭尾」是圓弧的。</span>
         }
 
         val path = Path()    <span>//用來記錄手指移動的軌跡</span>
