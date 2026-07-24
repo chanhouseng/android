@@ -1,0 +1,1237 @@
+{
+  "summary": {
+    "openMatches": 12,
+    "soldOutMatches": 3,
+    "vipSeatsRemaining": 45
+  },
+  "profile": {
+    "name": "Marco Rossi",
+    "email": "marco@example.com",
+    "favoriteTeam": "Brazil"
+  },
+  "matches": [
+    {
+      "id": "2026001",
+      "homeTeam": "France",
+      "awayTeam": "Germany",
+      "stadium": "National Stadium",
+      "distance": "2.5 km",
+      "date": "2026-06-20",
+      "time": "18:00",
+      "status": "OPEN",
+      "overview": {
+        "description": "France vs Germany",
+        "categories": [
+          {
+            "name": "Category 3",
+            "price": 80
+          },
+          {
+            "name": "Category 2",
+            "price": 120
+          },
+          {
+            "name": "Category 1",
+            "price": 180
+          },
+          {
+            "name": "VIP",
+            "price": 250
+          }
+        ],
+        "amenities": [
+          "Parking",
+          "Fan Zone",
+          "Wheelchair Access",
+          "Merchandise"
+        ]
+      },
+      "seatMap": {
+        "VIP": [
+          {
+            "id": "VIP1",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP2",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP3",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP4",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP5",
+            "status": "FREE"
+          }
+        ],
+        "A": [
+          {
+            "id": "A1",
+            "status": "FREE"
+          },
+          {
+            "id": "A2",
+            "status": "FREE"
+          },
+          {
+            "id": "A3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "A4",
+            "status": "FREE"
+          },
+          {
+            "id": "A5",
+            "status": "FREE"
+          }
+        ],
+        "B": [
+          {
+            "id": "B1",
+            "status": "FREE"
+          },
+          {
+            "id": "B2",
+            "status": "FREE"
+          },
+          {
+            "id": "B3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "B4",
+            "status": "FREE"
+          },
+          {
+            "id": "B5",
+            "status": "FREE"
+          }
+        ],
+        "C": [
+          {
+            "id": "C1",
+            "status": "FREE"
+          },
+          {
+            "id": "C2",
+            "status": "FREE"
+          },
+          {
+            "id": "C3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "C4",
+            "status": "FREE"
+          },
+          {
+            "id": "C5",
+            "status": "FREE"
+          }
+        ],
+        "D": [
+          {
+            "id": "D1",
+            "status": "FREE"
+          },
+          {
+            "id": "D2",
+            "status": "FREE"
+          },
+          {
+            "id": "D3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "D4",
+            "status": "FREE"
+          },
+          {
+            "id": "D5",
+            "status": "FREE"
+          }
+        ]
+      }
+    },
+    {
+      "id": "2026002",
+      "homeTeam": "Spain",
+      "awayTeam": "England",
+      "stadium": "Unity Stadium",
+      "distance": "3.2 km",
+      "date": "2026-06-22",
+      "time": "17:00",
+      "status": "SOLD_OUT",
+      "overview": {
+        "description": "Spain vs England",
+        "categories": [
+          {
+            "name": "Category 3",
+            "price": 100
+          },
+          {
+            "name": "Category 2",
+            "price": 110
+          },
+          {
+            "name": "Category 1",
+            "price": 140
+          },
+          {
+            "name": "VIP",
+            "price": 180
+          }
+        ],
+        "amenities": [
+          "Parking",
+          "Fan Zone",
+          "Wheelchair Access",
+          "Merchandise"
+        ]
+      },
+      "seatMap": {
+        "VIP": [
+          {
+            "id": "VIP1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "VIP2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "VIP3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "VIP4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "VIP5",
+            "status": "TAKEN"
+          }
+        ],
+        "A": [
+          {
+            "id": "A1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "A2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "A3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "A4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "A5",
+            "status": "TAKEN"
+          }
+        ],
+        "B": [
+          {
+            "id": "B1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "B2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "B3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "B4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "B5",
+            "status": "TAKEN"
+          }
+        ],
+        "C": [
+          {
+            "id": "C1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "C2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "C3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "C4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "C5",
+            "status": "TAKEN"
+          }
+        ],
+        "D": [
+          {
+            "id": "D1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "D2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "D3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "D4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "D5",
+            "status": "TAKEN"
+          }
+        ]
+      }
+    },
+    {
+      "id": "2026003",
+      "homeTeam": "Portugal",
+      "awayTeam": "Italy",
+      "stadium": "National Stadium",
+      "distance": "2.5 km",
+      "date": "2026-06-20",
+      "time": "18:00",
+      "status": "SOLD_OUT",
+      "overview": {
+        "description": "Portugal vs Italy",
+        "categories": [
+          {
+            "name": "Category 3",
+            "price": 65
+          },
+          {
+            "name": "Category 2",
+            "price": 85
+          },
+          {
+            "name": "Category 1",
+            "price": 100
+          },
+          {
+            "name": "VIP",
+            "price": 115
+          }
+        ],
+        "amenities": [
+          "Parking",
+          "Fan Zone",
+          "Wheelchair Access",
+          "Merchandise"
+        ]
+      },
+      "seatMap": {
+        "VIP": [
+          {
+            "id": "VIP1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "VIP2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "VIP3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "VIP4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "VIP5",
+            "status": "TAKEN"
+          }
+        ],
+        "A": [
+          {
+            "id": "A1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "A2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "A3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "A4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "A5",
+            "status": "TAKEN"
+          }
+        ],
+        "B": [
+          {
+            "id": "B1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "B2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "B3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "B4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "B5",
+            "status": "TAKEN"
+          }
+        ],
+        "C": [
+          {
+            "id": "C1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "C2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "C3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "C4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "C5",
+            "status": "TAKEN"
+          }
+        ],
+        "D": [
+          {
+            "id": "D1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "D2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "D3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "D4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "D5",
+            "status": "TAKEN"
+          }
+        ]
+      }
+    },
+    {
+      "id": "2026004",
+      "homeTeam": "Argentina",
+      "awayTeam": "Netherlands",
+      "stadium": "National Stadium",
+      "distance": "2.5 km",
+      "date": "2026-06-21",
+      "time": "18:00",
+      "status": "OPEN",
+      "overview": {
+        "description": "Argentina vs Netherlands",
+        "categories": [
+          {
+            "name": "Category 3",
+            "price": 110
+          },
+          {
+            "name": "Category 2",
+            "price": 120
+          },
+          {
+            "name": "Category 1",
+            "price": 150
+          },
+          {
+            "name": "VIP",
+            "price": 200
+          }
+        ],
+        "amenities": [
+          "Parking",
+          "Fan Zone",
+          "Wheelchair Access",
+          "Merchandise"
+        ]
+      },
+      "seatMap": {
+        "VIP": [
+          {
+            "id": "VIP1",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP2",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP3",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP4",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP5",
+            "status": "FREE"
+          }
+        ],
+        "A": [
+          {
+            "id": "A1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "A2",
+            "status": "FREE"
+          },
+          {
+            "id": "A3",
+            "status": "FREE"
+          },
+          {
+            "id": "A4",
+            "status": "FREE"
+          },
+          {
+            "id": "A5",
+            "status": "FREE"
+          }
+        ],
+        "B": [
+          {
+            "id": "B1",
+            "status": "FREE"
+          },
+          {
+            "id": "B2",
+            "status": "FREE"
+          },
+          {
+            "id": "B3",
+            "status": "FREE"
+          },
+          {
+            "id": "B4",
+            "status": "FREE"
+          },
+          {
+            "id": "B5",
+            "status": "FREE"
+          }
+        ],
+        "C": [
+          {
+            "id": "C1",
+            "status": "FREE"
+          },
+          {
+            "id": "C2",
+            "status": "FREE"
+          },
+          {
+            "id": "C3",
+            "status": "FREE"
+          },
+          {
+            "id": "C4",
+            "status": "FREE"
+          },
+          {
+            "id": "C5",
+            "status": "FREE"
+          }
+        ],
+        "D": [
+          {
+            "id": "D1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "D2",
+            "status": "FREE"
+          },
+          {
+            "id": "D3",
+            "status": "FREE"
+          },
+          {
+            "id": "D4",
+            "status": "FREE"
+          },
+          {
+            "id": "D5",
+            "status": "FREE"
+          }
+        ]
+      }
+    },
+    {
+      "id": "2026005",
+      "homeTeam": "Japan",
+      "awayTeam": "South Korea",
+      "stadium": "National Stadium",
+      "distance": "2.5 km",
+      "date": "2026-06-20",
+      "time": "18:00",
+      "status": "SOLD_OUT",
+      "overview": {
+        "description": "Japan vs South Korea",
+        "categories": [
+          {
+            "name": "Category 3",
+            "price": 65
+          },
+          {
+            "name": "Category 2",
+            "price": 85
+          },
+          {
+            "name": "Category 1",
+            "price": 100
+          },
+          {
+            "name": "VIP",
+            "price": 115
+          }
+        ],
+        "amenities": [
+          "Parking",
+          "Fan Zone",
+          "Wheelchair Access",
+          "Merchandise"
+        ]
+      },
+      "seatMap": {
+        "VIP": [
+          {
+            "id": "VIP1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "VIP2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "VIP3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "VIP4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "VIP5",
+            "status": "TAKEN"
+          }
+        ],
+        "A": [
+          {
+            "id": "A1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "A2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "A3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "A4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "A5",
+            "status": "TAKEN"
+          }
+        ],
+        "B": [
+          {
+            "id": "B1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "B2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "B3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "B4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "B5",
+            "status": "TAKEN"
+          }
+        ],
+        "C": [
+          {
+            "id": "C1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "C2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "C3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "C4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "C5",
+            "status": "TAKEN"
+          }
+        ],
+        "D": [
+          {
+            "id": "D1",
+            "status": "TAKEN"
+          },
+          {
+            "id": "D2",
+            "status": "TAKEN"
+          },
+          {
+            "id": "D3",
+            "status": "TAKEN"
+          },
+          {
+            "id": "D4",
+            "status": "TAKEN"
+          },
+          {
+            "id": "D5",
+            "status": "TAKEN"
+          }
+        ]
+      }
+    },
+    {
+      "id": "2026006",
+      "homeTeam": "USA",
+      "awayTeam": "Mexico",
+      "stadium": "National Stadium",
+      "distance": "2.5 km",
+      "date": "2026-06-20",
+      "time": "18:00",
+      "status": "OPEN",
+      "overview": {
+        "description": "USA vs Mexico",
+        "categories": [
+          {
+            "name": "Category 3",
+            "price": 65
+          },
+          {
+            "name": "Category 2",
+            "price": 85
+          },
+          {
+            "name": "Category 1",
+            "price": 100
+          },
+          {
+            "name": "VIP",
+            "price": 115
+          }
+        ],
+        "amenities": [
+          "Parking",
+          "Fan Zone",
+          "Wheelchair Access",
+          "Merchandise"
+        ]
+      },
+      "seatMap": {
+        "VIP": [
+          {
+            "id": "VIP1",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP2",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP3",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP4",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP5",
+            "status": "FREE"
+          }
+        ],
+        "A": [
+          {
+            "id": "A1",
+            "status": "FREE"
+          },
+          {
+            "id": "A2",
+            "status": "FREE"
+          },
+          {
+            "id": "A3",
+            "status": "FREE"
+          },
+          {
+            "id": "A4",
+            "status": "FREE"
+          },
+          {
+            "id": "A5",
+            "status": "FREE"
+          }
+        ],
+        "B": [
+          {
+            "id": "B1",
+            "status": "FREE"
+          },
+          {
+            "id": "B2",
+            "status": "FREE"
+          },
+          {
+            "id": "B3",
+            "status": "FREE"
+          },
+          {
+            "id": "B4",
+            "status": "FREE"
+          },
+          {
+            "id": "B5",
+            "status": "FREE"
+          }
+        ],
+        "C": [
+          {
+            "id": "C1",
+            "status": "FREE"
+          },
+          {
+            "id": "C2",
+            "status": "FREE"
+          },
+          {
+            "id": "C3",
+            "status": "FREE"
+          },
+          {
+            "id": "C4",
+            "status": "FREE"
+          },
+          {
+            "id": "C5",
+            "status": "FREE"
+          }
+        ],
+        "D": [
+          {
+            "id": "D1",
+            "status": "FREE"
+          },
+          {
+            "id": "D2",
+            "status": "FREE"
+          },
+          {
+            "id": "D3",
+            "status": "FREE"
+          },
+          {
+            "id": "D4",
+            "status": "FREE"
+          },
+          {
+            "id": "D5",
+            "status": "FREE"
+          }
+        ]
+      }
+    },
+    {
+      "id": "2026007",
+      "homeTeam": "Belgium",
+      "awayTeam": "Croatia",
+      "stadium": "National Stadium",
+      "distance": "2.5 km",
+      "date": "2026-06-20",
+      "time": "18:00",
+      "status": "SOLD_OUT",
+      "overview": {
+        "description": "Belgium vs Croatia",
+        "categories": [
+          {
+            "name": "Category 3",
+            "price": 65
+          },
+          {
+            "name": "Category 2",
+            "price": 85
+          },
+          {
+            "name": "Category 1",
+            "price": 100
+          },
+          {
+            "name": "VIP",
+            "price": 115
+          }
+        ],
+        "amenities": [
+          "Parking",
+          "Fan Zone",
+          "Wheelchair Access",
+          "Merchandise"
+        ]
+      },
+      "seatMap": {
+        "VIP": [
+          {
+            "id": "VIP1",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP2",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP3",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP4",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP5",
+            "status": "FREE"
+          }
+        ],
+        "A": [
+          {
+            "id": "A1",
+            "status": "FREE"
+          },
+          {
+            "id": "A2",
+            "status": "FREE"
+          },
+          {
+            "id": "A3",
+            "status": "FREE"
+          },
+          {
+            "id": "A4",
+            "status": "FREE"
+          },
+          {
+            "id": "A5",
+            "status": "FREE"
+          }
+        ],
+        "B": [
+          {
+            "id": "B1",
+            "status": "FREE"
+          },
+          {
+            "id": "B2",
+            "status": "FREE"
+          },
+          {
+            "id": "B3",
+            "status": "FREE"
+          },
+          {
+            "id": "B4",
+            "status": "FREE"
+          },
+          {
+            "id": "B5",
+            "status": "FREE"
+          }
+        ],
+        "C": [
+          {
+            "id": "C1",
+            "status": "FREE"
+          },
+          {
+            "id": "C2",
+            "status": "FREE"
+          },
+          {
+            "id": "C3",
+            "status": "FREE"
+          },
+          {
+            "id": "C4",
+            "status": "FREE"
+          },
+          {
+            "id": "C5",
+            "status": "FREE"
+          }
+        ],
+        "D": [
+          {
+            "id": "D1",
+            "status": "FREE"
+          },
+          {
+            "id": "D2",
+            "status": "FREE"
+          },
+          {
+            "id": "D3",
+            "status": "FREE"
+          },
+          {
+            "id": "D4",
+            "status": "FREE"
+          },
+          {
+            "id": "D5",
+            "status": "FREE"
+          }
+        ]
+      }
+    },
+    {
+      "id": "2026008",
+      "homeTeam": "Brazil",
+      "awayTeam": "Germany",
+      "stadium": "National Stadium",
+      "distance": "2.5 km",
+      "date": "2026-06-20",
+      "time": "18:00",
+      "status": "OPEN",
+      "overview": {
+        "description": "Brazil vs Germany",
+        "categories": [
+          {
+            "name": "Category 3",
+            "price": 65
+          },
+          {
+            "name": "Category 2",
+            "price": 85
+          },
+          {
+            "name": "Category 1",
+            "price": 100
+          },
+          {
+            "name": "VIP",
+            "price": 115
+          }
+        ],
+        "amenities": [
+          "Parking",
+          "Fan Zone",
+          "Wheelchair Access",
+          "Merchandise"
+        ]
+      },
+      "seatMap": {
+        "VIP": [
+          {
+            "id": "VIP1",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP2",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP3",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP4",
+            "status": "FREE"
+          },
+          {
+            "id": "VIP5",
+            "status": "FREE"
+          }
+        ],
+        "A": [
+          {
+            "id": "A1",
+            "status": "FREE"
+          },
+          {
+            "id": "A2",
+            "status": "FREE"
+          },
+          {
+            "id": "A3",
+            "status": "FREE"
+          },
+          {
+            "id": "A4",
+            "status": "FREE"
+          },
+          {
+            "id": "A5",
+            "status": "FREE"
+          }
+        ],
+        "B": [
+          {
+            "id": "B1",
+            "status": "FREE"
+          },
+          {
+            "id": "B2",
+            "status": "FREE"
+          },
+          {
+            "id": "B3",
+            "status": "FREE"
+          },
+          {
+            "id": "B4",
+            "status": "FREE"
+          },
+          {
+            "id": "B5",
+            "status": "FREE"
+          }
+        ],
+        "C": [
+          {
+            "id": "C1",
+            "status": "FREE"
+          },
+          {
+            "id": "C2",
+            "status": "FREE"
+          },
+          {
+            "id": "C3",
+            "status": "FREE"
+          },
+          {
+            "id": "C4",
+            "status": "FREE"
+          },
+          {
+            "id": "C5",
+            "status": "FREE"
+          }
+        ],
+        "D": [
+          {
+            "id": "D1",
+            "status": "FREE"
+          },
+          {
+            "id": "D2",
+            "status": "FREE"
+          },
+          {
+            "id": "D3",
+            "status": "FREE"
+          },
+          {
+            "id": "D4",
+            "status": "FREE"
+          },
+          {
+            "id": "D5",
+            "status": "FREE"
+          }
+        ]
+      }
+    }
+  ],
+  "tickets": [
+    {
+      "ticketId": 1,
+      "matchId": "2026004",
+      "stadium": "River Stadium",
+      "homeTeam": "Brazil",
+      "awayTeam": "Argentina",
+      "date": "2026-06-21",
+      "time": "20:00",
+      "seats": [
+        "D1"
+      ],
+      "ticketCount": 1,
+      "total": 65.00
+    },
+    {
+      "ticketId": 2,
+      "matchId": "2026002",
+      "stadium": "Unity Stadium",
+      "homeTeam": "Spain",
+      "awayTeam": "England",
+      "date": "2026-06-22",
+      "time": "17:00",
+      "seats": [
+        "C1",
+        "C2"
+      ],
+      "ticketCount": 2,
+      "total": 220.00
+    }
+  ]
+}

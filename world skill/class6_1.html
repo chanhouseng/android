@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+        <h3>NumberPicker</h3>
+        <mark>val numberPicker: NumberPicker = findViewById(R.id.numberPicker)</mark>  <span>//喺xml要自己打NumberPicker</span>
+        numberPicker.minValue = 100   <span>//好似冇用</span>
+        numberPicker.maxValue = 200
+        numberPicker.value = 140
+
+        val numberPicker2: NumberPicker = findViewById(R.id.numberPicker2)
+        numberPicker2.maxValue = 1  <span>//第二項</span>
+        numberPicker.minValue = 0   <span>//第一項</span>
+        <mark>numberPicker2.displayedValues = arrayOf("AM", "PM")</mark>
+
+<span>-------------------------------------------------------------------------------------------------------------------------------</span>
+
+        <h3>載入website</h3>
+        val webView : WebView = findViewById(R.id.webView)
+        <mark>webView.settings.javaScriptEnabled = true</mark>    <span>//可以load javaScript</span>
+        <mark>webView.loadUrl("https://www.library.gov.mo/zh-hant/")</mark>
+
+<span>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+        <h3>數組處理</h3>
+        val intArray = intArrayOf(3, 5, 1, 2, 10, 7, 8, 9, 9, 1)
+        var intArray2 = intArray.filter { it &gt;= 5 }.toIntArray()  <span>//filter之後會變list</span>
+        val random = intArray2.random()        <span>//隨便攞一個數字</span>
+        intArray.shuffle()                     <span>//打亂數組</span>
+        intArray.reverse()                     <span>//倒轉數組</span>
+        intArray2.sort()                       <span>//排序 小-&gt;大</span>
+        intArray2.sortDescending()             <span>// 大 -&gt; 小</span>
+        val array = arrayOf("aaas", "bs", "dzz", "c")
+        array.sort()                           <span>//先大寫排序、再字串排</span>
+        array.sortBy { it.length }             <span>//按字的長度排</span>
+        val arrayNew = intArray.take(2)        <span>//攞幾個元素</span>
+        val disArray = intArray.distinct()     <span>//刪去重復的</span>
+        val add10Array = intArray.map {        <span>//將成個數值整體處理</span>
+            it + 10
+        }
+        findViewById&lt;TextView&gt;(R.id.textView).text = add10Array.joinToString { it.toString() } <span>//IntArray必用, 將每個元素toString()</span>
+
+        val nameArray = arrayOf("Daniel", "Jason", "Andy", "Joe")
+        val nameNew = nameArray.filter { it.length &gt;= 5 }.map {    <span>//用filter篩選名字length&gt;=5的, 再將佢地整體加*</span>
+            it + "*"
+        }
+        val nameNew = nameArray.map {      <span>//如果唔夠5個長度, 就喺後面加*直到5 (padStart前面)</span>
+            it.padEnd(5, '*')
+        }
+        Toast.makeText(this, nameNew.joinToString(), Toast.LENGTH_SHORT).show()
+
+<span>-------------------------------------------------------------------------------------------------------------------------------</span>
+
+        <h3>ValueAnimator</h3>
+        val valueAnnotation = ValueAnimator.ofInt(0, 100)                <span>//// 建立從 0 到 100 的整數動畫</span>
+        valueAnnotation.duration = 2000                                  <span>// 動畫持續2秒</span>
+        valueAnnotation.interpolator = DecelerateInterpolator()          <span>// 減速插值器（越到後面越慢）</span>
+        var value = 0
+        <mark>valueAnnotation.addUpdateListener {</mark>
+            value = it.animatedValue as Int                              <span>animatedValue 的值會從 0 平滑地變化到 100, 就將其俾值俾value, 再show到textView</span>
+            findViewById&lt;TextView&gt;(R.id.textView2).text = value.toString()
+        }
+        findViewById&lt;TextView&gt;(R.id.textView).setOnClickListener {
+            valueAnnotation.start()                                      <span>開始動畫</span>
+        }
+
+        val valueAnim = ValueAnimator.ofInt(0, 300)
+        valueAnim.duration = 1500
+        var value = 0
+        valueAnim.addUpdateListener {
+            value = it.animatedValue as Int
+            findViewById&lt;LinearLayout&gt;(R.id.linearLayout).layoutParams.height = value    <span>//把 LinearLayout 的高度動態改成 value 的數值</span>
+            findViewById&lt;LinearLayout&gt;(R.id.linearLayout).requestLayout()                <span>//通知 Android View 系統：「我的尺寸變了，請重新計算佈局並重繪。」</span>
+        }
+        findViewById&lt;TextView&gt;(R.id.textView).setOnClickListener {
+            valueAnim.start()
+        }
+
+<span>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+        <h3>Copy 文字</h3>
+        findViewById&lt;TextView&gt;(R.id.textView3).setOnClickListener {
+            val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager                                   
+            <span>// 取得系統的剪貼簿管理器</span>
+            val clip = ClipData.newPlainText("label",findViewById&lt;TextView&gt;(R.id.textView3).text.toString())
+            <span>// 建立一個純文字的 ClipData，準備要複製的內容</span>
+            <span>// 第一個參數 "label" 是標籤（給系統看的，通常不重要）</span>
+            clipboard.setPrimaryClip(clip)
+            <span>// 把剛建立的內容設定為目前主要的剪貼簿內容</span>
+
+            Toast.makeText(this, "copied", Toast.LENGTH_SHORT).show()
+        }
+
+<span>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+        <h3>MediaPlayer 播音樂</h3>     
+
+        <mark>要先放音樂檔 res-> new -> folder -> raw resources folder 建立完就拉啲檔入去</mark>
+
+        <mark>val mediaButton : MediaPlayer = MediaPlayer.create(this, R.raw.coin)</mark>
+        mediaPlayer = MediaPlayer.create(this, R.raw.bgm)    <span>//選音樂路徑</span>
+        mediaPlayer.isLooping = true              <span>//設置會否重複播放</span>
+        mediaPlayer.start()
+        mediaPlayer.setVolume(0.2f, 0.2f)
+        findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
+            mediaButton.start()
+            mediaButton.setVolume(2f, 2f)          <span>//設置大細聲</span>
+        }
+
+<span>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+        <h3>滑動方向偵測</h3>
+        var startX = 0f
+        var startY = 0f
+        val touchText = findViewById&lt;TextView&gt;(R.id.textView4)
+        val linear : LinearLayout = findViewById(R.id.linear2)
+        <mark>linear.setOnTouchListener { _, event -&gt;</mark>
+            when(event.action){
+                MotionEvent.ACTION_UP -&gt; {
+                    startX = event.x
+                    startY = event.y
+                }
+
+                MotionEvent.ACTION_DOWN -&gt; {
+                    val moveX = event.x
+                    val moveY = event.y
+
+                    val deltaX = moveX - startX
+                    val deltaY = moveY - startY
+                     if(Math.abs(deltaX) &gt; Math.abs(deltaY)){
+                         if(deltaX &gt; 0){
+                             touchText.text = "左滑"
+                         }
+                         else{
+                             touchText.text = "右滑"
+                         }
+                     }
+                    else{
+                        if(deltaY &gt; 0){
+                            touchText.text = "下滑"
+                        }
+                         else{
+                             touchText.text = "上滑"
+                        }
+                     }
+                }
+            }
+            true
+        }
+
+<span>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+        <h3>VideoView 影片播放器</h3>  <span>//影片唔可以太大</span>
+        val videoView = findViewById&lt;VideoView&gt;(R.id.videoView)
+       <mark> val uri = Uri.parse("android.resource://$packageName/${R.raw.home}")</mark>  <span>//影片路徑</span>
+        videoView.setVideoURI(uri)         <span>// 設定影片來源</span>
+        videoView.requestFocus()           <span>// 請求焦點 讓 VideoView 能接收按鍵控制?</span>
+        videoView.start()
+
+
+    override fun onResume() {
+        super.onResume()
+        mediaPlayer.start()   <span>// 回到畫面 → 繼續播放</span>
+    }
+    override fun onPause() {
+        super.onPause()
+        mediaPlayer.pause()   <span>// 畫面離開前景（被遮住、切到其他 App）→ 暫停播放</span>
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mediaPlayer.stop()    <span>// 畫面完全不可見 → 停止播放</span>
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer.release() <span>// Activity 即將被銷毀 → 釋放資源</span>
+    }
+
+<span>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+    <h3>設置文字字型</h3>     
+
+        <mark>要先放字型檔 res-> new -> folder -> font folder 建立完就拉啲檔入去</mark>
+
+        <mark>android:fontFamily="@font/playfair_display_regular"</mark>
+    </pre>
+</div>
+<script src="js.js"></script>
+</body>
+</html>

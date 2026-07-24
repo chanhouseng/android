@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homework1</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="width: 100vw;">
+    <h1>homework1</h1>
+    <button class="accordion">Data.kt</button>
+    <div class="panel">
+        <pre>
+class Data {
+    companion object{
+        var playerList = arrayListOf&lt;player&gt;()
+
+        var oldUser = false
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity.ky</button>
+    <div class="panel">
+        <pre>
+val textView : TextView = findViewById(R.id.textView)
+var number = 3
+val countDownTimer = object : CountDownTimer(3000, 1000){
+    override fun onFinish() {
+        val intent = Intent(this@MainActivity, MainActivity2::class.java)
+        startActivity(intent)
+    }
+
+    override fun onTick(millisUntilFinished: Long) {
+        textView.text = "Reacts to colors in ${number} seconds"
+        number--
+    }
+}
+countDownTimer.start()
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt</button>
+    <div class="panel">
+        <pre>
+class MainActivity2 : AppCompatActivity() {
+    private lateinit var imageView1: ImageView
+    private lateinit var imageView2: ImageView
+    private lateinit var imageView3: ImageView
+    private lateinit var imageView4: ImageView
+    private lateinit var imageView5: ImageView
+    private lateinit var imageView9: ImageView
+    private lateinit var imageView8: ImageView
+    private lateinit var imageView7: ImageView
+    private lateinit var imageView6: ImageView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main2)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
+        <span> -- start --</span>
+        var imgNumber = -1
+        imageView1 = findViewById(R.id.imageView1)
+        imageView2 = findViewById(R.id.imageView2)
+        imageView3 = findViewById(R.id.imageView3)
+        imageView4 = findViewById(R.id.imageView4)
+        imageView5 = findViewById(R.id.imageView5)
+        imageView6 = findViewById(R.id.imageView6)
+        imageView7 = findViewById(R.id.imageView7)
+        imageView8 = findViewById(R.id.imageView8)
+        imageView9 = findViewById(R.id.imageView9)
+        imageView1.setOnClickListener { clickImg(1)
+            imgNumber = 1}
+        imageView2.setOnClickListener { clickImg(2)
+            imgNumber = 2}
+        imageView3.setOnClickListener { clickImg(3)
+            imgNumber = 3}
+        imageView4.setOnClickListener { clickImg(4)
+            imgNumber = 4}
+        imageView5.setOnClickListener { clickImg(5)
+            imgNumber = 5}
+        imageView6.setOnClickListener { clickImg(6)
+            imgNumber = 6}
+        imageView7.setOnClickListener { clickImg(7)
+            imgNumber = 7}
+        imageView8.setOnClickListener { clickImg(8)
+            imgNumber = 8}
+        imageView9.setOnClickListener { clickImg(9)
+            imgNumber = 9}
+
+        val nextButton: CardView = findViewById(R.id.nextButton)
+        nextButton.setOnClickListener {
+            if(imgNumber != -1 && findViewById&lt;EditText&gt;(R.id.editTextText).text.toString().trim() != ""){
+                val intent = Intent(this, MainActivity3::class.java)
+                intent.putExtra("name", findViewById&lt;EditText&gt;(R.id.editTextText).text.toString())
+                when(imgNumber){
+                    1 -&gt; intent.putExtra("img", "img_1")
+                    2 -&gt; intent.putExtra("img", "img_2")
+                    3 -&gt; intent.putExtra("img", "img_3")
+                    4 -&gt; intent.putExtra("img", "img_4")
+                    5 -&gt; intent.putExtra("img", "img_5")
+                    6 -&gt; intent.putExtra("img", "img_6")
+                    7 -&gt; intent.putExtra("img", "img_7")
+                    8 -&gt; intent.putExtra("img", "img_8")
+                    9 -&gt; intent.putExtra("img", "img_9")
+                }
+                startActivity(intent)
+            }
+            else{
+                Toast.makeText(this@MainActivity2, "please input all information", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+    }
+
+    fun clickImg(number: Int){
+        imageView1.setBackgroundResource(0)
+        imageView2.setBackgroundResource(0)
+        imageView3.setBackgroundResource(0)
+        imageView4.setBackgroundResource(0)
+        imageView5.setBackgroundResource(0)
+        imageView6.setBackgroundResource(0)
+        imageView7.setBackgroundResource(0)
+        imageView8.setBackgroundResource(0)
+        imageView9.setBackgroundResource(0)
+        when(number){
+            1 -&gt; imageView1.setBackgroundResource(R.drawable.next_stoken)
+            2 -&gt; imageView2.setBackgroundResource(R.drawable.next_stoken)
+            3 -&gt; imageView3.setBackgroundResource(R.drawable.next_stoken)
+            4 -&gt; imageView4.setBackgroundResource(R.drawable.next_stoken)
+            5 -&gt; imageView5.setBackgroundResource(R.drawable.next_stoken)
+            6 -&gt; imageView6.setBackgroundResource(R.drawable.next_stoken)
+            7 -&gt; imageView7.setBackgroundResource(R.drawable.next_stoken)
+            8 -&gt; imageView8.setBackgroundResource(R.drawable.next_stoken)
+            9 -&gt; imageView9.setBackgroundResource(R.drawable.next_stoken)
+        }
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity3.kt</button>
+    <div class="panel">
+        <pre>
+class MainActivity3 : AppCompatActivity() {
+    private lateinit var oval1: CardView
+    private lateinit var oval2: CardView
+    private lateinit var oval3: CardView
+    private lateinit var linearLayout1: LinearLayout
+    private lateinit var linearLayout2: LinearLayout
+    private lateinit var linearLayout3: LinearLayout
+    val transitionArray = arrayOf(0, 450, 900)
+    val colorName = arrayOf("YELLOW", "GREEN", "PURPLE", "RED", "BLUE", "ORANGE")
+    val colorRBG = arrayOf("#FFC700", "#00A991", "#C00DCF", "#CF0505", "#10A8FE", "#FFA500")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main3)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
+        <span> -- start --</span>
+        oval1 = findViewById(R.id.oval1)
+        oval2 = findViewById(R.id.oval2)
+        oval3 = findViewById(R.id.oval3)
+        linearLayout1 = findViewById(R.id.linearLayout1)
+        linearLayout2 = findViewById(R.id.linearLayout2)
+        linearLayout3 = findViewById(R.id.linearLayout3)
+        val imageView1: ImageView = findViewById(R.id.imageView1)
+        val imageView2: ImageView = findViewById(R.id.imageView2)
+        val imageView3: ImageView = findViewById(R.id.imageView3)
+        val textView : TextView = findViewById(R.id.color)
+        val score: TextView = findViewById(R.id.textView8)
+        var grade = 0
+        val name = intent.getStringExtra("name").toString()
+        val img = intent.getStringExtra("img").toString()
+        val imageView12: ImageView = findViewById(R.id.imageView12)
+        imageView12.setImageResource(resources.getIdentifier(img, "drawable", packageName))
+        findViewById&lt;TextView&gt;(R.id.name).text = name
+
+        val countDownTimer = object : CountDownTimer(2000, 2000){
+            override fun onFinish() {
+                val intents = Intent(this@MainActivity3, MainActivity4::class.java)
+                var newId = intent.getIntExtra("id", 0)
+                if(newId == 0){
+                    newId = if(Data.playerList.size == 0) 1 else Data.playerList.last().id + 1
+                }
+                if(Data.oldUser){
+                    val newOne = Data.playerList.find { it.id == newId }
+                    newOne?.score = grade
+                }
+                else{
+                    Data.playerList.add(player( newId, name, img, grade))
+                }
+                Toast.makeText(this@MainActivity3, newId.toString(), Toast.LENGTH_SHORT).show()
+                intents.putExtra("id", newId)
+                intents.putExtra("name", name)
+                intents.putExtra("img", img)
+                intents.putExtra("grade", grade)
+                startActivity(intents)
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                val randomNumber = (0..5).random()
+                val colorNew1 = colorRBG.filter { it != colorRBG[randomNumber] }
+                val color1 = colorNew1.random()
+                val color2 = colorNew1.filter { it != color1 }.random()
+                val tranY1 = (0..2).random()
+                val tranNew1 = transitionArray.filter { it != transitionArray[tranY1] }
+                val tranY2 = tranNew1.random()
+                val tranY3 = tranNew1.filter { it != tranY2 }.random()
+                linearLayout1.setBackgroundColor(Color.parseColor(colorRBG[randomNumber]))
+                linearLayout2.setBackgroundColor(Color.parseColor(color1))
+                linearLayout3.setBackgroundColor(Color.parseColor(color2))
+                textView.setText(colorName[randomNumber])
+                oval1.translationY = transitionArray[tranY1].toFloat()
+                textView.setTextColor(Color.parseColor(colorRBG[randomNumber]))
+                oval2.translationY = tranY2.toFloat()
+                oval3.translationY = tranY3.toFloat()
+                var number2 = 0
+                val countDownTimer2 = object : CountDownTimer(2000, 500){
+                    override fun onFinish() {
+                        imageView1.setImageResource(0)
+                        cancel()
+                    }
+
+                    override fun onTick(millisUntilFinished: Long) {
+                        when(number2){
+                            0 -&gt; {imageView1.setImageResource(R.drawable.button2)
+                                imageView2.setImageResource(R.drawable.button2)
+                                imageView3.setImageResource(R.drawable.button2)}
+                            1 -&gt; {imageView1.setImageResource(R.drawable.button3)
+                                imageView2.setImageResource(R.drawable.button3)
+                                imageView3.setImageResource(R.drawable.button3)}
+                            2 -&gt; {imageView1.setImageResource(R.drawable.button4)
+                                imageView2.setImageResource(R.drawable.button4)
+                                imageView3.setImageResource(R.drawable.button4)}
+                        }
+                        number2 ++
+                    }
+
+                }
+                countDownTimer2.start()
+                linearLayout1.setOnClickListener {
+                    cancel()
+                    countDownTimer2.cancel()
+                    start()
+                    grade++
+                    score.text = "Score: $grade"
+                }
+                linearLayout2.setOnClickListener {
+                    cancel()
+                    countDownTimer2.cancel()
+                    onFinish()
+                }
+                linearLayout3.setOnClickListener {
+                    cancel()
+                    countDownTimer2.cancel()
+                    onFinish()
+                }
+            }
+        }
+        countDownTimer.start()
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity4.kt</button>
+    <div class="panel">
+        <pre>
+class MainActivity4 : AppCompatActivity() {
+    private lateinit var linearLayout: LinearLayout
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main4)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        linearLayout = findViewById(R.id.linearLayout)
+        val name = intent.getStringExtra("name")
+        val imgId = resources.getIdentifier(intent.getStringExtra("img"), "drawable", packageName)
+        val layoutNew = layoutInflater.inflate(R.layout.product, null)
+        layoutNew.findViewById&lt;TextView&gt;(R.id.name).text = name
+        layoutNew.findViewById&lt;TextView&gt;(R.id.score).text = "Score: ${intent.getIntExtra("grade", 0)}"
+        layoutNew.findViewById&lt;ImageView&gt;(R.id.imageView).setImageResource(imgId)
+        linearLayout.addView(layoutNew)
+        findViewById&lt;ImageView&gt;(R.id.imageView12).setImageResource(imgId)
+        Data.oldUser = false
+        findViewById&lt;TextView&gt;(R.id.name).text = name
+        val nowId = intent.getIntExtra("id", 0)
+        val playArray = Data.playerList.filter { it.id != nowId }.sortedByDescending { it.score }
+        val playList = arrayListOf&lt;player&gt;()
+        if (playArray.size &gt; 9){
+            for(user in playArray){
+                if(playList.size &lt; 9){
+                    playList.add(user)
+                }
+                else{
+                    break
+                }
+            }
+        }
+        else{
+            playList.addAll(playArray)
+        }
+        val button2 : Button = findViewById(R.id.button2)
+        button2.setOnClickListener {
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+        }
+        val button1 : Button = findViewById(R.id.button1)
+        button1.setOnClickListener {
+            Data.oldUser = true
+            val intents = Intent(this@MainActivity4, MainActivity3::class.java)
+            intents.putExtra("name", name)
+            intents.putExtra("img", intent.getStringExtra("img"))
+            intents.putExtra("id", nowId)
+            startActivity(intents)
+        }
+        if(playList.size != 0){
+            for(play in playList){
+                val layout = layoutInflater.inflate(R.layout.product, null)
+                layout.findViewById&lt;TextView&gt;(R.id.name).text = play.name
+                layout.findViewById&lt;TextView&gt;(R.id.score).text = "Score: ${play.score}"
+                layout.setOnClickListener {
+                    Data.oldUser = true
+                    val intent = Intent(this@MainActivity4, MainActivity3::class.java)
+                    intent.putExtra("name", play.name)
+                    intent.putExtra("img", play.imgName)
+                    intent.putExtra("id", play.id)
+                    startActivity(intent)
+                }
+                layout.findViewById&lt;ImageView&gt;(R.id.imageView).setImageResource(resources.getIdentifier(play.imgName, "drawable", packageName))
+                linearLayout.addView(layout)
+            }
+        }
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">activity_main3.xml</button>
+    <div class="panel">
+        <pre>
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity3"&gt;
+
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:orientation="horizontal"&gt;
+        &lt;LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="40dp"
+            android:orientation="horizontal"&gt;
+            &lt;ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:srcCompat="@drawable/img" /&gt;
+
+            &lt;TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="Stroopy" /&gt;
+
+        &lt;/LinearLayout&gt;
+        &lt;LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical"&gt;
+            &lt;ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:srcCompat="@drawable/img_1" /&gt;
+
+            &lt;TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:text="TextView" /&gt;
+        &lt;/LinearLayout&gt;
+    &lt;/LinearLayout&gt;
+
+    &lt;TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:translationY="-27dp"
+        android:textColor="#00A991 "
+        android:text="Score: 0" /&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"&gt;
+        &lt;androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="30dp"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="4dp"&gt;
+
+            &lt;LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"&gt;
+
+                &lt;TextView
+                    android:id="@+id/color"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="TextView"
+                    android:textAlignment="center"
+                    android:textSize="60sp"
+                    android:textStyle="bold" /&gt;
+
+                &lt;FrameLayout
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"&gt;
+
+                    &lt;androidx.cardview.widget.CardView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:id="@+id/oval1"
+                        app:cardCornerRadius="999dp"&gt;
+
+                        &lt;LinearLayout
+                            android:id="@+id/linearLayout1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#00A991"
+                            android:gravity="center"
+                            android:orientation="vertical"&gt;
+
+                            &lt;ImageView
+                                android:id="@+id/imageView1"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/button1" /&gt;
+                        &lt;/LinearLayout&gt;
+                    &lt;/androidx.cardview.widget.CardView&gt;
+                    &lt;androidx.cardview.widget.CardView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:id="@+id/oval2"
+                        app:cardCornerRadius="999dp"&gt;
+
+                        &lt;LinearLayout
+                            android:id="@+id/linearLayout2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#00A991"
+                            android:gravity="center"
+                            android:orientation="vertical"&gt;
+
+                            &lt;ImageView
+                                android:id="@+id/imageView2"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/button1" /&gt;
+                        &lt;/LinearLayout&gt;
+                    &lt;/androidx.cardview.widget.CardView&gt;
+
+                    &lt;androidx.cardview.widget.CardView
+                        android:layout_width="150dp"
+                        android:id="@+id/oval3"
+                        android:layout_height="150dp"
+                        app:cardCornerRadius="999dp"&gt;
+
+                        &lt;LinearLayout
+                            android:id="@+id/linearLayout3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#00A991"
+                            android:gravity="center"
+                            android:orientation="vertical"&gt;
+
+                            &lt;ImageView
+                                android:id="@+id/imageView3"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/button1" /&gt;
+                        &lt;/LinearLayout&gt;
+                    &lt;/androidx.cardview.widget.CardView&gt;
+                &lt;/FrameLayout&gt;
+            &lt;/LinearLayout&gt;
+
+        &lt;/androidx.cardview.widget.CardView&gt;
+    &lt;/LinearLayout&gt;
+&lt;/LinearLayout&gt;
+        </pre>
+    </div>
+    <button class="accordion">知識點</button>
+    <div class="panel">
+        <pre>
+//没有特別的的知識點，就是透過兩個countDownTimer去循環，先設一個linearLayout1永遠正確，然後就random他們的位置和顏色。
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

@@ -1,0 +1,822 @@
+[
+  {
+    "id": "SCH001",
+    "name": "Aarav Sharma",
+    "country": "India",
+    "university": "IIT Delhi",
+    "primarySkillId": "SK001",
+    "skillMatch": 81,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Busy",
+    "profileImage": "scholars/sch_001.png",
+    "field": "Cloud Computing • Distributed Systems Enthusiast",
+    "location": "New Delhi, India",
+    "badges": [
+      "WorldSkills Aspirant",
+      "IndiaSkills Participant"
+    ],
+    "bio": "Passionate about scalable cloud architecture and distributed systems. Actively preparing for global skill competitions and looking to collaborate on cloud-native projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master container orchestration with Kubernetes",
+      "Prepare for WorldSkills Cloud Computing category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "AWS",
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+      "Linux",
+      "Python"
+    ],
+    "competitionHistory": [
+      {
+        "title": "IndiaSkills Nationals 2023",
+        "detail": "Cloud Computing Category • Silver Medalist"
+      },
+      {
+        "title": "Smart India Hackathon 2022",
+        "detail": "Cloud Edition • Finalist Team Lead"
+      }
+    ]
+  },
+  {
+    "id": "SCH002",
+    "name": "Ananya Gupta",
+    "country": "India",
+    "university": "IIT Delhi",
+    "primarySkillId": "SK002",
+    "skillMatch": 82,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Offline",
+    "profileImage": "scholars/sch_002.png",
+    "field": "Cyber Security • Ethical Hacking Enthusiast",
+    "location": "New Delhi, India",
+    "badges": [
+      "WorldSkills Aspirant",
+      "IndiaSkills Participant"
+    ],
+    "bio": "Focused on network defence and ethical hacking. Actively preparing for global skill competitions and looking to collaborate on security research projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master advanced penetration testing techniques",
+      "Prepare for WorldSkills Cyber Security category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "Kali Linux",
+      "Wireshark",
+      "Metasploit",
+      "Python",
+      "Network Security",
+      "Cryptography"
+    ],
+    "competitionHistory": [
+      {
+        "title": "IndiaSkills Nationals 2023",
+        "detail": "Cyber Security Category • Bronze Medalist"
+      },
+      {
+        "title": "National CTF Challenge 2022",
+        "detail": "Capture The Flag • Top 10 Finalist"
+      }
+    ]
+  },
+  {
+    "id": "SCH003",
+    "name": "Haruto Sato",
+    "country": "Japan",
+    "university": "University of Tokyo",
+    "primarySkillId": "SK003",
+    "skillMatch": 83,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Online",
+    "profileImage": "scholars/sch_003.png",
+    "field": "Information Technology • Business Solutions Enthusiast",
+    "location": "Tokyo, Japan",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Enjoys building software solutions that solve real business problems. Actively preparing for global skill competitions and looking to collaborate on enterprise application projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master enterprise application architecture patterns",
+      "Prepare for WorldSkills IT Software Solutions category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "C#",
+      ".NET",
+      "SQL Server",
+      "Azure",
+      "REST APIs",
+      "Git"
+    ],
+    "competitionHistory": [
+      {
+        "title": "WorldSkills Asia Regional Qualifier 2023",
+        "detail": "IT Software Solutions for Business • Silver Medalist"
+      },
+      {
+        "title": "National Business App Challenge 2022",
+        "detail": "Enterprise Track • Finalist Team Lead"
+      }
+    ]
+  },
+  {
+    "id": "SCH004",
+    "name": "Yui Tanaka",
+    "country": "Japan",
+    "university": "University of Tokyo",
+    "primarySkillId": "SK004",
+    "skillMatch": 84,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Busy",
+    "profileImage": "scholars/sch_004.png",
+    "field": "Computer Science Engineering • Web Technologies Enthusiast",
+    "location": "Tokyo, Japan",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Passionate about building fast, accessible web experiences. Actively preparing for global skill competitions and looking to collaborate on front-end and full-stack projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master modern front-end frameworks (React, Vue)",
+      "Prepare for WorldSkills Web Technologies category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "HTML/CSS",
+      "TypeScript",
+      "Git"
+    ],
+    "competitionHistory": [
+      {
+        "title": "IndiaSkills Nationals 2023",
+        "detail": "Web Technologies Category • Gold Medalist"
+      },
+      {
+        "title": "Smart India Hackathon 2022",
+        "detail": "Web Edition • Finalist Team Lead"
+      }
+    ]
+  },
+  {
+    "id": "SCH005",
+    "name": "Min-jun Kim",
+    "country": "South Korea",
+    "university": "KAIST",
+    "primarySkillId": "SK005",
+    "skillMatch": 85,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Offline",
+    "profileImage": "scholars/sch_005.png",
+    "field": "Information Technology • Network Administration Enthusiast",
+    "location": "Daejeon, South Korea",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Interested in enterprise network design and systems administration. Actively preparing for global skill competitions and looking to collaborate on infrastructure projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master enterprise routing and switching (CCNP-level)",
+      "Prepare for WorldSkills IT Network Systems Administration category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "Cisco IOS",
+      "Linux",
+      "Windows Server",
+      "VMware",
+      "Networking",
+      "Bash Scripting"
+    ],
+    "competitionHistory": [
+      {
+        "title": "WorldSkills Asia Regional Qualifier 2023",
+        "detail": "IT Network Systems Administration • Silver Medalist"
+      },
+      {
+        "title": "National Networking Olympiad 2022",
+        "detail": "Infrastructure Track • Top 5 Finalist"
+      }
+    ]
+  },
+  {
+    "id": "SCH006",
+    "name": "Seo-yeon Lee",
+    "country": "South Korea",
+    "university": "KAIST",
+    "primarySkillId": "SK006",
+    "skillMatch": 86,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Online",
+    "profileImage": "scholars/sch_006.png",
+    "field": "Computer Science Engineering • Quality Assurance Enthusiast",
+    "location": "Daejeon, South Korea",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Enjoys breaking software to make it better. Actively preparing for global skill competitions and looking to collaborate on automated testing projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master test automation frameworks (Selenium, Playwright)",
+      "Prepare for WorldSkills Software Testing category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "Selenium",
+      "Java",
+      "Postman",
+      "JIRA",
+      "Test Automation",
+      "SQL"
+    ],
+    "competitionHistory": [
+      {
+        "title": "IndiaSkills Nationals 2023",
+        "detail": "Software Testing Category • Bronze Medalist"
+      },
+      {
+        "title": "National QA Challenge 2022",
+        "detail": "Automation Track • Finalist Team Lead"
+      }
+    ]
+  },
+  {
+    "id": "SCH007",
+    "name": "Lucas Silva",
+    "country": "Brazil",
+    "university": "University of São Paulo",
+    "primarySkillId": "SK007",
+    "skillMatch": 87,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Busy",
+    "profileImage": "scholars/sch_007.png",
+    "field": "Computer Science Engineering • AI/ML Enthusiast",
+    "location": "São Paulo, Brazil",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Passionate Computer Science student with a strong focus on Machine Learning and Data Science. Actively preparing for global skill competitions and looking to collaborate on innovative AI projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master Advanced Deep Learning frameworks (PyTorch)",
+      "Prepare for WorldSkills Mobile Robotics category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "Python",
+      "TensorFlow",
+      "Data Structures",
+      "C++",
+      "Git",
+      "Robotics"
+    ],
+    "competitionHistory": [
+      {
+        "title": "IndiaSkills Nationals 2023",
+        "detail": "Mobile Robotics Category • Silver Medalist"
+      },
+      {
+        "title": "Smart India Hackathon 2022",
+        "detail": "Software Edition • Finalist Team Lead"
+      }
+    ]
+  },
+  {
+    "id": "SCH008",
+    "name": "Maria Oliveira",
+    "country": "Brazil",
+    "university": "University of São Paulo",
+    "primarySkillId": "SK008",
+    "skillMatch": 88,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Offline",
+    "profileImage": "scholars/sch_008.png",
+    "field": "Information Technology • Structured Cabling Enthusiast",
+    "location": "São Paulo, Brazil",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Interested in structured cabling design and physical layer infrastructure. Actively preparing for global skill competitions and looking to collaborate on network deployment projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master fibre optic termination and testing",
+      "Prepare for WorldSkills Information Network Cabling category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "Structured Cabling",
+      "Fibre Optics",
+      "Cat6/Cat6a",
+      "Cable Testing",
+      "Network Design",
+      "Safety Standards"
+    ],
+    "competitionHistory": [
+      {
+        "title": "WorldSkills Asia Regional Qualifier 2023",
+        "detail": "Information Network Cabling • Bronze Medalist"
+      },
+      {
+        "title": "National Skills Cabling Challenge 2022",
+        "detail": "Structured Cabling Track • Top 5 Finalist"
+      }
+    ]
+  },
+  {
+    "id": "SCH009",
+    "name": "Chi Hou",
+    "country": "Macau",
+    "university": "University of Macau",
+    "primarySkillId": "SK001",
+    "skillMatch": 89,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Online",
+    "profileImage": "scholars/sch_009.png",
+    "field": "Cloud Computing • Distributed Systems Enthusiast",
+    "location": "Macau, Macau",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Passionate about scalable cloud architecture and distributed systems. Actively preparing for global skill competitions and looking to collaborate on cloud-native projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master container orchestration with Kubernetes",
+      "Prepare for WorldSkills Cloud Computing category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "AWS",
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+      "Linux",
+      "Python"
+    ],
+    "competitionHistory": [
+      {
+        "title": "IndiaSkills Nationals 2023",
+        "detail": "Cloud Computing Category • Silver Medalist"
+      },
+      {
+        "title": "Smart India Hackathon 2022",
+        "detail": "Cloud Edition • Finalist Team Lead"
+      }
+    ]
+  },
+  {
+    "id": "SCH010",
+    "name": "Lei Wong",
+    "country": "Macau",
+    "university": "University of Macau",
+    "primarySkillId": "SK002",
+    "skillMatch": 90,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Busy",
+    "profileImage": "scholars/sch_010.png",
+    "field": "Cyber Security • Ethical Hacking Enthusiast",
+    "location": "Macau, Macau",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Focused on network defence and ethical hacking. Actively preparing for global skill competitions and looking to collaborate on security research projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master advanced penetration testing techniques",
+      "Prepare for WorldSkills Cyber Security category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "Kali Linux",
+      "Wireshark",
+      "Metasploit",
+      "Python",
+      "Network Security",
+      "Cryptography"
+    ],
+    "competitionHistory": [
+      {
+        "title": "IndiaSkills Nationals 2023",
+        "detail": "Cyber Security Category • Bronze Medalist"
+      },
+      {
+        "title": "National CTF Challenge 2022",
+        "detail": "Capture The Flag • Top 10 Finalist"
+      }
+    ]
+  },
+  {
+    "id": "SCH011",
+    "name": "Jason Wong",
+    "country": "Hong Kong",
+    "university": "HKU",
+    "primarySkillId": "SK003",
+    "skillMatch": 91,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Offline",
+    "profileImage": "scholars/sch_011.png",
+    "field": "Information Technology • Business Solutions Enthusiast",
+    "location": "Hong Kong, Hong Kong",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Enjoys building software solutions that solve real business problems. Actively preparing for global skill competitions and looking to collaborate on enterprise application projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master enterprise application architecture patterns",
+      "Prepare for WorldSkills IT Software Solutions category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "C#",
+      ".NET",
+      "SQL Server",
+      "Azure",
+      "REST APIs",
+      "Git"
+    ],
+    "competitionHistory": [
+      {
+        "title": "WorldSkills Asia Regional Qualifier 2023",
+        "detail": "IT Software Solutions for Business • Silver Medalist"
+      },
+      {
+        "title": "National Business App Challenge 2022",
+        "detail": "Enterprise Track • Finalist Team Lead"
+      }
+    ]
+  },
+  {
+    "id": "SCH012",
+    "name": "Emily Chan",
+    "country": "Hong Kong",
+    "university": "HKU",
+    "primarySkillId": "SK004",
+    "skillMatch": 92,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Online",
+    "profileImage": "scholars/sch_012.png",
+    "field": "Computer Science Engineering • Web Technologies Enthusiast",
+    "location": "Hong Kong, Hong Kong",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Passionate about building fast, accessible web experiences. Actively preparing for global skill competitions and looking to collaborate on front-end and full-stack projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master modern front-end frameworks (React, Vue)",
+      "Prepare for WorldSkills Web Technologies category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "HTML/CSS",
+      "TypeScript",
+      "Git"
+    ],
+    "competitionHistory": [
+      {
+        "title": "IndiaSkills Nationals 2023",
+        "detail": "Web Technologies Category • Gold Medalist"
+      },
+      {
+        "title": "Smart India Hackathon 2022",
+        "detail": "Web Edition • Finalist Team Lead"
+      }
+    ]
+  },
+  {
+    "id": "SCH013",
+    "name": "Ethan Tan",
+    "country": "Singapore",
+    "university": "NUS",
+    "primarySkillId": "SK005",
+    "skillMatch": 93,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Busy",
+    "profileImage": "scholars/sch_013.png",
+    "field": "Information Technology • Network Administration Enthusiast",
+    "location": "Singapore, Singapore",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Interested in enterprise network design and systems administration. Actively preparing for global skill competitions and looking to collaborate on infrastructure projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master enterprise routing and switching (CCNP-level)",
+      "Prepare for WorldSkills IT Network Systems Administration category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "Cisco IOS",
+      "Linux",
+      "Windows Server",
+      "VMware",
+      "Networking",
+      "Bash Scripting"
+    ],
+    "competitionHistory": [
+      {
+        "title": "WorldSkills Asia Regional Qualifier 2023",
+        "detail": "IT Network Systems Administration • Silver Medalist"
+      },
+      {
+        "title": "National Networking Olympiad 2022",
+        "detail": "Infrastructure Track • Top 5 Finalist"
+      }
+    ]
+  },
+  {
+    "id": "SCH014",
+    "name": "Grace Lim",
+    "country": "Singapore",
+    "university": "NUS",
+    "primarySkillId": "SK006",
+    "skillMatch": 94,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Offline",
+    "profileImage": "scholars/sch_014.png",
+    "field": "Computer Science Engineering • Quality Assurance Enthusiast",
+    "location": "Singapore, Singapore",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Enjoys breaking software to make it better. Actively preparing for global skill competitions and looking to collaborate on automated testing projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master test automation frameworks (Selenium, Playwright)",
+      "Prepare for WorldSkills Software Testing category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "Selenium",
+      "Java",
+      "Postman",
+      "JIRA",
+      "Test Automation",
+      "SQL"
+    ],
+    "competitionHistory": [
+      {
+        "title": "IndiaSkills Nationals 2023",
+        "detail": "Software Testing Category • Bronze Medalist"
+      },
+      {
+        "title": "National QA Challenge 2022",
+        "detail": "Automation Track • Finalist Team Lead"
+      }
+    ]
+  },
+  {
+    "id": "SCH015",
+    "name": "Wei Chen",
+    "country": "Taiwan",
+    "university": "National Taiwan University",
+    "primarySkillId": "SK007",
+    "skillMatch": 95,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Online",
+    "profileImage": "scholars/sch_015.png",
+    "field": "Computer Science Engineering • AI/ML Enthusiast",
+    "location": "Taipei, Taiwan",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Passionate Computer Science student with a strong focus on Machine Learning and Data Science. Actively preparing for global skill competitions and looking to collaborate on innovative AI projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master Advanced Deep Learning frameworks (PyTorch)",
+      "Prepare for WorldSkills Mobile Robotics category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "Python",
+      "TensorFlow",
+      "Data Structures",
+      "C++",
+      "Git",
+      "Robotics"
+    ],
+    "competitionHistory": [
+      {
+        "title": "IndiaSkills Nationals 2023",
+        "detail": "Mobile Robotics Category • Silver Medalist"
+      },
+      {
+        "title": "Smart India Hackathon 2022",
+        "detail": "Software Edition • Finalist Team Lead"
+      }
+    ]
+  },
+  {
+    "id": "SCH016",
+    "name": "Yu Lin",
+    "country": "Taiwan",
+    "university": "National Taiwan University",
+    "primarySkillId": "SK008",
+    "skillMatch": 96,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Busy",
+    "profileImage": "scholars/sch_016.png",
+    "field": "Information Technology • Structured Cabling Enthusiast",
+    "location": "Taipei, Taiwan",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Interested in structured cabling design and physical layer infrastructure. Actively preparing for global skill competitions and looking to collaborate on network deployment projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master fibre optic termination and testing",
+      "Prepare for WorldSkills Information Network Cabling category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "Structured Cabling",
+      "Fibre Optics",
+      "Cat6/Cat6a",
+      "Cable Testing",
+      "Network Design",
+      "Safety Standards"
+    ],
+    "competitionHistory": [
+      {
+        "title": "WorldSkills Asia Regional Qualifier 2023",
+        "detail": "Information Network Cabling • Bronze Medalist"
+      },
+      {
+        "title": "National Skills Cabling Challenge 2022",
+        "detail": "Structured Cabling Track • Top 5 Finalist"
+      }
+    ]
+  },
+  {
+    "id": "SCH017",
+    "name": "Arjun Rao",
+    "country": "India",
+    "university": "IIT Delhi",
+    "primarySkillId": "SK001",
+    "skillMatch": 97,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Offline",
+    "profileImage": "scholars/sch_017.png",
+    "field": "Cloud Computing • Distributed Systems Enthusiast",
+    "location": "New Delhi, India",
+    "badges": [
+      "WorldSkills Aspirant",
+      "IndiaSkills Participant"
+    ],
+    "bio": "Passionate about scalable cloud architecture and distributed systems. Actively preparing for global skill competitions and looking to collaborate on cloud-native projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master container orchestration with Kubernetes",
+      "Prepare for WorldSkills Cloud Computing category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "AWS",
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+      "Linux",
+      "Python"
+    ],
+    "competitionHistory": [
+      {
+        "title": "IndiaSkills Nationals 2023",
+        "detail": "Cloud Computing Category • Silver Medalist"
+      },
+      {
+        "title": "Smart India Hackathon 2022",
+        "detail": "Cloud Edition • Finalist Team Lead"
+      }
+    ]
+  },
+  {
+    "id": "SCH018",
+    "name": "Meera Iyer",
+    "country": "India",
+    "university": "IIT Delhi",
+    "primarySkillId": "SK002",
+    "skillMatch": 98,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Online",
+    "profileImage": "scholars/sch_018.png",
+    "field": "Cyber Security • Ethical Hacking Enthusiast",
+    "location": "New Delhi, India",
+    "badges": [
+      "WorldSkills Aspirant",
+      "IndiaSkills Participant"
+    ],
+    "bio": "Focused on network defence and ethical hacking. Actively preparing for global skill competitions and looking to collaborate on security research projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master advanced penetration testing techniques",
+      "Prepare for WorldSkills Cyber Security category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "Kali Linux",
+      "Wireshark",
+      "Metasploit",
+      "Python",
+      "Network Security",
+      "Cryptography"
+    ],
+    "competitionHistory": [
+      {
+        "title": "IndiaSkills Nationals 2023",
+        "detail": "Cyber Security Category • Bronze Medalist"
+      },
+      {
+        "title": "National CTF Challenge 2022",
+        "detail": "Capture The Flag • Top 10 Finalist"
+      }
+    ]
+  },
+  {
+    "id": "SCH019",
+    "name": "Ren Suzuki",
+    "country": "Japan",
+    "university": "University of Tokyo",
+    "primarySkillId": "SK003",
+    "skillMatch": 80,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Busy",
+    "profileImage": "scholars/sch_019.png",
+    "field": "Information Technology • Business Solutions Enthusiast",
+    "location": "Tokyo, Japan",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Enjoys building software solutions that solve real business problems. Actively preparing for global skill competitions and looking to collaborate on enterprise application projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master enterprise application architecture patterns",
+      "Prepare for WorldSkills IT Software Solutions category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "C#",
+      ".NET",
+      "SQL Server",
+      "Azure",
+      "REST APIs",
+      "Git"
+    ],
+    "competitionHistory": [
+      {
+        "title": "WorldSkills Asia Regional Qualifier 2023",
+        "detail": "IT Software Solutions for Business • Silver Medalist"
+      },
+      {
+        "title": "National Business App Challenge 2022",
+        "detail": "Enterprise Track • Finalist Team Lead"
+      }
+    ]
+  },
+  {
+    "id": "SCH020",
+    "name": "Pedro Santos",
+    "country": "Brazil",
+    "university": "University of São Paulo",
+    "primarySkillId": "SK004",
+    "skillMatch": 81,
+    "availability": "Weekday Evenings",
+    "onlineStatus": "Offline",
+    "profileImage": "scholars/sch_020.png",
+    "field": "Computer Science Engineering • Web Technologies Enthusiast",
+    "location": "São Paulo, Brazil",
+    "badges": [
+      "WorldSkills Aspirant",
+      "WorldSkills Asia Participant"
+    ],
+    "bio": "Passionate about building fast, accessible web experiences. Actively preparing for global skill competitions and looking to collaborate on front-end and full-stack projects. Always eager to learn and share knowledge with peers.",
+    "learningGoals": [
+      "Master modern front-end frameworks (React, Vue)",
+      "Prepare for WorldSkills Web Technologies category",
+      "Improve technical interview communication skills"
+    ],
+    "technicalSkills": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "HTML/CSS",
+      "TypeScript",
+      "Git"
+    ],
+    "competitionHistory": [
+      {
+        "title": "IndiaSkills Nationals 2023",
+        "detail": "Web Technologies Category • Gold Medalist"
+      },
+      {
+        "title": "Smart India Hackathon 2022",
+        "detail": "Web Edition • Finalist Team Lead"
+      }
+    ]
+  }
+]

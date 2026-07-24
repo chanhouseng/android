@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">選取文字內容</button>
+    <div class="panel">
+        <pre>
+android:textIsSelectable="true"
+
+<span>--- MainActivity.kt ---</span>
+val textView = findViewById&lt;TextView&gt;(R.id.textView)
+findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
+    val start = textView.selectionStart
+    val end = textView.selectionEnd
+    if(textView.text.substring(start, end).isNotEmpty()){
+        Toast.makeText(this, textView.text.substring(start, end), Toast.LENGTH_SHORT).show()
+    }
+}
+
+        </pre>
+    </div>
+    <button class="accordion">拍照片</button>
+    <div class="panel">
+        <pre>
+    private lateinit var imageView: ImageView
+    private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicturePreview()){bitmap -&gt;    <span>//告訴系統我要使用「拍照預覽」這個功能（會直接返回一張 Bitmap 圖片）。</span>
+        if(bitmap != null){     <span>//當相機拍完照、返回結果時，這個區塊就會被執行。</span>
+            imageView.setImageBitmap(bitmap)
+        }
+    }
+
+
+    findViewById&lt;Button&gt;(R.id.button2).setOnClickListener {
+        takePicture.launch(null)
+    }
+
+        </pre>
+    </div>
+    <button class="accordion">選圖片</button>
+    <div class="panel">
+        <pre>
+    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()){uri -&gt;    <span>//系統會把圖片的 Uri(位置資訊)傳回來。</span>
+        imageView.setImageURI(uri)
+    }
+
+    findViewById&lt;Button&gt;(R.id.button3).setOnClickListener {
+        pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))    <span>//只允許選擇圖片，不讓使用者選影片。</span>
+    }
+
+        </pre>
+    </div>
+    <button class="accordion">畫畫</button>
+    <div class="panel">
+        <pre>
+class MainActivity2 : AppCompatActivity() {
+    private lateinit var main: ConstraintLayout
+    private lateinit var imageView: ImageView
+    private lateinit var originalBitmap: Bitmap
+    private lateinit var mutableBitmap: Bitmap
+    private lateinit var canvas: Canvas
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main2)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
+        main = findViewById(R.id.main)
+        imageView = findViewById(R.id.imageView)
+
+        val paint = Paint().apply{    <span>//建立畫筆設定</span>
+            color = Color.WHITE
+            style = Paint.Style.STROKE
+            strokeWidth = 30f
+            isAntiAlias = true
+            strokeJoin = Paint.Join.ROUND    <span>//線條轉角和結尾都是圓滑的</span>
+            strokeCap = Paint.Cap.ROUND     <span>//讓線條更平滑、没有鋸齒</span>
+        }
+
+        val path = Path()    <span>//用來記錄手指移動的軌跡</span>
+        var lastX = 0f
+        var lastY = 0f
+
+        val width = resources.displayMetrics.widthPixels
+        val height = resources.displayMetrics.heightPixels
+
+        originalBitmap = BitmapFactory.decodeResource(resources, R.drawable.croissant)    <span>//從專案的資料夾裡讀取名為 croissant 的圖片，並轉成 Bitmap 格式。這是原始版本的圖片，程式後面會把它當作「模板」使用。</span>
+        mutableBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true)    <span>//把剛剛載入的 originalBitmap 放大或縮小，變成一張新的 Bitmap。這是可修改版本的 Bitmap。之後畫畫的所有線條都會畫在這張圖片上。</span>
+
+        canvas = Canvas(mutableBitmap)    <span>//建立一個畫布，並把它綁定到 mutableBitmap 這張圖片上。以後都會直接畫在這張 mutableBitmap 上面。</span>
+        imageView.setImageBitmap(mutableBitmap)
+
+        imageView.setOnTouchListener { v, event -&gt;
+            val x = event.x
+            val y = event.y
+
+            when(event.action){
+                MotionEvent.ACTION_DOWN -&gt; {
+                    path.moveTo(x, y)
+                    lastX = x
+                    lastY = y
+                    true
+                }
+
+                MotionEvent.ACTION_MOVE -&gt; {
+                    path.quadTo(lastX, lastY, (lastX+x) / 2, (lastY + y) /2 )
+                    lastX = x
+                    lastY = y
+                    canvas.drawPath(path, paint)
+                    imageView.invalidate()
+                    true
+                }
+
+                MotionEvent.ACTION_UP -&gt; {
+                    path.lineTo(x, y)
+                    canvas.drawPath(path, paint)
+                    path.reset()
+                    imageView.invalidate()
+                    true
+                }
+                else -&gt; false
+            }
+        }
+
+        findViewById&lt;Button&gt;(R.id.button5).setOnClickListener {
+            canvas.drawColor(Color.RED)
+            imageView.invalidate()
+            mutableBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true)
+            canvas = Canvas(mutableBitmap)
+            imageView.setImageBitmap(mutableBitmap)
+        }
+
+        findViewById&lt;Button&gt;(R.id.button6).setOnClickListener {
+            saveLayoutToGallery(main)
+        }
+    }
+
+    fun saveLayoutToGallery(view: View){
+        try {
+            val bitmap = Bitmap.createBitmap(
+                view.width,
+                view.height,
+                Bitmap.Config.ARGB_8888
+            )
+
+            val canvas = Canvas(bitmap)
+            view.draw(canvas)
+
+            saveImageToGallery(bitmap)
+        }catch (e: Exception){
+            Toast.makeText(this, "保存失敗: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun saveImageToGallery(bitmap: Bitmap){
+        try {
+            val fileName = "drawing_${System.currentTimeMillis()}.png"
+
+            val contentValues = ContentValues().apply {
+                put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
+                put(MediaStore.Images.Media.MIME_TYPE, "image/png")
+                put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+            }
+
+            val uri = contentResolver.insert(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                contentValues
+            )
+
+            uri?.let {
+                contentResolver.openOutputStream(it)?.use { stream -&gt;
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                }
+                true
+            }?: false
+
+            Toast.makeText(this, "Save to gallery", Toast.LENGTH_SHORT).show()
+        }catch (e: Exception){
+            Toast.makeText(this, e.message.toString(), Toast.LENGTH_SHORT).show()
+            false
+        }
+    }
+}
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

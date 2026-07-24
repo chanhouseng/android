@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+val switch: Switch = findViewById(R.id.switch1)
+<mark>switch.setOnCheckedChangeListener { _, isChecked -&gt;</mark>
+    if(isChecked){
+        Toast.makeText(this, "yes", Toast.LENGTH_SHORT).show()
+    }
+}
+
+<span>-------------------------------------------------------------------------------------------</span>
+
+val textView = findViewById&lt;TextView&gt;(R.id.textView)
+val seekBar: SeekBar = findViewById(R.id.seekBar)
+<mark>seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{</mark>
+    override fun onProgressChanged(
+        seekBar: SeekBar?,
+        progress: Int,
+        fromUser: Boolean
+    ) {
+        textView.setTextSize(progress.toFloat())    <span>//進度條的數值</span>
+    }
+
+    override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+    }
+
+    override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+    }
+})
+
+<span>-------------------------------------------------------------------------------------------</span>
+
+val button : Button = findViewById(R.id.button)
+val dialogLayout = layoutInflater.inflate(R.layout.product, null)
+<mark>val bottomSheetDialog = BottomSheetDialog(this)</mark>
+val closeButton = dialogLayout.findViewById&lt;Button&gt;(R.id.close)
+closeButton.setOnClickListener {
+    bottomSheetDialog.dismiss()
+}
+<mark>bottomSheetDialog.setContentView(dialogLayout)</mark>          <span>設置bottomSheetDialog畫面</span>
+button.setOnClickListener {
+    bottomSheetDialog.show()       <span>//顯示bottomSheetDialog</span>
+    //bottomSheetDialog.dismiss()
+}
+
+<span>-------------------------------------------------------------------------------------------</span>
+
+findViewById&lt;ImageView&gt;(R.id.imageView).setOnClickListener {
+    <mark>val popupMenu = PopupMenu(this, it)</mark>
+    <mark>popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)</mark>
+    <mark>popupMenu.setOnMenuItemClickListener {</mark>
+        when(it.itemId){
+            R.id.date -&gt; Toast.makeText(this, "date", Toast.LENGTH_SHORT).show()
+            R.id.time -&gt; Toast.makeText(this, "time", Toast.LENGTH_SHORT).show()
+        }
+        true
+    }
+    popupMenu.show()
+}
+
+
+    </pre>
+</div>
+<script src="js.js"></script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+[
+    {
+        "university_id": 1,
+        "user_id": "u123",
+        "user_name": "Alice Johnson",
+        "user_avatar": "avatar1.jpg",
+        "comment": "Great university with excellent facilities."
+    },
+    {
+        "university_id": 1,
+        "user_id": "u124",
+        "user_name": "Bob Smith",
+        "user_avatar": "avatar2.jpg",
+        "comment": "I loved studying here, the campus is beautiful."
+    },
+    {
+        "university_id": 1,
+        "user_id": "u125",
+        "user_name": "Carol White",
+        "user_avatar": "avatar3.jpg",
+        "comment": "The professors are very knowledgeable and helpful."
+    },
+    {
+        "university_id": 2,
+        "user_id": "u126",
+        "user_name": "David Brown",
+        "user_avatar": "avatar4.jpg",
+        "comment": "Had an amazing experience, would highly recommend."
+    },
+    {
+        "university_id": 2,
+        "user_id": "u127",
+        "user_name": "Emma Green",
+        "user_avatar": "avatar5.jpg",
+        "comment": "Lots of opportunities for research and internships."
+    },
+    {
+        "university_id": 2,
+        "user_id": "u128",
+        "user_name": "Frank Harris",
+        "user_avatar": "avatar6.jpg",
+        "comment": "The student community is very supportive."
+    },
+    {
+        "university_id": 3,
+        "user_id": "u129",
+        "user_name": "Grace Lee",
+        "user_avatar": "avatar7.jpg",
+        "comment": "Great location and vibrant city life."
+    },
+    {
+        "university_id": 3,
+        "user_id": "u130",
+        "user_name": "Henry Martin",
+        "user_avatar": "avatar8.jpg",
+        "comment": "The courses are well-structured and informative."
+    },
+    {
+        "university_id": 3,
+        "user_id": "u131",
+        "user_name": "Ivy Nelson",
+        "user_avatar": "avatar9.jpg",
+        "comment": "Fantastic university with a rich history."
+    },
+    {
+        "university_id": 4,
+        "user_id": "u132",
+        "user_name": "Jack O'Brien",
+        "user_avatar": "avatar10.jpg",
+        "comment": "A great place to meet people from all over the world."
+    },
+    {
+        "university_id": 4,
+        "user_id": "u133",
+        "user_name": "Katie Perez",
+        "user_avatar": "avatar1.jpg",
+        "comment": "Great university with excellent facilities."
+    },
+    {
+        "university_id": 4,
+        "user_id": "u134",
+        "user_name": "Liam Roberts",
+        "user_avatar": "avatar2.jpg",
+        "comment": "I loved studying here, the campus is beautiful."
+    },
+    {
+        "university_id": 5,
+        "user_id": "u135",
+        "user_name": "Mia Thompson",
+        "user_avatar": "avatar3.jpg",
+        "comment": "The professors are very knowledgeable and helpful."
+    },
+    {
+        "university_id": 5,
+        "user_id": "u136",
+        "user_name": "Noah Wilson",
+        "user_avatar": "avatar4.jpg",
+        "comment": "Had an amazing experience, would highly recommend."
+    },
+    {
+        "university_id": 5,
+        "user_id": "u137",
+        "user_name": "Olivia Adams",
+        "user_avatar": "avatar5.jpg",
+        "comment": "Lots of opportunities for research and internships."
+    },
+    {
+        "university_id": 6,
+        "user_id": "u138",
+        "user_name": "Peter Scott",
+        "user_avatar": "avatar6.jpg",
+        "comment": "The student community is very supportive."
+    },
+    {
+        "university_id": 6,
+        "user_id": "u139",
+        "user_name": "Quinn Taylor",
+        "user_avatar": "avatar7.jpg",
+        "comment": "Great location and vibrant city life."
+    },
+    {
+        "university_id": 6,
+        "user_id": "u140",
+        "user_name": "Rachel Walker",
+        "user_avatar": "avatar8.jpg",
+        "comment": "The courses are well-structured and informative."
+    },
+    {
+        "university_id": 7,
+        "user_id": "u141",
+        "user_name": "Sam Young",
+        "user_avatar": "avatar9.jpg",
+        "comment": "Fantastic university with a rich history."
+    },
+    {
+        "university_id": 7,
+        "user_id": "u142",
+        "user_name": "Tina Zane",
+        "user_avatar": "avatar10.jpg",
+        "comment": "A great place to meet people from all over the world."
+    },
+    {
+        "university_id": 7,
+        "user_id": "u123",
+        "user_name": "Alice Johnson",
+        "user_avatar": "avatar1.jpg",
+        "comment": "Great university with excellent facilities."
+    },
+    {
+        "university_id": 8,
+        "user_id": "u124",
+        "user_name": "Bob Smith",
+        "user_avatar": "avatar2.jpg",
+        "comment": "I loved studying here, the campus is beautiful."
+    },
+    {
+        "university_id": 8,
+        "user_id": "u125",
+        "user_name": "Carol White",
+        "user_avatar": "avatar3.jpg",
+        "comment": "The professors are very knowledgeable and helpful."
+    },
+    {
+        "university_id": 8,
+        "user_id": "u126",
+        "user_name": "David Brown",
+        "user_avatar": "avatar4.jpg",
+        "comment": "Had an amazing experience, would highly recommend."
+    },
+    {
+        "university_id": 9,
+        "user_id": "u127",
+        "user_name": "Emma Green",
+        "user_avatar": "avatar5.jpg",
+        "comment": "Lots of opportunities for research and internships."
+    },
+    {
+        "university_id": 9,
+        "user_id": "u128",
+        "user_name": "Frank Harris",
+        "user_avatar": "avatar6.jpg",
+        "comment": "The student community is very supportive."
+    },
+    {
+        "university_id": 9,
+        "user_id": "u129",
+        "user_name": "Grace Lee",
+        "user_avatar": "avatar7.jpg",
+        "comment": "Great location and vibrant city life."
+    },
+    {
+        "university_id": 10,
+        "user_id": "u130",
+        "user_name": "Henry Martin",
+        "user_avatar": "avatar8.jpg",
+        "comment": "The courses are well-structured and informative."
+    },
+    {
+        "university_id": 10,
+        "user_id": "u131",
+        "user_name": "Ivy Nelson",
+        "user_avatar": "avatar9.jpg",
+        "comment": "Fantastic university with a rich history."
+    },
+    {
+        "university_id": 10,
+        "user_id": "u132",
+        "user_name": "Jack O'Brien",
+        "user_avatar": "avatar10.jpg",
+        "comment": "A great place to meet people from all over the world."
+    },
+    {
+        "university_id": 10,
+        "user_id": "u133",
+        "user_name": "Katie Perez",
+        "user_avatar": "avatar1.jpg",
+        "comment": "Great university with excellent facilities."
+    }
+]

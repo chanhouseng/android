@@ -1,0 +1,202 @@
+[
+    {
+        "id": 1,
+        "user": {
+            "id": "u123",
+            "name": "Alice Johnson",
+            "photo": "avatar1.jpg"
+        },
+        "last_message": "Hey, did you attend the open day at King's College?",
+        "date": "2024-07-01T10:15:00Z"
+    },
+    {
+        "id": 2,
+        "user": {
+            "id": "u124",
+            "name": "Bob Smith",
+            "photo": "avatar2.jpg"
+        },
+        "last_message": "I found some great scholarships at UCL.",
+        "date": "2024-07-01T11:30:00Z"
+    },
+    {
+        "id": 3,
+        "user": {
+            "id": "u125",
+            "name": "Carol White",
+            "photo": "avatar3.jpg"
+        },
+        "last_message": "The library at Imperial is amazing!",
+        "date": "2024-07-02T08:45:00Z"
+    },
+    {
+        "id": 4,
+        "user": {
+            "id": "u126",
+            "name": "David Brown",
+            "photo": "avatar4.jpg"
+        },
+        "last_message": "When are the exams at LSE?",
+        "date": "2024-07-02T09:00:00Z"
+    },
+    {
+        "id": 5,
+        "user": {
+            "id": "u127",
+            "name": "Emma Green",
+            "photo": "avatar5.jpg"
+        },
+        "last_message": "Can we meet to discuss the application process?",
+        "date": "2024-07-03T12:00:00Z"
+    },
+    {
+        "id": 6,
+        "user": {
+            "id": "u128",
+            "name": "Frank Harris",
+            "photo": "avatar6.jpg"
+        },
+        "last_message": "Do you know if there are any events at SOAS next week?",
+        "date": "2024-07-03T14:20:00Z"
+    },
+    {
+        "id": 7,
+        "user": {
+            "id": "u129",
+            "name": "Grace Lee",
+            "photo": "avatar7.jpg"
+        },
+        "last_message": "The campus at Queen Mary is beautiful.",
+        "date": "2024-07-04T09:30:00Z"
+    },
+    {
+        "id": 8,
+        "user": {
+            "id": "u130",
+            "name": "Henry Martin",
+            "photo": "avatar8.jpg"
+        },
+        "last_message": "Did you see the new course offerings at City University?",
+        "date": "2024-07-04T11:15:00Z"
+    },
+    {
+        "id": 9,
+        "user": {
+            "id": "u131",
+            "name": "Ivy Nelson",
+            "photo": "avatar9.jpg"
+        },
+        "last_message": "How was your experience at Brunel University?",
+        "date": "2024-07-05T08:00:00Z"
+    },
+    {
+        "id": 10,
+        "user": {
+            "id": "u132",
+            "name": "Jack O'Brien",
+            "photo": "avatar10.jpg"
+        },
+        "last_message": "I need help with my application essay for Goldsmiths.",
+        "date": "2024-07-05T13:45:00Z"
+    },
+    {
+        "id": 11,
+        "user": {
+            "id": "u133",
+            "name": "Katie Perez",
+            "photo": "avatar11.jpg"
+        },
+        "last_message": "Can you recommend any good housing near UAL?",
+        "date": "2024-07-06T07:20:00Z"
+    },
+    {
+        "id": 12,
+        "user": {
+            "id": "u134",
+            "name": "Liam Roberts",
+            "photo": "avatar12.jpg"
+        },
+        "last_message": "What are the best places to study on the UEL campus?",
+        "date": "2024-07-06T09:10:00Z"
+    },
+    {
+        "id": 13,
+        "user": {
+            "id": "u135",
+            "name": "Mia Thompson",
+            "photo": "avatar13.jpg"
+        },
+        "last_message": "Any tips for the interview at Birkbeck?",
+        "date": "2024-07-07T11:00:00Z"
+    },
+    {
+        "id": 14,
+        "user": {
+            "id": "u136",
+            "name": "Noah Wilson",
+            "photo": "avatar14.jpg"
+        },
+        "last_message": "How's the student life at Westminster?",
+        "date": "2024-07-07T14:50:00Z"
+    },
+    {
+        "id": 15,
+        "user": {
+            "id": "u137",
+            "name": "Olivia Adams",
+            "photo": "avatar15.jpg"
+        },
+        "last_message": "Did you join any clubs at Roehampton?",
+        "date": "2024-07-08T10:30:00Z"
+    },
+    {
+        "id": 16,
+        "user": {
+            "id": "u138",
+            "name": "Peter Scott",
+            "photo": "avatar16.jpg"
+        },
+        "last_message": "Are there any upcoming events at Middlesex University?",
+        "date": "2024-07-08T13:25:00Z"
+    },
+    {
+        "id": 17,
+        "user": {
+            "id": "u139",
+            "name": "Quinn Taylor",
+            "photo": "avatar17.jpg"
+        },
+        "last_message": "What's the best way to get to LSBU from the city center?",
+        "date": "2024-07-09T08:45:00Z"
+    },
+    {
+        "id": 18,
+        "user": {
+            "id": "u140",
+            "name": "Rachel Walker",
+            "photo": "avatar18.jpg"
+        },
+        "last_message": "Is there a student discount for public transport in London?",
+        "date": "2024-07-09T11:50:00Z"
+    },
+    {
+        "id": 19,
+        "user": {
+            "id": "u141",
+            "name": "Sam Young",
+            "photo": "avatar19.jpg"
+        },
+        "last_message": "What's the deadline for applications at St Mary's?",
+        "date": "2024-07-09T12:30:00Z"
+    },
+    {
+        "id": 20,
+        "user": {
+            "id": "u142",
+            "name": "Tina Zane",
+            "photo": "avatar20.jpg"
+        },
+        "last_message": "Can we form a study group for the King's College exam?",
+        "date": "2024-07-09T14:00:00Z"
+    }
+]

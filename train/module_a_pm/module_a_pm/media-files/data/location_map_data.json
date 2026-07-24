@@ -1,0 +1,123 @@
+[
+    {
+        "location_id": 1,
+        "location_name": "Eiffel Tower",
+        "location_map_image": "map_1.jpg",
+        "location_scene_image": "scene_1.jpg",
+        "location_introduction": "The Eiffel Tower, a symbol of France and Paris, stands proudly at the heart of the city. This iron lattice tower, designed by Gustave Eiffel for the 1889 World's Fair, is a masterpiece of engineering and architecture. Rising to a height of 324 meters, it offers panoramic views of the city, making it a popular tourist attraction.",
+        "location_mark_x_y_of_map_image": [
+            1155,
+            1243
+        ]
+    },
+    {
+        "location_id": 2,
+        "location_name": "Arc de Triomphe",
+        "location_map_image": "map_2.jpg",
+        "location_scene_image": "scene_2.jpg",
+        "location_introduction": "The Arc de Triomphe, a majestic monument in Paris, France, stands as a triumphant gateway to the city's history and grandeur. Constructed to commemorate the brave soldiers of the French Revolution and Napoleonic Wars, its imposing design and intricate carvings captivate visitors.\nThe monument, with its grand arch and columns, is a testament to France's military might and national pride. Beneath its vaulted ceiling, the names of France's great military victories are inscribed, a reminder of the country's past glories.",
+        "location_mark_x_y_of_map_image": [
+            1181,
+            846
+        ]
+    },
+    {
+        "location_id": 3,
+        "location_name": "Les Invalides",
+        "location_map_image": "map_3.jpg",
+        "location_scene_image": "scene_3.jpg",
+        "location_introduction": "Les Invalides, a historical complex in Paris, France, is a poignant reminder of the nation's military past and a testament to the bravery of its soldiers. Originally built as a hospital and retirement home for war veterans, it now houses the Tomb of the Unknown Soldier, a national symbol of sacrifice and remembrance.\nThe complex is dominated by the golden dome of the Saint-Louis Church, which soars above the surrounding buildings, glistening in the sunlight. Inside, the church is decorated with intricate carvings and paintings, creating a serene and respectful atmosphere.",
+        "location_mark_x_y_of_map_image": [
+            1456,
+            1346
+        ]
+    },
+    {
+        "location_id": 4,
+        "location_name": "Paris Opera",
+        "location_map_image": "map_4.jpg",
+        "location_scene_image": "scene_4.jpg",
+        "location_introduction": "The Opéra National de Paris, a cultural icon of France, is renowned for its outstanding performances of opera and ballet. This storied venue, with its elegant interior and acoustically superb auditorium, hosts world-class productions that attract audiences from around the globe. The Opéra National de Paris not only preserves and promotes classical music but also remains at the forefront of innovation, presenting contemporary works that push the boundaries of the performing arts.",
+        "location_mark_x_y_of_map_image": [
+            1794,
+            880
+        ]
+    },
+    {
+        "location_id": 5,
+        "location_name": "The Basilica of the Sacred Heart of Paris",
+        "location_map_image": "map_5.jpg",
+        "location_scene_image": "scene_5.jpg",
+        "location_introduction": "The Basilica of the Sacred Heart of Paris, also known as the Sacré-Cœur, is a majestic religious landmark overlooking the city. Its neo-Byzantine architecture, with its domes, arches, and intricate mosaics, exudes a sense of grandeur and devotion. The basilica is a popular pilgrimage site, attracting thousands of visitors each year who come to pray, admire its beauty, or simply take in the breathtaking views of Paris below.",
+        "location_mark_x_y_of_map_image": [
+            1978,
+            539
+        ]
+    },
+    {
+        "location_id": 6,
+        "location_name": "Palais-Royal",
+        "location_map_image": "map_6.jpg",
+        "location_scene_image": "scene_6.jpg",
+        "location_introduction": "The Palais-Royal, situated in the heart of Paris, is a historical palace and garden complex that exudes elegance and grandeur. Once the residence of French kings, it now houses museums, galleries, and shops, attracting visitors from around the world. The intricate architecture of the palace, combined with the lush greenery of the gardens, creates a serene and enchanting atmosphere. Whether exploring the art collections or simply soaking up the ambience, the Palais-Royal offers a unique experience of Parisian culture and history.",
+        "location_mark_x_y_of_map_image": [
+            1978,
+            1082
+        ]
+    },
+    {
+        "location_id": 7,
+        "location_name": "Pont Neuf",
+        "location_map_image": "map_7.jpg",
+        "location_scene_image": "scene_7.jpg",
+        "location_introduction": "The Pont-Neuf, located in the heart of Paris, is a historical bridge that crosses the Seine River. Built in the 17th century, it is the oldest bridge in Paris to have retained its original design. The bridge's wide arches and elegant balustrades give it a distinctive appearance, and it has become a popular gathering spot for Parisians and tourists alike. Today, the Pont-Neuf is a vibrant hub of activity, with cafes, shops, and street artists lining its sides, offering a lively and unique perspective of the City of Light.",
+        "location_mark_x_y_of_map_image": [
+            1948,
+            1256
+        ]
+    },
+    {
+        "location_id": 8,
+        "location_name": "Luxembourg Palace",
+        "location_map_image": "map_8.jpg",
+        "location_scene_image": "scene_8.jpg",
+        "location_introduction": "The Palais du Luxembourg, a historical palace in Paris, is a testament to French grandeur and elegance. Once a royal residence, it now serves as a seat for the French Senate. Its neoclassical facade, adorned with intricate carvings, exudes a sense of dignity and power. Inside, the palace boasts luxurious interiors and a rich collection of art and historical artifacts. Surrounded by beautiful gardens, the Palais du Luxembourg offers a peaceful oasis in the bustling city of Paris, inviting visitors to explore its history and beauty.",
+        "location_mark_x_y_of_map_image": [
+            1875,
+            1499
+        ]
+    },
+    {
+        "location_id": 9,
+        "location_name": "Centre Pompidou",
+        "location_map_image": "map_9.jpg",
+        "location_scene_image": "scene_9.jpg",
+        "location_introduction": "The Centre Pompidou, a cultural icon in Paris, is a vibrant hub of contemporary art and creativity. Its distinctive modern architecture, with its exposed pipes and futuristic design, sets it apart from other museums. Inside, the Centre Pompidou houses a vast collection of modern art, including paintings, sculptures, and installations by renowned artists. In addition to its permanent collection, the museum also hosts temporary exhibitions, workshops, and events, making it a lively and engaging destination for art lovers and culture seekers.",
+        "location_mark_x_y_of_map_image": [
+            2147,
+            1882
+        ]
+    },
+    {
+        "location_id": 10,
+        "location_name": "Pantheon",
+        "location_map_image": "map_10.jpg",
+        "location_scene_image": "scene_10.jpg",
+        "location_introduction": "The Panthéon, a majestic monument in Paris, is a national sanctuary dedicated to the great figures of French history. Its neoclassical architecture and grandiose interior house the tombs of illustrious individuals who have made significant contributions to France and its culture. The Panthéon serves as a symbol of national unity and remembrance, drawing visitors from around the world to pay tribute to these heroes and icons. Its serene atmosphere and historical significance make it a must-visit destination for anyone interested in French history and culture.",
+        "location_mark_x_y_of_map_image": [
+            2007,
+            1536
+        ]
+    },
+    {
+        "location_id": 11,
+        "location_name": "Père Lachaise Cemetery",
+        "location_map_image": "map_11.jpg",
+        "location_scene_image": "scene_11.jpg",
+        "location_introduction": "Père Lachaise Cemetery, located in the heart of Paris, is a renowned burial ground for notable figures and a popular tourist attraction. Its peaceful green spaces and intricate tombstones create a unique atmosphere. Visitors can wander among the graves of famous artists, writers, and politicians, including Chopin, Oscar Wilde, and Jim Morrison. The cemetery also offers a serene escape from the bustle of the city, providing a place to reflect and remember the lives of those who have passed.",
+        "location_mark_x_y_of_map_image": [
+            2855,
+            1126
+        ]
+    }
+]

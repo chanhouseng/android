@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+val view = inflater.inflate(R.layout.fragment_home, container, false)
+val linearLayout: LinearLayout = view.findViewById(R.id.linearLayout)
+val activity = requireActivity() as MainPage
+val req = okhttp3.Request.Builder().url("https://www.cpttm.org.mo/uploads/class/products2.php ").build()
+OkHttpClient().newCall(req).enqueue(object : Callback{
+    override fun onFailure(call: Call, e: IOException) {
+
+    }
+
+    override fun onResponse(call: Call, response: Response) {
+        val resultString = response.body?.string()
+        val results = Gson().fromJson(resultString, Array&lt;product_food&gt;::class.java)
+        activity.runOnUiThread{
+            for(result in results){
+                val layout = layoutInflater.inflate(R.layout.home_product, null)
+                layout.findViewById&lt;TextView&gt;(R.id.name).text = result.name
+                layout.findViewById&lt;TextView&gt;(R.id.price).text = "$" + String.format("%.1f", result.price)
+                layout.findViewById&lt;ImageView&gt;(R.id.imageView2).load(result.link){
+                    crossfade(true)
+                    placeholder(R.drawable.bubble_tea)
+                }
+                if(result.isLike){
+                    layout.findViewById&lt;ImageView&gt;(R.id.imageView3).setImageResource(R.drawable.like)
+                }
+                else{
+                    layout.findViewById&lt;ImageView&gt;(R.id.imageView3).setImageResource(R.drawable.unlike)
+                }
+
+                layout.setOnClickListener {
+                    val intent = Intent(activity, food_detail::class.java)
+                    intent.putExtra("name", result.name)
+                    intent.putExtra("price", String.format("%.1f", result.price))
+                    intent.putExtra("photo", result.link)
+                    intent.putExtra("isLike", result.isLike)
+                    startActivity(intent)
+                }
+
+                linearLayout.addView(layout)
+            }
+        }
+
+    }
+
+})
+return view
+
+<p style="color: rgb(128, 13, 13);background-color: bisque;">----------------------------------------------------------------------------------------------------------------------------------</p>
+val view =  inflater.inflate(R.layout.fragment_photo, container, false)
+val activity = requireActivity() as MainPage
+recyclerView = view.findViewById(R.id.recyclerView)
+val req = okhttp3.Request.Builder().url("https://www.cpttm.org.mo/uploads/class/products2.php").build()
+OkHttpClient().newCall(req).enqueue(object: Callback{
+    override fun onFailure(call: Call, e: IOException) {
+
+    }
+
+    override fun onResponse(call: Call, response: Response) {
+        val resultString = response.body?.string()
+        val results = Gson().fromJson(resultString, Array&lt;photoClass&gt;::class.java)
+        val resultList = results.toList()
+        activity.runOnUiThread {
+            recyclerView.adapter = photoAdapter(resultList)
+            recyclerView.layoutManager = LinearLayoutManager(activity)
+        }
+    }
+
+})
+return view
+
+
+    </pre>
+</body>
+</html>

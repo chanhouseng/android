@@ -1,0 +1,2133 @@
+{
+	"info": {
+		"_postman_id": "dc082d1e-363d-45a2-ac7a-745cce3015b5",
+		"name": "Friendly Competition China 2024",
+		"description": "**This API is used for friendly competition 2024 in Guangzhou, China.**\n\n- Various APIs are available, and there is no correct answer to using APIs.\n- You can change the url address and token value on the Variables tab.\n- Run Sign-in after Sign-up. Use the token returned from Sign-in.\n- Do not hardcode tokens in competition.\n- Call Sign-out and the existing token will be discarded. Call Sign-in to get a new token.\n    \n\n\\[Common\\]\n\n- Determined to be an error if the HTTP status code is not 200.\n- If the STATUS_CD value of the API starts with E, it is judged to be an error.\n    \n\nSTATUS_MSG: Status Message  \nSTATUS_CD: Status Code(Normal if it starts with M, Error if it starts with E)  \nhost: API Address  \nsuccess: API Successful\n\n\\[API\\]\n\n- Calling \"501. Heart rate measurement and recording\" saves a random heart rate between 0 and 200.\n- foodKndCd: B=Breakfast, L=Lunch, D=Dinner\n- water: 100 or 250\n    \n- alarmKndCd: F=Food, W=Water, E=ETC\n    \n- useYN: Y=Enable, N=Disable",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "550722"
+	},
+	"item": [
+		{
+			"name": "100. Authentication",
+			"item": [
+				{
+					"name": "101. Sign-up",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "mberId",
+									"value": "user2",
+									"description": "User ID",
+									"type": "text"
+								},
+								{
+									"key": "mberPassword",
+									"value": "1234",
+									"description": "User password",
+									"type": "text"
+								},
+								{
+									"key": "mberNm",
+									"value": "Mobile man",
+									"description": "User name",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{url}}/authenticate/signup",
+						"description": "# Authenticate User Sign Up\n\nThis endpoint allows users to sign up for authentication.\n\n## Request Body\n\n- `mberId` (text, required): User ID\n- `mberPassword` (text, required): User password\n- `mberNm` (text, required): User name\n    \n\n## Response\n\n- `STATUS_MSG` (string): A message indicating the status of the request\n- `STATUS_CD` (string): Status code of the request\n- `host` (string): Host information\n- `success` (boolean): Indicates if the sign up was successful"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "mberId",
+											"value": "user1",
+											"description": "User ID",
+											"type": "text"
+										},
+										{
+											"key": "mberPassword",
+											"value": "1234",
+											"description": "User password",
+											"type": "text"
+										},
+										{
+											"key": "mberNm",
+											"value": "Mobile man",
+											"description": "User name",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://127.0.0.1:50004/api/authenticate/signup"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:13:19 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"STATUS_CD\": \"M0000\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "102. Sign-in",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mberId\": \"user2\",\r\n    \"mberPassword\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/authenticate/signin",
+						"description": "This endpoint is used to authenticate and sign in. It is an HTTP GET request to {{url}}/authenticate/signin.\n\n### Request\n\nThe request should have a raw request body type with the following payload:\n\n``` json\n{\n    \"mberId\":\"\",\n    \"mberPassword\":\"\"\n}\n\n ```\n\n### Response\n\n- Status: 200\n- Content-Type: application/json\n    \n\nThe response will contain the following fields:\n\n- `tkn`: The authentication token\n- `success`: Indicates if the authentication was successful\n- `host`: The host information\n- `STATUS_CD`: The status code\n- `STATUS_MSG`: The status message"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mberId\": \"user1\",  // User ID\r\n    \"mberPassword\": \"1234\"  // User Password\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://127.0.0.1:50004/api/authenticate/signin"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:13:22 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"tkn\": \"925BE8B24AB9431699A44364B67B2D18\",\n    \"success\": true,\n    \"host\": \"http://127.0.0.1:50004\",\n    \"STATUS_CD\": \"M0000\",\n    \"STATUS_MSG\": \"\"\n}"
+						}
+					]
+				},
+				{
+					"name": "103. Sign-out",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/authenticate/signout",
+						"description": "This endpoint is used to sign out and authenticate the user. Upon successful execution, it returns a JSON response with a status code of 200 and the following fields:\n\n- success (boolean): Indicates whether the sign out was successful\n- host (string): The host information\n- STATUS_CD (string): The status code\n- STATUS_MSG (string): The status message\n    \n\nExample response:\n\n``` json\n{\n  \"success\": true,\n  \"host\": \"\",\n  \"STATUS_CD\": \"\",\n  \"STATUS_MSG\": \"\"\n}\n\n ```"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://127.0.0.1:50004/api/authenticate/signout"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:21:09 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"host\": \"http://127.0.0.1:50004\",\n    \"STATUS_CD\": \"M0000\",\n    \"STATUS_MSG\": \"\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "200. Profile & Target",
+			"item": [
+				{
+					"name": "201. Get profile & target",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/profile",
+						"description": "\nThis endpoint makes an HTTP GET request to retrieve the profile information. The response returns a JSON object with member details such as member ID, name, gender, birthday, physical attributes like weight and height, target step count and water intake, host information, status code, status message, and success status.\n"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "http://127.0.0.1:50004/api/profile"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:14:14 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"mberId\": \"user1\",\n    \"mberNm\": \"Mobile man\",\n    \"sexdstn\": \"M\",\n    \"brthdy\": \"1986-09-30\",\n    \"physical\": {\n        \"weight\": 71.1,\n        \"height\": 178.2\n    },\n    \"target\": {\n        \"step\": 5000,\n        \"water\": 2000\n    },\n    \"host\": \"http://127.0.0.1:50004\",\n    \"STATUS_CD\": \"M0000\",\n    \"STATUS_MSG\": \"\",\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "202. Update profile & target",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mberNm\": \"Mobile App\",\r\n    \"sexdstn\": \"F\",\r\n    \"height\": 170.1,\r\n    \"weight\": 70.3,\r\n    \"brthdy\": \"1980-09-30\",\r\n    \"stepTarget\": 5001,\r\n    \"waterTarget\": 2001\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/profile",
+						"description": "\nThis endpoint allows you to update the user profile using an HTTP PUT request. The request should be sent to {{url}}/profile with a JSON payload in the raw request body. The payload can include the following parameters: mberNm, sexdstn, height, weight, brthdy, stepTarget, and waterTarget.\n\n### Request Body\n- mberNm (string): The member's name.\n- sexdstn (string): The gender of the member.\n- height (number): The height of the member.\n- weight (number): The weight of the member.\n- brthdy (string): The birthday of the member.\n- stepTarget (number): The target number of steps for the member.\n- waterTarget (number): The target water intake for the member.\n\n### Response\nUpon a successful update, the API returns a 200 status code and a JSON response with the following fields:\n- STATUS_MSG (string): A message indicating the status of the operation.\n- STATUS_CD (string): A status code for the operation.\n- host (string): The host information.\n- success (boolean): Indicates whether the update was successful.\n\n"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mberNm\": \"Mobile App\",   // User name\r\n    \"sexdstn\": \"F\",   // Gender\r\n    \"height\": 170.1,   // Height, Tall\r\n    \"weight\": 70.3,   // weight\r\n    \"brthdy\": \"1980-09-30\",   // Birthday\r\n    \"stepTarget\": 5001,   // daily step Target\r\n    \"waterTarget\": 2001   // daily water intake Target\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://127.0.0.1:50004/api/profile"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:14:24 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"STATUS_CD\": \"M0000\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "300. Home",
+			"item": [
+				{
+					"name": "301. Home",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/home",
+						"description": "\nThis endpoint makes an HTTP GET request to retrieve home-related information. The response returns a JSON object with various fields such as member ID, name, gender, birthday, physical attributes like weight and height, target step count and water intake, today's food list, step count, heart rate list, water intake, host information, status code, status message, and success status.\n"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "http://127.0.0.1:50004/api/home"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:14:43 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"mberId\": \"user1\",\n    \"mberNm\": \"Mobile App\",\n    \"sexdstn\": \"F\",\n    \"brthdy\": \"1980-09-30\",\n    \"physical\": {\n        \"weight\": 70.3,\n        \"height\": 170.1\n    },\n    \"target\": {\n        \"step\": 5001,\n        \"water\": 2001\n    },\n    \"today\": {\n        \"foodList\": [],\n        \"step\": 0,\n        \"heartList\": [],\n        \"water\": 0\n    },\n    \"host\": \"http://127.0.0.1:50004\",\n    \"STATUS_CD\": \"M0000\",\n    \"STATUS_MSG\": \"\",\n    \"success\": true\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "400. Step",
+			"item": [
+				{
+					"name": "401. Insert today's step",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stepCount\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/step",
+						"description": "\nThis endpoint makes an HTTP POST request to {{url}}/step to add a step count. The request should include a JSON payload with the key \"stepCount\" and its corresponding value. \n\n### Request Body\n- `stepCount`: (number) The count of steps to be added.\n\nThe response will have a status code of 200 and a content type of application/json. The response body will include the following fields:\n- `STATUS_MSG`: A message related to the status of the request.\n- `STATUS_CD`: The status code of the request.\n- `host`: The host information.\n- `success`: A boolean indicating the success status of the request.\n"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stepCount\": 7   // Number of steps to add\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://127.0.0.1:50004/api/step"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:14:55 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"STATUS_CD\": \"M0000\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "402. Get today's step",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "{{url}}/step",
+						"description": "\nThis endpoint makes an HTTP GET request to retrieve the \"step\" from the server. The request uses form-data as the request body type. \n\n### Request Parameters\n- No specific parameters were provided in the last call.\n\n### Response\n- **Status**: 200\n- **Content-Type**: application/json\n- **Body**:\n  ```json\n  {\n    \"STATUS_MSG\":\"\",\n    \"step\":0,\n    \"STATUS_CD\":\"\",\n    \"host\":\"\",\n    \"success\":true\n  }\n  ```\n\nThe response contains the \"step\" value along with other attributes. The \"step\" value is retrieved from the server in the response body.\n\n"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": "http://127.0.0.1:50004/api/step"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:15:06 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"step\": 7,\n    \"STATUS_CD\": \"M0000\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "403. Get list of step",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/step/:date",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"step",
+								":date"
+							],
+							"variable": [
+								{
+									"key": "date",
+									"value": "2024-04-18",
+									"description": "Date"
+								}
+							]
+						},
+						"description": "\nThis endpoint makes an HTTP GET request to retrieve step data for a specific date. Replace \":date\" in the URL with the desired date to fetch the step data for that date.\n\nThe request does not require any payload in the form-data request body.\n\n### Response\n- Status: 200\n- Content-Type: application/json\n\nThe response will be a JSON object with the following structure:\n```json\n{\n    \"STATUS_MSG\": \"\",\n    \"list\": [\n        {\n            \"stepUid\": 0,\n            \"rcordDt\": \"\",\n            \"mberId\": \"\",\n            \"registDt\": \"\",\n            \"stepCnt\": 0\n        }\n    ],\n    \"STATUS_CD\": \"\",\n    \"host\": \"\",\n    \"success\": true\n}\n```\n\nThe \"list\" array contains step data for the specified date, including \"stepUid\", \"rcordDt\", \"mberId\", \"registDt\", and \"stepCnt\" fields.\n\n"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/step/:date",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"step",
+										":date"
+									],
+									"variable": [
+										{
+											"key": "date",
+											"value": "2024-04-18",
+											"description": "Date"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:15:16 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"list\": [\n        {\n            \"stepUid\": 4,\n            \"rcordDt\": \"2024-04-18\",\n            \"mberId\": \"user1\",\n            \"registDt\": \"2024-04-18 19:14:55\",\n            \"stepCnt\": 7\n        }\n    ],\n    \"STATUS_CD\": \"M0000\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "500. Heart Rate",
+			"item": [
+				{
+					"name": "501. Heart rate measurement and recording",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{url}}/heart",
+						"description": "\nThis endpoint allows you to send an HTTP POST request to {{url}}/heart in order to perform a specific action. Upon the last execution, the response returned a status code of 200 and a content type of application/json. The response body included the following key-value pairs:\n- \"STATUS_MSG\": (string) A message related to the status of the operation\n- \"STATUS_CD\": (string) A code representing the status of the operation\n- \"host\": (string) The host information\n- \"success\": (boolean) Indicates the success of the operation\n\nYou can use this endpoint to perform the intended action and expect a JSON response with the mentioned key-value pairs.\n"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": "{{url}}/heart"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:15:31 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"STATUS_CD\": \"M0000\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "502. Get today's heart rate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "{{url}}/heart",
+						"description": "\nThis endpoint makes an HTTP GET request to retrieve heart rate data from the server. The request does not require any parameters in the form-data request body. \n\nUpon successful execution, the server responds with a status code of 200 and the data in JSON format. The response includes a list of heart rate records, each containing heart rate, record date, heart UID, member ID, and registration date. Additionally, the response includes status message, status code, last heart rate, host information, and a success indicator.\n\n"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": "{{url}}/heart"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:15:42 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"list\": [\n        {\n            \"heartRate\": 124,\n            \"rcordDt\": \"2024-04-18\",\n            \"heartUid\": 4,\n            \"mberId\": \"user1\",\n            \"registDt\": \"2024-04-18 19:15:31\"\n        }\n    ],\n    \"STATUS_CD\": \"M0000\",\n    \"lastHeartRate\": 124,\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "503. Get list of heart rate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/heart/:date",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"heart",
+								":date"
+							],
+							"variable": [
+								{
+									"key": "date",
+									"value": "2024-04-18",
+									"description": "Date"
+								}
+							]
+						},
+						"description": "\nThis endpoint retrieves heart rate data for a specific date. \n\n### Request\n\n#### Path Parameters\n\n- `date` (string, required): The date for which the heart rate data is to be retrieved.\n\n### Response\n\n- `STATUS_MSG` (string): A message related to the status of the response.\n- `list` (array): An array containing heart rate data objects.\n  - `heartRate` (integer): The recorded heart rate.\n  - `rcordDt` (string): The date of the heart rate record.\n  - `heartUid` (integer): The unique identifier for the heart rate record.\n  - `mberId` (string): The member ID associated with the heart rate record.\n  - `registDt` (string): The registration date of the heart rate record.\n- `STATUS_CD` (string): The status code related to the response.\n- `host` (string): The host information.\n- `success` (boolean): Indicates the success status of the response.\n\n"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/heart/:date",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"heart",
+										":date"
+									],
+									"variable": [
+										{
+											"key": "date",
+											"value": "2024-04-18",
+											"description": "Date"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:15:51 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"list\": [\n        {\n            \"heartRate\": 124,\n            \"rcordDt\": \"2024-04-18\",\n            \"heartUid\": 4,\n            \"mberId\": \"user1\",\n            \"registDt\": \"2024-04-18 19:15:31\"\n        }\n    ],\n    \"STATUS_CD\": \"M0000\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "600. Food",
+			"item": [
+				{
+					"name": "601. Insert Food",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"description": "Upload file",
+									"type": "file",
+									"src": "/C:/Users/webma/Pictures/icon.png"
+								},
+								{
+									"key": "foodKndCd",
+									"value": "B",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{url}}/food",
+						"description": "This endpoint allows you to add food items via an HTTP POST request to {{url}}/food. The request should be sent with form-data as the request body type, including a file to upload and a text parameter for foodKndCd.\n\n### Request Body\n\n- `file` (file): Upload file\n- `foodKndCd` (text):\n    \n\n### Response\n\n- Status: 200\n- Content-Type: application/json\n- `STATUS_MSG` (string)\n- `STATUS_CD` (string)\n- `host` (string)\n- `success` (boolean)"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"description": "Upload file",
+											"type": "file",
+											"src": "/C:/Users/webma/Pictures/icon.png"
+										},
+										{
+											"key": "foodKndCd",
+											"value": "B",
+											"description": "Food kind code(B, L, D)",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{url}}/food"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 10:53:25 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"STATUS_CD\": \"M0000\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "602. Get list of food",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/food/:date",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"food",
+								":date"
+							],
+							"variable": [
+								{
+									"key": "date",
+									"value": "2024-04-18",
+									"description": "Date"
+								}
+							]
+						},
+						"description": "# Food Details by Date\n\nThis endpoint retrieves the details of food items for a specific date.\n\n## Request\n\n### URL Parameters\n\n- `date`: The date for which the food details are to be retrieved.\n    \n\n### Request Body\n\n- Type: form-data\n    \n\n## Response\n\n- Status: 200 OK\n- Content-Type: application/json\n    \n\n``` json\n{\n    \"STATUS_MSG\": \"\",\n    \"list\": [\n        {\n            \"foodUid\": 0,\n            \"fileNm\": \"\",\n            \"fileSize\": \"\",\n            \"maskNm\": \"\",\n            \"rcordDt\": \"\",\n            \"foodKndCd\": \"\",\n            \"mberId\": \"\",\n            \"registDt\": \"\"\n        }\n    ],\n    \"STATUS_CD\": \"\",\n    \"food_image_path_prefix\": \"\",\n    \"host\": \"\",\n    \"success\": true\n}\n\n ```"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/food/:date",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"food",
+										":date"
+									],
+									"variable": [
+										{
+											"key": "date",
+											"value": "2024-04-18",
+											"description": "Date"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 10:53:27 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"list\": [\n        {\n            \"foodUid\": 1,\n            \"fileNm\": \"icon.png\",\n            \"fileSize\": \"55459\",\n            \"maskNm\": \"user1_8E348E85D8074F659830113CE4A78BD1_icon.png\",\n            \"rcordDt\": \"2024-04-18\",\n            \"foodKndCd\": \"B\",\n            \"mberId\": \"user1\",\n            \"registDt\": \"2024-04-18 18:48:27\"\n        },\n        {\n            \"foodUid\": 2,\n            \"fileNm\": \"icon.png\",\n            \"fileSize\": \"55459\",\n            \"maskNm\": \"user1_ED36E913329443C8A585E7F5551ECFFD_icon.png\",\n            \"rcordDt\": \"2024-04-18\",\n            \"foodKndCd\": \"C\",\n            \"mberId\": \"user1\",\n            \"registDt\": \"2024-04-18 18:52:50\"\n        },\n        {\n            \"foodUid\": 3,\n            \"fileNm\": \"icon.png\",\n            \"fileSize\": \"55459\",\n            \"maskNm\": \"user1_288E2271D1A34123AB97B00D15DF57F6_icon.png\",\n            \"rcordDt\": \"2024-04-18\",\n            \"foodKndCd\": \"B\",\n            \"mberId\": \"user1\",\n            \"registDt\": \"2024-04-18 18:53:25\"\n        }\n    ],\n    \"STATUS_CD\": \"M0000\",\n    \"food_image_path_prefix\": \"/resource/images/food\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "603. Delete food",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/food/:foodUid",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"food",
+								":foodUid"
+							],
+							"variable": [
+								{
+									"key": "foodUid",
+									"value": "2",
+									"description": "Food unique ID"
+								}
+							]
+						},
+						"description": "### Delete Food\n\nThis endpoint is used to delete a specific food item.\n\n#### Request\n\n- Method: DELETE\n- URL: `{{url}}/food/:foodUid`\n- Body (form-data)\n    \n\n#### Response\n\n- Status: 200\n- Content-Type: application/json\n- Body:\n    \n    ``` json\n    {\n      \"STATUS_MSG\": \"\",\n      \"STATUS_CD\": \"\",\n      \"host\": \"\",\n      \"success\": true\n    }\n    \n     ```"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/food/:foodUid",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"food",
+										":foodUid"
+									],
+									"variable": [
+										{
+											"key": "foodUid",
+											"value": "2",
+											"description": "Food unique ID"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 10:54:09 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"STATUS_CD\": \"M0000\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "700. Water",
+			"item": [
+				{
+					"name": "701. Insert Water",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"water\": 100   // Water intake(100, 250)\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/water",
+						"description": "\nThis endpoint allows you to send an HTTP POST request to {{url}}/water in order to add water data.\n\n### Request Body\n- Request body type: raw\n  - water (number): The amount of water to be added.\n\n### Response\n- Status: 200\n- Content-Type: application/json\n- success (boolean): Indicates if the request was successful.\n- STATUS_MSG (string): A message related to the status of the request.\n- STATUS_CD (string): The status code of the request.\n- host: The host information.\n\n"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"water\": 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/water"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:17:10 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"STATUS_CD\": \"M0000\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "702. Get today's water",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "{{url}}/water",
+						"description": "\nThis endpoint makes an HTTP GET request to retrieve water-related information.\n\n### Request\nThe request does not require any parameters in the form-data request body.\n\n### Response\n- Status: 200\n- Content-Type: application/json\n\n#### Response Body\nThe response contains a JSON object with the following fields:\n- STATUS_MSG (string): A message related to the status.\n- STATUS_CD (string): The status code.\n- water (number): The water-related information.\n- host (string): The host information.\n- success (boolean): Indicates the success status of the request.\n"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": "{{url}}/water"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:17:17 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"STATUS_CD\": \"M0000\",\n    \"water\": 100,\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "703. Get a list of water",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/water/:date",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"water",
+								":date"
+							],
+							"variable": [
+								{
+									"key": "date",
+									"value": "2024-04-18",
+									"description": "Date"
+								}
+							]
+						},
+						"description": "\nThis HTTP GET request is used to retrieve water data for a specific date. The date is specified as a parameter in the URL.\n\n### Request\nThe request does not require any payload in the form-data request body.\n\n### Response\n- Status: 200\n- Content-Type: application/json\n\n#### Response Body\nThe response body is in JSON format and includes the following keys:\n- \"STATUS_MSG\": A message related to the status\n- \"list\": An array of water data objects, each containing:\n    - \"waterUid\": Unique identifier for the water data\n    - \"rcordDt\": Date of the record\n    - \"mberId\": Member ID associated with the record\n    - \"registDt\": Registration date\n    - \"waterCnt\": Water count value\n- \"STATUS_CD\": Status code\n- \"host\": Host information\n- \"success\": Indicates the success status of the request\n"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/water/:date",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"water",
+										":date"
+									],
+									"variable": [
+										{
+											"key": "date",
+											"value": "2024-04-18",
+											"description": "Date"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:17:33 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"list\": [\n        {\n            \"waterUid\": 7,\n            \"rcordDt\": \"2024-04-18\",\n            \"mberId\": \"user1\",\n            \"registDt\": \"2024-04-18 19:17:10\",\n            \"waterCnt\": 100\n        }\n    ],\n    \"STATUS_CD\": \"M0000\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "800. Alarm",
+			"item": [
+				{
+					"name": "801. Insert an alarm",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"alarmKndCd\": \"F\",    // Alarm kind code(F, W, E)\r\n    \"hour\": 10,  // Hour\r\n    \"mnt\" : 55  // Minute\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/alarm",
+						"description": "\n### Add Alarm\nThis endpoint allows you to add an alarm.\n\n#### Request Body\n- `alarmKndCd` (string, optional): The code for the type of alarm.\n- `hour` (number, required): The hour at which the alarm is set.\n- `mnt` (number, required): The minute at which the alarm is set.\n\n#### Response\n- `STATUS_MSG` (string): A message related to the status of the operation.\n- `STATUS_CD` (string): The status code of the operation.\n- `host` (string): The host information.\n- `success` (boolean): Indicates if the operation was successful.\n\n**Note**: The `alarmKndCd` is optional, while `hour` and `mnt` are required in the request body.\n"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"alarmKndCd\": \"F\", \r\n    \"hour\": 10,\r\n    \"mnt\" : 55\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/alarm"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:17:46 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"STATUS_CD\": \"M0000\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "802. Get a list of alarms",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "{{url}}/alarm",
+						"description": "This endpoint makes an HTTP GET request to retrieve alarm information from the specified URL. The request uses form-data as the request body type. The response returns a status code of 200 and a JSON object containing a list of alarm details, including mnt, hour, mberId, useYn, registDt, alarmUid, and alarmKndCd. The success field indicates whether the request was successful."
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": "{{url}}/alarm"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:17:53 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"list\": [\n        {\n            \"mnt\": 55,\n            \"hour\": 10,\n            \"mberId\": \"user1\",\n            \"useYn\": \"Y\",\n            \"registDt\": \"2024-04-18 19:17:46\",\n            \"alarmUid\": 3,\n            \"alarmKndCd\": \"F\"\n        }\n    ],\n    \"STATUS_CD\": \"M0000\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "703. Modify alarm usage",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/alarm/:alarmUid/:useYN",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"alarm",
+								":alarmUid",
+								":useYN"
+							],
+							"variable": [
+								{
+									"key": "alarmUid",
+									"value": "3",
+									"description": "Alarm unique ID"
+								},
+								{
+									"key": "useYN",
+									"value": "N",
+									"description": "enable: Y, disable: N"
+								}
+							]
+						},
+						"description": "\nThis HTTP PUT request is used to update the status of an alarm identified by the provided alarmUid and useYN parameters in the URL. The request updates the alarm's status and the response returns a status code of 200 along with a JSON object containing the status message, status code, host information, and a success indicator.\n"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/alarm/:alarmUid/:useYN",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"alarm",
+										":alarmUid",
+										":useYN"
+									],
+									"variable": [
+										{
+											"key": "alarmUid",
+											"value": "3",
+											"description": "Alarm unique ID"
+										},
+										{
+											"key": "useYN",
+											"value": "N",
+											"description": "enable: Y, disable: N"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Language",
+									"value": "ko"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Apr 2024 11:18:18 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"STATUS_MSG\": \"\",\n    \"STATUS_CD\": \"M0000\",\n    \"host\": \"http://127.0.0.1:50004\",\n    \"success\": true\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{tkn}}"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "tkn",
+			"value": "2C734767C04E4C05B56500E7C729349B",
+			"type": "string"
+		},
+		{
+			"key": "url",
+			"value": "http://127.0.0.1:50004/api",
+			"type": "string"
+		}
+	]
+}

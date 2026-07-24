@@ -1,0 +1,216 @@
+{
+	"info": {
+		"_postman_id": "7a407dcc-2a9a-44b6-a29d-b18b173ad9a8",
+		"name": "GHMC-Sample",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4148537"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "z68bu76J",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "user",
+							"type": "text"
+						},
+						{
+							"key": "pwd",
+							"value": "1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/ghmc/public/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ghmc",
+						"public",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Events",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/ghmc/public/tour/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ghmc",
+						"public",
+						"tour",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Specific Event",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/ghmc/public/tour/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ghmc",
+						"public",
+						"tour",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get profile photo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/ghmc/public/img/user.jpg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ghmc",
+						"public",
+						"img",
+						"user.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new tour",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "activityName",
+							"value": "Test Tour",
+							"type": "text"
+						},
+						{
+							"key": "activityDate",
+							"value": "2023-12-31",
+							"type": "text"
+						},
+						{
+							"key": "activityType",
+							"value": "户外活动",
+							"type": "text"
+						},
+						{
+							"key": "activityDescription",
+							"value": "Test Description",
+							"type": "text"
+						},
+						{
+							"key": "maxParticipant",
+							"value": "50",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/ghmc/public/tour",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ghmc",
+						"public",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get participant list for given tour",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/ghmc/public/participant/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ghmc",
+						"public",
+						"participant",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update event active",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "isActive",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/ghmc/public/tour/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ghmc",
+						"public",
+						"tour",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

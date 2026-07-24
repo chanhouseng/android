@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">MainActivity.kt</button>
+    <div class="panel">
+        <pre>
+class MainActivity : AppCompatActivity() {
+    private lateinit var about: TextView
+    private lateinit var statistic: TextView
+    private lateinit var photos: TextView
+    private lateinit var skills: TextView
+    private fun replaceFragment(fragment: Fragment){
+        val fragmentManager = supportFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.frameLayout, fragment)
+        transaction.commit()
+    }
+    var number = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        val view : View = findViewById(R.id.view)
+        val textView: TextView = findViewById(R.id.textView)
+        val imageView: ImageView = findViewById(R.id.imageView)
+        val map : ImageView = findViewById(R.id.imageView2)
+        val down: ImageView = findViewById(R.id.imageView3)
+        val i2Anim = TranslateAnimation(0f, 0f, 0f, 200f)
+        i2Anim.duration = 2000
+        i2Anim.fillAfter = true
+        val alphaAnimation = AlphaAnimation(0f, 1f)
+        alphaAnimation.duration = 1500
+        alphaAnimation.fillAfter = true
+        val downAnim = TranslateAnimation(0f, 0f, 0f, 70f)
+        downAnim.duration = 1500
+        downAnim.repeatCount = -1    <span>// 無限重複</span>
+        downAnim.repeatMode = Animation.REVERSE    <span>// 來回反向播放</span>
+        var startX = 0f
+        var startY = 0f
+        val home : ConstraintLayout = findViewById(R.id.home)
+        Thread{
+            Thread.sleep(1000)    <span>//用Thread來控制動畫先後</span>
+            runOnUiThread {
+                imageView.startAnimation(i2Anim)
+            }
+            Thread.sleep(1000)
+            runOnUiThread {
+                map.startAnimation(alphaAnimation)
+                textView.startAnimation(alphaAnimation)
+                down.startAnimation(alphaAnimation)
+                down.startAnimation(downAnim)
+                view.startAnimation(alphaAnimation)
+                home.setOnTouchListener { _, event -&gt;
+                    when(event.action){
+                        MotionEvent.ACTION_DOWN -&gt; {
+                            startX = event.x
+                            startY = event.y
+                        }
+
+                        MotionEvent.ACTION_UP -&gt; {
+                            val moveX = event.x
+                            val moveY = event.y
+
+                            val delutaX = moveX - startX
+                            val delutaY = moveY - startY
+
+                            if(Math.abs(delutaY) &gt; Math.abs(delutaX)){
+                                if(delutaY &lt; 0){
+                                    val translateAnimationUp = TranslateAnimation(0f, 0f, 0f, -3000f)
+                                    translateAnimationUp.duration = 900
+                                    translateAnimationUp.fillAfter = true
+                                    home.startAnimation(translateAnimationUp)
+                                    home.visibility = View.GONE
+                                    home.isEnabled = false    <span>//讓 home 這個元件無法被點擊</span>
+                                }
+                            }
+                        }
+                    }
+                    true
+                }
+            }
+
+        }.start()
+
+        val textView4: TextView = findViewById(R.id.textView4)
+        about  = findViewById(R.id.about)
+        statistic = findViewById(R.id.statistic)
+        photos = findViewById(R.id.photos)
+        skills = findViewById(R.id.skills)
+        replaceFragment(aboutFragment())
+        about.setOnClickListener {
+            number = 1
+            replaceFragment(aboutFragment())
+            textBackground()
+            textView4.text = "About"
+        }
+        statistic.setOnClickListener {
+            number = 2
+            textBackground()
+            replaceFragment(statisticFragment())
+            textView4.text = "Statistic"
+        }
+        photos.setOnClickListener {
+            number = 3
+            replaceFragment(photosFragment())
+            textBackground()
+            textView4.text = "Photos"
+        }
+        skills.setOnClickListener {
+            number = 4
+            textBackground()
+            replaceFragment(skillsFragment())
+            textView4.text = "Skills"
+        }
+    }
+
+    private fun textBackground(){
+        about.setBackgroundResource(0)
+        statistic.setBackgroundResource(0)
+        photos.setBackgroundResource(0)
+        skills.setBackgroundResource(0)
+        when(number){
+            1 -&gt; about.setBackgroundResource(R.drawable.text_back)
+            2 -&gt; statistic.setBackgroundResource(R.drawable.text_back)
+            3 -&gt; photos.setBackgroundResource(R.drawable.text_back)
+            4 -&gt; skills.setBackgroundResource(R.drawable.text_back)
+        }
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">activity_main.xml</button>
+    <div class="panel">
+        <pre>
+&lt;FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".MainActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"&gt;
+    &lt;LinearLayout                              <span>首面</span>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"    
+        android:orientation="horizontal"
+        android:background="#fff"&gt;
+
+        &lt;LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#fffbfc"
+            android:orientation="vertical"&gt;
+            &lt;ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="250dp"
+                android:layout_margin="20dp"
+                android:layout_marginBottom="40dp"
+                android:layout_height="200dp"
+                app:srcCompat="@drawable/logo_pink" /&gt;
+
+            &lt;TextView
+                android:id="@+id/about"
+                android:layout_width="match_parent"
+                android:textSize="23dp"
+                android:textAlignment="center"
+                android:background="@drawable/text_back"
+                android:padding="15dp"
+                android:layout_height="wrap_content"
+                android:text="About" /&gt;
+            &lt;TextView
+                android:id="@+id/statistic"
+                android:layout_width="match_parent"
+                android:textSize="23dp"
+                android:textAlignment="center"
+                android:padding="15dp"
+                android:layout_height="wrap_content"
+                android:text="Statistic" /&gt;
+            &lt;TextView
+                android:id="@+id/photos"
+                android:layout_width="match_parent"
+                android:textSize="23dp"
+                android:textAlignment="center"
+                android:padding="15dp"
+                android:layout_height="wrap_content"
+                android:text="Photos" /&gt;
+            &lt;TextView
+                android:id="@+id/skills"
+                android:layout_width="match_parent"
+                android:textSize="23dp"
+                android:textAlignment="center"
+                android:padding="15dp"
+                android:layout_height="wrap_content"
+                android:text="Skills" /&gt;
+        &lt;/LinearLayout&gt;
+
+        &lt;LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="40dp"&gt;
+
+            &lt;TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About"
+                android:textSize="40dp"
+                android:textStyle="bold" /&gt;
+            &lt;View
+                android:layout_width="35dp"
+                android:layout_marginVertical="15dp"
+                android:layout_height="7dp"
+                android:background="#d81368"/&gt;
+            &lt;FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/frameLayout"&gt;
+
+
+            &lt;/FrameLayout&gt;
+
+
+        &lt;/LinearLayout&gt;
+
+    &lt;/LinearLayout&gt;
+    &lt;androidx.constraintlayout.widget.ConstraintLayout    <span>//粉紅色的背景，先覆蓋首面，拉上去才可以看到</span>
+        android:background="#d51067"
+        android:visibility="visible"
+        android:id="@+id/home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"&gt;
+
+        &lt;View
+            android:id="@+id/view"
+            android:layout_width="1000dp"
+            android:layout_height="1000dp"
+            android:layout_marginTop="248dp"
+            android:background="#fff"
+            android:rotation="45"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" /&gt;
+
+        &lt;ImageView
+            android:id="@+id/imageView"
+            android:layout_width="105dp"
+            android:layout_height="142dp"
+            android:translationY="-150dp"
+            android:layout_marginTop="16dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/lamp" /&gt;
+
+        &lt;ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="660dp"
+            android:layout_height="214dp"
+            android:layout_marginTop="356dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/worldmap" /&gt;
+
+        &lt;TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="260dp"
+            android:text="Master Skills \nChange the World"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" /&gt;
+
+        &lt;ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="32dp"
+            android:layout_height="34dp"
+            android:layout_marginBottom="56dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/baseline_arrow_downward_24" /&gt;
+
+    &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+    &lt;FrameLayout                               <span>//photo page可以放大圖片之用</span>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="60dp"
+        android:visibility="gone"
+        android:id="@+id/photoFrame"
+        android:background="#78A8A8A8"&gt;
+        &lt;ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/photo_1" /&gt;
+        &lt;ImageView
+            android:id="@+id/imageView17"
+            android:background="@drawable/close_button"
+            android:padding="3dp"
+            android:layout_gravity="right"
+            android:layout_margin="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/baseline_close_24" /&gt;
+    &lt;/FrameLayout&gt;
+&lt;/FrameLayout&gt;
+        </pre>
+    </div>
+    <button class="accordion">fragment_about.xml</button>
+    <div class="panel">
+        <mark>主要靠constrainLayout的width_percent去設定佢嘅寬度，之後再喺個介面面版可以拉左右上下</mark>
+        <pre>
+&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_height="match_parent"
+    tools:context=".aboutFragment"&gt;
+
+    &lt;FrameLayout
+        android:layout_width="0dp"
+        android:id="@+id/inspire"
+        android:layout_height="0dp"
+        android:layout_marginEnd="90dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_percent="0.66"&gt;    <span>//設定佢嘅寬度</span>
+
+        &lt;ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:scaleType="centerCrop"
+            android:layout_height="wrap_content"
+            android:src="@drawable/inspire"
+            tools:layout_editor_absoluteX="43dp"
+            tools:layout_editor_absoluteY="63dp" /&gt;
+
+        &lt;androidx.constraintlayout.widget.ConstraintLayout    <span>//因為內容所有皆置中，所以放大都會match_parent都埋內文都會置中</span>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#A24480C7"&gt;
+
+            &lt;TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:text="Inspire"
+                android:textColor="#fff"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" /&gt;
+
+            &lt;TextView
+                android:id="@+id/textView2"
+                android:layout_width="339dp"
+                android:layout_height="89dp"
+                android:text="We inspire young people to develop a passion for skills and pursing excellence, through cometitions and promotions."
+                android:visibility="gone"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView13" /&gt;
+        &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+
+
+    &lt;/FrameLayout&gt;
+
+    &lt;FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:id="@+id/develop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintWidth_percent="0.66"&gt;
+
+        &lt;ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/develop"
+            tools:layout_editor_absoluteX="43dp"
+            android:scaleType="centerCrop"
+            tools:layout_editor_absoluteY="63dp" /&gt;
+
+        &lt;androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#91823CA4"&gt;
+
+            &lt;TextView
+                android:id="@+id/textView9"
+                android:layout_width="306dp"
+                android:layout_height="83dp"
+                android:text="We develop skills through global traning standards, benchmarking systems, and enhancing industry engagement."
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:visibility="gone"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView11" /&gt;
+
+            &lt;TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:text="Develop"
+                android:textColor="#fff"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" /&gt;
+        &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+
+    &lt;/FrameLayout&gt;
+
+    &lt;FrameLayout
+        android:id="@+id/influence"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintWidth_percent="0.34"&gt;
+
+        &lt;ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/influence"
+            tools:layout_editor_absoluteX="43dp"
+            tools:layout_editor_absoluteY="63dp" /&gt;
+
+        &lt;androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#B2D03280"&gt;
+
+            &lt;TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:text="Influence"
+                android:textColor="#fff"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" /&gt;
+
+            &lt;TextView
+                android:id="@+id/textView10"
+                android:layout_width="306dp"
+                android:layout_height="83dp"
+                android:text="We influence industry, government, and educators through cooperation and research - building a global platform of skills for all."
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:visibility="gone"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" /&gt;
+        &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+
+    &lt;/FrameLayout&gt;
+&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+        </pre>
+    </div>
+
+    <button class="accordion">aboutFragment.kt</button>
+    <div class="panel">
+        <pre>
+class aboutFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view =  inflater.inflate(R.layout.fragment_about, container, false)
+        val activity = requireActivity() as MainActivity
+        val inspire = view.findViewById&lt;FrameLayout&gt;(R.id.inspire)
+        val develop = view.findViewById&lt;FrameLayout&gt;(R.id.develop)
+        val influence = view.findViewById&lt;FrameLayout&gt;(R.id.influence)
+        val anim = ScaleAnimation(1f, 1.56f, 1f, 2f)
+        val anim2 = ScaleAnimation(1.56f, 1f, 2f, 1f)
+        val anim3 = ScaleAnimation(1f, 1.56f, 1f, 2f, Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF,1f)
+        val anim4 = ScaleAnimation(1.56f, 1f, 2f, 1f, Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF,1f)
+        val anim5 = ScaleAnimation(1f, 3f, 1f, 3f, Animation.RELATIVE_TO_SELF, 1f, Animation.RELATIVE_TO_SELF,0.5f)
+        val anim6 = ScaleAnimation(3f, 1f, 3f, 1f, Animation.RELATIVE_TO_SELF, 1f, Animation.RELATIVE_TO_SELF,0.5f)
+        anim2.duration = 500
+        anim2.fillAfter = true
+        anim.duration = 500
+        anim.fillAfter = true
+        anim3.duration = 500
+        anim3.fillAfter = true
+        anim4.duration = 500
+        anim4.fillAfter = true
+        anim5.duration = 500
+        anim5.fillAfter = true
+        anim6.duration = 500
+        anim6.fillAfter = true
+        var Bool = false
+        val main: ConstraintLayout = view.findViewById(R.id.main)
+        val textView2: TextView = view.findViewById(R.id.textView2)
+        val textView9: TextView = view.findViewById(R.id.textView9)
+        val textView10: TextView = view.findViewById(R.id.textView10)
+        val alphaAnimation = AlphaAnimation(0f, 1f)
+        alphaAnimation.duration = 500
+        alphaAnimation.fillAfter = true
+        val alphaAnimation2 = AlphaAnimation(1f, 0f)
+        alphaAnimation.duration = 500
+        alphaAnimation.fillAfter = true
+        inspire.setOnClickListener {
+            Bool = !Bool
+            if(Bool){
+                it.bringToFront()
+                inspire.startAnimation(anim)
+                textView2.startAnimation(alphaAnimation)    <span>//放大動畫</span>
+                textView2.visibility = View.VISIBLE  
+            }
+            else{
+                inspire.startAnimation(anim2)
+                textView2.visibility = View.GONE
+                textView2.startAnimation(alphaAnimation2)
+            }
+
+        }
+        develop.setOnClickListener {
+            Bool = !Bool
+            if(Bool){
+                it.bringToFront()
+                develop.startAnimation(anim3)
+                textView9.startAnimation(alphaAnimation)
+                textView9.visibility = View.VISIBLE
+            }
+            else{
+                develop.startAnimation(anim4)
+                textView9.startAnimation(alphaAnimation2)
+                textView9.visibility = View.GONE
+            }
+
+        }
+        influence.setOnClickListener {
+            Bool = !Bool
+            if(Bool){
+                it.bringToFront()
+                influence.startAnimation(anim5)
+                textView10.startAnimation(alphaAnimation)
+                textView10.visibility = View.VISIBLE
+            }
+            else{
+                influence.startAnimation(anim6)
+                textView10.startAnimation(alphaAnimation2)
+                textView10.visibility = View.GONE
+            }
+
+        }
+        return  view
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">photosFragment.kt</button>
+    <div class="panel">
+        <pre>
+class photosFragment : Fragment() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_photos, container, false)
+        val activity = requireActivity() as MainActivity
+        val imageView8: ImageView = view.findViewById(R.id.imageView8)
+        val imageView9 : ImageView = view.findViewById(R.id.imageView9)
+        val imageView10 : ImageView = view.findViewById(R.id.imageView10)
+        val imageView11: ImageView = view.findViewById(R.id.imageView11)
+        val imageView12: ImageView = view.findViewById(R.id.imageView12)
+        val imageView13 : ImageView = view.findViewById(R.id.imageView13)
+        val imageView14: ImageView = view.findViewById(R.id.imageView14)
+        val imageView15: ImageView = view.findViewById(R.id.imageView15)
+        imageView16 = activity.findViewById(R.id.imageView16)    <span>//攞返MainActivity嘅內容</span>
+        photoFrame = activity.findViewById(R.id.photoFrame)
+        val closeButton : ImageView = activity.findViewById(R.id.imageView17)
+        val scaleAnimation = ScaleAnimation(0f,1f,0f,1f, Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f)
+        val alphaAnimation = AlphaAnimation(0f, 1f)
+        animSet = AnimationSet(true)
+        animSet.addAnimation(scaleAnimation)
+        animSet.addAnimation(alphaAnimation)
+        animSet.duration = 500
+        animSet.fillAfter = true
+
+        val scaleAnimation2 = ScaleAnimation(1f,0f,1f,0f, Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f)
+        val alphaAnimation2 = AlphaAnimation(1f, 0f)
+        val animSet2 = AnimationSet(true)
+        animSet2.addAnimation(scaleAnimation2)
+        animSet2.addAnimation(alphaAnimation2)
+        animSet2.duration = 500
+        animSet2.fillAfter = true
+
+        closeButton.setOnClickListener {    <span>//閂返個大相</span>
+            imageView16.startAnimation(animSet2)
+            Thread{
+                Thread.sleep(450)
+                activity.runOnUiThread {
+                    photoFrame.visibility = View.GONE
+                }
+            }.start()
+        }
+        imageView8.setOnClickListener {
+            loadImage(R.drawable.photo_3)
+        }
+        imageView9.setOnClickListener {
+            loadImage(R.drawable.photo_4)
+        }
+        imageView10.setOnClickListener {
+            loadImage(R.drawable.photo_5)
+        }
+        imageView11.setOnClickListener {
+            loadImage(R.drawable.photo_6)
+        }
+        imageView12.setOnClickListener {
+            loadImage(R.drawable.photo_1)
+        }
+        imageView13.setOnClickListener {
+            loadImage(R.drawable.photo_2)
+        }
+        imageView14.setOnClickListener {
+            loadImage(R.drawable.photo_7)
+        }
+        imageView15.setOnClickListener {
+            loadImage(R.drawable.photo_8)
+        }
+        return  view
+    }
+    fun loadImage(imageId: Int){
+        photoFrame.visibility = View.VISIBLE
+        imageView16.setImageResource(imageId)
+        imageView16.startAnimation(animSet)
+    }
+    private lateinit var photoFrame: FrameLayout
+    private lateinit var imageView16: ImageView
+    private lateinit var animSet: AnimationSet
+}
+
+
+        </pre>
+    </div>
+    <button class="accordion">skillsFragment.kt</button>
+    <div class="panel">
+        <pre>
+class skillsFragment : Fragment() {
+    var imageNumber = 0
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_skills, container, false)
+        val activity = requireActivity() as MainActivity
+        before = view.findViewById(R.id.imageView20)
+        next = view.findViewById(R.id.imageView21)
+       scrollView = view.findViewById(R.id.scrollView)
+        bottomButton = view.findViewById(R.id.bottomButton)
+        linearLayout = view.findViewById(R.id.linearLayout)
+        before.setOnClickListener {
+            if(imageNumber != 0){
+                imageNumber -= 1
+                alphaButton(1)    <span>//所有都是已經做完了+-處理</span>
+                buttonColor()
+                alphaFrame(1)
+                animFun(1)
+            }
+        }
+        before.alpha = 0.3f
+
+        next.setOnClickListener {
+            if(imageNumber != 7){
+                imageNumber += 1
+                alphaButton(-1)
+                buttonColor()
+                alphaFrame(-1)
+                animFun(-1)
+            }
+        }
+        var startX = 0f
+        var startY = 0f
+        scrollView.setOnTouchListener { _, event ->
+            when(event.action){
+                MotionEvent.ACTION_DOWN -> {
+                    startX = event.x
+                    startY = event.y
+                }
+
+                MotionEvent.ACTION_UP -> {
+                    val moveX = event.x
+                    val moveY = event.y
+
+                    val deltaX = moveX - startX
+                    val deltaY = moveY - startY
+
+                    if(Math.abs(deltaX) > Math.abs(deltaY)){
+                        if(deltaX > 0){
+                            if(imageNumber != 0){
+                                imageNumber -= 1
+                                animFun(1)
+                                alphaButton(1)
+                                buttonColor()
+                                alphaFrame(1)
+                            }
+                        }
+                        else{
+                            if(imageNumber != 7){
+                                imageNumber += 1
+                                animFun(-1)
+                                alphaButton(-1)
+                                buttonColor()
+                                alphaFrame(-1)
+                            }
+                        }
+                    }
+                }
+
+            }
+            true
+        }
+        var i = 2
+        while (i<=8){
+            bottomButton.getChildAt(i).alpha = 0.3f
+            i++
+        }
+        return  view
+    }
+    private lateinit var linearLayout: LinearLayout
+    fun alphaButton(number: Int){      <span>正為向右滑，負為向左滑。(imageNumber已經是現時要展示的相片，右滑即右邊的要移走，所以+1)</span>
+        val targetLast = bottomButton.getChildAt(imageNumber + 1 + number)    <span>//左右兩個按鈕也在這個linearLayout中，所以要+1</span>
+        targetLast.alpha = 0.3f
+        val targetNow = bottomButton.getChildAt(imageNumber + 1)
+        targetNow.alpha = 1f
+    }
+    fun alphaFrame(number : Int){
+        val targetFrame = linearLayout.getChildAt(imageNumber + number)
+        targetFrame.alpha = 0.3f
+        val targetNow = linearLayout.getChildAt(imageNumber)
+        targetNow.alpha = 1f
+    }
+    private lateinit var  bottomButton: LinearLayout
+    fun buttonColor(){
+        if(imageNumber == 0){
+            before.alpha = 0.3f
+        }
+        else{
+            before.alpha = 1f
+        }
+        if(imageNumber == 7){
+            next.alpha = 0.3f
+        }
+        else{
+            next.alpha = 1f
+        }
+    }
+    private lateinit var next: ImageView
+    private lateinit var before: ImageView
+    fun animFun(number: Int){
+        val targetView = linearLayout.getChildAt(imageNumber)    <span>//移後現在我的相片</span>
+        val targetLast = linearLayout.getChildAt(imageNumber + number)    <span>//向右是1，向左是-1。正負表示前向</span>
+        val valueAnimator = ValueAnimator.ofInt(targetLast.left - 240, targetView.left - 240)    <span>//由之間的左邊移後後來的左邊</span>
+        valueAnimator.duration = 500
+        var value = 0
+        valueAnimator.addUpdateListener {
+            value = it.animatedValue as Int
+            <mark>scrollView.scrollX = value</mark>
+        }
+        valueAnimator.start()
+    }
+    private lateinit var scrollView: HorizontalScrollView
+}
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

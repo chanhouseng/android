@@ -1,0 +1,334 @@
+{
+  "_readme": "MARKING VECTORS - Experts only. Do NOT distribute to competitors. Inputs differ from the public test-vectors.json to detect hardcoded outputs. All rules (UTF-8, lowercase hex, standard Base64, RFC 3986) are identical to the public file.",
+  "hashGenerator": {
+    "input": "Friendly2026",
+    "results": {
+      "MD5": "e07c19f09c7b1ebc7454a341d3a64d39",
+      "SHA-1": "19c998277b88f3d1326275f4ed026c7ab4ee3f52",
+      "SHA-224": "46be7702c2671df9e88d31340e48188eca6a9ec2222806372b61c643",
+      "SHA-256": "8654cccecf1f13cdeb94086664643ccbaab03d0245ab6c56bd7a3439248e3373",
+      "SHA-384": "3732e1d8ceacecd825bc9594f60bfa5351f4d85d3502ea2a49b84afb7ea2b101e9722e4327a4fecf03e8e9966275c63a",
+      "SHA-512": "7c71a9f5d209582a7e9f8b2bb8f2dcd3135e4fdb06cb9b3692f0e4f3e38af166b64f276e72e3ded3ed84b84fb7f7ea8682b437a33de2d8de88d1625ae03174ac"
+    },
+    "saltedCase": {
+      "input": "Friendly2026",
+      "salt": "deadbeefcafe",
+      "SHA-256": "a23010bd257dbb5d174c95a59587281981fdb3c18b1fe7002211697c803d39f7",
+      "SHA-512": "901c680973b4465fa288c8ca3d1463fbe6498282794a36fddf90d8d60acd5985217a5a2135a365c6bcf91cd583e6b1a9c91f6b3f647e92f99642a28166b1cf90"
+    },
+    "errorCase": {
+      "input": "",
+      "expected": "error notification banner"
+    }
+  },
+  "fileHash": {
+    "file": "marking_sample.bin",
+    "fileSizeBytes": 2345,
+    "expectedDisplayedSizeKB": "2.29",
+    "note": "Also verify sample.txt (public file, 49 bytes) displays 0.05 KB.",
+    "results": {
+      "MD5": "0295aaa8ed8887184c1dc6f93bddeff8",
+      "SHA-1": "e7674e063aba1f151e9d5c17684668dfd8fb3c17",
+      "SHA-256": "7fadf7e3fea476677ec97ccf750b17b7b73ff96a929c4a9e077eb8a6136dec6f",
+      "SHA-512": "954c1dddeb7025d620f31318d31b08bf45df8af886f126684ad0c3f1afe9f8929b6a04aecb793dab66d1134dac9fbd2840c10ced1decc1c03a812ff364b4da83"
+    }
+  },
+  "aes": [
+    {
+      "case": "AES-128 CBC encrypt",
+      "algorithm": "AES-128",
+      "mode": "CBC",
+      "padding": "PKCS7",
+      "key": "JP26JulyOFC-KEY!",
+      "keyEncoding": "ASCII (16 bytes)",
+      "ivHex": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+      "plaintext": "Mobile Applications Development 2026",
+      "expectedCiphertext": "TYNG2QNmJ7TkM1EBC7KrHhYnQwieynDWnu43WVsDZicU+8UuJzEpyx1nI8yk/86n",
+      "expectedDecryptedText": "Mobile Applications Development 2026"
+    },
+    {
+      "case": "AES-256 CBC encrypt",
+      "algorithm": "AES-256",
+      "mode": "CBC",
+      "padding": "PKCS7",
+      "key": "WorldSkills-Seoul-2026-Module-A!",
+      "keyEncoding": "ASCII (32 bytes)",
+      "ivHex": "FFEEDDCCBBAA99887766554433221100",
+      "plaintext": "IT Utility Toolkit",
+      "expectedCiphertext": "R3y80MnI9TpQgBnE8+BdzKLtIW3ngmsO4/THOEvKnyA=",
+      "expectedDecryptedText": "IT Utility Toolkit"
+    },
+    {
+      "case": "AES-192 ECB encrypt",
+      "algorithm": "AES-192",
+      "mode": "ECB",
+      "padding": "PKCS7",
+      "key": "FriendlyCompetition-2026",
+      "keyEncoding": "ASCII (24 bytes)",
+      "ivHex": null,
+      "plaintext": "Encoding & Conversion",
+      "expectedCiphertext": "kvQ49PhlVTqRVcuCw8ezdWR+PMIAEMHy7bYX7QR3MMg=",
+      "expectedDecryptedText": "Encoding & Conversion"
+    },
+    {
+      "case": "AES-128 CBC with Ignore Key Length (auto-pad)",
+      "algorithm": "AES-128",
+      "mode": "CBC",
+      "padding": "PKCS7",
+      "key": "short",
+      "ignoreKeyLength": true,
+      "processedKey": "short00000000000",
+      "keyEncoding": "ASCII, padded with \"0\" (0x30) to 16 bytes",
+      "ivHex": "000102030405060708090A0B0C0D0E0F",
+      "plaintext": "Pad me",
+      "expectedCiphertext": "XwWpcmN9HW5UMMJ2xjnvuw==",
+      "expectedDecryptedText": "Pad me"
+    },
+    {
+      "case": "error cases",
+      "invalidIV": {
+        "mode": "CBC",
+        "ivHex": "1234",
+        "expected": "error notification banner (IV must be 32 hex characters)"
+      },
+      "wrongKeyLength": {
+        "algorithm": "AES-128",
+        "key": "123",
+        "ignoreKeyLength": false,
+        "expected": "error notification banner"
+      },
+      "invalidCiphertext": {
+        "decryptInput": "not-base64!!!",
+        "expected": "error notification banner"
+      }
+    }
+  ],
+  "hmacGenerator": {
+    "input": "JP2026 July Online Friendly Competition",
+    "secretKey": "JP26JulyOFC",
+    "results": {
+      "HMAC-MD5": "ce4933c58b878c6c502a797c48d07999",
+      "HMAC-SHA1": "d5dc7eade4a880ed39ed2b96004003fc7d4dfb25",
+      "HMAC-SHA256": "47a69e5568997bd8a6fa45d935d0ac2d304097ccde3d5cdf6bca479c79d36680",
+      "HMAC-SHA512": "3ed3aa8aca3b1469387e347c60194f846aef688ee600018724dc6651349c7e8ddf4c92372ec513de46b5b23aaa63603209ee021a89816fc9dde634c6b47653a1"
+    }
+  },
+  "base64": {
+    "encode": {
+      "plain": "Module A (Phone) - 15 points",
+      "expected": "TW9kdWxlIEEgKFBob25lKSAtIDE1IHBvaW50cw=="
+    },
+    "decode": {
+      "input": "SVQgVXRpbGl0eSBUb29sa2l0",
+      "expected": "IT Utility Toolkit"
+    },
+    "errorCase": {
+      "input": "@@@invalid@@@",
+      "expected": "error notification banner"
+    }
+  },
+  "urlEncoding": {
+    "encode": {
+      "plain": "https://jp26.example.com/search?q=mobile app dev&lang=ko&max=100%",
+      "expected": "https%3A%2F%2Fjp26.example.com%2Fsearch%3Fq%3Dmobile%20app%20dev%26lang%3Dko%26max%3D100%25"
+    },
+    "encodeSpacePlus": {
+      "plain": "a b+c",
+      "expected": "a%20b%2Bc"
+    },
+    "decode": {
+      "input": "Seoul%20%2F%20Tokyo%202026",
+      "expected": "Seoul / Tokyo 2026"
+    },
+    "errorCase": {
+      "input": "%ZZ%",
+      "expected": "error notification banner"
+    }
+  },
+  "numberBase": {
+    "cases": [
+      {
+        "input": "65280",
+        "inputBase": 10,
+        "binary": "1111111100000000",
+        "octal": "177400",
+        "decimal": "65280",
+        "hexadecimal": "FF00"
+      },
+      {
+        "input": "DEADBEEF",
+        "inputBase": 16,
+        "binary": "11011110101011011011111011101111",
+        "octal": "33653337357",
+        "decimal": "3735928559",
+        "hexadecimal": "DEADBEEF"
+      },
+      {
+        "input": "101010",
+        "inputBase": 2,
+        "binary": "101010",
+        "octal": "52",
+        "decimal": "42",
+        "hexadecimal": "2A"
+      },
+      {
+        "input": "4294967295",
+        "inputBase": 10,
+        "binary": "11111111111111111111111111111111",
+        "octal": "37777777777",
+        "decimal": "4294967295",
+        "hexadecimal": "FFFFFFFF"
+      }
+    ],
+    "errorCases": [
+      {
+        "input": "129",
+        "inputBase": 8,
+        "expected": "error notification banner (invalid digit for base 8)"
+      },
+      {
+        "input": "4294967296",
+        "inputBase": 10,
+        "expected": "error notification banner (out of 32-bit unsigned range)"
+      }
+    ]
+  },
+  "asciiHex": {
+    "textToHex": {
+      "input": "JP2026",
+      "expected": "4A 50 32 30 32 36"
+    },
+    "hexToText": {
+      "input": "57 53 4B 52",
+      "expected": "WSKR"
+    },
+    "errorCases": [
+      {
+        "mode": "Hex -> Text",
+        "input": "GG 41",
+        "expected": "error notification banner"
+      },
+      {
+        "mode": "Text -> Hex",
+        "input": "café",
+        "expected": "error notification banner (non-ASCII)"
+      }
+    ]
+  },
+  "cidrCalculator": {
+    "cases": [
+      {
+        "input": "172.16.5.130/27",
+        "networkAddress": "172.16.5.128",
+        "broadcastAddress": "172.16.5.159",
+        "firstHost": "172.16.5.129",
+        "lastHost": "172.16.5.158",
+        "availableHosts": 30,
+        "subnetMask": "255.255.255.224"
+      },
+      {
+        "input": "10.0.0.1/8",
+        "networkAddress": "10.0.0.0",
+        "broadcastAddress": "10.255.255.255",
+        "firstHost": "10.0.0.1",
+        "lastHost": "10.255.255.254",
+        "availableHosts": 16777214,
+        "subnetMask": "255.0.0.0"
+      },
+      {
+        "input": "192.168.10.77/30",
+        "networkAddress": "192.168.10.76",
+        "broadcastAddress": "192.168.10.79",
+        "firstHost": "192.168.10.77",
+        "lastHost": "192.168.10.78",
+        "availableHosts": 2,
+        "subnetMask": "255.255.255.252"
+      }
+    ],
+    "errorCase": {
+      "input": "10.0.0.256/24",
+      "expected": "error notification banner"
+    }
+  },
+  "ipCalculator": {
+    "cases": [
+      {
+        "operation": "Add",
+        "input": "10.0.0.255 + 1",
+        "expected": "10.0.1.0"
+      },
+      {
+        "operation": "Subtract",
+        "input": "172.16.0.0 - 1",
+        "expected": "172.15.255.255"
+      },
+      {
+        "operation": "Count",
+        "input": "192.168.0.250 to 192.168.1.5",
+        "expected": "12 IP addresses"
+      }
+    ],
+    "errorCases": [
+      {
+        "operation": "Add",
+        "input": "255.255.255.255 + 1",
+        "expected": "error notification banner (overflow)"
+      },
+      {
+        "operation": "Subtract",
+        "input": "0.0.0.0 - 1",
+        "expected": "error notification banner (underflow)"
+      },
+      {
+        "operation": "Count",
+        "input": "192.168.1.10 to 192.168.1.1",
+        "expected": "error notification banner (End IP < Start IP)"
+      }
+    ]
+  },
+  "regexTester": {
+    "cases": [
+      {
+        "pattern": "\\d{3}-\\d{4}",
+        "testString": "Call 010-1234 now",
+        "expected": "Matched (partial search)"
+      },
+      {
+        "pattern": "^abc$",
+        "testString": "abcd",
+        "expected": "Not Matched"
+      },
+      {
+        "pattern": "[A-Z]{2}",
+        "testString": "jp26julyofc",
+        "expected": "Not Matched"
+      }
+    ],
+    "errorCase": {
+      "pattern": "[a-",
+      "testString": "abc",
+      "expected": "error notification banner (invalid pattern)"
+    }
+  },
+  "uuidGenerator": {
+    "validation": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+    "procedure": "Generate twice; both must match the regex (lowercase) and differ from each other."
+  },
+  "passwordGenerator": {
+    "procedure": [
+      "1. Length 4, only Numbers checked -> 4 characters, digits only.",
+      "2. Length 8, all four sets checked -> 8 characters; at least one uppercase, one lowercase, one digit, one special.",
+      "3. Uncheck all -> error notification banner.",
+      "4. Length 64, all sets -> 64 characters from the allowed sets only."
+    ],
+    "specialSet": "!@#$%^&*()_+-=[]{}|;:,.<>?"
+  },
+  "randomNumberGenerator": {
+    "procedure": [
+      "1. Min 1, Max 100, Qty 5 -> five integers in [1,100], joined by \", \".",
+      "2. Min -10, Max 10, Qty 10 -> negatives allowed, all in [-10,10].",
+      "3. Min 5, Max 5 -> error notification banner (Minimum must be less than Maximum).",
+      "4. Qty 1001 -> error notification banner."
+    ]
+  }
+}

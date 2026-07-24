@@ -1,0 +1,93 @@
+{
+  "title": "Events",
+  "events": [
+    {
+      "image": "summer_festival_main.jpg",
+      "title": "Summer Music Festival",
+      "description": "An annual celebration of music bringing together top bands and independent artists from around the world for an unforgettable outdoor concert experience. The event also features a food market, art installations, and interactive zones for the whole family to enjoy.",
+      "isRead": true,
+      "thumbnails": [
+        "summer_festival_thumb_01.jpeg",
+        "summer_festival_thumb_02.jpeg",
+        "summer_festival_thumb_03.jpeg"
+      ]
+    },
+    {
+      "image": "tech_expo_main.jpg",
+      "title": "Future Tech Expo",
+      "description": "Explore the frontiers of artificial intelligence, virtual reality, and green energy. This year's expo welcomes over two hundred international tech companies and features keynote talks and hands-on workshops, making it a must-attend event for tech enthusiasts and industry professionals alike.",
+      "isRead": false,
+      "thumbnails": [
+        "tech_expo_thumb_01.jpeg",
+        "tech_expo_thumb_02.jpeg",
+        "tech_expo_thumb_03.jpeg"
+      ]
+    },
+    {
+      "image": "art_exhibition_main.jpg",
+      "title": "Contemporary Art Exhibition",
+      "description": "This group exhibition showcases original works from forty emerging artists across painting, sculpture, installation art, and digital media. Themed around 'Boundaries,' the show explores the subtle relationships between humanity and nature, technology and emotion.",
+      "isRead": false,
+      "thumbnails": [
+        "art_exhibition_thumb_01.jpeg",
+        "art_exhibition_thumb_02.jpeg",
+        "art_exhibition_thumb_03.jpeg"
+      ]
+    },
+    {
+      "image": "marathon_main.jpg",
+      "title": "City Marathon",
+      "description": "A 42-kilometer challenge that runs through the heart of the city, passing by historic landmarks and scenic parks along the way. Whether you're an elite runner or a first-time amateur, this race offers everyone a chance to feel the freedom of running and the joy of pushing past their limits.",
+      "isRead": true,
+      "thumbnails": [
+        "marathon_thumb_01.jpg",
+        "marathon_thumb_02.jpeg",
+        "marathon_thumb_03.jpg"
+      ]
+    },
+    {
+      "image": "food_carnival_main.jpg",
+      "title": "International Food Carnival",
+      "description": "Featuring authentic dishes from thirty countries, ranging from street food favorites to Michelin-star chef specialties. The event includes live cooking demonstrations, a wine tasting area, and a kids' culinary class, offering guests a global journey for the taste buds.",
+      "isRead": true,
+      "thumbnails": [
+        "food_carnival_thumb_01.jpeg",
+        "food_carnival_thumb_02.jpg",
+        "food_carnival_thumb_03.jpeg"
+      ]
+    },
+    {
+      "image": "film_festival_main.jpg",
+      "title": "Independent Film Festival",
+      "description": "This ten-day festival curates independent films from around the globe, including feature-length dramas, documentaries, and short film competitions. Post-screening discussions are held every night, giving audiences the chance to meet directors and actors and learn the stories behind the films.",
+      "isRead": false,
+      "thumbnails": [
+        "film_festival_thumb_01.jpg",
+        "film_festival_thumb_02.jpeg",
+        "film_festival_thumb_03.jpg"
+      ]
+    },
+    {
+      "image": "garden_show_main.jpg",
+      "title": "Spring Garden Show",
+      "description": "Spanning three hectares, this garden show displays over five hundred rare plant species alongside themed landscape gardens. Professional horticulturists are on-site to offer planting advice, and limited-edition potted plants and gardening tools are available for purchase, bringing greenery into every home.",
+      "isRead": true,
+      "thumbnails": [
+        "garden_show_thumb_01.jpeg",
+        "garden_show_thumb_02.jpg",
+        "garden_show_thumb_03.jpeg"
+      ]
+    },
+    {
+      "image": "startup_summit_main.jpg",
+      "title": "Startup Founders Summit",
+      "description": "Bringing together leading venture capital firms and startup teams from Silicon Valley, Asia, and Europe to discuss business opportunities for the next decade. The summit features a startup pitch competition, one-on-one matchmaking sessions, and themed roundtable discussions, providing valuable resources and inspiration for aspiring entrepreneurs.",
+      "isRead": false,
+      "thumbnails": [
+        "startup_summit_thumb_01.jpg",
+        "startup_summit_thumb_02.jpeg",
+        "startup_summit_thumb_03.jpg"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "TP Reading",
+    "category": "reading",
+    "durationMinutes": 15
+  },
+  {
+    "name": "Expert Communication",
+    "category": "communication",
+    "durationMinutes": 30
+  },
+  {
+    "name": "Module A Competition",
+    "category": "module",
+    "durationMinutes": 180
+  },
+  {
+    "name": "Module B Competition",
+    "category": "module",
+    "durationMinutes": 180
+  },
+  {
+    "name": "Module C Competition",
+    "category": "module",
+    "durationMinutes": 240
+  },
+  {
+    "name": "Module D Competition",
+    "category": "module",
+    "durationMinutes": 240
+  }
+]

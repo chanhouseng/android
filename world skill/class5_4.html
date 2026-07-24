@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+        load()
+        UI.setOnCheckedChangeListener{ view, isChecked ->
+            view.isChecked = isChecked
+            if(isChecked){
+                checkChip.add(view.text.toString())
+            }
+            else{
+                checkChip.remove(view.text.toString())
+            }
+            load()
+        }
+        Design.setOnCheckedChangeListener{ view, isChecked ->
+            if(isChecked){
+                checkChip.add(view.text.toString())
+            }
+            else{
+                checkChip.remove(view.text.toString())
+            }
+            load()
+        }
+        Programming.setOnCheckedChangeListener{ view, isChecked ->
+            if(isChecked){
+                checkChip.add(view.text.toString())
+            }
+            else{
+                checkChip.remove(view.text.toString())
+            }
+            load()
+        }
+        Basic.setOnCheckedChangeListener{ view, isChecked ->
+            if(isChecked){
+                checkChip.add(view.text.toString())
+            }
+            else{
+                checkChip.remove(view.text.toString())
+            }
+            load()
+        }
+
+fun load(){
+    linearLayout.removeAllViews()
+    for(lan in Data.languageList){
+        <mark>if(lan.setList.containsAll(checkChip)){</mark>    <span>//如果 lan.setList 這個集合「完全包含」 checkChip 裡的所有元素，就執行 { } 裡面的程式碼。</span>
+            val layout = layoutInflater.inflate(R.layout.product, null)
+            layout.findViewById&lt;TextView&gt;(R.id.title).text = lan.title
+            for(lans in lan.setList){
+                val textView = TextView(this)
+                textView.text = lans
+                layout.findViewById&lt;ChipGroup&gt;(R.id.linearLayout).addView(textView)
+            }
+            linearLayout.addView(layout)
+        }
+
+    }
+}
+
+
+    </pre>
+</div>
+<script src="js.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+<h3>以layout模版自製spinner </h3>
+val foodList: List&lt;Array&gt; = listOf(
+    Array("one", R.drawable.cupcake),
+    Array("Two", R.drawable.croissant)
+)
+
+val spinner: Spinner = findViewById(R.id.spinner)
+spinner.adapter = adapter(this, foodList)
+
+<span><h5>Class- adapter</h5></span>
+class adapter(context: Context, list: List&lt;Array&gt;): ArrayAdapter&lt;Array&gt;(context, 0, list) {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        return initView(position, convertView, parent)
+    }
+
+    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View? {
+        return initView(position, convertView, parent)
+    }
+    private fun initView(position: Int, convertView: View?, parent: ViewGroup): View{
+        val layout = LayoutInflater.from(context).inflate(R.layout.porduct, null)
+        val item = getItem(position)
+        layout.findViewById&lt;TextView&gt;(R.id.name).text = item!!.name
+        layout.findViewById&lt;ImageView&gt;(R.id.img).setImageResource(item!!.img)
+        return layout
+    }
+}
+
+<span>////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
+<mark>spinner監察獲得所選項目的文字</mark>
+spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+    override fun onItemSelected(
+        parent: AdapterView&lt;*&gt;?,
+        view: View?,
+        position: Int,
+        id: Long
+    ) {
+        <mark>val textView:String = parent?.findViewById&lt;TextView&gt;(R.id.name)?.text.toString()</mark>
+        Toast.makeText(this@MainActivity, textView, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onNothingSelected(parent: AdapterView&lt;*&gt;?) {
+    }
+}
+
+<span>///////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
+<mark>進度條</mark>
+&lt;ProgressBar
+    android:id="@+id/progressBar"
+    style="?android:attr/progressBarStyleHorizontal"
+    android:layout_width="match_parent"
+    android:max="100"
+    android:progress="10"
+    android:layout_height="wrap_content" /&gt;
+
+<mark>增加進度條</mark>
+var progress = 10
+findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
+    progress ++
+    <mark>findViewById&lt;ProgressBar&gt;(R.id.progressBar).progress = progress</mark>
+}
+
+
+    </pre>
+</div>
+<script src="js.js"></script>
+</body>
+</html>

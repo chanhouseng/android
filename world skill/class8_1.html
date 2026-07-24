@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">ProButton class</button>
+    <div class="panel">
+        <pre>
+class ProButton : LinearLayout {
+    constructor(context: Context) : super(context)
+    var valueProgress = 0
+    private var button : Button
+    private var progressBar: ProgressBar
+    init {
+        LayoutInflater.from(context).inflate(R.layout.pro_button, this, true)
+        button = findViewById(R.id.button)
+        progressBar = findViewById(R.id.progressBar)
+        button.setOnClickListener {
+            valueProgress ++
+            addValue()
+        }
+    }
+
+    fun addValue(){
+        progressBar.progress = valueProgress
+    }
+}
+        </pre>
+    </div>
+
+    <button class="accordion">Table Class</button>
+    <div class="panel">
+        <pre>
+class Table : LinearLayout{
+    constructor(context: Context) : super(context)
+
+    private var textView : TextView
+    private var progress: ProgressBar
+
+    init {
+        LayoutInflater.from(context).inflate(R.layout.table, this, true)
+        textView = findViewById(R.id.tableTextView)
+        progress = findViewById(R.id.tableProgressBar)
+    }
+
+    fun setName(name:String){
+        textView.text = name
+    }
+
+    fun setValue(value: Int){
+        progress.progress = value
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity.kt</button>
+    <div class="panel">
+        <pre>
+        val table = Table(this)
+        table.setName("Daniel")
+        table.setValue(50)
+
+        val table2 = Table(this)
+        table2.setName("Danil")
+        table2.setValue(50)
+        findViewById&lt;LinearLayout&gt;(R.id.linearlayout).addView(table)
+        findViewById&lt;LinearLayout&gt;(R.id.linearLayout2).addView(table2)
+
+        val proButton = ProButton(this)
+        findViewById&lt;LinearLayout&gt;(R.id.linearLayout2).addView(proButton)
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"&gt;
+
+
+    &lt;FrameLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/frameLayout"
+        android:layout_height="wrap_content"&gt;
+        &lt;ImageView
+            android:id="@+id/imageView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"/&gt;
+    &lt;/FrameLayout&gt;
+    &lt;Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="select photo" /&gt;
+
+    &lt;Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="rot" /&gt;
+
+    &lt;Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="save" /&gt;
+&lt;/LinearLayout&gt;
+
+
+        </pre>
+    </div>
+    <button class="accordion">MainAvitivty.kt</button>
+    <div class="panel">
+        <pre>
+class MainActivity : AppCompatActivity() {
+    val pickPhoto = registerForActivityResult(ActivityResultContracts.PickVisualMedia()){uri -&gt;
+        if(uri != null){
+            imageView.setImageURI(uri)
+        }
+    }
+    private lateinit var imageView: ImageView
+    private lateinit var originalBitmap: Bitmap
+    private lateinit var mutableBitmap: Bitmap
+    private lateinit var frameLayout: FrameLayout
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
+        <span>--- start in here ---</span>
+        frameLayout = findViewById(R.id.frameLayout)
+        imageView = findViewById(R.id.imageView)
+        findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
+            pickPhoto.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+        findViewById&lt;Button&gt;(R.id.button2).setOnClickListener {
+            imageView.rotation = imageView.rotation + 90f
+        }
+        findViewById&lt;Button&gt;(R.id.button3).setOnClickListener {
+            saveLayoutToGallery(frameLayout)
+        }
+    }
+    fun saveLayoutToGallery(view: View){
+        try {
+            val bitmap = Bitmap.createBitmap(
+                view.width,
+                view.height,
+                Bitmap.Config.ARGB_8888
+            )
+
+            val canvas = Canvas(bitmap)
+            view.draw(canvas)
+
+            saveImageToGallery(bitmap)
+        }catch (e: Exception){
+            Toast.makeText(this, "保存失敗: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun saveImageToGallery(bitmap: Bitmap){
+        try {
+            val fileName = "drawing_${System.currentTimeMillis()}.png"
+            val contentValues = ContentValues().apply {
+                put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
+                put(MediaStore.Images.Media.MIME_TYPE, "image/png")
+                put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+            }
+
+            val uri = contentResolver.insert(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                contentValues
+            )
+
+            uri?.let {
+                contentResolver.openOutputStream(it)?.use { stream -&gt;
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                }
+                true
+            }?:false
+            Toast.makeText(this, "Save to gallery", Toast.LENGTH_SHORT).show()
+        }catch (e: Exception){
+            Toast.makeText(this, e.message.toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
+}
+
+
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

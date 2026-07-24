@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+val add : Button = findViewById(R.id.add)
+val linearLayout : LinearLayout = findViewById(R.id.linearLayout)
+add.setOnClickListener {
+    val textView = TextView(this)
+    val custom = layoutInflater.inflate(R.layout.alert, null)
+    val editText = custom.findViewById&lt;EditText&gt;(R.id.editTextText)
+    val close = custom.findViewById&lt;ImageView&gt;(R.id.imageView)
+    val button = custom.findViewById&lt;Button&gt;(R.id.button)
+    val alertDialog = AlertDialog.Builder(this).setView(custom).show()
+    close.setOnClickListener {
+        alertDialog.dismiss()
+    }
+    button.setOnClickListener {
+        textView.text = editText.text.toString()
+        alertDialog.dismiss()
+        <mark>linearLayout.addView(textView, 0)</mark>  <span>增加到linearLayout第一項</span>
+    }
+    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    alertDialog.setCanceledOnTouchOutside(false)
+}
+
+<span>////////////////////////////////////////////////////////////////////////////////////////////////////</span>
+
+val foodList = listOf("macau", "hk", "apple", "china")
+val editText2 : EditText = findViewById(R.id.editTextText2)
+val button2: Button = findViewById(R.id.button2)
+val linearLayout2: LinearLayout = findViewById(R.id.linearLayout2)
+val scrollView: ScrollView = findViewById(R.id.scrollView)
+for(food in foodList){
+    val layout = layoutInflater.inflate(R.layout.food, null)
+    layout.findViewById&lt;TextView&gt;(R.id.textView).text = food
+    layout.setOnLongClickListener {
+        linearLayout2.removeView(layout)
+        true
+    }
+    linearLayout2.addView(layout)
+}
+button2.setOnClickListener {
+    val layout = layoutInflater.inflate(R.layout.food, null)
+    layout.findViewById&lt;TextView&gt;(R.id.textView).text = editText2.text.toString()
+
+    layout.setOnLongClickListener {
+        linearLayout2.removeView(layout)
+        <span>//removeView(0, 2)刪除1,2項</span>
+        true
+    }
+    linearLayout2.addView(layout)
+    <mark>scrollView.fullScroll(View.FOCUS_UP)</mark>
+    editText2.setText("")
+}
+scrollView.post { <span>//會自動最後先開始做</span>
+    <mark>scrollView.fullScroll(View.FOCUS_DOWN)</mark>
+}
+findViewById&lt;Button&gt;(R.id.up).setOnClickListener {
+    scrollView.fullScroll(View.FOCUS_UP)
+}
+
+
+    </pre>
+</div>
+<script src="js.js"></script>
+</body>
+</html>

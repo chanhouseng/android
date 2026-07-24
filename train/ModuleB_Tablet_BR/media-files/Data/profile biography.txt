@@ -1,0 +1,1 @@
+WorldSkills Competitor in Mobile Applications Development (#08). Specialized in building high-performance native solutions and fluid interfaces using Flutter, Clean Architecture, and RESTful APIs. Focused on software quality, UX, and delivering top-tier apps under pressure.

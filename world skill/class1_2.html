@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+findViewById&lt;Button&gt;(R.id.button).setOnClickListener{
+    findViewById&lt;TextView&gt;(R.id.textView).text = "Hi"
+    <mark>findViewById&lt;TextView&gt;(R.id.textView).setTextColor(Color.parseColor("#123456"))</mark>
+
+}
+var size:Float = 18.0f
+var bold = false
+findViewById&lt;Button&gt;(R.id.button2).setOnClickListener {
+    size += 5f
+    findViewById&lt;TextView&gt;(R.id.textView4).setTextSize(size)
+    if(bold){
+        bold = false
+        <mark>findViewById&lt;TextView&gt;(R.id.textView4).setTypeface(null, Typeface.NORMAL)</mark>  <span>//正常</span>
+    }
+    else{
+        bold = true
+        <mark>findViewById&lt;TextView&gt;(R.id.textView4).setTypeface(null, Typeface.BOLD)</mark>    <span>//粗體</span>
+    }
+}
+val name = "cupcake.jpg"
+val imageName = name.replace(".jpg", "").replace(".png","")
+val imageId = resources.getIdentifier(imageName, "drawable", packageName)
+findViewById&lt;ImageView&gt;(R.id.imageView).setImageResource(imageId)
+findViewById&lt;Button&gt;(R.id.button3).setOnClickListener {
+    findViewById&lt;EditText&gt;(R.id.editTextText).setText("hello")
+}
+val editText = findViewById&lt;EditText&gt;(R.id.editTextText)
+editText.doOnTextChanged { text, _, _, _ -&gt;
+    findViewById&lt;TextView&gt;(R.id.textView5).text = text.toString()<mark>.uppercase() //lowercase,capitalize</mark> <span>capitalize為句子大寫</span>
+}
+
+
+<span>//private lateinit var dataPickerDialog: DatePickerDialog</span>
+<mark>日期選擇器</mark>
+dataPickerDialog = DatePickerDialog(this)
+findViewById&lt;EditText&gt;(R.id.editTextDate).setOnClickListener {
+    dataPickerDialog.show()
+    dataPickerDialog.setOnDateSetListener { _, year, month, dayOfMonth -&gt;
+        val dataString = String.format("%d-%02d-%02d", year, month + 1, dayOfMonth)
+        Toast.makeText(this, dataString, Toast.LENGTH_SHORT).show()
+        findViewById&lt;EditText&gt;(R.id.editTextDate).setText(dataString)
+    }
+}
+
+<mark>時間選擇器</mark>
+val editTime = findViewById&lt;EditText&gt;(R.id.editTextTime)
+val timePickerDialog: TimePickerDialog = TimePickerDialog(this,
+    {_, hour, minute -&gt; editTime.setText(String.format("%02d:%02d", hour, minute))}, 12, 0, false)
+editTime.setOnFocusChangeListener {_, hasFocus -&gt;
+    if(hasFocus){
+        timePickerDialog.show()
+    }
+
+}
+
+<mark>checkbox監察</mark>
+findViewById&lt;Button&gt;(R.id.button4).isEnabled = false
+findViewById&lt;CheckBox&gt;(R.id.checkBox).setOnCheckedChangeListener { _, isChecked -&gt;
+    if(findViewById&lt;CheckBox&gt;(R.id.checkBox).isChecked){
+        findViewById&lt;Button&gt;(R.id.button4).isEnabled = true
+    }
+    else{
+        findViewById&lt;Button&gt;(R.id.button4).isEnabled = false
+    }
+}
+
+<mark>得到radiouButton被點的文字</mark>
+val radioGroup: RadioGroup = findViewById(R.id.radioGroup)
+findViewById&lt;Button&gt;(R.id.button5).setOnClickListener {
+    val radioId = radioGroup.checkedRadioButtonId
+    Toast.makeText(this, findViewById&lt;RadioButton&gt;(radioId).text.toString(), Toast.LENGTH_SHORT).show()
+}
+
+<mark>radioButton監察</mark>
+radioGroup.setOnCheckedChangeListener{ _, checkedId -&gt;
+    Toast.makeText(this, findViewById&lt;RadioButton&gt;(checkedId).text.toString(), Toast.LENGTH_SHORT).show()
+    when(findViewById&lt;RadioButton&gt;(checkedId).text.toString()){
+        "hi" -&gt; findViewById&lt;RadioButton&gt;(checkedId).text = "bye"
+        "bye" -&gt; findViewById&lt;RadioButton&gt;(checkedId).text = "hi"
+    }
+}
+
+
+    </pre>
+</div>
+<script src="js.js"></script>
+</body>
+</html>

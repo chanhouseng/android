@@ -1,0 +1,39 @@
+CRITICAL - 2023-10-31 07:18:07 --> "App\Models\TourModel" model class does not have a valid dateFormat.
+in SYSTEMPATH/BaseModel.php on line 1331.
+ 1 SYSTEMPATH/BaseModel.php(1331): CodeIgniter\Exceptions\ModelException::forNoDateFormat('App\\Models\\TourModel')
+ 2 SYSTEMPATH/BaseModel.php(1298): CodeIgniter\BaseModel->intToDate(1698736687)
+ 3 SYSTEMPATH/BaseModel.php(772): CodeIgniter\BaseModel->setDate()
+ 4 SYSTEMPATH/Model.php(715): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH/BaseModel.php(698): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH/Controllers/TourController.php(46): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\TourController->store()
+ 8 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TourController))
+ 9 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-31 07:18:37 --> "App\Models\TourModel" model class does not have a valid dateFormat.
+in SYSTEMPATH/BaseModel.php on line 1331.
+ 1 SYSTEMPATH/BaseModel.php(1331): CodeIgniter\Exceptions\ModelException::forNoDateFormat('App\\Models\\TourModel')
+ 2 SYSTEMPATH/BaseModel.php(1298): CodeIgniter\BaseModel->intToDate(1698736717)
+ 3 SYSTEMPATH/BaseModel.php(772): CodeIgniter\BaseModel->setDate()
+ 4 SYSTEMPATH/Model.php(715): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH/BaseModel.php(698): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH/Controllers/TourController.php(46): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\TourController->store()
+ 8 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TourController))
+ 9 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-31 07:47:07 --> There is no data to update.
+in SYSTEMPATH/BaseModel.php on line 930.
+ 1 SYSTEMPATH/BaseModel.php(930): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH/Model.php(776): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH/Controllers/TourController.php(56): CodeIgniter\Model->update('1', [...])
+ 4 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\TourController->update('1')
+ 5 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TourController))
+ 6 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-31 07:48:20 --> Call to undefined function App\Controllers\get()
+in APPPATH/Controllers/TourController.php on line 58.
+ 1 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\TourController->update('1')
+ 2 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TourController))
+ 3 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">MainActivity3.kt</button>
+    <div class="panel">
+        <mark>輸入判斷</mark>
+        <pre>
+val name: EditText = findViewById&lt;EditText&gt;(R.id.editTextText)
+findViewById&lt;TextView&gt;(R.id.textView5).setOnClickListener {
+
+    if(name.text.toString().length == 0){
+        Toast.makeText(this, "Full name should not be empty", Toast.LENGTH_SHORT).show()
+    }
+    else if(name.text.toString().firstOrNull()?.isDigit() == true){
+        <span>//.firstOrNull()取出字串的第一個字元。如果字串為空（""），則返回 null</span>
+        <span>//isDigit() 會檢查是否為 '0' ~ '9'。</span>
+        Toast.makeText(this, "Full name should not start with number", Toast.LENGTH_SHORT).show()
+    }
+    else if(name.text.toString().length &lt; 3){
+        Toast.makeText(this, "Full name should not be less than 3 characters", Toast.LENGTH_SHORT).show()
+    }
+    else{
+        val intent = Intent(this, MainActivity4::class.java)
+        startActivity(intent)
+        val editor = getSharedPreferences("data", MODE_PRIVATE).edit()
+        editor.putString("name", name.text.toString())
+        editor.apply()
+    }
+}
+        </pre>
+    </div>
+
+    <button class="accordion">activity5.xml(輸入日期)</button>
+    <div class="panel">
+        <mark>有兩個重疊的東西，editText輸入內容就在textView顯示</mark>
+        <pre>
+&lt;FrameLayout
+    android:layout_width="match_parent"
+    android:layout_marginVertical="40dp"
+    android:layout_height="wrap_content"&gt;
+    &lt;TextView
+        android:id="@+id/textView31"
+        android:textSize="25dp"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:padding="20dp"
+        android:layout_height="wrap_content"
+        android:letterSpacing="0.3"          <span>//每個字的間距</span>
+        android:text="DD / MM / YYYY" /&gt;
+
+    &lt;EditText
+        android:id="@+id/editTextText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#18abc8"
+        android:ems="10"
+        android:inputType="date"
+        android:padding="20dp"
+        android:maxLength="8"            <span>//最多可輸入8個字</span>
+        android:hint="DD / MM / YYYY"
+        android:visibility="visible"
+        android:textColor="#111"
+        android:alpha="0"                <span>//editText不顯示，只作輸入功能</span>
+        android:textSize="25sp" /&gt;
+&lt;/FrameLayout&gt;
+
+
+        </pre>
+    </div>
+    <button class="accordion">MainActivity5.kt</button>
+    <div class="panel">
+        <mark>日期有自動格式輸入</mark>
+        <pre>
+class MainActivity4 : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main4)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        findViewById&lt;ImageView&gt;(R.id.imageView2).setOnClickListener {
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+        }
+        val editTextText: EditText = findViewById(R.id.editTextText)
+        val timeLimit = LocalDate.of(2010, 1, 1)
+        val textView31: TextView = findViewById(R.id.textView31)
+        editTextText.doOnTextChanged { text, start, before, count -&gt;         <span>//每次輸入都進行</span>
+            val textShow = when(text.toString().length){
+                0,1,2 -&gt; "${text.toString().padEnd(2,'D')} / MM / YYYY"
+                3,4 -&gt; "${text.toString().take(2)} / ${text.toString().substring(2, text.toString().length).padEnd(2,'M')} / YYYY"
+                else -&gt; "${text.toString().take(2)} / ${text.toString().substring(2,4)} / ${text.toString().substring(4, text.toString().length).padEnd(4,'Y')}"
+            }
+            textView31.text = textShow.toString()
+        }
+        findViewById&lt;TextView&gt;(R.id.textView5).setOnClickListener {
+            val text = editTextText.text.toString()
+
+            val time : LocalDate? = try {
+                LocalDate.of(text.substring(4, 8).toInt(),text.substring(2, 4).toInt(),text.substring(0,2).toInt())
+            }catch (e: Exception){
+                null
+            }
+            if(time == null){
+                Toast.makeText(this, "please input a correct time formatter",Toast.LENGTH_SHORT).show()
+            }
+            else if(time.isAfter(timeLimit)){
+                Toast.makeText(this, " Birth date should be a valid date and before 2010", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val intent = Intent(this, MainActivity5::class.java)
+                startActivity(intent)
+            }
+        }
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity9.kt</button>
+    <div class="panel">
+        <mark>記錄apply時間，每三秒更新</mark>
+        <pre>
+class MainActivity9 : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main9)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        val photo: ImageView = findViewById(R.id.imageView5)
+        val name: TextView = findViewById(R.id.textView9)
+        val location: TextView = findViewById(R.id.textView12)
+        val button: FrameLayout = findViewById(R.id.button)
+        val buttonText = findViewById&lt;TextView&gt;(R.id.textView13)
+        val link = findViewById&lt;TextView&gt;(R.id.textView14)
+        val linkButton = findViewById&lt;LinearLayout&gt;(R.id.linkButton)
+        val web = intent.getStringExtra("website")
+        linkButton.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_VIEW
+            intent.data = Uri.parse(web)
+            startActivity(intent)
+        }
+        val desc = findViewById&lt;TextView&gt;(R.id.textView15)
+        val tabLayout = findViewById&lt;TabLayout&gt;(R.id.tabLayout)
+        val viewpager2: ViewPager2 = findViewById(R.id.viewpager2)
+        photo.load(intent.getStringExtra("photo")){
+            crossfade(true)
+            placeholder(R.drawable.bristol)
+        }
+        name.text = intent.getStringExtra("name")
+        location.text = intent.getStringExtra("location")
+        link.text = intent.getStringExtra("website")?.replace("https://www.", "")
+        desc.text = intent.getStringExtra("desc")
+        val tabList = listOf&lt;String&gt;("Followings", "Followers", "Comments", "Fields")
+        viewpager2.adapter = m9Adapter(this)
+        TabLayoutMediator(tabLayout,viewpager2){tab, position -&gt;
+            tab.text = tabList[position]
+        }.attach()
+        findViewById&lt;ImageView&gt;(R.id.imageView6).setOnClickListener {
+            val intent = Intent(this, MainActivity8::class.java)
+            startActivity(intent)
+        }
+        id = intent.getIntExtra("id", -1)
+
+        countDownTimer = object : CountDownTimer(3000, 3000){    <span>//每三秒更新計時textView</span>
+            override fun onFinish() {
+                start()
+                val universityList = Data.applyUniversity.find { it.Univer_id == id }
+                val time = ChronoUnit.SECONDS.between(universityList?.time?:null, LocalDateTime.now())
+                val hour:Int = (time / 3600).toInt()
+                val min = ((time%3600)/60).toInt()
+                val seconds = ((time%3600)%60).toInt()
+                buttonText.text = "Applied ${hour}h, ${min}m, ${seconds}s ago"
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+        }
+        if(Data.appliedUniversityList.contains(id)){
+            countDownTimer.start()
+            val universityList = Data.applyUniversity.find { it.Univer_id == id }
+            val time = ChronoUnit.SECONDS.between(universityList?.time, LocalDateTime.now())
+            val hour:Int = (time / 3600).toInt()
+            val min = ((time%3600)/60).toInt()
+            val seconds = ((time%3600)%60).toInt()
+            buttonText.text = "Applied ${hour}h, ${min}m, ${seconds}s ago"
+        }
+        else{
+            button.setOnClickListener {
+                Data.applyUniversity.add(applyUClass(id, intent.getStringExtra("name").toString(), intent.getStringExtra("website").toString(),
+                    LocalDateTime.now()))     <span>//記下按下的時間</span>
+                Data.appliedUniversityList.add(id)
+                buttonText.text = "Applied 0h, 0m, 0s ago"
+                countDownTimer.start()
+            }
+        }
+    }
+    override fun onPause() {
+        super.onPause()
+        countDownTimer.cancel()
+    }
+    var id: Int = -1
+    lateinit var countDownTimer: CountDownTimer
+}
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <mark>多項需排序的搜尋、要等三秒才做</mark>
+        <pre>
+class seachFragment : Fragment() {
+    private lateinit var linearLayout: LinearLayout
+    private lateinit var search: EditText
+    private var searchId = arrayListOf&lt;Int&gt;()
+    private var searchId2 = listOf&lt;Int&gt;()
+    private var searchHandler = Handler(Looper.getMainLooper())   <span>//建立排程器</span>
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view =  inflater.inflate(R.layout.fragment_seach, container, false)
+        val activity = requireActivity() as MainActivity8
+        linearLayout = view.findViewById(R.id.linearLayout)
+        search = view.findViewById(R.id.editTextText3)
+        val results = Gson().fromJson(Data.universityText, Array&lt;universityClass&gt;::class.java)
+        val results2 = Gson().fromJson(Data.studyFields, Array&lt;studyClass&gt;::class.java)
+        search.doOnTextChanged { text, start, before, count -&gt;
+            linearLayout.removeAllViews()
+            searchHandler.removeCallbacksAndMessages(null)
+            if(text.toString().length &gt; 3){
+                searchHandler.postDelayed({    <span>//三秒後才做的東西</span>
+                    searchId.clear()
+                    linearLayout.removeAllViews()
+                    for(result in results){
+                        if(result.university_name.contains(text.toString())){
+                            searchId.add(result.university_id)     <span>//因為佢要按標題、內文等等去搜，所以合適先記ID</span>
+                        }
+                    }
+                    for(result in results){
+                        if(result.university_desc.contains(text.toString())){
+                            searchId.add(result.university_id)
+                        }
+                    }
+                    for(result in results2){
+                        for(fields in result.fields_of_study){
+                            if(fields.name.contains(text.toString())){
+                                searchId.add(result.university_id)
+                            }}
+                    }
+                    searchId2 = searchId.distinct()    <span>//必然有重覆項，就要刪去</span>
+                    for(searchId in searchId2) { 
+                        val resultUniversity = results.filter { it.university_id == searchId }    <span>//最後按ID去顯示學校</span>
+                        val studyResult = results2.filter { it.university_id == searchId }
+                        for (result in resultUniversity) {
+                            for (study in studyResult) {
+                                val layout = layoutInflater.inflate(R.layout.search_pro, null)
+                                layout.findViewById&lt;TextView&gt;(R.id.textView25).text =
+                                    result.university_name
+                                layout.findViewById&lt;TextView&gt;(R.id.textView26).text =
+                                    result.university_location
+                                layout.findViewById&lt;TextView&gt;(R.id.textView27).text =
+                                    result.university_desc
+                                val fields = study.fields_of_study.joinToString(", ") { it.name }
+                                layout.findViewById&lt;TextView&gt;(R.id.textView28).text =
+                                    "Fields: ${fields}"
+                                layout.setOnClickListener {
+                                    val intent = Intent(activity, MainActivity9::class.java)
+                                    intent.putExtra("name", result.university_name)
+                                    intent.putExtra("desc", result.university_desc)
+                                    intent.putExtra("photo", result.university_photo)
+                                    intent.putExtra("website", result.university_website)
+                                    intent.putExtra("id", result.university_id)
+                                    intent.putExtra("location", result.university_location)
+                                    startActivity(intent)
+                                }
+                                linearLayout.addView(layout)
+                            }
+                        }
+                    }
+                }, 3000)
+            }
+        }
+        return  view
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

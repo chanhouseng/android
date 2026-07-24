@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">AlphaAnimation</button>
+    <div class="panel">
+        <pre>
+val anim1 = AlphaAnimation(0f, 1f)
+anim1.duration = 2000
+anim1.repeatCount = Animation.INFINITE
+findViewById&lt;TextView&gt;(R.id.textView).startAnimation(anim1)
+
+        </pre>
+    </div>
+    <button class="accordion">RotateAnimation 旋轉</button>
+    <div class="panel">
+        <pre>
+val anim2 = RotateAnimation(0f, 720f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+anim2.duration = 1000
+anim2.fillAfter = true
+findViewById&lt;TextView&gt;(R.id.textView1).startAnimation(anim2)
+
+        </pre>
+    </div>
+    <button class="accordion">TranslateAnimation 移動</button>
+    <div class="panel">
+        <pre>
+val anim3 = TranslateAnimation(0f, 100f, 0f, 0f)
+anim3.duration = 3000
+anim3.fillAfter = true
+findViewById&lt;TextView&gt;(R.id.textView2).startAnimation(anim3)
+
+        </pre>
+    </div>
+    <button class="accordion">ScaleAnimation 放大</button>
+    <div class="panel">
+        <pre>
+val anim4 = ScaleAnimation(0f, 3f, 0f, 2f, Animation.RELATIVE_TO_SELF, 1f, Animation.RELATIVE_TO_SELF, 0f)
+anim4.duration = 4000
+anim4.fillAfter = true
+findViewById&lt;TextView&gt;(R.id.textView3).startAnimation(anim4)
+
+        </pre>
+    </div>
+    <button class="accordion">AnimationSet 向上漸現</button>
+    <div class="panel">
+        <pre>
+val animSet = AnimationSet(true)
+animSet.addAnimation(AlphaAnimation(0f, 1f))
+animSet.addAnimation(TranslateAnimation(0f, 0f, 100f, 0f))
+animSet.duration = 3000
+animSet.fillAfter = true
+findViewById&lt;TextView&gt;(R.id.textView4).startAnimation(animSet)
+
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

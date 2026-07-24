@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "45cb330a-1a74-4da2-a24f-1700043d71a3",
+		"name": "WSC2024_Module_A_PM_Web_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[User] Sign in or Sign up",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    let auth_token = jsonData.data.auth_token",
+							"    pm.collectionVariables.set(\"AUTHORIZATION_TOKEN\", auth_token);",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userEmailAddress\" : \"{{$randomEmail}}\",\n    \"userPassword\" : \"{{$randomPassword}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/users/signin",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"port": "{{SERVICE_PORT}}",
+					"path": [
+						"api",
+						"users",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Diary] Get all diaries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/diary",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"port": "{{SERVICE_PORT}}",
+					"path": [
+						"api",
+						"diary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Favorite] Insert new favorite diary",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth_token",
+						"value": "{{AUTHORIZATION_TOKEN}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "diary_id",
+							"value": "BA23617D-42DA-8C4A-F569-C1915B9B55B1",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/diary/favorite",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"port": "{{SERVICE_PORT}}",
+					"path": [
+						"api",
+						"diary",
+						"favorite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Favorite] Get my all diary favorites",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth_token",
+						"value": "{{AUTHORIZATION_TOKEN}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/diary/favorite",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"port": "{{SERVICE_PORT}}",
+					"path": [
+						"api",
+						"diary",
+						"favorite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Resources] Get resource file",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/:path",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"port": "{{SERVICE_PORT}}",
+					"path": [
+						"api",
+						":path"
+					],
+					"variable": [
+						{
+							"key": "path",
+							"value": "resources/Musee d Orsay/d1.json"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Resources] Visit User Agreement",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/user-agreement",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"port": "{{SERVICE_PORT}}",
+					"path": [
+						"api",
+						"user-agreement"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "AUTHORIZATION_TOKEN",
+			"value": "VS0Z7OR9ZTGYQTTJ4A5RCR4S6",
+			"type": "default"
+		},
+		{
+			"key": "BASE_URL",
+			"value": "192.168.0.201",
+			"type": "default"
+		},
+		{
+			"key": "SERVICE_PORT",
+			"value": "8091",
+			"type": "default"
+		}
+	]
+}

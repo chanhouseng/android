@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+spinner = findViewById(R.id.spinner)
+
+findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
+    val spinnerText = spinner.selectedItemId.toString()
+    Toast.makeText(this, spinnerText, Toast.LENGTH_SHORT).show()
+}
+val region = listOf("china", "macau", "HK")
+<mark>val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, region)</mark>  <span>//設置spinner選項</span>
+val spinner2 = findViewById&lt;Spinner&gt;(R.id.spinner2)
+<mark>spinner2.adapter = adapter</mark>
+<mark>spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{</mark>
+    override fun onItemSelected(
+        parent: AdapterView&lt;*&gt;?,
+        view: View?,
+        position: Int,
+        id: Long
+    ) {
+        Toast.makeText(this@MainActivity, region[position], Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onNothingSelected(parent: AdapterView&lt;*&gt;?) {
+
+    }
+
+}
+
+
+
+    </pre>
+</div>
+<script src="js.js"></script>
+</body>
+</html>

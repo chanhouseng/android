@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+val foodList: List<foodClass> = listOf(
+    foodClass(1, "One", R.drawable.croissant),
+    foodClass(2, "Two", R.drawable.gingerbread),
+    foodClass(3, "Three", R.drawable.cheese_cake),
+    foodClass(4, "One", R.drawable.croissant),
+    foodClass(5, "Two", R.drawable.gingerbread),
+    foodClass(6, "Three", R.drawable.cheese_cake),
+    foodClass(7, "One", R.drawable.croissant),
+    foodClass(8, "Two", R.drawable.gingerbread),
+    foodClass(9, "Three", R.drawable.cheese_cake)
+)
+var clickSet = HashSet<String>()
+val linearLayout: LinearLayout = findViewById(R.id.linearLayout)
+val prefs = getSharedPreferences("data", MODE_PRIVATE)
+<mark>val prefsSet = prefs.getStringSet("foodClick", emptySet&lt;String&gt;()) ?: emptySet()</mark>  <span>//攞返本地存嘅clicked List(HashSet)</span>
+
+for (food in foodList) {
+    val layout = layoutInflater.inflate(R.layout.product, null)
+    layout.findViewById&lt;TextView&gt;(R.id.textView).text = food.name
+    layout.findViewById&lt;ImageView&gt;(R.id.imageView).setImageResource(food.img)
+    if (prefsSet.contains(food.id.toString())) {   <span>//將所有clicked的放入clickSet放便之後存入唔會覆蓋數據</span>
+        clickSet.add(food.id.toString())
+        food.isClick = true
+    }
+
+    if (food.isClick) {
+        layout.findViewById&lt;TextView&gt;(R.id.isClick).text = "Clicked"
+    } else {
+        layout.findViewById&lt;TextView&gt;(R.id.isClick).text = "Unclicked"
+    }
+    layout.setOnClickListener {
+        clickSet.add(food.id.toString())
+        layout.findViewById&lt;TextView&gt;(R.id.isClick).text = "Clicked"
+        val editor = getSharedPreferences("data", MODE_PRIVATE).edit()
+        <mark>editor.putStringSet("foodClick", clickSet)</mark>
+        editor.apply()
+    }
+    linearLayout.addView(layout)
+}
+
+    </pre>
+</div>
+<script src="js.js"></script>
+</body>
+</html>

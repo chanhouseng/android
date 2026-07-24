@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">MainActivity.kt</button>
+    <div class="panel">
+        <mark>普通search功能</mark>
+        <pre>
+class MainActivity : AppCompatActivity() {
+    private lateinit var linearLayout: LinearLayout
+    var results = arrayOf&lt;hotelListClass&gt;()
+    val hotelsList = """
+        [
+            {
+                "hotel_id": 1000,
+                "hotel_name": "Résidence Pierre & Vacances Premium les Crets",
+                "hotel_rating": 8.3,
+                "hotel_to_ski_distance": 6.7,
+                "hotel_cover_image": "cover/1000.jpg"
+            },
+            {
+                "hotel_id": 1001,
+                "hotel_name": "Duplex - Plein sud - Pied des pistes - 50m2 - Mottaret",
+                "hotel_rating": 9.4,
+                "hotel_to_ski_distance": 6.4,
+                "hotel_cover_image": "cover/1001.jpg"
+            },
+            {
+                "hotel_id": 1002,
+                "hotel_name": "Meribel le chalet d'eugénie",
+                "hotel_rating": 7.8,
+                "hotel_to_ski_distance": 0.8,
+                "hotel_cover_image": "cover/1002.jpg"
+            },
+            {
+                "hotel_id": 1003,
+                "hotel_name": "Chalet de 3 chambres a Les Allues",
+                "hotel_rating": 7.1,
+                "hotel_to_ski_distance": 3.2,
+                "hotel_cover_image": "cover/1003.jpg"
+            },
+            {
+                "hotel_id": 1004,
+                "hotel_name": "Résidence Premium L'Hévana",
+                "hotel_rating": 7.9,
+                "hotel_to_ski_distance": 3.8,
+                "hotel_cover_image": "cover/1004.jpg"
+            },
+            {
+                "hotel_id": 1005,
+                "hotel_name": "L'Hévana - maeva Home - Appartement",
+                "hotel_rating": 8.2,
+                "hotel_to_ski_distance": 3.8,
+                "hotel_cover_image": "cover/1005.jpg"
+            },
+            {
+                "hotel_id": 1006,
+                "hotel_name": "La Belette - Duplex au charme savoyard avec vue sur la montagne",
+                "hotel_rating": 6.7,
+                "hotel_to_ski_distance": 1.8,
+                "hotel_cover_image": "cover/1006.jpg"
+            },
+            {
+                "hotel_id": 1007,
+                "hotel_name": "Superbe Appartement au Plateau Rond",
+                "hotel_rating": 6.9,
+                "hotel_to_ski_distance": 3.7,
+                "hotel_cover_image": "cover/1007.jpg"
+            },
+            {
+                "hotel_id": 1008,
+                "hotel_name": "Appartement Méribel",
+                "hotel_rating": 9.0,
+                "hotel_to_ski_distance": 6.5,
+                "hotel_cover_image": "cover/1008.jpg"
+            },
+            {
+                "hotel_id": 1009,
+                "hotel_name": "L'Appart à Méribel",
+                "hotel_rating": 7.0,
+                "hotel_to_ski_distance": 6.2,
+                "hotel_cover_image": "cover/1009.jpg"
+            }
+        ]
+    """.trimIndent()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        findViewById&lt;ImageView&gt;(R.id.imageView3).setOnClickListener {
+            val intent = Intent(this, MainActivity4::class.java)
+            startActivity(intent)
+        }
+        linearLayout = findViewById(R.id.linearLayout)
+        results = Gson().fromJson(hotelsList, Array&lt;hotelListClass&gt;::class.java)
+        val editText : EditText = findViewById(R.id.editTextText)
+        load("")
+        editText.doOnTextChanged { text, start, before, count -&gt;
+            load(text.toString())
+        }
+    }
+
+    fun load(text: String){
+        linearLayout.removeAllViews()
+        for(result in results){
+            if(result.hotel_name.contains(text, true)){
+                val layout = layoutInflater.inflate(R.layout.hotel_product, null)
+                layout.findViewById&lt;TextView&gt;(R.id.name).text = result.hotel_name
+                layout.findViewById&lt;TextView&gt;(R.id.number).text = result.hotel_rating.toString()
+                layout.findViewById&lt;TextView&gt;(R.id.stance).text = result.hotel_to_ski_distance.toString() + " km from Alps' ski lift"
+                val imageViewName = "_" + result.hotel_cover_image.replace("cover/", "").replace(".jpg", "")
+                layout.findViewById&lt;ImageView&gt;(R.id.imageView).setImageResource(resources.getIdentifier(imageViewName, "drawable", packageName))
+                layout.findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
+                    if(result.hotel_id == 1000 || result.hotel_id == 1008){
+                        val intent = Intent(this, MainActivity2::class.java)
+                        intent.putExtra("id", result.hotel_id)
+                        startActivity(intent)
+                    }
+                }
+                linearLayout.addView(layout)
+            }
+        }
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">Guest reviews(oneFragment.kt)</button>
+    <div class="panel">
+        <mark>普通顯示內容</mark>
+        <pre>
+class oneFragment : Fragment() {
+    var results = arrayOf&lt;jsonClass&gt;()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view =  inflater.inflate(R.layout.fragment_one, container, false)
+        val activity = requireActivity() as MainActivity2
+        val linearLayout: LinearLayout = view.findViewById(R.id.linearLayout)
+
+        val text1: TextView = view.findViewById(R.id.text1)
+        val text2: TextView = view.findViewById(R.id.text2)
+        val text3: TextView = view.findViewById(R.id.text3)
+        val locationFloat: TextView = view.findViewById(R.id.locationFloat)
+        val locationProgress: ProgressBar = view.findViewById(R.id.locationProgress)
+        val staffFloat: TextView = view.findViewById(R.id.staffFloat)
+        val staffProgress: ProgressBar = view.findViewById(R.id.staffProgress)
+        val moneyFloat: TextView = view.findViewById(R.id.moneyFloat)
+        val moneyProgress: ProgressBar = view.findViewById(R.id.moneyProgress)
+
+        val id = activity.intent.getIntExtra("id", 0)
+        results = Gson().fromJson(Data.resultString, Array&lt;jsonClass&gt;::class.java)
+        val inforList = results.filter { it.hotel_id == id }
+        for(result in inforList){
+            for(users in result.guest_reviews.reviews_objects){
+                val layout = layoutInflater.inflate(R.layout.review_prodcut, null)
+                layout.findViewById&lt;TextView&gt;(R.id.oneName).text = users.username.take(1)
+                layout.findViewById&lt;TextView&gt;(R.id.name).text = users.username
+                layout.findViewById&lt;TextView&gt;(R.id.email).text = users.country
+                layout.findViewById&lt;TextView&gt;(R.id.content).text = users.review_text
+                linearLayout.addView(layout)
+            }
+            for(grade in result.guest_reviews.ratings_categories){
+                if(grade.Staff != null){
+                    locationFloat.text = String.format("%.1f", grade.Staff)
+                    locationProgress.progress = grade.Staff.toInt()
+                }
+                if(grade.Facilities != null){
+                    staffFloat.text = String.format("%.1f", grade.Facilities)
+                    staffProgress.progress = grade.Facilities.toInt()
+                }
+                if (grade.Cleanliness != null){
+                    moneyFloat.text = String.format("%.1f", grade.Cleanliness)
+                    moneyProgress.progress = grade.Cleanliness.toInt()
+                }
+                if(grade.value_for_money != null){
+                    moneyFloat.text = String.format("%.1f", grade.value_for_money)
+                    moneyProgress.progress = grade.value_for_money!!.toInt()
+                    text3.text = "Value for money"
+                }
+            }
+        }
+        return view
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">Room selection(twoFragment.kt)</button>
+    <div class="panel">
+        <mark>動態加入TextView</mark>
+        <pre>
+class twoFragment : Fragment() {
+    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result -&gt;
+        if(result.resultCode == RESULT_OK){
+        }
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view =  inflater.inflate(R.layout.fragment_two, container, false)
+        val activity = requireActivity() as MainActivity2
+        val linearLayout : LinearLayout =  view.findViewById(R.id.linearLayout)
+        val id = activity.intent.getIntExtra("id", 0)
+        val results = Gson().fromJson(Data.resultString, Array&lt;jsonClass&gt;::class.java)
+        val inforList = results.filter { it.hotel_id == id }
+        for(infor in inforList){
+            for(room in infor.rooms){
+                val layout = layoutInflater.inflate(R.layout.room_product, null)
+                layout.findViewById&lt;TextView&gt;(R.id.textView2).text = room.room_type
+                layout.findViewById&lt;TextView&gt;(R.id.textView3).text = room.room_bed_type
+                layout.setOnClickListener {
+                    val intent = Intent(activity, MainActivity3::class.java)
+                    intent.putExtra("id", id)
+                    intent.putExtra("hotel_name", infor.hotel_name)
+                    intent.putExtra("room_type", room.room_type)
+                    intent.putExtra("room_bed_type", room.room_bed_type)
+                    intent.putExtra("room_total_number_of_guests", room.room_total_number_of_guests)
+                    intent.putExtra("room_price_for_one_night", room.room_price_for_one_night)
+                    startForResult.launch(intent)
+                }
+                layout.findViewById&lt;TextView&gt;(R.id.textView34).text = room.room_total_number_of_guests.toString()
+                for(con in room.room_features){
+                    val textView = TextView(activity)
+                    textView.setTextSize(10.0f)
+                    textView.text = con
+                    layout.findViewById&lt;LinearLayout&gt;(R.id.contentLayout).addView(textView)
+                }
+                layout.findViewById&lt;TextView&gt;(R.id.textView5).text = "€ ${room.room_price_for_one_night}"
+                linearLayout.addView(layout)
+            }
+        }
+        return view
+    }
+}
+        </pre>
+    </div>
+
+    <button class="accordion">MainActivity3.kt</button>
+    <div class="panel">
+        <mark>表單輸入和檢查</mark>
+        <pre>
+class MainActivity3 : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main3)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        val hotel_name = intent.getStringExtra("hotel_name")
+        val room_type = intent.getStringExtra("room_type")
+        val room_bed_type = intent.getStringExtra("room_bed_type")
+        val room_total_number_of_guests = intent.getIntExtra("room_total_number_of_guests", 0)
+        val room_price_for_one_night = intent.getIntExtra("room_price_for_one_night", 0)
+        findViewById&lt;TextView&gt;(R.id.textView6).text = hotel_name
+        findViewById&lt;TextView&gt;(R.id.textView7).text = room_type
+        findViewById&lt;TextView&gt;(R.id.bad).text = room_bed_type
+        findViewById&lt;TextView&gt;(R.id.guests).text = room_total_number_of_guests.toString()
+        findViewById&lt;TextView&gt;(R.id.price).text = "€ " + room_price_for_one_night.toString()
+        findViewById&lt;TextView&gt;(R.id.textView72).text = room_type
+        val firstName = findViewById&lt;EditText&gt;(R.id.firstName)
+        val lastname: EditText = findViewById(R.id.lastname)
+        val inDate: EditText = findViewById(R.id.inDate)
+        val outDate : EditText = findViewById(R.id.outDate)
+        val Adults: EditText = findViewById(R.id.Adults)
+        val Children: EditText = findViewById(R.id.Children)
+        val room: TextView = findViewById(R.id.room)
+        val radioGroup: RadioGroup = findViewById(R.id.radioGroup)
+        val payGroup: RadioGroup = findViewById(R.id.payGroup)
+        val textView15: TextView = findViewById(R.id.textView15)
+        val button3: Button = findViewById(R.id.button3)
+        val datePickerDialog = DatePickerDialog(this)
+        var price = room_price_for_one_night
+        var other = 0
+        var liveDay: Long = 1
+        var total  = price*liveDay + other
+        textView15.text = "€" + price.toString()
+        Adults.doOnTextChanged { text, start, before, count -&gt;
+            if(text.toString().trim().length&gt;0){
+                val roomCount = if((text.toString().toInt() + if(Children.text.toString().trim().length==0) 0 else Children.text.toString().toInt())%room_total_number_of_guests&gt;0) ((text.toString().toInt() + if(Children.text.toString().trim().length==0) 0 else Children.text.toString().toInt())/room_total_number_of_guests)+1 else (text.toString().toInt() + if(Children.text.toString().trim().length==0) 0 else Children.text.toString().toInt())/room_total_number_of_guests
+                room.text = roomCount.toString()
+                price = roomCount*room_price_for_one_night
+                total = price*liveDay + other
+                textView15.text = "€" + total.toString()
+            }
+        }
+        Children.doOnTextChanged { text, start, before, count -&gt;
+            if(text.toString().trim().length&gt;0){
+                val roomCount = if((text.toString().toInt() + if(Adults.text.toString().trim().length==0) 0 else Adults.text.toString().toInt())%room_total_number_of_guests&gt;0) ((text.toString().toInt() + if(Adults.text.toString().trim().length==0) 0 else Adults.text.toString().toInt())/room_total_number_of_guests)+1 else (text.toString().toInt() + if(Adults.text.toString().trim().length==0) 0 else Adults.text.toString().toInt())/room_total_number_of_guests
+                room.text = roomCount.toString()
+                price = roomCount*room_price_for_one_night
+                total = price*liveDay + other
+                textView15.text = "€" + total.toString()
+            }
+        }
+        radioGroup.setOnCheckedChangeListener { _, checkedId -&gt;
+            when(checkedId){
+                R.id.rad1 -&gt; other = 0
+                R.id.rad2 -&gt; other = 150
+            }
+            total = price*liveDay + other
+            textView15.text = "€" + total.toString()
+        }
+        val formatter = DateTimeFormatter.ofPattern("EEE, MMM dd, yyyy")
+        <span>
+            val formatterList = listOf(
+            DateTimeFormatter.ofPattern("dd/MM/yyyy"),
+            DateTimeFormatter.ofPattern("dd-MM-yyyy"),
+            DateTimeFormatter.ofPattern("MMM dd yyyy")
+        )
+        inDate.doOnTextChanged { text, start, before, count -&gt;
+
+            val timeIn : LocalDate? = try {
+                LocalDate.parse(text, formatterList[0])
+            }catch (e: Exception){
+                try {
+                    LocalDate.parse(text, formatterList[1])
+                }catch (e: Exception){
+                    try {
+                        LocalDate.parse(text, formatterList[2])
+                    }catch (e: Exception){
+                        null
+                    }
+                }
+            }
+            if(timeIn != null){
+                Data.timeIn = timeIn
+                inDate.setOnFocusChangeListener{_, hasFocus -&gt;
+                    if(!hasFocus){
+                        inDate.setText(Data.timeIn?.format(formatter))
+                    }
+                }
+                if(Data.timeOut != null){
+                    liveDay = ChronoUnit.DAYS.between(Data.timeIn, Data.timeOut)
+                    if(liveDay&lt;=0){
+                        Toast.makeText(this, "please input check-in date before check-out date", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        total = price*liveDay + other
+                        textView15.text = "€" + total.toString()
+                    }
+                }
+            }
+        }
+        </span>
+        outDate.doOnTextChanged { text, start, before, count -&gt;
+            val timeOut : LocalDate? = try {
+                LocalDate.parse(text, formatterList[0])
+            }catch (e: Exception){
+                try {
+                    LocalDate.parse(text, formatterList[1])
+                }catch (e: Exception){
+                    try {
+                        LocalDate.parse(text, formatterList[2])
+                    }catch (e: Exception){
+                        null
+                    }
+                }
+            }
+            if(timeOut != null){
+                Data.timeOut = timeOut
+                outDate.setOnFocusChangeListener{_, hasFocus -&gt;
+                    if(!hasFocus){
+                        outDate.setText(Data.timeOut?.format(formatter))
+                    }
+                }
+                if(Data.timeIn != null){
+                    liveDay = ChronoUnit.DAYS.between(Data.timeIn, Data.timeOut)
+                    if(liveDay&lt;=0){
+                        Toast.makeText(this, "please input check-in date before check-out date", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        total = price*liveDay + other
+                        textView15.text = "€" + total.toString()
+                    }
+                }
+            }
+        }
+        findViewById&lt;ImageView&gt;(R.id.imageView4).setOnClickListener {
+            val resultIntent = Intent()
+            setResult(RESULT_OK, resultIntent)
+            finish()
+        }
+        button3.setOnClickListener {
+            if(firstName.text.toString().trim().length&gt;15){
+                Toast.makeText(this, "Your first name is too long", Toast.LENGTH_SHORT).show()
+            }
+            else if(firstName.text.toString().trim().length&lt;1 ){
+                Toast.makeText(this, "your first name is too short", Toast.LENGTH_SHORT).show()
+            }
+            else if(lastname.text.toString().trim().length&gt;15){
+                Toast.makeText(this, "Your last name is too long", Toast.LENGTH_SHORT).show()
+            }
+            else if(lastname.text.toString().trim().length&lt;1 ){
+                Toast.makeText(this, "your last name is too short", Toast.LENGTH_SHORT).show()
+            }
+            else if(Data.timeIn == null){
+                Toast.makeText(this, "please input your check-in date", Toast.LENGTH_SHORT).show()
+            }
+            else if(Data.timeOut == null){
+                Toast.makeText(this, "please input your check-out date", Toast.LENGTH_SHORT).show()
+            }
+            else if(Data.timeIn!!.isAfter(Data.timeOut)){
+                Toast.makeText(this, "please input check-in date before check-out date", Toast.LENGTH_SHORT).show()
+            }
+            else if(Adults.text.toString().trim().length == 0){
+                Toast.makeText(this, "please input the number of adults", Toast.LENGTH_SHORT).show()
+            }
+            else if(Children.text.toString().trim().length == 0){
+                Toast.makeText(this, "please input the number of children", Toast.LENGTH_SHORT).show()
+            }
+            else if(Adults.text.toString().toInt()&gt;5){
+                Toast.makeText(this, "There is too much adults", Toast.LENGTH_SHORT).show()
+            }
+            else if(Adults.text.toString().toInt()&lt;1 ){
+                Toast.makeText(this, "Haven't adults", Toast.LENGTH_SHORT).show()
+
+            }
+            else if(Children.text.toString().toInt()&lt;0){
+                Toast.makeText(this, "please input a correct number of child", Toast.LENGTH_SHORT).show()
+            }
+            else if(Adults.text.toString().toInt()*2 &lt; Children.text.toString().toInt()){
+                Toast.makeText(this, "There are many children", Toast.LENGTH_SHORT).show()
+            }
+            else if(radioGroup.checkedRadioButtonId == -1){
+                Toast.makeText(this, "please choice your travel for business", Toast.LENGTH_SHORT).show()
+            }
+            else if(payGroup.checkedRadioButtonId == -1){
+                Toast.makeText(this, "please choice your way to pay", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                AlertDialog.Builder(this)
+                    .setTitle("Confirm")
+                    .setMessage("Are you going to book this room?")
+                    .setNegativeButton("Cancel"){_, _ -&gt;
+                    }
+                    .setPositiveButton("Yes"){_, _ -&gt;
+                        val intent = Intent(this, MainActivity4::class.java)
+                        <span>
+                        Data.bookList.add(bookClass(if(Data.bookList.size == 0) 1 else Data.bookList.last().id + 1,firstName.text.toString(), lastname.text.toString(), hotel_name.toString(), Data.timeIn?.format(formatter).toString(), Data.timeOut?.format(formatter).toString(), Adults.text.toString().toInt(), Children.text.toString().toInt(), room.text.toString().toInt(), findViewById&lt;RadioButton&gt;(radioGroup.checkedRadioButtonId).text.toString().replace("\n", ""), findViewById&lt;RadioButton&gt;(payGroup.checkedRadioButtonId).text.toString(),textView15.text.toString() ))
+                        </span>
+                        startActivity(intent)
+                    }.show()
+            }
+
+        }
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity4.kt</button>
+    <div class="panel">
+        <mark>普通顯示json的內容</mark>
+        <pre>
+class MainActivity4 : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main4)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        val imageView4: ImageView = findViewById(R.id.imageView4)
+        imageView4.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        val linearLayout : LinearLayout = findViewById(R.id.linearLayout)
+        for(result in Data.bookList){
+            val layout = layoutInflater.inflate(R.layout.book_product, null)
+            layout.findViewById&lt;TextView&gt;(R.id.id).text = result.id.toString()
+            layout.findViewById&lt;TextView&gt;(R.id.firstName).text = result.firstName
+            layout.findViewById&lt;TextView&gt;(R.id.lastname).text = result.lastName
+            layout.findViewById&lt;TextView&gt;(R.id.hotalName).text = result.hotelName
+            layout.findViewById&lt;TextView&gt;(R.id.checkInDate).text = result.checkInDate
+            layout.findViewById&lt;TextView&gt;(R.id.checkOutDate).text = result.checkInDate
+            layout.findViewById&lt;TextView&gt;(R.id.adults).text = result.adults.toString()
+            layout.findViewById&lt;TextView&gt;(R.id.children).text = result.children.toString()
+            layout.findViewById&lt;TextView&gt;(R.id.room).text = result.rooms.toString()
+            layout.findViewById&lt;TextView&gt;(R.id.business).text = result.business
+            layout.findViewById&lt;TextView&gt;(R.id.payWay).text = result.payWay
+            layout.findViewById&lt;TextView&gt;(R.id.textView16).text = result.price
+            linearLayout.addView(layout)
+        }
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">ApplicationUiTesting</button>
+    <div class="panel">
+        <mark>測試</mark>
+        <pre>
+class ApplicationUITesting {
+    <span>
+    private lateinit var device: UiDevice
+    private val PACKAGE_NAME = "com.example.homework2"
+    </span>
+
+    <span>
+    @Before
+    fun setUp(){
+        device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        device.pressHome()
+    }
+
+    @Test
+    fun startTesting(){
+        Log.d("Step No: 1","Step No: 1,Application startup")
+        val context = ApplicationProvider.getApplicationContext&lt;Context&gt;()
+        val intent = context.packageManager.getLaunchIntentForPackage(PACKAGE_NAME)
+    </span>
+        context.startActivity(intent)
+        Thread.sleep(3000)
+
+        Log.d("Step No: 2","Step No: 2,Scroll to the bottom of the hotel list")
+        <span>val scrollView = UiScrollable(UiSelector().scrollable(true))</span>
+        scrollView.setAsVerticalList()
+        scrollView.scrollToEnd(1)
+        Thread.sleep( 3000)
+
+        Log.d("Step No: 3","Step No: 3,Perform a search after entering the search term in the search bar")
+        <span>val searchEditText = device.findObject(By.res(PACKAGE_NAME, "editTextText"))</span>
+        searchEditText.text = "Méribel"
+        Thread.sleep(3000)
+
+        Log.d("Step No: 4","Step No: 4,Click the listing item \"Appartement Méribel\"")
+        <span>val button = device.findObject(UiSelector().text("Book it"))</span>
+        button.click()
+        Thread.sleep(3000)
+
+        Log.d("Step No: 5","Step No: 5,Click the Guest reviews tab button")
+        val tab = device.findObject(UiSelector().text("Guest reviews"))
+        tab.click()
+        Thread.sleep(3000)
+
+        Log.d("Step No: 6", "Step No: 6,Scroll down the Reviews list to the 4th Review (published by \"Miles\") ")
+        val scrollView2 = UiScrollable(UiSelector().scrollable(true))
+        scrollView2.setAsHorizontalList()
+        scrollView2.scrollToEnd(5)
+        Thread.sleep(3000)
+
+        Log.d("Step No: 7", "Step No: 7,Click the Room selection label button")
+        val button2 = device.findObject(UiSelector().text("Room selection"))
+        button2.click()
+        Thread.sleep(3000)
+
+        Log.d("Step No: 8", "Step No: 8,Scroll down the room list to the \"Great Family Room\" item")
+        val scrollView3 = UiScrollable(UiSelector().scrollable(true))
+        scrollView3.scrollToEnd(5)
+        Thread.sleep(3000)
+
+        Log.d("Step No: 9", "Step No: 9,Click the \"Great Family Room\" item")
+        val layout = device.findObject(UiSelector().text("Great family Room"))
+        layout.click()
+        Thread.sleep(3000)
+
+        Log.d("Step No: 10", "Step No: 10,Enter First Name")
+        val firstName = device.findObject(By.res(PACKAGE_NAME, "firstName"))
+        firstName.text = "Taylor"
+        Thread.sleep(3000)
+
+        Log.d("Step No: 11", "Step No: 11,Enter Last Name")
+        val lastName = device.findObject(By.res(PACKAGE_NAME, "lastname"))
+        lastName.text = "Hutchinson"
+        Thread.sleep(3000)
+
+
+        Log.d("Step No: 12", "Step No: 12,Enter check-in date")
+        val checkIn = device.findObject(By.res(PACKAGE_NAME, "inDate"))
+        checkIn.text = "Oct 15 2024"
+        Thread.sleep(3000)
+
+        Log.d("Step No: 13", "Step No: 13,Enter check-out date ")
+        val checkOut = device.findObject(By.res(PACKAGE_NAME, "outDate"))
+        checkOut.text = "2024/2/10"
+        Thread.sleep(3000)
+
+        Log.d("Step No: 14", "Step No: 14,Enter the number of adults")
+        val numberAd = device.findObject(By.res(PACKAGE_NAME, "Adults"))
+        numberAd.text = "4"
+        Thread.sleep(3000)
+
+        Log.d("Step No: 15", "Step No: 15,Enter the number of children ")
+        val numberCh = device.findObject(By.res(PACKAGE_NAME, "Children"))
+        numberCh.text = "3"
+        Thread.sleep(3000)
+
+        Log.d("Step No: 16", "Step No: 16,Click the E-Pay radio button")
+        val ePay = device.findObject(UiSelector().text("E-Pay"))
+        ePay.click()
+        Thread.sleep(3000)
+
+        Log.d("Step No: 17", "Step No: 17,Click the \"Book now\" button")
+        val bookButton = device.findObject(UiSelector().text("Book now").instance(0))
+        bookButton.click()
+        Thread.sleep(3000)
+
+        Log.d("Step No: 18", "Step No: 18,Change check-out date")
+        checkOut.text = "10-19-2024"
+        Thread.sleep(3000)
+
+        Log.d("Step No: 19", "Step No: 19,Click the \"Book now\" button")
+        bookButton.click()
+        Thread.sleep(3000)
+
+        Log.d("Step No: 20", "Step No: 20,Click \"Yes\" in the pop-up window to confirm your reservation. ")
+        val button4 = device.findObject(UiSelector().text("Yes"))
+        button4.click()
+        Thread.sleep(3000)
+
+    }
+}
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

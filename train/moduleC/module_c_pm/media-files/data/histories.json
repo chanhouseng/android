@@ -1,0 +1,32 @@
+[
+  {
+    "phase": "Roman Lyon",
+    "time_range": "1st century BC - 5th century AD",
+    "intro": "Lyon’s history begins with the Roman Empire. Founded in 43 BC by Roman soldiers as Lugdunum, the city quickly became an important military and commercial center. Its strategic location at the confluence of the Rhône and Saône rivers made it a natural crossroads for trade and communication. Lugdunum was known for its impressive architecture, including an amphitheater and Roman baths. The city also became an early center of Christianity, hosting important Councils and housing the relics of many Christian martyrs.",
+    "image": "histories/roman.jpg"
+  },
+  {
+    "phase": "Medieval Lyon",
+    "time_range": "5th - 15th century",
+    "intro": "With the decline of the Roman Empire, Lyon entered a period of uncertainty and change. The city was repeatedly attacked by various Germanic tribes, including the Burgundians and Franks. Despite these challenges, Lyon managed to maintain its status as an important religious and commercial center. The city became part of the Holy Roman Empire and later came under the control of the Kings of France. During the Middle Ages, Lyon was known for its thriving silk industry and its famous annual fairs, which attracted merchants from all over Europe.",
+    "image": "histories/medieval.jpg"
+  },
+  {
+    "phase": "Renaissance Lyon",
+    "time_range": "16th - 17th century",
+    "intro": "The Renaissance period marked a golden age for Lyon. The city’s silk industry boomed, making it one of the richest cities in France. Many wealthy merchants and artisans built beautiful townhouses and palaces, contributing to the city’s architectural heritage. This period also saw the construction of important landmarks such as the Hôtel-Dieu de Lyon and the Palais de Justice. Lyon became a center of learning and the arts, attracting many scholars and artists.",
+    "image": "histories/renaissance.jpg"
+  },
+  {
+    "phase": "Industrial Lyon",
+    "time_range": "18th - 19th century",
+    "intro": "The Industrial Revolution brought significant changes to Lyon. The city’s silk industry was modernized, with the introduction of mechanized weaving looms and the construction of large textile factories. This period saw the growth of working-class neighborhoods and the development of infrastructure such as railways and bridges. However, it was also a time of social unrest, with workers’ strikes and protests becoming common.",
+    "image": "histories/industrial.jpg"
+  },
+  {
+    "phase": "Modern Lyon",
+    "time_range": "20th century - present",
+    "intro": "In the 20th century, Lyon continued to grow and evolve. The city became a major center of the automotive industry and home to companies such as Renault. The post-war period saw the development of new suburbs and the expansion of the city’s transportation network. Lyon also became a major center of higher education, with the creation of the University of Lyon and other institutions.",
+    "image": "histories/modern.jpeg"
+  }
+]

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+        val countNumber: TextView = findViewById(R.id.textView2)
+        var count:Int = 5
+        val countDownTimer = object : CountDownTimer(5000, 1000){
+
+            override fun onFinish() {
+                countNumber.text = "finish"
+            }
+            override fun onTick(millisUntilFinished: Long) {
+                count--
+                countNumber.text = count.toString()
+            }
+        }
+        countDownTimer.start()
+        val button2: Button = findViewById(R.id.button2)
+        button2.setOnClickListener {
+            count= 5
+            countDownTimer.start()
+        }
+    </pre>
+</body>
+</html>

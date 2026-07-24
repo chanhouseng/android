@@ -1,0 +1,58 @@
+[
+    {
+       "name":"Morning Ambience",
+       "file":"morning_ambience",
+       "ext":"aac",
+       "kind":"builtin",
+       "id":"builtin000"
+    },
+    {
+       "file":"night_scene",
+       "kind":"builtin",
+       "name":"Night Scene",
+       "id":"builtin001",
+       "ext":"aac"
+    },
+    {
+       "file":"bounce",
+       "kind":"builtin",
+       "ext":"caf",
+       "id":"builtin002",
+       "name":"Bounce"
+    },
+    {
+       "id":"builtin003",
+       "file":"car_engine_start",
+       "ext":"aac",
+       "name":"Car Engine Start",
+       "kind":"builtin"
+    },
+    {
+       "kind":"builtin",
+       "ext":"aac",
+       "file":"dog_bark",
+       "id":"builtin004",
+       "name":"Dog Bark"
+    },
+    {
+       "ext":"mp3",
+       "name":"Clock Ticking",
+       "id":"builtin005",
+       "file":"clockticking",
+       "kind":"builtin"
+    },
+    {
+       "id":"builtin006",
+       "kind":"builtin",
+       "file":"traffic_light",
+       "ext":"aac",
+       "name":"Traffic Light"
+    },
+    {
+       "kind":"builtin",
+       "ext":"aac",
+       "name":"Car Horn",
+       "file":"horn",
+       "id":"builtin007"
+    }
+ ]

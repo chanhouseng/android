@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Mona Lisa",
+    "years": "c. 1503-19",
+    "born_at": "Florence, Italy",
+    "comment": "The best known, the most visited, the most written about, the most sung about, the most parodied work of art in the world"
+  },
+  {
+    "title": "Lady Ermine",
+    "years": "c. 1489-91",
+    "born_at": "Milan, Italy",
+    "comment": "It is a captivating image of exquisite elegance and reveals the artistic genius of Leonardo\'s incomparable creative mind"
+  },
+  {
+    "title": "Litta Madonna",
+    "years": "c. 1490",
+    "born_at": "Italy",
+    "comment": "This portrayal reflects the religious devotion of the Renaissance period, emphasizes the virtues of motherhood"
+  }
+]

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p style="color: red;">home page</p>
+    <p style="color: blueviolet;">將Json檔的內容copy，將用Gson().fromJson 去處理得出Array</p>
+    <pre>
+    private lateinit var recyclerView: RecyclerView
+    private val jsonProduct = "[{\n" +
+            "            \"postId\": 1,\n" +
+            "            \"id\": 1,\n" +
+            "            \"name\": \"id labore ex et quam laborum\",\n" +
+            "            \"email\": \"Eliseo@gardner.biz\",\n" +
+            "            \"body\": \"laudantium enim quasi est quidem magnam voluptate ipsam eos\\ntempora quo necessitatibus\\ndolor quam autem quasi\\nreiciendis et nam sapiente accusantium\"\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"postId\": 1,\n" +
+            "            \"id\": 2,\n" +
+            "            \"name\": \"quo vero reiciendis velit similique earum\",\n" +
+            "            \"email\": \"Jayne_Kuhic@sydney.com\",\n" +
+            "            \"body\": \"est natus enim nihil est dolore omnis voluptatem numquam\\net omnis occaecati quod ullam at\\nvoluptatem error expedita pariatur\\nnihil sint nostrum voluptatem reiciendis et\"\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"postId\": 1,\n" +
+            "            \"id\": 3,\n" +
+            "            \"name\": \"odio adipisci rerum aut animi\",\n" +
+            "            \"email\": \"Nikita@garfield.biz\",\n" +
+            "            \"body\": \"quia molestiae reprehenderit quasi aspernatur\\naut expedita occaecati aliquam eveniet laudantium\\nomnis quibusdam delectus saepe quia accusamus maiores nam est\\ncum et ducimus et vero voluptates excepturi deleniti ratione\"\n" +
+            "        }]"
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view =  inflater.inflate(R.layout.fragment_home, container, false)
+        val activity = requireActivity() as MainActivity3
+        recyclerView = view.findViewById(R.id.recyclerView)
+        val results = Gson().fromJson(jsonProduct, Array&lt;comment&gt;::class.java)
+        val resultList = results.toList()
+        recyclerView.adapter = recyclerView_Adapter(resultList)
+        val layoutManager = LinearLayoutManager(activity)
+        recyclerView.layoutManager = layoutManager
+        return view
+    }
+    </pre>
+    <p style="color: green;">----------------------------------------------------------------------------------------------------------------------</p>
+    <p style="color: red;">search</p>
+    <p style="color: blue;">tab layout 的分頁</p>
+    <pre>
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager2: ViewPager2
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view =  inflater.inflate(R.layout.fragment_search, container, false)
+        val activity = requireActivity() as MainActivity3
+        tabLayout = view.findViewById(R.id.tabLayout)
+        viewPager2 = view.findViewById(R.id.viewPager2)
+        viewPager2.adapter = searchAdapter(activity)
+        TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+            when (position) {
+                0 -> tab.text = "tab1"
+                1 -> {
+                    tab.text = "tab2"
+                }
+            }
+        }.attach()
+        return view
+    }
+    </pre>
+    <p style="color: green;">----------------------------------------------------------------------------------------------------------------------</p>
+    <p style="color: red;">alert 無背景</p>
+    <pre>
+        fun showLog(){
+        val custom = layoutInflater.inflate(R.layout.alerclos, null)
+        val closeButton = custom.findViewById&lt;ImageView&gt;(R.id.imageView8)
+        val editText = custom.findViewById&lt;EditText&gt;(R.id.editTextText3)
+        val submit = custom.findViewById&lt;Button&gt;(R.id.button3)
+        val dialogs = AlertDialog.Builder(activity).setView(custom).show()
+        <mark>dialogs.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))</mark>  <span style="color: green;">//出除alert的背景，變為透明</span>
+        <mark>dialogs.setCanceledOnTouchOutside(false)</mark>                                 <span style="color: green;">//暗空白處唔會退出alert</span>
+        closeButton.setOnClickListener {
+            dialogs.dismiss()
+        }
+        submit.setOnClickListener {
+            if(editText.text.toString().trim() == ""){
+                Toast.makeText(activity, "input", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val editor = activity?.getSharedPreferences("think", MODE_PRIVATE)?.edit()
+                editor?.putString("think", editText.text.toString())
+                editor?.apply()
+                dialogs.dismiss()
+            }
+        }
+    }
+    </pre>
+    <p style="color: green;">----------------------------------------------------------------------------------------------------------------------</p>
+    <p style="color: red;">alert 無背景</p>    
+    <pre>
+        private lateinit var imageView3: ImageView
+        private val appro = """
+            [
+      {
+        "postId": 4,
+        "id": 18,
+        "name": "aut et tenetur ducimus illum aut nulla ab",
+        "email": "Vincenza_Klocko@albertha.name",
+        "body": "veritatis voluptates necessitatibus maiores corrupti\\nneque et exercitationem amet sit et\\nullam velit sit magnam laborum\\nmagni ut molestias",
+        "img": "cheese_cake.jpg"
+      },
+      {
+        "postId": 4,
+        "id": 19,
+        "name": "sed impedit rerum quia et et inventore unde officiis",
+        "email": "Madelynn.Gorczany@darion.biz",
+        "body": "doloribus est illo sed minima aperiam\\nut dignissimos accusantium tempore atque et aut molestiae\\nmagni ut accusamus voluptatem quos ut voluptates\\nquisquam porro sed architecto ut",
+        "img": "croissant.jpg"
+      }
+    ]
+        """.trimIndent()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view =  inflater.inflate(R.layout.fragment_person, container, false)
+        val activity = requireActivity() as MainActivity3
+        val results = Gson().fromJson(appro, Array&lt;approClass&gt;::class.java)
+        val linearLayout : LinearLayout = view.findViewById(R.id.linearLayout)
+        imageView3 = view.findViewById(R.id.imageView3)
+        for(result in results){
+            val layout = layoutInflater.inflate(R.layout.appro_product, null)
+            layout.findViewById&lt;TextView&gt;(R.id.name).text = result.name
+            layout.findViewById&lt;TextView&gt;(R.id.email).text = result.email
+            layout.findViewById&lt;TextView&gt;(R.id.body).text = result.body
+            <mark>imageName = result.img.replace(".jpg", "")  </mark>                                        <span>//清除名稱後的點綴</span>
+            <mark>resId = resources.getIdentifier(imageName, "drawable", activity.packageName)</mark>        <span>//在packageName的app中的drawable尋找imageName的id號</span>
+            layout.findViewById&lt;ImageView&gt;(R.id.imgView).setImageResource(resId)
+
+            layout.setOnClickListener {
+                val customView = layoutInflater.inflate(R.layout.alert_layout, null)
+                customView.findViewById&lt;TextView&gt;(R.id.name).text = result.name
+                customView.findViewById&lt;TextView&gt;(R.id.email).text = result.email
+                customView.findViewById&lt;TextView&gt;(R.id.body).text = result.body
+                customView.findViewById&lt;ImageView&gt;(R.id.imageView2).setImageResource(resId)
+                val alertDialog = AlertDialog.Builder(activity).setView(customView).show()
+            }
+            linearLayout.addView(layout)
+        }
+        var number = 0
+        val textView5: TextView = view.findViewById(R.id.textView5)
+        val countDownTimer = object : CountDownTimer(2000,1000){
+            override fun onFinish() {
+                number ++
+                start()
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                when(number % 3){
+                    0 -> {imageView3.setImageResource(R.drawable.cheese_cake)
+                    textView5.text = "cheese_cake"}
+                    1 ->{imageView3.setImageResource(R.drawable.croissant)
+                        textView5.text = "croissant"}
+                    else ->{imageView3.setImageResource(R.drawable.cupcake)
+                        textView5.text = "cupcake"}
+                }
+            }
+
+        }
+        countDownTimer.start()
+        return view
+    }
+    </pre> 
+
+</body>
+</html>

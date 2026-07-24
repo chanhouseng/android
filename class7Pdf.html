@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+        linearLayout = findViewById(R.id.linearLayout)
+        search = findViewById(R.id.search)
+
+        creat("")
+        search.doOnTextChanged { text,_, _, _ ->
+            creat(text.toString())
+        }
+
+
+    
+    fun creat(words: String){
+        linearLayout.removeAllViews()
+        getLoadString()
+        for(product in products) {
+            if (product.name.startsWith(words, true)){
+                val layout = layoutInflater.inflate(R.layout.product,null)
+                layout.findViewById&lt;TextView&gt;(R.id.name).text = product.name
+                layout.findViewById&lt;TextView&gt;(R.id.piece).text = product.Stringto()
+                layout.findViewById&lt;ImageView&gt;(R.id.imageView).setImageResource(product.image)
+
+                layout.setOnClickListener {
+                    val intent = Intent(this, detail::class.java)
+                    intent.putExtra("name", product.name)
+                    intent.putExtra("piece", product.Stringto())
+                    intent.putExtra("image", product.image)
+                    intent.putExtra("isLike", product.islike)
+                    if(product is drink){
+                        intent.putExtra("ml", product.ml.toString())
+                    }
+
+                    startActivity(intent)
+                }
+
+                layout.findViewById&lt;ImageView&gt;(R.id.islikeButton).setOnClickListener {
+                    if(product.islike){
+                        product.islike = false
+                        layout.findViewById&lt;ImageView&gt;(R.id.islikeButton).setImageResource(R.drawable.unlike)
+                        likeList.remove(product.name)
+                        saveLoadString()
+                    }
+                    else{
+                        product.like()
+                        likeList.add(product.name)
+                        saveLoadString()
+                        layout.findViewByI&lt;&lt;ImageView&gt;(R.id.islikeButton).setImageResource(R.drawable.like)
+                    }
+                }
+
+                layout.setOnLongClickListener {
+                    linearLayout.removeView(layout)
+                    true
+                }
+
+                if(product is drink){
+                    layout.findViewById&lt;TextView&gt;(R.id.ml).text = product.ml.toString() + "ml"
+                }
+
+
+                if(product.islike){
+                    layout.findViewById&lt;ImageView&gt;(R.id.islikeButton).setImageResource(R.drawable.like)
+                }
+                else{
+                    layout.findViewById&lt;ImageView&gt;(R.id.islikeButton).setImageResource(R.drawable.unlike)
+                }
+                linearLayout.addView(layout)
+                <mark>//要把editor的likeList 與likeList同步，才不會讓likeList覆蓋之前的數據(入頁面時會自動likeList = 没有野)</mark>
+            }
+        }
+    }
+
+    fun saveLoadString(){
+        val editor = getSharedPreferences("date", MODE_PRIVATE).edit()
+        editor.putString("likeList", likeList.joinToString())
+        editor.apply()
+    }
+
+    fun getLoadString(){
+
+        val prefs = getSharedPreferences("date", MODE_PRIVATE)
+        val likeProduct = prefs.getString("likeList", "")
+        val  productLike= ArrayList(likeProduct?.split(",")?: emptyList())
+        for(pro in productLike){
+            likeList.add(pro.trim()) <mark>//joinToString時有空格</mark>
+        }
+        for(product in products){
+            if(productLike.toString().contains(product.name)){
+                product.like()
+            }
+        }
+    }
+
+
+    ===================================================================================================================
+    val back: Button = findViewById(R.id.back)
+        back.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        getLoat()
+        likeImage.setOnClickListener {
+            if(likeed){
+                likeed = false
+                savelike()
+                likeImage.setImageResource(R.drawable.unlike)
+            }
+            else{
+                likeed  = true
+                savelike()
+                likeImage.setImageResource(R.drawable.like)
+            }
+        }
+
+    
+    fun savelike(){
+        val editor = getSharedPreferences("date", MODE_PRIVATE).edit()
+        val prefs = getSharedPreferences("date", MODE_PRIVATE)
+        val prefsList = prefs.getString("likeList", "")?.split(",")?: emptyList()
+        val listLike = arrayListOf&lt;String&gt;()
+        for(product in prefsList){
+            listLike.add(product.trim())
+        }
+        if(likeed){
+            listLike.add(productName)
+        }
+        else{
+            listLike.remove(productName)
+        }
+        editor.putString("likeList",listLike.joinToString() )
+        editor.apply()
+    }
+    fun getLoat(){
+        val prefs = getSharedPreferences("date", MODE_PRIVATE)
+        val productlike = prefs.getString("likeList", "")
+        if(productlike?.contains(productName) == true){
+            likeed = true
+            likeImage.setImageResource(R.drawable.like)
+        }
+        else{
+            likeImage.setImageResource(R.drawable.unlike)
+        }
+    }
+    </pre>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+<h3>圖片手指放大縮小、平移 </h3>
+val imageMatrix = Matrix()    <span>//所有放大、縮小、移動的操作，都記錄在此，最後再套到圖片上。</span>
+var scaleFactor = 1f      <span>//記錄目前圖片放大的倍率</span>
+val scaleImageView: ImageView = findViewById(R.id.imageView)     
+scaleImageView.scaleType = ImageView.ScaleType.MATRIX     <span>//不要用預設的縮放方式 用『矩陣』來控制你。</span>
+
+<span>// 圖像放大縮小</span>
+val scaleDetector = ScaleGestureDetector(this, object : ScaleGestureDetector.SimpleOnScaleGestureListener(){   <span>//手指張開或合起來的監聽器</span>
+    override fun onScale(detector: ScaleGestureDetector): Boolean {     <span>//當手指正在捏合或張開時.....</span>
+        val scale = detector.scaleFactor     <span>//取得這一次手指移動的「縮放比例」（例如 1.05 表示稍微放大一點）。</span>
+        val nextScale = scaleFactor * scale    <span>//計算「如果套用這次變化後，總共會變成幾倍」。</span>
+        if (nextScale in 1f..5f){      <span>//只能從 1 倍放大到最多 5 倍，避免縮太小或放太大壞掉。</span>
+            <mark>imageMatrix.postScale(scale, scale, detector.focusX, detector.focusY) </mark>
+            <span>//postScale -- 在目前的變形矩陣上再加上縮放的效果</span>
+            <span>//"scale, scale" -- X方向和Y方向都放大相同的倍率（等比例縮放）</span>
+            <span>//"detector.focusX, detector.focusY" -- 縮放的中心點（手指捏合的位置）</span>
+            <mark>scaleImageView.imageMatrix = imageMatrix</mark>    <span>//把剛剛做好的變形套用到圖片上，畫面立刻更新。</span>
+        }
+        return true    <span>//告訴系統：「這個觸摸事件我處理完了。」</span>
+    }
+})
+
+<span>// 圖像位移</span>
+val gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener(){     <span>//滑動偵測器</span>
+    override fun onScroll(     <span>//當手指按住圖片並移動時......</span>
+        e1: MotionEvent?, 
+        e2: MotionEvent,
+        distanceX: Float,
+        distanceY: Float
+    ): Boolean {
+        <mark>imageMatrix.postTranslate(-distanceX, -distanceY)</mark>    <span>//把圖片往手指滑動的相反方向移動。
+（為什麼是負號？因為手指往右滑，圖片要往左「跟著走」，才會有拖動的感覺）</span>
+
+        scaleImageView.imageMatrix = imageMatrix    <span>//再次把變形套用到圖片上，讓畫面更新。</span>
+        return  true
+    }
+})
+
+<span>// 設置接觸事件 </span>
+scaleImageView.setOnTouchListener { _, event -&gt;     <span>當手指碰到圖片時，把觸摸事件同時傳給「捏合偵測器」和「滑動偵測器」。</span>
+    scaleDetector.onTouchEvent(event)
+    gestureDetector.onTouchEvent(event)
+    true
+}
+
+<span>-------------------------------------------------------------------------------------------------------------------------------------------</span>
+
+<h3>拖曳功能</h3>
+val imageView2: ImageView = findViewById(R.id.macaron)
+imageView2.setOnLongClickListener {
+    val dragData = ClipData.newPlainText("drag_data", "data")    <span>//建立一個「拖曳資料包」。告訴系統這是要被拖的東西</span>
+    val dragShadowBuilder = View.DragShadowBuilder(it)    <span>//建立拖曳時的影子（就是你拖著移動時看到的那個半透明圖片）。</span>
+    it.startDragAndDrop(dragData, dragShadowBuilder, it, 0)      <span>//真正開始拖曳這張圖片</span>
+    it.visibility = View.INVISIBLE    <span>//把原本的圖片藏起來，避免畫面上同時出現兩個一樣的圖片。</span>
+    true
+}
+
+val destinationFrameLayout: FrameLayout = findViewById(R.id.frameLayout)    <span>//找到那個可以接收拖曳的大容器（FrameLayout）。</span>
+
+val imageView3: ImageView = findViewById(R.id.puff)
+imageView3.setOnLongClickListener {
+    val dragData = ClipData.newPlainText("drag_data", "data")
+    val dragShadowBuilder = View.DragShadowBuilder(it)
+
+    it.startDragAndDrop(dragData, dragShadowBuilder, it, 0)
+    it.visibility = View.INVISIBLE
+    true
+}
+
+destinationFrameLayout.setOnDragListener {view, dragEvent -&gt;    <span>//當有東西被拖到這個容器上方時，這個監聽器就會一直監視各種拖曳事件。</span>
+    when(dragEvent.action){
+        DragEvent.ACTION_DRAG_STARTED -&gt; true    <span>//當開始拖曳時 → 允許接收</span>
+        DragEvent.ACTION_DRAG_EXITED -&gt; true     <span>//當拖曳物離開容器時 → 什麼都不做。</span>
+        <mark>DragEvent.ACTION_DROP -&gt;</mark>{      <span>//當使用者放開手指把東西放下時</span>
+            val v = dragEvent.localState as ImageView     <span>//取得原本被拖的那張圖片。</span>
+            val destination = view as FrameLayout     <span>//取得目前這個容器。</span>
+            var myView = ImageView(this)
+            if(v.id == R.id.macaron){     <span>//判斷拖進來的是馬卡龍還是泡芙，然後把對應的圖片放進 myView。</span>
+                myView.setImageResource(R.drawable.macaron)
+            }
+            else{
+                myView.setImageResource(R.drawable.puff)
+            }
+            if(destination.contains(v)){
+                destination.removeView(v)
+                myView = v     <span>//如果原本的圖片已經在容器裡，就把它移走，然後直接使用原本的那張（避免重複）。</span>
+            }
+            myView.x = dragEvent.x - 65f
+            myView.y = dragEvent.y - 65f
+            <span>//把圖片放在手指放開的位置（減 65 是為了讓圖片中心對齊手指）。</span>
+
+            myView.layoutParams = ViewGroup.LayoutParams(150, 150)     <span>//設定這張圖片的大小為 150×150。</span>
+            myView.setOnLongClickListener {     <span>//給這張新放進來的圖片也加上長按可以再次拖曳的功能（讓它可以重複移動）。</span>
+                val dragData2 = ClipData.newPlainText("drag_data", "data")
+                val dragShadowBuilder2 = View.DragShadowBuilder(it)
+                it.startDragAndDrop(dragData2, dragShadowBuilder2, it, 0)
+                it.visibility = View.INVISIBLE
+                true
+            }
+
+            destination.addView(myView)
+
+            v.visibility = View.VISIBLE    <span>//把原本隱藏的那張圖片恢復顯示（如果需要的話）。</span>
+            true
+        }
+
+        DragEvent.ACTION_DRAG_ENDED -&gt; true
+        else -&gt; false
+        <span>//拖曳結束時允許，其他情況不處理。</span>
+    }
+    true
+}
+
+
+<mark>imgView2.setOnLongClickListener就係移動圖片 但拉入去要增加多一張 所以就有setOnDragListener</mark>
+    </pre>
+</div>
+<script src="js.js"></script>
+</body>
+</html>

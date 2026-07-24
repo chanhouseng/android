@@ -1,0 +1,334 @@
+{
+  "metadata": {
+    "name": "WorldSkills Lyon 2024 country and region seed",
+    "note": "Seed list for the Seat Lottery test project. Replace with an official skill-specific list if provided by the organiser.",
+    "uniqueCountryRule": "Only one competitor may use each country or region within the same trade."
+  },
+  "countries": [
+    {
+      "code": "AE",
+      "name": "United Arab Emirates",
+      "emoji": "🇦🇪"
+    },
+    {
+      "code": "AL",
+      "name": "Albania",
+      "emoji": "🇦🇱"
+    },
+    {
+      "code": "AM",
+      "name": "Armenia",
+      "emoji": "🇦🇲"
+    },
+    {
+      "code": "AT",
+      "name": "Austria",
+      "emoji": "🇦🇹"
+    },
+    {
+      "code": "AU",
+      "name": "Australia",
+      "emoji": "🇦🇺"
+    },
+    {
+      "code": "AZ",
+      "name": "Azerbaijan",
+      "emoji": "🇦🇿"
+    },
+    {
+      "code": "BD",
+      "name": "Bangladesh",
+      "emoji": "🇧🇩"
+    },
+    {
+      "code": "BE",
+      "name": "Belgium",
+      "emoji": "🇧🇪"
+    },
+    {
+      "code": "BH",
+      "name": "Bahrain",
+      "emoji": "🇧🇭"
+    },
+    {
+      "code": "BN",
+      "name": "Brunei Darussalam",
+      "emoji": "🇧🇳"
+    },
+    {
+      "code": "BR",
+      "name": "Brazil",
+      "emoji": "🇧🇷"
+    },
+    {
+      "code": "CA",
+      "name": "Canada",
+      "emoji": "🇨🇦"
+    },
+    {
+      "code": "CH",
+      "name": "Switzerland",
+      "emoji": "🇨🇭"
+    },
+    {
+      "code": "CL",
+      "name": "Chile",
+      "emoji": "🇨🇱"
+    },
+    {
+      "code": "CN",
+      "name": "China",
+      "emoji": "🇨🇳"
+    },
+    {
+      "code": "CO",
+      "name": "Colombia",
+      "emoji": "🇨🇴"
+    },
+    {
+      "code": "CR",
+      "name": "Costa Rica",
+      "emoji": "🇨🇷"
+    },
+    {
+      "code": "HR",
+      "name": "Croatia",
+      "emoji": "🇭🇷"
+    },
+    {
+      "code": "CY",
+      "name": "Cyprus",
+      "emoji": "🇨🇾"
+    },
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "emoji": "🇩🇰"
+    },
+    {
+      "code": "EC",
+      "name": "Ecuador",
+      "emoji": "🇪🇨"
+    },
+    {
+      "code": "EE",
+      "name": "Estonia",
+      "emoji": "🇪🇪"
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "emoji": "🇪🇸"
+    },
+    {
+      "code": "FI",
+      "name": "Finland",
+      "emoji": "🇫🇮"
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "emoji": "🇫🇷"
+    },
+    {
+      "code": "GE",
+      "name": "Georgia",
+      "emoji": "🇬🇪"
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "emoji": "🇩🇪"
+    },
+    {
+      "code": "GH",
+      "name": "Ghana",
+      "emoji": "🇬🇭"
+    },
+    {
+      "code": "HK",
+      "name": "Hong Kong, China",
+      "emoji": "🇭🇰"
+    },
+    {
+      "code": "HU",
+      "name": "Hungary",
+      "emoji": "🇭🇺"
+    },
+    {
+      "code": "ID",
+      "name": "Indonesia",
+      "emoji": "🇮🇩"
+    },
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "emoji": "🇮🇪"
+    },
+    {
+      "code": "IN",
+      "name": "India",
+      "emoji": "🇮🇳"
+    },
+    {
+      "code": "IR",
+      "name": "Iran",
+      "emoji": "🇮🇷"
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "emoji": "🇮🇹"
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "emoji": "🇯🇵"
+    },
+    {
+      "code": "KZ",
+      "name": "Kazakhstan",
+      "emoji": "🇰🇿"
+    },
+    {
+      "code": "KR",
+      "name": "Korea",
+      "emoji": "🇰🇷"
+    },
+    {
+      "code": "LI",
+      "name": "Liechtenstein",
+      "emoji": "🇱🇮"
+    },
+    {
+      "code": "LT",
+      "name": "Lithuania",
+      "emoji": "🇱🇹"
+    },
+    {
+      "code": "LU",
+      "name": "Luxembourg",
+      "emoji": "🇱🇺"
+    },
+    {
+      "code": "LV",
+      "name": "Latvia",
+      "emoji": "🇱🇻"
+    },
+    {
+      "code": "MO",
+      "name": "Macao, China",
+      "emoji": "🇲🇴"
+    },
+    {
+      "code": "MA",
+      "name": "Morocco",
+      "emoji": "🇲🇦"
+    },
+    {
+      "code": "MT",
+      "name": "Malta",
+      "emoji": "🇲🇹"
+    },
+    {
+      "code": "MV",
+      "name": "Maldives",
+      "emoji": "🇲🇻"
+    },
+    {
+      "code": "MX",
+      "name": "Mexico",
+      "emoji": "🇲🇽"
+    },
+    {
+      "code": "MY",
+      "name": "Malaysia",
+      "emoji": "🇲🇾"
+    },
+    {
+      "code": "NA",
+      "name": "Namibia",
+      "emoji": "🇳🇦"
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "emoji": "🇳🇱"
+    },
+    {
+      "code": "NO",
+      "name": "Norway",
+      "emoji": "🇳🇴"
+    },
+    {
+      "code": "NZ",
+      "name": "New Zealand",
+      "emoji": "🇳🇿"
+    },
+    {
+      "code": "OM",
+      "name": "Oman",
+      "emoji": "🇴🇲"
+    },
+    {
+      "code": "PH",
+      "name": "Philippines",
+      "emoji": "🇵🇭"
+    },
+    {
+      "code": "PT",
+      "name": "Portugal",
+      "emoji": "🇵🇹"
+    },
+    {
+      "code": "SA",
+      "name": "Saudi Arabia",
+      "emoji": "🇸🇦"
+    },
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "emoji": "🇸🇪"
+    },
+    {
+      "code": "SG",
+      "name": "Singapore",
+      "emoji": "🇸🇬"
+    },
+    {
+      "code": "TH",
+      "name": "Thailand",
+      "emoji": "🇹🇭"
+    },
+    {
+      "code": "TN",
+      "name": "Tunisia",
+      "emoji": "🇹🇳"
+    },
+    {
+      "code": "TPE",
+      "name": "Chinese Taipei",
+      "emoji": "🇹🇼"
+    },
+    {
+      "code": "UK",
+      "name": "United Kingdom",
+      "emoji": "🇬🇧"
+    },
+    {
+      "code": "US",
+      "name": "United States of America",
+      "emoji": "🇺🇸"
+    },
+    {
+      "code": "VN",
+      "name": "Vietnam",
+      "emoji": "🇻🇳"
+    },
+    {
+      "code": "ZA",
+      "name": "South Africa",
+      "emoji": "🇿🇦"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+        <mark>攞id去搵返passowrdsList的id == id 的項，再去修改</mark>
+        //var number = 0
+        //for(product in data.passwordsList){
+        //    if(product.id == id){
+        //        data.passwordsList[number] = Product(id, title.text.toString(), username.text.toString(), password.text.toString(), website.text.toString())
+        //        break
+        //    }
+        //    number ++
+        //}
+
+        
+        val editList = data.editFind(id)
+        if(editList != null){
+            editList.title = title.text.toString()
+            editList.username = username.text.toString()
+            editList.password = password.text.toString()
+            editList.website = website.text.toString()
+        }
+
+        fun editFind(id:Int) : Product?{
+            return passwordsList.find { it.id == id }
+        }
+
+<span>//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
+
+        <mark>將password InputType 改變(不可見 -> 可見)</mark>
+        findViewById&lt;ImageView&gt;(R.id.seeButton).setOnClickListener {
+            isSee = !isSee
+            if(isSee){
+                password.inputType = InputType.TYPE_CLASS_TEXT
+
+            }
+            else{
+                password.inputType = 129
+            }
+        }
+
+<span>////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
+
+<mark>bottomNavigationView 顏色問題</mark>
+&lt;com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        <mark>app:itemIconTint="@drawable/bottom_color"</mark>    <span>//圖示顏色</span>
+        <mark>app:itemTextColor="@drawable/bottom_color"</mark>   <span>//文字顏色</span>
+        android:background="#151419"
+        <mark>style="@style/CustomBottomNavigationView"</mark>    <span>//選中時的背景</span>
+        app:menu="@menu/menu" /&gt;
+
+<mark>在themes.xml中設置選中背景樣式</mark>
+&lt;style name="CustomBottomNavigationView" parent="Widget.Material3.BottomNavigationView"&gt;
+    <mark>&lt;item name="itemActiveIndicatorStyle"&gt;@null&lt;/item&gt;</mark>      <span>//改為没有</span>
+    &lt;item name="itemBackground"&gt;@android:color/transparent&lt;/item&gt;
+&lt;/style&gt;
+
+<mark>開drawable設置判斷擊中的顏色</mark>
+&lt;selector xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+    &lt;item android:state_checked="true"    <span>//當擊中時的顏色</span>
+        android:color="#50CD9F"/&gt;
+    &lt;item android:color="#ccc"/&gt;       <span>//預設顏色</span>
+&lt;/selector&gt;
+
+    </pre>
+</div>
+<script src="js.js"></script>
+</body>
+</html>

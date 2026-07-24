@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+linearLayout = findViewById(R.id.lienarLayout)
+frameLayout = findViewById(R.id.frameLayout)
+imageView = findViewById(R.id.imageView)
+var startX = 0f
+var startY = 0f
+linearLayout.setOnTouchListener {_, e -&gt;
+    when(e.action){
+        MotionEvent.ACTION_DOWN -&gt; {
+            startX = e.x
+            startY = e.y
+        }
+
+        MotionEvent.ACTION_UP -&gt; {
+            val moveX = e.x
+            val moveY = e.y
+
+            val deltaX = moveX - startX
+            val deltaY = moveY - startY
+
+            if(Math.abs(deltaX) &gt; Math.abs(deltaY)){
+                if(deltaX &lt; 0){
+                    goImageView(-50f, 0f)
+
+                }
+                else{
+                    goImageView(50f, 0f)
+                    Toast.makeText(this@MainActivity, "y", Toast.LENGTH_SHORT).show()  <span>//由左向右滑</span>
+                }
+            }
+            else{
+                if(deltaY &lt; 0){
+                    goImageView(0f, -50f)
+
+                }
+                else{
+                    goImageView(0f, 50f)
+                    Toast.makeText(this@MainActivity, "s", Toast.LENGTH_SHORT).show()  <span>//由上向下滑</span>
+                }
+            }
+        }
+    }
+    true
+}
+
+
+    fun goImageView(x: Float, y: Float){
+        imageView.translationX = imageView.translationX + x
+        imageView.translationY = imageView.translationY + y
+    }
+    </pre>
+</div>
+<script src="js.js"></script>
+</body>
+</html>

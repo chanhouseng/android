@@ -1,0 +1,37 @@
+[
+  {
+    "id": "REQ001",
+    "toScholarId": "SCH001",
+    "status": "Pending",
+    "purpose": "Competition Preparation",
+    "message": "Would love to prepare for the next round together!"
+  },
+  {
+    "id": "REQ002",
+    "toScholarId": "SCH002",
+    "status": "Pending",
+    "purpose": "Peer Learning",
+    "message": "Could we exchange notes on your skill category?"
+  },
+  {
+    "id": "REQ003",
+    "toScholarId": "SCH003",
+    "status": "Pending",
+    "purpose": "Project Collaboration",
+    "message": "Interested in collaborating on a joint project."
+  },
+  {
+    "id": "REQ004",
+    "toScholarId": "SCH004",
+    "status": "Pending",
+    "purpose": "Mock Interview",
+    "message": "Would you be open to a mock interview session?"
+  },
+  {
+    "id": "REQ005",
+    "toScholarId": "SCH005",
+    "status": "Pending",
+    "purpose": "Competition Preparation",
+    "message": "Keen to learn from your competition experience."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "userId": "USR001",
+    "scholarId": "SCH001"
+  },
+  {
+    "userId": "USR001",
+    "scholarId": "SCH005"
+  },
+  {
+    "userId": "USR001",
+    "scholarId": "SCH010"
+  },
+  {
+    "userId": "USR001",
+    "scholarId": "SCH015"
+  },
+  {
+    "userId": "USR001",
+    "scholarId": "SCH020"
+  }
+]

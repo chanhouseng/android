@@ -1,0 +1,74 @@
+{
+  "trades": [
+    {
+      "id": "MAD",
+      "name": "Mobile Applications Development"
+    },
+    {
+      "id": "ST",
+      "name": "Software Testing"
+    }
+  ],
+  "competitors": [
+    {
+      "id": "T101",
+      "name": "Yuki Tanaka",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "JP",
+      "countryName": "Japan",
+      "flagEmoji": "🇯🇵",
+      "thumbnail": "assets/sample_1.png"
+    },
+    {
+      "id": "T102",
+      "name": "Nora Lee",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "SG",
+      "countryName": "Singapore",
+      "flagEmoji": "🇸🇬",
+      "thumbnail": "assets/sample_1.png"
+    },
+    {
+      "id": "T103",
+      "name": "Hugo Bernard",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "FR",
+      "countryName": "France",
+      "flagEmoji": "🇫🇷",
+      "thumbnail": "assets/sample_1.png"
+    },
+    {
+      "id": "T104",
+      "name": "Liam Chan",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "HK",
+      "countryName": "Hong Kong, China",
+      "flagEmoji": "🇭🇰",
+      "thumbnail": "assets/sample_1.png"
+    },
+    {
+      "id": "T105",
+      "name": "Ava Brown",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "AU",
+      "countryName": "Australia",
+      "flagEmoji": "🇦🇺",
+      "thumbnail": "assets/sample_1.png"
+    },
+    {
+      "id": "T106",
+      "name": "Mateo Costa",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "BR",
+      "countryName": "Brazil",
+      "flagEmoji": "🇧🇷",
+      "thumbnail": "assets/sample_1.png"
+    }
+  ]
+}

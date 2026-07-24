@@ -1,0 +1,210 @@
+{
+  "_readme": "Expected outputs for marking. All values computed with the algorithms specified in the Test Project. Markers compare competitor outputs against these values.",
+  "common": {
+    "textEncoding": "UTF-8",
+    "hashHexCase": "lowercase",
+    "hmacHexCase": "lowercase",
+    "base64Variant": "standard (not Base64URL)",
+    "base64LineBreaks": false,
+    "urlSpaceEncoding": "%20",
+    "urlPercentHexCase": "uppercase",
+    "aesKeyEncoding": "ASCII (printable characters only, length measured in bytes)",
+    "aesPadding": "PKCS7 (PKCS5Padding transformation name on Android is acceptable when results match)"
+  },
+  "hashGenerator": {
+    "input": "WorldSkills",
+    "note": "Results are lowercase hexadecimal.",
+    "results": {
+      "MD5": "e514b0a3298d6efe1322b85ddb91a791",
+      "SHA-1": "2972dbdf750e245279322215c0ddab338fbd23ab",
+      "SHA-224": "127f0d79ce3f56294092b09c0ff2f89632cef99dc40d4d3cbee13592",
+      "SHA-256": "7a474640b9e0fc9aa42fd27d92f5ffe331b25b0ab5e0537d2bd6d7ee387ffd75",
+      "SHA-384": "16d149ccac03a06bb96fd9cd8413ef88da4f880cb3f9dc467057024dc38cad4e5b16fdf98ee1aefbdcf325d6de25406f",
+      "SHA-512": "7e4e6da145e939d4cdbdf3171670647c6a603082e92d9f1c616f26e21815c640e9212363864550ce5ef8af3cadf6a309a7697b707245112c2875f4b8bcd81736"
+    },
+    "saltedExample": {
+      "input": "WorldSkills",
+      "salt": "a1b2c3d4",
+      "note": "salted input = UTF8(inputText + displayedSaltText), simple concatenation",
+      "SHA-256": "abbb323f22969317095c0891206b105a1a223db6eb7560d26047c121199ee06c"
+    }
+  },
+  "fileHash": {
+    "file": "sample.txt",
+    "fileContentNote": "sample.txt provided in \"003. Test Data\" folder. Hashes are calculated from the original binary file bytes.",
+    "results": {
+      "MD5": "48c35ed66f54c3873d2b0562be38f5d1",
+      "SHA-1": "27849d5673fde21fa63c9350612a2e5f3fbaa39c",
+      "SHA-256": "eb32e372006f4b442cceaa8d74fa1a6d013a9f9315810f68fa692668cbe21281",
+      "SHA-512": "f08914c55a1af43f6e1db909c2e35f486ef89226db29604a53879f9828a4d21b55e8c02a42033059f733dd04f8ad6629cf52dbe4dc5fe3a9c4fe127ba79b1f93"
+    }
+  },
+  "aes": [
+    {
+      "algorithm": "AES-128",
+      "mode": "CBC",
+      "padding": "PKCS7",
+      "keyEncoding": "ASCII",
+      "key": "1234567890ABCDEF",
+      "ivHex": "000102030405060708090A0B0C0D0E0F",
+      "plaintextEncoding": "UTF-8",
+      "plaintext": "Hello WorldSkills",
+      "ciphertextEncoding": "Base64 (standard, no line breaks)",
+      "expectedCiphertext": "n2tQ3xoA0rRAUolnZAeHLBjD4S6g0VhQwrHfkXcI/Hw=",
+      "expectedDecryptedText": "Hello WorldSkills"
+    },
+    {
+      "algorithm": "AES-128",
+      "mode": "ECB",
+      "padding": "PKCS7",
+      "keyEncoding": "ASCII",
+      "key": "1234567890ABCDEF",
+      "ivHex": null,
+      "plaintextEncoding": "UTF-8",
+      "plaintext": "Hello WorldSkills",
+      "ciphertextEncoding": "Base64 (standard, no line breaks)",
+      "expectedCiphertext": "uSUkxxBr9ptOTrfja7VbHZN+6lo9j6+jvLfXcQnNpNE=",
+      "expectedDecryptedText": "Hello WorldSkills"
+    }
+  ],
+  "hmacGenerator": {
+    "input": "WorldSkills",
+    "secretKey": "secret",
+    "note": "Input and key are UTF-8; results are lowercase hexadecimal.",
+    "results": {
+      "HMAC-MD5": "de39af120b461ffac034df1a0f379cd6",
+      "HMAC-SHA1": "9b2975b6d17aa7003f2592f6bcaab8812808d6c3",
+      "HMAC-SHA256": "dd9e9b2ed9bd854808cd2dda51dc86b10d8ff4e87c84f23fb1cd350822ce6ee8",
+      "HMAC-SHA512": "d0aaa7787a8eebfd092187fccca5156940d675bbf301994f6c42940d1e91c2d2255b9e1dc092262d092219376e66855a12662431fa0a310e61683617a017486d"
+    }
+  },
+  "base64": {
+    "plain": "WorldSkills 2026",
+    "encoded": "V29ybGRTa2lsbHMgMjAyNg==",
+    "rules": "UTF-8 input bytes, standard Base64, no line breaks, Base64URL not allowed."
+  },
+  "urlEncoding": {
+    "plain": "https://worldskills.org/?q=mobile app&lang=ko",
+    "encoded": "https%3A%2F%2Fworldskills.org%2F%3Fq%3Dmobile%20app%26lang%3Dko",
+    "rules": "RFC 3986: unreserved characters (A-Z a-z 0-9 - . _ ~) unchanged; space = %20 (not +); percent hex digits uppercase; UTF-8 basis. The characters ! * ' ( ) may be either encoded or left unchanged."
+  },
+  "numberBase": {
+    "input": "1111111",
+    "inputBase": 2,
+    "results": {
+      "binary": "1111111",
+      "octal": "177",
+      "decimal": "127",
+      "hexadecimal": "7F"
+    },
+    "validation": {
+      "binary": "^[01]+$",
+      "octal": "^[0-7]+$",
+      "decimal": "^[0-9]+$",
+      "hexadecimal": "^[0-9A-Fa-f]+$"
+    },
+    "range": "Unsigned integers 0 to 4294967295 only. Negative values are not supported."
+  },
+  "asciiHex": {
+    "textToHex": {
+      "input": "Hello",
+      "output": "48 65 6C 6C 6F"
+    },
+    "hexToText": {
+      "input": "48 65 6C 6C 6F",
+      "output": "Hello"
+    },
+    "rules": "Only ASCII characters (0x00-0x7F) are accepted. Non-ASCII input must display an error notification."
+  },
+  "cidrCalculator": {
+    "input": "192.168.1.10/24",
+    "results": {
+      "networkAddress": "192.168.1.0",
+      "broadcastAddress": "192.168.1.255",
+      "firstHost": "192.168.1.1",
+      "lastHost": "192.168.1.254",
+      "availableHosts": 254,
+      "subnetMask": "255.255.255.0"
+    },
+    "extra": {
+      "input": "10.20.30.40/26",
+      "results": {
+        "networkAddress": "10.20.30.0",
+        "broadcastAddress": "10.20.30.63",
+        "firstHost": "10.20.30.1",
+        "lastHost": "10.20.30.62",
+        "availableHosts": 62,
+        "subnetMask": "255.255.255.192"
+      }
+    },
+    "rules": "IPv4 only. Only the CIDR prefixes listed in the dropdown are required."
+  },
+  "ipCalculator": {
+    "add": {
+      "input": "192.168.1.1 + 5",
+      "output": "192.168.1.6"
+    },
+    "addOverflowOctet": {
+      "input": "192.168.1.250 + 10",
+      "output": "192.168.2.4"
+    },
+    "subtract": {
+      "input": "192.168.2.4 - 10",
+      "output": "192.168.1.250"
+    },
+    "count": {
+      "input": "192.168.1.1 to 192.168.1.10",
+      "output": "10 IP addresses"
+    },
+    "rules": "IPv4 as unsigned 32-bit values. Add/Subtract values are non-negative. Overflow above 255.255.255.255 and underflow below 0.0.0.0 must display an error. For Count, End IP must be greater than or equal to Start IP."
+  },
+  "regexTester": {
+    "matchingMode": "partial search - the result is Matched when the test string contains at least one match of the pattern. Default options, no flags.",
+    "matched": {
+      "pattern": "^[a-zA-Z0-9_]{6,16}$",
+      "testString": "WorldSkills_2026",
+      "result": "Matched"
+    },
+    "notMatched": {
+      "pattern": "^[a-zA-Z0-9_]{6,16}$",
+      "testString": "World Skills!",
+      "result": "Not Matched"
+    },
+    "commonPatterns": {
+      "email": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      "url": "^https?://[^\\s]+$",
+      "phone": "^\\d{3}-\\d{3}-\\d{4}$"
+    }
+  },
+  "uuidGenerator": {
+    "format": "xxxxxxxx-xxxx-4xxx-[89ab]xxx-xxxxxxxxxxxx",
+    "validation": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+    "note": "RFC 4122 version 4, lowercase output. Verify the format and that consecutive generations differ."
+  },
+  "passwordGenerator": {
+    "characterSets": {
+      "uppercase": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "lowercase": "abcdefghijklmnopqrstuvwxyz",
+      "numbers": "0123456789",
+      "special": "!@#$%^&*()_+-=[]{}|;:,.<>?"
+    },
+    "lengthRange": {
+      "min": 4,
+      "max": 64,
+      "default": 16
+    },
+    "note": "The password must contain at least one character from each selected set and only characters from the selected sets, with the selected length."
+  },
+  "randomNumberGenerator": {
+    "constraints": {
+      "minLessThanMax": true,
+      "quantityRange": [
+        1,
+        1000
+      ],
+      "negativesAllowed": true,
+      "duplicatesAllowed": true
+    },
+    "note": "All values are independent integers within [min, max]; count equals Quantity; output joined by \", \"."
+  }
+}

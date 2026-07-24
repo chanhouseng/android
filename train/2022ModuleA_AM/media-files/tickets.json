@@ -1,0 +1,40 @@
+{
+  "title": "Tickets",
+  "tickets": [
+    {
+      "isOpeningCeremony": true,
+      "attendeeName": "James Carter",
+      "time": "2025-08-15T18:00:00",
+      "seat": "A050310",
+      "image": "ticket_james_carter_opening.png"
+    },
+    {
+      "isOpeningCeremony": false,
+      "attendeeName": "Sophia Nguyen",
+      "time": "2025-08-24T20:00:00",
+      "seat": "B070804",
+      "image": "ticket_sophia_nguyen_closing.png"
+    },
+    {
+      "isOpeningCeremony": true,
+      "attendeeName": "Ethan Williams",
+      "time": "2025-08-15T18:00:00",
+      "seat": "C010906",
+      "image": "ticket_ethan_williams_opening.png"
+    },
+    {
+      "isOpeningCeremony": false,
+      "attendeeName": "Olivia Bennett",
+      "time": "2025-08-24T20:00:00",
+      "seat": "A040157",
+      "image": "ticket_olivia_bennett_closing.png"
+    },
+    {
+      "isOpeningCeremony": true,
+      "attendeeName": "Liam Rodriguez",
+      "time": "2025-08-15T18:00:00",
+      "seat": "B021008",
+      "image": "ticket_liam_rodriguez_opening.png"
+    }
+  ]
+}

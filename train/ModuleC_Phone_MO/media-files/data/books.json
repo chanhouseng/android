@@ -1,0 +1,9 @@
+[
+  { "id": 1, "image": "hp1", "status": "active" },
+  { "id": 2, "image": "hp2", "status": "active" },
+  { "id": 3, "image": "hp3", "status": "inactive" },
+  { "id": 4, "image": "hp4", "status": "inactive" },
+  { "id": 5, "image": "hp5", "status": "inactive" },
+  { "id": 6, "image": "hp6", "status": "inactive" },
+  { "id": 7, "image": "hp7", "status": "locked" }
+]

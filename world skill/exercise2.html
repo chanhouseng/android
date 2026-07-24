@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">MainActivity.ky</button>
+    <div class="panel">
+        <pre>
+val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigation)
+val viewPager2 : ViewPager2 = findViewById(R.id.viewPager2)
+viewPager2.adapter = viewAdapter(this)
+bottomNavigationView.setOnItemSelectedListener {
+    when(it.itemId){
+        R.id.one -&gt; viewPager2.currentItem = 0
+        R.id.two -&gt; viewPager2.currentItem = 1
+    }
+    true
+}
+viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+    override fun onPageSelected(position: Int) {
+        super.onPageSelected(position)
+        when(position){
+            0 -&gt; bottomNavigationView.selectedItemId = R.id.one
+            1 -&gt; bottomNavigationView.selectedItemId = R.id.two
+        }
+    }
+})
+
+
+        </pre>
+    </div>
+    <button class="accordion">oneFragment</button>
+    <div class="panel">
+        <pre>
+val prefs = activity.getSharedPreferences("data", MODE_PRIVATE)
+Data.checkSet.addAll(prefs.getStringSet("dataSet", emptySet&lt;String&gt;())?:emptySet())
+linearLayout = view.findViewById(R.id.linearLayout)
+for(data in Data.dataList){
+    val layout = activity.layoutInflater.inflate(R.layout.product, null)
+    layout.findViewById&lt;TextView&gt;(R.id.name).text = data.name
+    if(Data.checkSet.contains(data.id.toString())){
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView).setImageResource(R.drawable.like)
+    }
+    else{
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView).setImageResource(R.drawable.unlike)
+    }
+    layout.setOnClickListener {
+        if(Data.checkSet.contains(data.id.toString())){
+            Data.checkSet.remove(data.id.toString())
+            layout.findViewById&lt;ImageView&gt;(R.id.imageView).setImageResource(R.drawable.unlike)
+            save()
+        }
+        else{
+            Data.checkSet.add(data.id.toString())
+            layout.findViewById&lt;ImageView&gt;(R.id.imageView).setImageResource(R.drawable.like)
+            save()
+        }
+    }
+    linearLayout.addView(layout)
+}
+
+    fun save(){
+        val editor = requireActivity()?.getSharedPreferences("data", MODE_PRIVATE)?.edit()
+        editor?.putStringSet("dataSet", Data.checkSet)
+        editor?.apply()
+    }
+        </pre>
+    </div>
+    <button class="accordion">TwoFragment</button>
+    <div class="panel">
+        <pre>
+override fun onResume() {
+    super.onResume()
+    val likeList = Data.dataList.filter { Data.checkSet.contains(it.id.toString()) }
+    linearLayout.removeAllViews()
+    for(like in likeList){
+        val layout = activity?.layoutInflater?.inflate(R.layout.product, null)
+        layout?.findViewById&lt;TextView&gt;(R.id.name)?.text = like.name
+        layout?.findViewById&lt;ImageView&gt;(R.id.imageView)?.setImageResource(R.drawable.like)
+        linearLayout.addView(layout)
+    }
+}
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

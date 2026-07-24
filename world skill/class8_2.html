@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">Table Class</button>
+    <div class="panel">
+        <pre>
+class Table : LinearLayout {
+    constructor(context: Context) : super(context)
+    var isUse = false
+    var time = 0
+    var timeTextView: TextView
+    var tableTextView: TextView
+    var shapeLayout: LinearLayout
+    lateinit var countDownTimer: CountDownTimer
+    var overCountTimer: CountDownTimer
+    var overTime = 0
+    var ids = 0
+    init {
+        LayoutInflater.from(context).inflate(R.layout.table_pro, this, true)
+        timeTextView = findViewById(R.id.time)
+        tableTextView = findViewById(R.id.table)
+        shapeLayout = findViewById(R.id.shapeLayout)
+        overCountTimer = object : CountDownTimer(1000, 1000){
+            override fun onFinish() {
+                overTime++
+                if(isUse){
+                    start()
+                }
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                timeTextView.setTextColor(Color.parseColor("#ff1111"))
+                val hour = overTime/3600
+                val minute = (overTime%3600)/60
+                val seconds = ((overTime%3600)%60)
+                timeTextView.text = "-${hour.toString().padStart(2,'0')}:${minute.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}"
+                val tableData = Data.tableLayoutList.find { it.ids == ids }
+                tableData?.time = overTime*-1
+
+            }
+        }
+
+    }
+
+    fun startCountTimer(){
+        countDownTimer = object : CountDownTimer(time*1000.toLong(), 1000){
+            override fun onFinish() {
+                overCountTimer.start()
+                shapeLayout.setBackgroundColor("#924bca".toColorInt())
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                val hour = millisUntilFinished/3600000
+                val minute = (millisUntilFinished%3600000)/60000
+                val seconds = ((millisUntilFinished%3600000)%60000)/1000
+                timeTextView.text = "${hour.toString().padStart(2,'0')}:${minute.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}"
+                val tableData = Data.tableLayoutList.find { it.ids == ids }
+                tableData?.time = (millisUntilFinished/1000).toInt()
+            }
+
+        }
+        countDownTimer.start()
+        shapeLayout.setBackgroundColor(Color.parseColor("#18abc8"))
+
+    }
+
+    fun reSet(){
+        countDownTimer.cancel()
+        overCountTimer.cancel()
+        time = 0
+        timeTextView.text = "00:00:00"
+        isUse = false
+        shapeLayout.setBackgroundColor(Color.parseColor("#efefef"))
+        timeTextView.setTextColor(Color.parseColor("#111111"))
+        val tableData = Data.tableLit.find { it.id == ids }
+        tableData?.time = 0
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity.kt</button>
+    <div class="panel">
+        <pre>
+    linearLayout1 = findViewById&lt;LinearLayout&gt;(R.id.LinearLayout1)
+        load()
+        review()
+        val textView = findViewById&lt;TextView&gt;(R.id.textView3)
+        textView.setOnClickListener {
+            val popupMenu = PopupMenu(this, it)
+            popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener {
+                when(it.itemId){
+                    R.id.none -&gt; {
+
+                    }
+                    R.id.used -&gt; {
+
+                    }
+                    R.id.over -&gt; {
+                        
+                    }
+                    R.id.free -&gt; {
+
+                    }
+                }
+                true
+            }
+            popupMenu.show()
+        }
+
+
+
+    fun load(){
+        for(result in Data.tableLit){
+            val table = Table(this)
+            table.ids = result.id
+            table.tableTextView.text = result.id.toString()
+            table.setOnClickListener {
+                if(table.isUse){
+                    table.reSet()
+                    Data.tableLayoutList.add(table)
+                    Data.haveTimeList.remove(table)
+                    sortDataList()
+                    Data.tableLayoutList.sortBy { it.ids }
+                    review()
+                }
+                else{
+                    val custom = layoutInflater.inflate(R.layout.alert_time, null)
+                    val alertDialog = AlertDialog.Builder(this).setView(custom).show()
+                    custom.findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
+                        result.time = hourToSeconds(0.001f)
+                        table.time = result.time
+                        alertDialog.dismiss()
+                        table.isUse = true
+                        Data.tableLayoutList.remove(table)
+                        Data.haveTimeList.add(table)
+                        table.startCountTimer()
+                        sortDataList()
+                        review()
+                    }
+                    custom.findViewById&lt;Button&gt;(R.id.button2).setOnClickListener {
+                        result.time = hourToSeconds(1f)
+                        table.time = result.time
+                        alertDialog.dismiss()
+                        table.isUse = true
+                        Data.tableLayoutList.remove(table)
+                        Data.haveTimeList.add(table)
+                        table.startCountTimer()
+                        sortDataList()
+                        review()
+                    }
+                    custom.findViewById&lt;Button&gt;(R.id.button3).setOnClickListener {
+                        result.time = hourToSeconds(2f)
+                        table.time = result.time
+                        alertDialog.dismiss()
+                        table.isUse = true
+                        Data.tableLayoutList.remove(table)
+                        Data.haveTimeList.add(table)
+                        table.startCountTimer()
+                        sortDataList()
+                        review()
+                    }
+                }
+
+            }
+            Data.tableLayoutList.add(table)
+        }
+    }
+    fun sortDataList() {
+        Data.tableLayoutList.sortBy { it.time }
+        Data.haveTimeList.sortBy { it.time }
+    }
+    fun review(){
+        linearLayout1.removeAllViews()
+        for(result in Data.haveTimeList){
+            linearLayout1.addView(result)
+        }
+        for(table in Data.tableLayoutList){
+            linearLayout1.addView(table)
+        }
+    }
+    fun hourToSeconds(hour: Float): Int{
+        return (hour*3600).toInt()
+    }
+
+
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

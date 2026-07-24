@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+val defaultList = arrayOf(
+    chipClass(1, "HK"),
+    chipClass(2, "Macau"),
+    chipClass(3, "China")
+)
+val prefs = getSharedPreferences("data", MODE_PRIVATE)
+<mark>val prefsList = Gson().fromJson(prefs.getString("dataJson", Gson().toJson(defaultList).toString()),
+    Array&lt;chipClass&gt;::class.java)</mark>
+chipList.addAll(prefsList)
+for(checked in prefs.getStringSet("chipChecked", emptySet&lt;String&gt;())?:emptySet&lt;String&gt;()){
+    chipChecked.add(checked)
+}
+for(chips in chipList){
+    val chip = Chip(this)
+    chip.text = chips.content
+    chip.isCheckable = true
+    for(checked in chipChecked){
+        if (chips.id.toString() == checked){
+            chip.isChecked = true
+        }
+    }
+    chip.setOnCheckedChangeListener { _, isChecked -&gt;
+        if (isChecked) chipChecked.add(chips.id.toString()) else chipChecked.remove(chips.id.toString())
+        saveChip()
+    }
+    chip.setOnLongClickListener {
+        chipGroup.removeView(chip)
+        chipList.remove(chips)
+        saveChip()
+        true
+    }
+    chipGroup.addView(chip)
+}
+button.setOnClickListener {
+    val chip = Chip(this)
+    chip.text = editText.text.toString()
+    val chipNew = chipClass(chipList.last().id + 1, editText.text.toString())   <span>//先定一個class 方便之刪去</span>
+    chipList.add(chipNew)
+    chip.isCheckable = true
+    chip.setOnCheckedChangeListener { _, isChecked -&gt;
+        if (isChecked) chipChecked.add(chipNew.id.toString()) else chipChecked.remove(chipNew.id.toString())
+        saveChip()
+    }
+    chip.setOnLongClickListener {
+        chipGroup.removeView(chip)
+        <mark>chipList.remove(chipNew)</mark>
+        saveChip()
+        true
+    }
+    chipGroup.addView(chip)
+    editText.setText("")
+}
+
+    fun saveChip(){
+        val editor = getSharedPreferences("data", MODE_PRIVATE).edit()
+        editor.putString("dataJson", Gson().toJson(chipList))
+        editor.putStringSet("chipChecked", chipChecked)
+        editor.apply()
+    }
+    </pre>
+</div>
+<script src="js.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+spinner1 = findViewById(R.id.spinner1)
+        spinner2 = findViewById(R.id.spinner2)
+        val adapter1 = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, region)
+        spinner1.adapter = adapter1
+        val adapter2a = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, a)
+        val adapter2d = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, d)
+        val adapter2f = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, f)
+        spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView&lt;*&gt;?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when(position){
+                    0 -> spinner2.adapter = adapter2a
+                    1 -> spinner2.adapter = adapter2d
+                    2 -> spinner2.adapter = adapter2f
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+        }
+    </pre>
+    <p style="color: red;">可以再改好啲 用Array包住a,d,f
+    </p>
+</div>
+<script src="js.js"></script>
+</body>
+</html>

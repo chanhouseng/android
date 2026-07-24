@@ -1,0 +1,134 @@
+{
+  "trades": [
+    {
+      "id": "MAD",
+      "name": "Mobile Applications Development"
+    },
+    {
+      "id": "ST",
+      "name": "Software Testing"
+    }
+  ],
+  "competitors": [
+    {
+      "id": "C001",
+      "name": "Aiden Wong",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "HK",
+      "countryName": "Hong Kong, China",
+      "flagEmoji": "🇭🇰",
+      "thumbnail": "assets/avatar_aiden.png"
+    },
+    {
+      "id": "C002",
+      "name": "Mia Sato",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "JP",
+      "countryName": "Japan",
+      "flagEmoji": "🇯🇵",
+      "thumbnail": "assets/avatar_mia.png"
+    },
+    {
+      "id": "C003",
+      "name": "Leo Garcia",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "ES",
+      "countryName": "Spain",
+      "flagEmoji": "🇪🇸",
+      "thumbnail": "assets/avatar_leo.png"
+    },
+    {
+      "id": "C004",
+      "name": "Emma Smith",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "UK",
+      "countryName": "United Kingdom",
+      "flagEmoji": "🇬🇧",
+      "thumbnail": "assets/avatar_emma.png"
+    },
+    {
+      "id": "C005",
+      "name": "Noah Kim",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "KR",
+      "countryName": "Korea",
+      "flagEmoji": "🇰🇷",
+      "thumbnail": "assets/avatar_noah.png"
+    },
+    {
+      "id": "C006",
+      "name": "Sofia Rossi",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "IT",
+      "countryName": "Italy",
+      "flagEmoji": "🇮🇹",
+      "thumbnail": "assets/avatar_sofia.png"
+    },
+    {
+      "id": "C007",
+      "name": "Lucas Silva",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "BR",
+      "countryName": "Brazil",
+      "flagEmoji": "🇧🇷",
+      "thumbnail": "assets/avatar_lucas.png"
+    },
+    {
+      "id": "C008",
+      "name": "Chloe Martin",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "FR",
+      "countryName": "France",
+      "flagEmoji": "🇫🇷",
+      "thumbnail": "assets/avatar_chloe.png"
+    },
+    {
+      "id": "C009",
+      "name": "Ethan Muller",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "DE",
+      "countryName": "Germany",
+      "flagEmoji": "🇩🇪",
+      "thumbnail": "assets/avatar_ethan.png"
+    },
+    {
+      "id": "C010",
+      "name": "Olivia Chen",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "CN",
+      "countryName": "China",
+      "flagEmoji": "🇨🇳",
+      "thumbnail": "assets/avatar_olivia.png"
+    },
+    {
+      "id": "C011",
+      "name": "Amir Hassan",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "AE",
+      "countryName": "United Arab Emirates",
+      "flagEmoji": "🇦🇪",
+      "thumbnail": "assets/avatar_amir.png"
+    },
+    {
+      "id": "C012",
+      "name": "Isla Brown",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "AU",
+      "countryName": "Australia",
+      "flagEmoji": "🇦🇺",
+      "thumbnail": "assets/avatar_isla.png"
+    }
+  ]
+}

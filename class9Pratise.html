@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+&lt;ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"&gt;
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"&gt;
+        &lt;LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/lineaLayout_1"
+            android:layout_weight="1"
+            android:orientation="vertical"&gt;
+        &lt;/LinearLayout&gt;
+        &lt;LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/lineaLayout_2"
+            android:layout_weight="1"
+            android:orientation="vertical"&gt;
+
+        &lt;/LinearLayout&gt;
+    &lt;/LinearLayout&gt;
+&lt;/ScrollView&gt;
+
+
+==============================================================================
+&lt;ImageView
+    android:id="@+id/imageView"
+    android:layout_width="match_parent"
+    android:background="@drawable/img_background"
+    android:clipToOutline="true"
+    android:layout_height="match_parent"
+    android:scaleType="centerCrop"
+    app:srcCompat="@drawable/bubble_tea" /&gt;
+    </pre>
+</body>
+</html>

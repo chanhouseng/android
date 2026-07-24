@@ -1,0 +1,81 @@
+{
+  "ongoing": [
+  {
+    "activity_name": "陈家祠堂游览",
+    "activity_location": "中国广东省广州市",
+    "activity_date": "2023-11-25",
+    "activity_thumbnail": "chen_family.jpg",
+    "activity_deadline": "2023-11-18",
+    "activity_description": "陈家祠堂，又称陈氏宗祠或陈氏书院，是广州市的一个地方，既用于祭祀祖先，又用于学习。现在它作为广东民间艺术博物馆展示最具特色的广东建筑。这座寺庙于1894年完工，是由广东省72个县的陈家人捐赠的资金以及一些海外陈家人捐赠的资金建造的。陈家祠堂是一个复合式建筑群，由九个大厅、六个庭院和十九栋建筑物组成，由走廊连接，所有这些都与外界隔离开来。",
+    "activity_qrcode": "chen_family_qrcode.png", 
+    "joined":true,
+    "place_left":35
+  },
+  {
+    "activity_name": "广州塔游览",
+    "activity_location": "中国广东省广州市海珠区",
+    "activity_date": "2023-11-16",
+    "activity_thumbnail": "canton_tower.jpg",
+    "activity_deadline": "2023-11-12",
+    "activity_description": "广州塔是位于中国广东省广州市海珠区的一座多功能观测塔。它于2009年竣工，并于当年9月29日开始运营。该塔采用钢筋混凝土和钢铁建造，并在高度为488米（1,601英尺）处设有观景台。它目前是世界上第二高的塔和第四高的独立结构。",
+    "activity_qrcode": "canton_tower_qrcode.png", 
+    "joined":false,
+    "place_left":12
+  },
+  {
+    "activity_name": "长隆旅游度假区游览",
+    "activity_location": "中国广东省广州市番禺区",
+    "activity_date": "2023-11-12",
+    "activity_thumbnail": "chimelong_tourist_resort.jpg",
+    "activity_deadline": "2023-11-4",
+    "activity_description": "长隆旅游度假区是位于中国广东省广州市番禺区的一个大型游乐园。它于2006年4月12日开业，占地面积超过2,000英亩。公园设有几个主题区域，如长隆天堂（主题公园）、长隆水上乐园（水上乐园）、长隆野生动物世界（动物园）和长隆国际马戏城（马戏团）。它是中国最受欢迎的旅游目的地之一。",
+    "activity_qrcode": "chimelong_tourist_resort_qrcode.png", 
+    "joined":false,
+    "place_left":25
+  }],
+  "past": [
+  {
+    "activity_name": "广东省博物馆游览",
+    "activity_location": "中国广东省广州市",
+    "activity_date": "2023-10-20",
+    "activity_thumbnail": "canton_museum.jpg",
+    "activity_deadline": "2023-10-07",
+    "activity_description": "广东省博物馆是一家综合性博物馆，收藏了广东艺术、自然、文化和历史方面的藏品。它位于广州市越秀区，占地面积约为67,000平方米（721,182平方英尺），外观像一个珠宝盒子，有五层楼和一层地下室。博物馆有五个永久性展览：广东历史文化、潮州鎏金木雕、自然资源、陶瓷和端砚。此外，它还举办了许多临时展览。",
+    "activity_qrcode": "canton_museum_resort.jpg", 
+    "joined":false,
+    "place_left":0
+  },
+    {
+    "activity_name": "沙面岛游览",
+    "activity_location": "中国广东省广州市荔湾区",
+    "activity_date": "2023-09-12",
+    "activity_thumbnail": "shamian_island.jpg",
+    "activity_deadline": "2023-09-10",
+    "activity_description": "沙面岛是一个小岛，位于中国广东省广州市珠江口附近。它是一个历史悠久的地方，曾经是一个英国租界。现在，这个岛上有许多欧式建筑和街道，成为了一个旅游胜地。",
+    "activity_qrcode": "shamian_island_qrcode.png", 
+    "joined":false,
+    "place_left":0
+  },
+  {
+    "activity_name": "孙中山纪念堂游览",
+    "activity_location": "广州市越秀区",
+    "activity_date": "2023-09-10",
+    "activity_thumbnail": "sun_yat_sen_memorial_hall.jpg",
+    "activity_deadline": "2023-09-07",
+    "activity_descritpion": "孙中山纪念堂是为纪念中国革命先驱孙中山而建的一座纪念馆。它是一座八角形的宫殿式建筑，高约50米，是现代广州市建筑中的经典之作。在大厅内有一个圆形的两层观众席，设计师使用了建筑和力学的结合理论，使空间跨度约70米，仅靠周围的墙壁支撑，显得非常宏伟。游客还可以参观一个展览厅，展示孙中山的生平事迹。",
+    "activity_qrcode": "sun_yat_sen_memorial_hall_qrcode.png", 
+    "joined":true,
+    "place_left":0
+  },
+  {
+    "activity_name": "白云山游览",
+    "activity_location": "广州市白云区",
+    "activity_date": "2023-09-07",
+    "activity_thumbnail": "white_cloud_mountain.jpg",
+    "activity_deadline": "2023-09-01",
+    "activity_descritpion": "白云山是广东省南部最著名的山脉之一，位于广州市北郊。这座山以唐代（618-907）的自然遗迹而闻名。在宋代（960-1279），白云山占据了“羊城八景”中的五个或六个。当风吹过山上时，它在附近的广阔松林中发出的声音就像沸腾的波浪。人们称这种惊人的自然现象为松浪。森林内还有几个公园、花园和别墅，也是一个放松身心的宁静之地。白云山主要由30座山峰组成，其中磨形峰最高。这座山因雨后白云缭绕峰顶而得名。登上山顶，游客可以俯瞰珠江，并全景欣赏城市美景。吸引了许多中国历史上著名的诗人来此参观，并留下了许多经典作品。",
+    "activity_qrcode": "white_cloud_mountain_qrcode.png", 
+    "joined":false,
+    "place_left":0
+  } ]
+}

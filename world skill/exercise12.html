@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+val imageView1 = findViewById&lt;ImageView&gt;(R.id.imageView1)
+val imageView2 = findViewById&lt;ImageView&gt;(R.id.imageView2)
+val imageView3 = findViewById&lt;ImageView&gt;(R.id.imageView3)
+val imageView4 = findViewById&lt;ImageView&gt;(R.id.imageView4)
+val frameLayout = findViewById&lt;FrameLayout&gt;(R.id.frameLayout)
+
+imageView1.setOnLongClickListener {
+    val dragData = ClipData.newPlainText("drag_data", "data")
+    val dragShadowBuilder = View.DragShadowBuilder(it)
+    it.startDragAndDrop(dragData, dragShadowBuilder, it, 0)
+    it.visibility = View.INVISIBLE
+    true
+}
+imageView2.setOnLongClickListener {
+    val dragData = ClipData.newPlainText("drag_data", "data")
+    val dragShadowBuilder = View.DragShadowBuilder(it)
+    it.startDragAndDrop(dragData, dragShadowBuilder, it, 0)
+    it.visibility = View.INVISIBLE
+    true
+}
+imageView3.setOnLongClickListener {
+    val dragData = ClipData.newPlainText("drag_data" , "data")
+    val dragShadowBuilder = View.DragShadowBuilder(it)
+    it.startDragAndDrop(dragData, dragShadowBuilder, it, 0)
+    it.visibility = View.INVISIBLE
+    true
+}
+imageView4.setOnLongClickListener {
+    val dragData = ClipData.newPlainText("drag_data", "data")
+    val dragShadowBuilder = View.DragShadowBuilder(it)
+    it.startDragAndDrop(dragData, dragShadowBuilder, it, 0)
+    it.visibility = View.INVISIBLE
+    true
+}
+frameLayout.setOnDragListener { view, event -&gt;
+    when(event.action){
+        DragEvent.ACTION_DRAG_STARTED -&gt; true
+        DragEvent.ACTION_DRAG_EXITED -&gt; true
+        DragEvent.ACTION_DROP -&gt; {
+            val v = event.localState as ImageView
+            val destination = view as FrameLayout
+            var myView = ImageView(this)
+            if(v.id == R.id.imageView1){
+                myView.setImageResource(R.drawable.macaron)
+            }
+            else if(v.id == R.id.imageView2){
+                myView.setImageResource(R.drawable.puff)
+            }
+            else if(v.id == R.id.imageView3){
+                myView.setImageResource(R.drawable.baguette)
+            }
+            else if(v.id == R.id.imageView4){
+                myView.setImageResource(R.drawable.bone)
+            }
+            if(destination.contains(v)){
+                destination.removeView(v)
+                myView = v
+            }
+            myView.x = event.x - 65f
+            myView.y = event.y - 65f
+            myView.layoutParams = ViewGroup.LayoutParams(pxTodp(60), pxTodp(60))
+            myView.setOnLongClickListener {
+                val dragData = ClipData.newPlainText("drag_data", "data")
+                val dragShadowBuilder = View.DragShadowBuilder(it)
+                it.startDragAndDrop(dragData, dragShadowBuilder, it, 0)
+                it.visibility = View.INVISIBLE
+                true
+            }
+            destination.addView(myView)
+        }
+
+        DragEvent.ACTION_DRAG_ENDED -&gt; {
+            val v = event.localState as ImageView
+            v.visibility = View.VISIBLE
+        }
+        else -&gt; false
+    }
+    true
+}
+
+fun pxTodp(number: Int): Int{
+    return (number*resources.displayMetrics.density).toInt()    <span>//原本輸入的是px，這個就把它轉化做dp</span>
+}
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

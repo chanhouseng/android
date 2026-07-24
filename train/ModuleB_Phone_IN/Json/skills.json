@@ -1,0 +1,34 @@
+[
+  {
+    "id": "SK001",
+    "name": "Cloud Computing"
+  },
+  {
+    "id": "SK002",
+    "name": "Cyber Security"
+  },
+  {
+    "id": "SK003",
+    "name": "IT Software Solutions for Business"
+  },
+  {
+    "id": "SK004",
+    "name": "Web Technologies"
+  },
+  {
+    "id": "SK005",
+    "name": "IT Network Systems Administration"
+  },
+  {
+    "id": "SK006",
+    "name": "Software Testing"
+  },
+  {
+    "id": "SK007",
+    "name": "Mobile Applications Development"
+  },
+  {
+    "id": "SK008",
+    "name": "Information Network Cabling"
+  }
+]

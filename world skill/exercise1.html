@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">Date, Time Picker</button>
+    <div class="panel">
+        <pre>
+val timeButton : EditText = findViewById(R.id.timeButton)
+val timePickerDialog  = TimePickerDialog(this,{ _, hour, minute -&gt;
+    val timeString = String.format("%02d:%02d", hour, minute)
+    timeButton.setText(timeString)
+}, 12, 0, false )
+timeButton.setOnFocusChangeListener{_, hasFocus -&gt;
+    if(hasFocus){
+        timePickerDialog.show()
+    }
+}
+
+val dataButton: EditText = findViewById(R.id.dataButton)
+val dataPickerDialog = DatePickerDialog(this)
+dataButton.setOnFocusChangeListener{_, hasFocus -&gt;
+    if(hasFocus){
+        dataPickerDialog.show()
+        dataPickerDialog.setOnDateSetListener { _, year, month, dayOfMonth -&gt;
+            val dataString = String.format("%d-%02d-%02d", year, month+1, dayOfMonth)
+            dataButton.setText(dataString)
+        }
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">list 定義spinner內容</button>
+    <div class="panel">
+        <pre>
+val spinner: Spinner = findViewById(R.id.spinner)
+val region = listOf("HK", "Macau", "China")
+val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, region)
+spinner.adapter = adapter
+spinner.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+    override fun onItemSelected(
+        parent: AdapterView&lt;*&gt;?,
+        view: View?,
+        position: Int,
+        id: Long
+    ) {
+        Toast.makeText(this@MainActivity, region[position], Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onNothingSelected(parent: AdapterView&lt;*&gt;?) {
+
+    }
+}
+
+val spinner1: Spinner = findViewById(R.id.spinner1)
+val spinner2 : Spinner = findViewById(R.id.spinner2)
+val spinner3 : Spinner = findViewById(R.id.spinner3)
+val list1 = listOf("Asia", "Africa", "North America", "Europe")
+val list2 = listOf(
+    listOf("China", "Macao", "Taiwan"),
+    listOf("Algeria", "Egypt", "Libya"),
+    listOf("Canada", "USA", "Mexico"),
+    listOf("US", "Germany", "Spain")
+)
+val list3 = listOf(
+    listOf(
+        listOf("a", "b"),
+        listOf("c", "d"),
+        listOf("e", "f")
+    ),
+    listOf(
+        listOf("g", "h"),
+        listOf("i", "j"),
+        listOf("k", "l")
+    ),
+    listOf(
+        listOf("n", "m"),
+        listOf("o", "p"),
+        listOf("q", "r")
+    ),
+    listOf(
+        listOf("s", "t"),
+        listOf("w", "v"),
+        listOf("y", "z")
+    )
+)
+<mark>spinner1.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list1)</mark>
+spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+    override fun onItemSelected(
+        parent: AdapterView&lt;*&gt;?,
+        view: View?,
+        position: Int,
+        id: Long
+    ) {
+        spinner2.adapter = ArrayAdapter(this@MainActivity,android.R.layout.simple_spinner_dropdown_item, list2[position])
+        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView&lt;*&gt;?,
+                view: View?,
+                position2: Int,
+                id: Long
+            ) {
+                spinner3.adapter = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, list3[position][position2])
+            }
+            override fun onNothingSelected(parent: AdapterView&lt;*&gt;?) {
+            }
+        }
+    }
+    override fun onNothingSelected(parent: AdapterView&lt;*&gt;?) {
+    }
+}
+
+        </pre>
+    </div>
+    <button class="accordion">countDownTimer, 粗體</button>
+    <div class="panel">
+        <pre>
+val color : TextView = findViewById(R.id.Color)
+color.setTextColor(Color.parseColor("#10ab1c"))
+var number = 0
+val countDownTimer = object : CountDownTimer(3000, 1000){
+    override fun onFinish() {
+        number ++
+        start()
+    }
+
+    override fun onTick(millisUntilFinished: Long) {
+        when(number % 2){
+            0 -&gt; color.setTypeface(null, Typeface.NORMAL)
+            <mark>else -&gt; color.setTypeface(null, Typeface.BOLD)</mark>
+        }
+    }
+}
+countDownTimer.start()
+
+        </pre>
+    </div>
+    <button class="accordion">自定義spinner內容</button>
+    <div class="panel">
+        <pre>
+val spinner5: Spinner = findViewById(R.id.spinner5)
+val spinnerList = listOf(
+    prodcutClass("cupcake", R.drawable.cupcake),
+    prodcutClass("croissant", R.drawable.croissant),
+    prodcutClass("cheese cake", R.drawable.cheese_cake)
+)
+<mark>spinner5.adapter = spinnerAdapter(this, spinnerList)</mark>
+spinner5.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+    override fun onItemSelected(
+        parent: AdapterView&lt;*&gt;?,
+        view: View?,
+        position: Int,
+        id: Long
+    ) {
+        Toast.makeText(this@MainActivity, parent?.findViewById&lt;TextView&gt;(R.id.textView)!!.text.toString(), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onNothingSelected(parent: AdapterView&lt;*&gt;?) {
+        TODO("Not yet implemented")
+    }
+
+}
+
+<span>//spinnerAdapter 的內容</span>
+class spinnerAdapter(context: Context, list: List&lt;prodcutClass&gt;): ArrayAdapter&lt;prodcutClass&gt;(context, 0, list) {  
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        return initView(position, convertView, parent)
+    }
+
+    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View? {
+        return initView(position, convertView, parent)
+    }
+    private fun initView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val layout = LayoutInflater.from(context).inflate(R.layout.product, null)
+        val item = getItem(position)
+        layout.findViewById&lt;TextView&gt;(R.id.textView).text = item!!.name
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView).setImageResource(item!!.img)
+        return layout
+    }
+
+}
+        </pre>
+    </div>
+    <button class="accordion">文字提取</button>
+    <div class="panel">
+        <pre>
+findViewById&lt;TextView&gt;(R.id.textView2).text = findViewById&lt;TextView&gt;(R.id.textView).text.substring(0, 3) + " " + findViewById&lt;TextView&gt;(R.id.textView7).text.take(4)
+        </pre>
+    </div>
+    <button class="accordion">scrollView上滑</button>
+    <div class="panel">
+        <pre>
+findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
+    <mark>findViewById&lt;ScrollView&gt;(R.id.main).fullScroll(View.FOCUS_UP)</mark>
+}
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

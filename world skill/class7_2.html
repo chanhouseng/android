@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+val time = LocalDateTime.now()    <span>//獲得完整日期時間 (年/月/日/時/分/秒/納秒)</span>
+findViewById<TextView>(R.id.dateTime).text = time.toString()
+
+val date = LocalTime.now()    <span>//獲得時間 (時/分/秒/納秒)</span>
+findViewById<TextView>(R.id.localDate).text = date.toString()
+
+val timestamp = System.currentTimeMillis()    <span>//取得毫秒時間戳 可以計返日期</span>
+findViewById<TextView>(R.id.timestamp).text = timestamp.toString()
+
+val time2 = time.plusMonths(3)     <span>//加三個月的時間</span>
+val formatter3 = DateTimeFormatter.ofPattern("dd MMMM yyyy, EEEE HH:mm")   <span>//自定日期的顯示格式</span>
+findViewById<TextView>(R.id.textView3).text = time2.format(formatter3)     <span>//輸出</span>
+    
+val dateString = "2024-10-06"
+val dateChange = LocalDate.parse(dateString)       <span>//字符串轉成時間 </span>
+val formatter5 = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+findViewById<TextView>(R.id.textView4).text = dateChange.format(formatter5)
+
+<span>//val date3 = "12.30.2025"
+//val time1 = LocalDate.of(date3.substring(7, 10).toInt(), date3.substring(1, 2).toInt(), date3.substring(4, 5).toInt())</span>
+
+val time4 = LocalDate.of(2021, 3, 20)
+val time5 = LocalDate.of(2021, 3, 22)     <span>//輸入日期得到日期的LocalDate的形式再進行處理</span>
+val formatter6 = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+findViewById<TextView>(R.id.textView5).text = time4.format(formatter6)
+findViewById<TextView>(R.id.textView6).text = ChronoUnit.DAYS.between(time4, time5).toString()    <span>//計算相差天數（精確到天）</span>
+
+val dateTime2 = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault())
+<span>//LocalDateTime.ofInstant( ... ) -- 把()中的時間點，轉成本地日期時間</span>
+<span>//Instant.ofEpochMilli(timestamp) -- 把「毫秒時間戳」轉成 時間瞬間（Instant）</span>
+<span>//ZoneId.systemDefault() -- 使用手機目前設定的時區</span>
+findViewById<TextView>(R.id.textView7).text = dateTime2.toString()
+    </pre>
+</div>
+
+<iframe style="margin-top: 20px;" src="Kotlin 日期時間.pdf" frameborder="0" width="100%" height="800px"></iframe>
+<script src="js.js"></script>
+</body>
+</html>

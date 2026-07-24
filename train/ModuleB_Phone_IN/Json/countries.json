@@ -1,0 +1,42 @@
+[
+  {
+    "id": "CTR001",
+    "name": "India",
+    "code": "IN"
+  },
+  {
+    "id": "CTR002",
+    "name": "Japan",
+    "code": "JP"
+  },
+  {
+    "id": "CTR003",
+    "name": "South Korea",
+    "code": "KR"
+  },
+  {
+    "id": "CTR004",
+    "name": "Brazil",
+    "code": "BR"
+  },
+  {
+    "id": "CTR005",
+    "name": "Macau",
+    "code": "MO"
+  },
+  {
+    "id": "CTR006",
+    "name": "Hong Kong",
+    "code": "HK"
+  },
+  {
+    "id": "CTR007",
+    "name": "Singapore",
+    "code": "SG"
+  },
+  {
+    "id": "CTR008",
+    "name": "Taiwan",
+    "code": "TW"
+  }
+]

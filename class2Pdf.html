@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+        val checkRadioButtonId = radioGroup.checkedRadioButtonId
+
+            if(checkRadioButtonId != -1){
+                val radioButtonChecked: RadioButton = findViewById(checkRadioButtonId)
+                Toast.makeText(this, radioButtonChecked.text, Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(this, "you have not choose any chose", Toast.LENGTH_SHORT).show()
+            }
+    </pre>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+<h3>屏幕橫向直向</h3>
+<mark>AndroidManifest.xml</mark>
+&lt;activity
+android:name=".MainActivity"
+<mark>android:screenOrientation="portrait"</mark> <span>//現為橫，landscape為直</span>
+
+<h3>攞數據</h3>
+<mark>AndroidManifest.xml</mark>
+&lt;uses-permission android:name="android.permission.INTERNET"/&gt;
+android:usesCleartextTraffic="true"
+
+val req = Request.Builder().url("http://172.18.15.142:8000/data.php").build()
+OkHttpClient().newCall(req).enqueue(object : Callback{
+    override fun onFailure(call: Call, e: IOException) {
+        runOnUiThread {
+            Toast.makeText(this@MainActivity, "please check your network", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onResponse(call: Call, response: Response) {
+        val resultString = response.body?.string()
+        val results = Gson().fromJson(resultString, getClass::class.java)
+        runOnUiThread {
+            for(result in results.data){
+                val layout = layoutInflater.inflate(R.layout.product, null)
+                layout.findViewById&lt;TextView&gt;(R.id.data).text = result.date
+                layout.findViewById&lt;TextView&gt;(R.id.job).text = result.jobactivity
+                for(isCheck in result.records){
+                    val imageView = ImageView(this@MainActivity)
+                    if(isCheck == 1){
+                        imageView.setImageResource(R.drawable.outline_check_24)
+                    }
+                    else if(isCheck == 0){
+                        imageView.setImageResource(R.drawable.outline_award_star_24)
+                    }
+                    else{
+                        Toast.makeText(this@MainActivity, "wrong", Toast.LENGTH_SHORT).show()
+                    }
+                    layout.findViewById&lt;LinearLayout&gt;(R.id.linearLayout).addView(imageView)
+                }
+                linearLayout.addView(layout)
+            }
+        }
+    }
+
+})
+
+<h3>當class name有空格時</h3>
+class data(var date:String,
+           <mark>@SerializedName("job activity") var jobactivity:String,</mark>
+            var records: List<Int>
+    )
+
+    </pre>
+</div>
+<script src="js.js"></script>
+</body>
+</html>

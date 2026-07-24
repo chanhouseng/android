@@ -1,0 +1,37 @@
+[
+  {
+    "question": "What is the best time to visit Lyon?",
+    "answer": "The best time to visit Lyon is during the spring (April to June) or autumn (September to November) when the weather is mild and pleasant.",
+    "avatar": "avatars/oliver.png",
+    "username": "Oliver",
+    "likes": 988
+  },
+  {
+    "question": "How do I get from Lyon-Saint Exupéry Airport to the city center?",
+    "answer": "You can take the Rhônexpress tram, which offers a direct connection from the airport to the city center in around 30 minutes.",
+    "avatar": "avatars/emily.png",
+    "username": "Emily",
+    "likes": 1189
+  },
+  {
+    "question": "Where can I find information about events and festivals in Lyon?",
+    "answer": "You can check the official Lyon tourism website or visit one of the tourist information centers located in the city center for the latest information on events, festivals, and other activities happening in Lyon.",
+    "avatar": "avatars/echo.png",
+    "username": "Echo",
+    "likes": 578
+  },
+  {
+    "question": "Can I use public transportation in Lyon with a credit card?",
+    "answer": "Yes, you can purchase single tickets or day passes using a credit card at the ticket machines available at most tram and metro stations.",
+    "avatar": "avatars/benjamin.png",
+    "username": "Benjamin",
+    "likes": 365
+  },
+  {
+    "question": "Where can I find the best Lyonaise cuisine?",
+    "answer": "For an authentic Lyonnaise dining experience, head to the Croix-Rousse district or Vieux Lyon, where you’ll find plenty of traditional bistros and brasseries.",
+    "avatar": "avatars/lucas.png",
+    "username": "Lucas",
+    "likes": 1075
+  }
+]

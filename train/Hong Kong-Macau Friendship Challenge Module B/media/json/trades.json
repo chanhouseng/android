@@ -1,0 +1,16 @@
+{
+  "metadata": {
+    "name": "WorldSkills trade seed list",
+    "note": "Trades available for the Seat Lottery friendly test project."
+  },
+  "trades": [
+    {
+      "id": "MAD",
+      "name": "Mobile Applications Development"
+    },
+    {
+      "id": "ST",
+      "name": "Software Testing"
+    }
+  ]
+}

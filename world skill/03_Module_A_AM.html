@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">Data.kt</button>
+    <div class="panel">
+        <pre>
+class Data {
+    companion object{
+        var baguette = 0
+        var macaron = 0
+        var puff = 0
+        var fishbone = 0
+        var bone = 0
+
+        var time = 30
+        var score = 1000
+        var health = 3
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">GameOverActivity.kt</button>
+    <div class="panel">
+        <pre>
+class GameOverActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_game_over)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        
+        <span>//這裡開始</span>
+        findViewById&lt;TextView&gt;(R.id.baguetteCountTextView).text = "x${Data.baguette}"
+        findViewById&lt;TextView&gt;(R.id.baguetteScoreTextView).text = (Data.baguette* 10).toString()
+        findViewById&lt;TextView&gt;(R.id.macaronCountTextView).text = "x${Data.macaron}"
+        findViewById&lt;TextView&gt;(R.id.macaronScoreTextView).text = (Data.macaron* 20).toString()
+        findViewById&lt;TextView&gt;(R.id.puffCountTextView).text = "x${Data.puff}"
+        findViewById&lt;TextView&gt;(R.id.puffScoreTextView).text = (Data.puff* 30).toString()
+        findViewById&lt;TextView&gt;(R.id.fishboneCountTextView).text = "x${Data.fishbone}"
+        findViewById&lt;TextView&gt;(R.id.fishboneScoreTextView).text = "-${Data.fishbone * 10}"
+        findViewById&lt;TextView&gt;(R.id.boneCountTextView).text = "x${Data.bone}"
+        findViewById&lt;TextView&gt;(R.id.boneScoreTextView).text = "-${Data.bone * 25}"
+        findViewById&lt;TextView&gt;(R.id.scoreTextView).text = Data.score.toString()
+
+    }
+}
+
+        </pre>
+    </div>
+    <button class="accordion">MainActivity.kt</button>
+    <div class="panel">
+        <pre>
+class MainActivity : AppCompatActivity(), SensorEventListener {    <span>//接收手機感測器的資料</span>
+
+    private lateinit var sensorManager: SensorManager         <span>//管理所有感測器</span>
+    private lateinit var accelerometer: Sensor                <span>//加速度感測器。</span>
+
+    private lateinit var mainFrameLayout: FrameLayout
+    private lateinit var pauseLinearLayout: LinearLayout
+
+    private lateinit var gameFrameLayout: FrameLayout
+    private lateinit var playerImageView: ImageView
+    private lateinit var pauseImageView: ImageView
+
+    private lateinit var timeTextView: TextView
+
+    private lateinit var playImageView: ImageView
+    private lateinit var moveCountDownTimer: CountDownTimer
+
+    private lateinit var foodCountDownTimer: CountDownTimer
+
+    private lateinit var scoreTextView: TextView
+    private lateinit var heartTextView: TextView
+    private var currentDirection: Direction = Direction.STAY    <span>//記錄目前要移動的方向</span>
+
+    private var screenWidth = 800
+    private var isGamePausing = false
+ 
+    private val fallingFoodAnimatorList = mutableListOf&lt;ValueAnimator&gt;()   <span>//儲存所有正在掉落的食物的valueAnimator</span>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
+        <span>//這裡開始</span>
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager              <span>//取得系統感測器服務與加速度計</span>
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)!!
+
+        mainFrameLayout = findViewById(R.id.mainFrameLayout)
+        pauseLinearLayout = findViewById(R.id.pauseLinearLayout)
+        timeTextView = findViewById(R.id.timeTextView)
+        playImageView = findViewById(R.id.playImageView)
+        gameFrameLayout = findViewById(R.id.gameFrameLayout)
+        playerImageView = findViewById(R.id.playerImageView)
+        pauseImageView = findViewById(R.id.pauseImageView)
+        scoreTextView = findViewById(R.id.scoreTextView)
+        heartTextView = findViewById(R.id.heartTextView)
+
+        screenWidth = Resources.getSystem().displayMetrics.widthPixels     <span>//動態取得螢幕寬度</span>
+
+        foodCountDownTimer = object : CountDownTimer(60000, 1000) {
+            override fun onFinish() {
+                start()
+            }
+
+            override fun onTick(p0: Long) {
+                dropFood()
+            }
+        }
+        foodCountDownTimer.start()
+
+
+        moveCountDownTimer = object : CountDownTimer(10000, 30) {
+            override fun onFinish() {
+                start()
+            }
+
+            override fun onTick(p0: Long) {
+                if(currentDirection == Direction.LEFT) {
+                    
+                    val originalLeft = playerImageView.left    <span>// 獲得.xml一開始的左邊界位置</span>
+
+                    
+                    val actualScreenPosition = originalLeft + playerImageView.translationX     <span>//因為之後會有translationX 改變，所以這個是獲得實時的位置</span>
+
+                    if(actualScreenPosition &gt; 0f) {
+                        playerImageView.translationX = playerImageView.translationX - 10       <span>//左移</span>
+                    } else {
+                        cancel()      <span>不要再有這個判斷</span>
+                    }
+                } else if(currentDirection == Direction.RIGHT) {
+                    
+                    val originalRight = playerImageView.right
+
+                    
+                    val actualScreenPosition = originalRight + playerImageView.translationX
+
+                    if(actualScreenPosition &lt; screenWidth) {
+                        playerImageView.translationX = playerImageView.translationX + 10
+                    } else {
+                        cancel()
+                    }
+                }
+            }
+        }
+
+
+        playerImageView.setOnClickListener {
+        }
+
+        pauseImageView.setOnClickListener {
+            isGamePausing = true
+            gamePause()
+        }
+
+        playImageView.setOnClickListener {
+            isGamePausing = false
+            gameStart()
+        }
+    }
+
+    private fun moveLeft() {
+        if(!isGamePausing) {
+            currentDirection = Direction.LEFT
+            playerImageView.scaleX = 1f
+            moveCountDownTimer.cancel()
+            moveCountDownTimer.start()
+        }
+    }
+
+    private fun moveRight() {
+        if(!isGamePausing) {
+            currentDirection = Direction.RIGHT 
+            playerImageView.scaleX = -1f       <span>//-1f: 水平鏡像翻轉（角色面向右邊）</span>
+            moveCountDownTimer.cancel()
+            moveCountDownTimer.start()
+        }
+    }
+
+    private fun dropFood() {
+        val foodNameArray = arrayOf("puff", "macaron", "baguette", "fishbone", "bone")
+
+        val foodImageView = ImageView(this)
+        foodImageView.tag = foodNameArray.random()     <span>//自訂資料，之後會用來判斷</span>
+
+        val drawable = when(foodImageView.tag) {
+            "puff" -&gt; R.drawable.puff
+            "macaron" -&gt; R.drawable.macaron
+            "baguette" -&gt; R.drawable.baguette
+            "fishbone" -&gt; R.drawable.fishbone
+            else -&gt; R.drawable.bone
+        }
+        foodImageView.setImageResource(drawable)
+
+        gameFrameLayout.addView(foodImageView)
+
+        val params = foodImageView.layoutParams
+        params.width = 120
+        params.height = 120
+
+        foodImageView.translationX = (0..1000).random().toFloat()
+        val animator = ValueAnimator.ofFloat(0f, 1500f) 
+        animator.interpolator = LinearInterpolator()      <span>//讓動畫速度均勻</span>
+        animator.duration = 4000
+
+        animator.addUpdateListener {
+            foodImageView.translationY = it.animatedValue as Float
+            if(isCatching(foodImageView)) {
+                catchFoodHandle(foodImageView)
+                gameFrameLayout.removeView(foodImageView)
+                fallingFoodAnimatorList.remove(animator)
+                animator.cancel()
+            }
+        }
+
+        animator.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                gameFrameLayout.removeView(foodImageView)
+                fallingFoodAnimatorList.remove(animator)
+            }
+        })
+
+        fallingFoodAnimatorList.add(animator)
+
+        animator.start()
+    }
+
+    private fun gamePause() {
+        moveCountDownTimer.cancel()
+        foodCountDownTimer.cancel()
+
+        pauseLinearLayout.visibility = View.VISIBLE
+        pauseLinearLayout.bringToFront()
+        mainFrameLayout.setBackgroundColor(Color.parseColor("#CC000000"))
+        timeTextView.setTextColor(Color.WHITE)
+
+        for(foodAnimator in fallingFoodAnimatorList) { 
+            foodAnimator.pause()          <span>//暫停Animator</span>
+        }
+    }
+
+    private fun gameStart() {
+        moveCountDownTimer.start()
+        foodCountDownTimer.start()
+
+        pauseLinearLayout.visibility = View.GONE
+        mainFrameLayout.setBackgroundColor(Color.WHITE)
+        timeTextView.setTextColor(Color.BLACK)
+
+        for (foodAnimator in fallingFoodAnimatorList) {
+            foodAnimator.resume()          <span>//暫停的那一刻繼續往下執行Animator</span>
+        }
+    }
+
+    fun getViewRect(view: View): Rect {
+        val location = IntArray(2)          <span>//建立一個長度為 2 的整數陣列，用來存放 View 的螢幕座標</span>
+        view.getLocationOnScreen(location)  <span>//把 View 在整個螢幕上的左上角座標，存放到 location 陣列中。</span>
+        return Rect(
+            location[0],
+            location[1],
+            location[0] + view.width,
+            location[1] + view.height    <span>//建立一個矩形（Rect）物件。左上角同右下角</span>
+        )
+    }
+
+    fun isCatching(food: View): Boolean {
+        val personRect = getViewRect(playerImageView)
+        val foodRect = getViewRect(food)
+        return Rect.intersects(personRect, foodRect)    <span>//檢查兩個矩形是否有重疊</span>
+    }
+
+    fun catchFoodHandle(foodImageView: ImageView) {
+        when(foodImageView.tag) {    <span>//檢測碰到甚麼食物</span>
+            "puff" -&gt; {
+                Data.puff++
+                Data.score += 30
+                Data.time += 30
+            }
+            "baguette" -&gt; {
+                Data.baguette++
+                Data.score += 10
+            }
+            "macaron" -&gt; {
+                Data.macaron++
+                Data.score += 20
+            }
+            "fishbone" -&gt; {
+                Data.fishbone++
+                Data.score -= 20
+                Data.health -= 1
+            }
+            else -&gt; {
+                Data.bone++
+                Data.score -= 10
+            }
+        }
+        updateUI()      <span>//更新生命和分數</span>
+        checkGameOver() <span>//判斷生命是否少於0</span>
+    } 
+
+    private fun updateUI() {
+        scoreTextView.text = Data.score.toString()
+        heartTextView.text = "x${Data.health}"
+    }
+
+    private fun checkGameOver() {
+        if(Data.health &lt;= 0) {
+            val intent = Intent(this, GameOverActivity::class.java)
+            startActivity(intent)
+            gamePause()
+
+        }
+    }
+
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {    <span>//處理感測器精準度變化</span>
+
+    }
+ 
+    override fun onSensorChanged(event: SensorEvent) {      <span>//感測器數值改變時</span>
+        if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {   <span>//確認這次變化是來自加速度感測器</span>
+            val x = event.values[0]     <span>//// 左右傾斜（-10 到 10）</span>
+
+            // 判斷方向（根據 X 軸數值）
+             when {
+                x &lt; -3 -&gt; moveRight()
+                x &gt; 3 -&gt; moveLeft()
+                else -&gt; moveCountDownTimer.cancel()
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI)  <span>//開啟感測器監聽</span>
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(this)  <span>//關閉感測器監聽。</span>
+    }
+}
+
+enum class Direction {
+    LEFT, STAY, RIGHT;    <span>//建立一種有不同狀態的類型(類似變數，可用作判斷)</span>
+}
+
+
+        </pre>
+    </div>
+    <button class="accordion">activity_game_over.xml</button>
+    <div class="panel">
+        <pre>
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GameOverActivity"&gt;
+
+    &lt;TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="18dp"
+        android:text="Game Over"
+        android:textAlignment="center"
+        android:textSize="42sp"
+        android:textStyle="bold" /&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"&gt;
+
+        &lt;ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/baguette_box" /&gt;
+
+        &lt;TextView
+            android:id="@+id/baguetteCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+
+            android:text="x0"
+            android:textSize="28sp" /&gt;
+
+        &lt;TextView
+            android:id="@+id/baguetteScoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="+0"
+            android:textSize="28sp" /&gt;
+    &lt;/LinearLayout&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"&gt;
+
+        &lt;ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/macaron_box" /&gt;
+
+        &lt;TextView
+            android:id="@+id/macaronCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+
+            android:text="x0"
+            android:textSize="28sp" /&gt;
+
+        &lt;TextView
+            android:id="@+id/macaronScoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="+0"
+            android:textSize="28sp" /&gt;
+    &lt;/LinearLayout&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"&gt;
+
+        &lt;ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/puff_box" /&gt;
+
+        &lt;TextView
+            android:id="@+id/puffCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+
+            android:text="x0"
+            android:textSize="28sp" /&gt;
+
+        &lt;TextView
+            android:id="@+id/puffScoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="+0"
+            android:textSize="28sp" /&gt;
+    &lt;/LinearLayout&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"&gt;
+
+        &lt;ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/fishbone_box" /&gt;
+
+        &lt;TextView
+            android:id="@+id/fishboneCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:text="x0"
+            android:textSize="28sp" /&gt;
+
+        &lt;TextView
+            android:id="@+id/fishboneScoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="+0"
+            android:textSize="28sp" /&gt;
+    &lt;/LinearLayout&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"&gt;
+
+        &lt;ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/bone_box" /&gt;
+
+        &lt;TextView
+            android:id="@+id/boneCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+
+            android:text="x0"
+            android:textSize="28sp" /&gt;
+
+        &lt;TextView
+            android:id="@+id/boneScoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="+0"
+            android:textSize="28sp" /&gt;
+    &lt;/LinearLayout&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"&gt;
+
+        &lt;TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SCORE"
+            android:textSize="28sp" /&gt;
+
+        &lt;TextView
+            android:id="@+id/scoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0"
+            android:textAlignment="textEnd"
+            android:textSize="28sp" /&gt;
+    &lt;/LinearLayout&gt;
+
+
+&lt;/LinearLayout&gt;
+
+        </pre>
+    </div>
+    <button class="accordion">activity_main.xml</button>
+    <div class="panel">
+        <pre>
+&lt;FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainFrameLayout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"&gt;
+
+    &lt;LinearLayout
+        android:id="@+id/pauseLinearLayout"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"&gt;
+
+        &lt;TextView
+            android:text="Game Pause"
+            android:textSize="42sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/&gt;
+
+        &lt;ImageView
+            android:id="@+id/playImageView"
+            android:src="@drawable/play"
+            android:layout_marginTop="20dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp" /&gt;
+
+        &lt;ImageView
+            android:id="@+id/restartImageView"
+            android:src="@drawable/restart"
+            android:layout_marginTop="20dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp" /&gt;
+
+        &lt;ImageView
+            android:id="@+id/outImageView"
+            android:src="@drawable/out"
+            android:layout_marginTop="20dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp" /&gt;
+    &lt;/LinearLayout&gt;
+
+    &lt;LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity"&gt;
+
+        &lt;ImageView
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bottom_bg" /&gt;
+
+        &lt;LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="4dp"
+            android:orientation="horizontal"&gt;
+
+            &lt;LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="45dp"
+                android:background="@drawable/title_bg"
+                android:gravity="center_vertical"&gt;
+
+                &lt;ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:src="@drawable/board" /&gt;
+
+                &lt;TextView
+                    android:id="@+id/scoreTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="1000"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" /&gt;
+
+            &lt;/LinearLayout&gt;
+
+            &lt;View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" /&gt;
+
+            &lt;ImageView
+                android:id="@+id/pauseImageView"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/stop" /&gt;
+
+        &lt;/LinearLayout&gt;
+
+        &lt;LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="4dp"
+            android:orientation="horizontal"&gt;
+
+            &lt;LinearLayout
+                android:layout_width="140dp"
+                android:layout_height="45dp"
+                android:background="@drawable/title_bg"
+                android:gravity="center_vertical"&gt;
+
+                &lt;ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:src="@drawable/icon_like" /&gt;
+
+                &lt;TextView
+                    android:id="@+id/heartTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:text="x3"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" /&gt;
+            &lt;/LinearLayout&gt;
+
+        &lt;/LinearLayout&gt;
+
+        &lt;TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="Time : 00:30"
+            android:textSize="18sp"
+            android:textStyle="bold" /&gt;
+
+        &lt;FrameLayout
+            android:id="@+id/gameFrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"&gt;
+
+            &lt;ImageView
+                android:id="@+id/playerImageView"
+                android:layout_width="85dp"
+                android:layout_height="110dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:src="@drawable/player"
+                android:translationY="5dp" /&gt;
+
+        &lt;/FrameLayout&gt;
+
+        &lt;ImageView
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bottom_bg" /&gt;
+
+        &lt;ImageView
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bottom_bg" /&gt;
+
+    &lt;/LinearLayout&gt;
+
+
+&lt;/FrameLayout&gt;
+
+
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

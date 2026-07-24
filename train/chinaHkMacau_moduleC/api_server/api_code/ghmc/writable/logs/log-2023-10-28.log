@@ -1,0 +1,329 @@
+ERROR - 2023-10-28 09:09:35 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', '', Object(SensitiveParameterValue), '', 3306, '', 0)
+#1 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Applications/MAMP/htdocs/ghmc/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Applications/MAMP/htdocs/ghmc/system/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#5 /Applications/MAMP/htdocs/ghmc/system/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#6 /Applications/MAMP/htdocs/ghmc/app/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+#7 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(942): App\Controllers\EventController->index()
+#8 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+#9 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Applications/MAMP/htdocs/ghmc/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Applications/MAMP/htdocs/ghmc/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Applications/MAMP/htdocs/ghmc/system/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#4 /Applications/MAMP/htdocs/ghmc/system/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#5 /Applications/MAMP/htdocs/ghmc/app/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+#6 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(942): App\Controllers\EventController->index()
+#7 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+#8 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Applications/MAMP/htdocs/ghmc/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-10-28 09:09:35 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `events`', [], false)
+ 3 SYSTEMPATH/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\EventController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+ 8 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-10-28 09:09:38 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', '', Object(SensitiveParameterValue), '', 3306, '', 0)
+#1 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Applications/MAMP/htdocs/ghmc/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Applications/MAMP/htdocs/ghmc/system/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#5 /Applications/MAMP/htdocs/ghmc/system/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#6 /Applications/MAMP/htdocs/ghmc/app/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+#7 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(942): App\Controllers\EventController->index()
+#8 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+#9 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Applications/MAMP/htdocs/ghmc/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Applications/MAMP/htdocs/ghmc/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Applications/MAMP/htdocs/ghmc/system/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#4 /Applications/MAMP/htdocs/ghmc/system/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#5 /Applications/MAMP/htdocs/ghmc/app/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+#6 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(942): App\Controllers\EventController->index()
+#7 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+#8 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Applications/MAMP/htdocs/ghmc/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-10-28 09:09:38 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `events`', [], false)
+ 3 SYSTEMPATH/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\EventController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+ 8 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-10-28 09:12:06 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', '', Object(SensitiveParameterValue), '', 3306, '', 0)
+#1 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Applications/MAMP/htdocs/ghmc/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Applications/MAMP/htdocs/ghmc/system/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#5 /Applications/MAMP/htdocs/ghmc/system/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#6 /Applications/MAMP/htdocs/ghmc/app/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+#7 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(942): App\Controllers\EventController->index()
+#8 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+#9 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Applications/MAMP/htdocs/ghmc/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Applications/MAMP/htdocs/ghmc/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Applications/MAMP/htdocs/ghmc/system/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#4 /Applications/MAMP/htdocs/ghmc/system/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#5 /Applications/MAMP/htdocs/ghmc/app/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+#6 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(942): App\Controllers\EventController->index()
+#7 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+#8 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Applications/MAMP/htdocs/ghmc/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-10-28 09:12:06 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `events`', [], false)
+ 3 SYSTEMPATH/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\EventController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+ 8 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-10-28 09:12:07 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', '', Object(SensitiveParameterValue), '', 3306, '', 0)
+#1 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Applications/MAMP/htdocs/ghmc/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Applications/MAMP/htdocs/ghmc/system/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#5 /Applications/MAMP/htdocs/ghmc/system/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#6 /Applications/MAMP/htdocs/ghmc/app/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+#7 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(942): App\Controllers\EventController->index()
+#8 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+#9 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Applications/MAMP/htdocs/ghmc/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Applications/MAMP/htdocs/ghmc/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Applications/MAMP/htdocs/ghmc/system/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#4 /Applications/MAMP/htdocs/ghmc/system/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#5 /Applications/MAMP/htdocs/ghmc/app/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+#6 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(942): App\Controllers\EventController->index()
+#7 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+#8 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Applications/MAMP/htdocs/ghmc/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-10-28 09:12:07 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `events`', [], false)
+ 3 SYSTEMPATH/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\EventController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+ 8 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-10-28 09:12:08 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', '', Object(SensitiveParameterValue), '', 3306, '', 0)
+#1 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Applications/MAMP/htdocs/ghmc/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Applications/MAMP/htdocs/ghmc/system/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#5 /Applications/MAMP/htdocs/ghmc/system/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#6 /Applications/MAMP/htdocs/ghmc/app/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+#7 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(942): App\Controllers\EventController->index()
+#8 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+#9 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Applications/MAMP/htdocs/ghmc/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Applications/MAMP/htdocs/ghmc/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Applications/MAMP/htdocs/ghmc/system/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#4 /Applications/MAMP/htdocs/ghmc/system/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#5 /Applications/MAMP/htdocs/ghmc/app/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+#6 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(942): App\Controllers\EventController->index()
+#7 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+#8 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Applications/MAMP/htdocs/ghmc/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-10-28 09:12:08 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `events`', [], false)
+ 3 SYSTEMPATH/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\EventController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+ 8 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-10-28 09:12:14 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', '', Object(SensitiveParameterValue), '', 3306, '', 0)
+#1 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Applications/MAMP/htdocs/ghmc/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Applications/MAMP/htdocs/ghmc/system/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#5 /Applications/MAMP/htdocs/ghmc/system/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#6 /Applications/MAMP/htdocs/ghmc/app/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+#7 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(942): App\Controllers\EventController->index()
+#8 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+#9 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Applications/MAMP/htdocs/ghmc/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Applications/MAMP/htdocs/ghmc/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Applications/MAMP/htdocs/ghmc/system/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#4 /Applications/MAMP/htdocs/ghmc/system/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#5 /Applications/MAMP/htdocs/ghmc/app/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+#6 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(942): App\Controllers\EventController->index()
+#7 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+#8 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Applications/MAMP/htdocs/ghmc/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-10-28 09:12:14 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `events`', [], false)
+ 3 SYSTEMPATH/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\EventController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+ 8 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-10-28 09:12:15 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php:184
+Stack trace:
+#0 /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php(184): mysqli->real_connect('localhost', '', Object(SensitiveParameterValue), '', 3306, '', 0)
+#1 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#3 /Applications/MAMP/htdocs/ghmc/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Applications/MAMP/htdocs/ghmc/system/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#5 /Applications/MAMP/htdocs/ghmc/system/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#6 /Applications/MAMP/htdocs/ghmc/app/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+#7 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(942): App\Controllers\EventController->index()
+#8 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+#9 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Applications/MAMP/htdocs/ghmc/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in /Applications/MAMP/htdocs/ghmc/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(392): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /Applications/MAMP/htdocs/ghmc/system/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+#2 /Applications/MAMP/htdocs/ghmc/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /Applications/MAMP/htdocs/ghmc/system/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+#4 /Applications/MAMP/htdocs/ghmc/system/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+#5 /Applications/MAMP/htdocs/ghmc/app/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+#6 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(942): App\Controllers\EventController->index()
+#7 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+#8 /Applications/MAMP/htdocs/ghmc/system/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /Applications/MAMP/htdocs/ghmc/public/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-10-28 09:12:15 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 428.
+ 1 SYSTEMPATH/Database/BaseConnection.php(575): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `events`', [], false)
+ 3 SYSTEMPATH/Model.php(237): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(624): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH/Controllers/EventController.php(20): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\EventController->index()
+ 7 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+ 8 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-28 09:12:40 --> App\Controllers\EventController::index(): Return value must be of type string, CodeIgniter\HTTP\Response returned
+in APPPATH/Controllers/EventController.php on line 21.
+ 1 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\EventController->index()
+ 2 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+ 3 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-28 09:12:41 --> App\Controllers\EventController::index(): Return value must be of type string, CodeIgniter\HTTP\Response returned
+in APPPATH/Controllers/EventController.php on line 21.
+ 1 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\EventController->index()
+ 2 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+ 3 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-28 09:12:47 --> App\Controllers\EventController::index(): Return value must be of type string, CodeIgniter\HTTP\Response returned
+in APPPATH/Controllers/EventController.php on line 21.
+ 1 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\EventController->index()
+ 2 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+ 3 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-28 09:15:32 --> App\Controllers\EventController::index(): Return value must be of type string, CodeIgniter\HTTP\Response returned
+in APPPATH/Controllers/EventController.php on line 22.
+ 1 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\EventController->index()
+ 2 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+ 3 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-28 09:15:33 --> App\Controllers\EventController::index(): Return value must be of type string, CodeIgniter\HTTP\Response returned
+in APPPATH/Controllers/EventController.php on line 22.
+ 1 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\EventController->index()
+ 2 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+ 3 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-28 09:15:34 --> App\Controllers\EventController::index(): Return value must be of type string, CodeIgniter\HTTP\Response returned
+in APPPATH/Controllers/EventController.php on line 22.
+ 1 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\EventController->index()
+ 2 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+ 3 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-28 09:15:40 --> App\Controllers\EventController::index(): Return value must be of type string, CodeIgniter\HTTP\Response returned
+in APPPATH/Controllers/EventController.php on line 22.
+ 1 SYSTEMPATH/CodeIgniter.php(942): App\Controllers\EventController->index()
+ 2 SYSTEMPATH/CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EventController))
+ 3 SYSTEMPATH/CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()

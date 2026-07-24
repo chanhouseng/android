@@ -1,0 +1,46 @@
+{
+    "hotel_id": 1008,
+    "hotel_name": "Appartement Méribel",
+    "guest_reviews" : {
+        "ratings_categories" : [
+            {"Staff":7.7},{"Facilities":9.5},{"Value for money":7.5}
+        ],
+        "reviews_objects" : [
+            {"username":"Simon","country":"United Kingdom","review_text":"Good size apartment, well equiped kitchen, except oven.\nConvenient for ski in/out (onto red run) and down to main Mottaret center.\nNice bathroom and large terrace on our room."},
+            {"username":"Tomáš","country":"Slovakia","review_text":"Direct access to slopes from the apartment doors was excellent. There is well equipped kitchenette including the Nespresso machine. All necessary services (e.g. local shop) was nearby, within 5 minutes reach. And, in addition, a great view from the balcony. There is a pleasant staff to help in any situation - just call them."},
+            {"username":"Kerem","country":"Turkey","review_text":"Great location, renovated rooms and friendly staff.But Internet is very slow. So slow that you hardly can browse the internet. A well maintained facility shouldnt have slow internet access in 2024!"},
+            {"username":"Miles","country":"Singapore","review_text":"Location very good for ski-in-out. Access to Meribel shops, etc dependent on a funicular which does have a history of outages. Room very good, clean."}
+        ]
+    },
+    "rooms" : [
+        {
+            "room_id":1008000,
+            "room_type": "Single room with river view",
+            "room_bed_type" : "1 large bed" ,
+            "room_total_number_of_guests" : 1,
+            "room_features" : ["Heating","Dining table","15 m²","Refrigerator","Internet Flat-screen TV","Microwave"],
+            "room_price_for_one_night" : 90
+        },{
+            "room_id":1008001,
+            "room_type": "Double Room",
+            "room_bed_type" : "1 large double bed" ,
+            "room_total_number_of_guests" : 2,
+            "room_features" : ["Soundproofing","Extra long beds","16 m²","Refrigerator","Electric kettle"],
+            "room_price_for_one_night" : 144
+        },{
+            "room_id":1008002,
+            "room_type": "Deluxe Double or Twin Room",
+            "room_bed_type" : "2 single beds" ,
+            "room_total_number_of_guests" : 2,
+            "room_features" : ["20 m²","Soundproofing","Flat-screen TV","Free WiFi","Private bathroom"],
+            "room_price_for_one_night" : 160
+        },{
+            "room_id":1008002,
+            "room_type": "Great family Room",
+            "room_bed_type" : "1 large double bed and 1 single bed" ,
+            "room_total_number_of_guests" : 3,
+            "room_features" : ["45 m²","Soundproofing", "2 bathroom","Flat-screen TV","Free WiFi","Private bathroom","Quiet room"],
+            "room_price_for_one_night" : 217
+        }
+    ]
+}

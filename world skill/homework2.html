@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">Test</button>
+    <div class="panel">
+        <pre>
+class ApplicationUITesting {
+    private lateinit var device: UiDevice
+    private val PACKAGE_NAME = "com.example.homework2"
+
+    @Before
+    fun setUp(){
+        device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        device.pressHome()
+    }
+
+    @Test
+    fun startTesting(){
+        Log.d("Step No: 1","Step No: 1,Application startup")
+        val context = ApplicationProvider.getApplicationContext&lt;Context&gt;()
+        val intent = context.packageManager.getLaunchIntentForPackage(PACKAGE_NAME)
+        context.startActivity(intent)
+        Thread.sleep(3000)
+
+        Log.d("Step No: 2","Step No: 2,Scroll to the bottom of the hotel list")
+        val scrollView = UiScrollable(UiSelector().scrollable(true))
+        scrollView.setAsVerticalList()
+        scrollView.scrollToEnd(1)
+        Thread.sleep( 3000)
+
+        Log.d("Step No: 3","Step No: 3,Perform a search after entering the search term in the search bar")
+        val searchEditText = device.findObject(By.res(PACKAGE_NAME, "editTextText"))
+        searchEditText.text = "Méribel"
+        Thread.sleep(3000)
+
+        Log.d("Step No: 4","Step No: 4,Click the listing item \"Appartement Méribel\"")
+        val button: UiObject = device.findObject(UiSelector().text("Book it"))
+        button.click()
+        Thread.sleep(3000)
+
+        Log.d("Step No: 5","Step No: 5,Click the Guest reviews tab button")
+        val tab: UiObject = device.findObject(UiSelector().text("Guest reviews"))
+        tab.click()
+        Thread.sleep(3000)
+
+        Log.d("Step No: 6", "Step No: 6,Scroll down the Reviews list to the 4th Review (published by \"Miles\") ")
+        val scrollView2 = UiScrollable(UiSelector().scrollable(true))
+        scrollView2.setAsHorizontalList()
+        scrollView2.scrollToEnd(5)
+        Thread.sleep(3000)
+
+        Log.d("Step No: 7", "Step No: 7,Click the Room selection label button")
+        val button2: UiObject = device.findObject(UiSelector().text("Room selection"))
+        button2.click()
+        Thread.sleep(3000)
+
+        Log.d("Step No: 8", "Step No: 8,Scroll down the room list to the \"Great Family Room\" item")
+        val scrollView3 = UiScrollable(UiSelector().scrollable(true))
+        scrollView3.scrollToEnd(5)
+        Thread.sleep(3000)
+
+        Log.d("Step No: 9", "Step No: 9,Click the \"Great Family Room\" item")
+        val layout = device.findObject(UiSelector().text("Great family Room"))
+        layout.click()
+        Thread.sleep(3000)
+
+        Log.d("Step No: 10", "Step No: 10,Enter First Name")
+        val firstName = device.findObject(By.res(PACKAGE_NAME, "firstName"))
+        firstName.text = "Taylor"
+        Thread.sleep(3000)
+
+        Log.d("Step No: 11", "Step No: 11,Enter Last Name")
+        val lastName = device.findObject(By.res(PACKAGE_NAME, "lastname"))
+        lastName.text = "Hutchinson"
+        Thread.sleep(3000)
+
+
+        Log.d("Step No: 12", "Step No: 12,Enter check-in date")
+        val checkIn = device.findObject(By.res(PACKAGE_NAME, "inDate"))
+        checkIn.text = "Oct 15 2024"
+        Thread.sleep(3000)
+
+        Log.d("Step No: 13", "Step No: 13,Enter check-out date ")
+        val checkOut = device.findObject(By.res(PACKAGE_NAME, "outDate"))
+        checkOut.text = "2024/2/10"
+        Thread.sleep(3000)
+
+        Log.d("Step No: 14", "Step No: 14,Enter the number of adults")
+        val numberAd = device.findObject(By.res(PACKAGE_NAME, "Adults"))
+        numberAd.text = "4"
+        Thread.sleep(3000)
+
+        Log.d("Step No: 15", "Step No: 15,Enter the number of children ")
+        val numberCh = device.findObject(By.res(PACKAGE_NAME, "Children"))
+        numberCh.text = "3"
+        Thread.sleep(3000)
+
+        Log.d("Step No: 16", "Step No: 16,Click the E-Pay radio button")
+        val ePay = device.findObject(UiSelector().text("E-Pay"))
+        ePay.click()
+        Thread.sleep(3000)
+
+        Log.d("Step No: 17", "Step No: 17,Click the \"Book now\" button")
+        val bookButton = device.findObject(UiSelector().text("Book now").instance(0))
+        bookButton.click()
+        Thread.sleep(3000)
+
+        Log.d("Step No: 18", "Step No: 18,Change check-out date")
+        checkOut.text = "10-19-2024"
+        Thread.sleep(3000)
+
+        Log.d("Step No: 19", "Step No: 19,Click the \"Book now\" button")
+        bookButton.click()
+        Thread.sleep(3000)
+
+        Log.d("Step No: 20", "Step No: 20,Click \"Yes\" in the pop-up window to confirm your reservation. ")
+        val button4 = device.findObject(UiSelector().text("Yes"))
+        button4.click()
+        Thread.sleep(3000)
+
+    }
+}
+
+        </pre>
+    </div>
+    <button class="accordion">tableLayout connect with viewPager2</button>
+    <div class="panel">
+        <pre>
+TabLayoutMediator(tabLayout, viewPager2){ tab, position-&gt;
+    tab.text = tabItemList[position]
+}.attach()
+
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

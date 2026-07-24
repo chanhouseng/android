@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">Switch 按鈕</button>
+    <div class="panel">
+        <pre>
+val switch: Switch = findViewById(R.id.switch1)
+switch.setOnCheckedChangeListener { _, isChecked -&gt;
+    if(isChecked){
+        Toast.makeText(this, "switch true", Toast.LENGTH_SHORT).show()
+    }
+}        </pre>
+
+    </div>
+    <button class="accordion">SeekBar 滑動條</button>
+    <div class="panel">
+        <pre>
+val seekBar: SeekBar = findViewById(R.id.seekBar)
+val seekText : TextView = findViewById(R.id.textView)
+seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+    override fun onProgressChanged(
+        seekBar: SeekBar?,
+        progress: Int,
+        fromUser: Boolean
+    ) {
+        seekText.setTextSize(progress.toFloat())
+    }
+
+    override fun onStartTrackingTouch(seekBar: SeekBar?) {
+    }
+
+    override fun onStopTrackingTouch(seekBar: SeekBar?) {
+    }
+
+})
+
+        </pre>
+    </div>
+    <button class="accordion">BottomSheetDialog</button>
+    <div class="panel">
+        <pre>
+val button: Button = findViewById(R.id.button)
+button.setOnClickListener {
+    val bottomSheetDialog = BottomSheetDialog(this)
+    val custom = layoutInflater.inflate(R.layout.bottom_sheet, null)
+    bottomSheetDialog.setContentView(custom)
+    custom.findViewById&lt;TextView&gt;(R.id.textView2).text = "參觀大三巴"
+    custom.findViewById&lt;TextView&gt;(R.id.textView4).text = "大三巴導賞"
+    custom.findViewById&lt;TextView&gt;(R.id.textView5).text = "大三巴"
+    <mark>bottomSheetDialog.window?.setDimAmount(0f)</mark>   <span>//set bottomSheetDialog 冇灰色背景</span>
+    bottomSheetDialog.show()
+}
+        </pre>
+    </div>
+    <button class="accordion">PopupMenu</button>
+    <div class="panel">
+        <pre>
+findViewById&lt;TextView&gt;(R.id.textView6).setOnClickListener {
+    val popupMenu = PopupMenu(this, it)
+    popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
+    popupMenu.setOnMenuItemClickListener {
+        when(it.itemId){
+            R.id.name -&gt; Toast.makeText(this, "name", Toast.LENGTH_SHORT).show()
+            R.id.date -&gt; Toast.makeText(this, "date", Toast.LENGTH_SHORT).show()
+        }
+        true
+    }
+    popupMenu.show()
+}
+
+        </pre>
+    </div>
+    <button class="accordion">numberPicker 顯示</button>
+    <div class="panel">
+        <pre>
+val numberPicker1 : NumberPicker = findViewById(R.id.numberPicker1)
+val numberPicker2 : NumberPicker = findViewById(R.id.numberPicker2)
+numberPicker1.maxValue = 12
+numberPicker1.minValue = 0
+numberPicker1.value = 6
+numberPicker2.maxValue = 1
+numberPicker2.minValue = 0
+val numberPicker2List = arrayOf("AM", "PM")
+numberPicker2.displayedValues = numberPicker2List
+findViewById&lt;Button&gt;(R.id.button2).setOnClickListener {
+    Toast.makeText(this, numberPicker1.value.toString() + numberPicker2List[numberPicker2.value], Toast.LENGTH_SHORT).show()
+}
+
+        </pre>
+    </div>
+
+    <button class="accordion">WebView</button>
+    <div class="panel">
+        <pre>
+val webView : WebView = findViewById(R.id.webView)
+webView.settings.javaScriptEnabled = true
+webView.loadUrl("https://www.library.gov.mo/zh-hant/")
+        </pre>
+    </div>
+    <button class="accordion">ValueAnimator</button>
+    <div class="panel">
+        <pre>
+val linearLayout: LinearLayout = findViewById(R.id.linearLayout)
+val valueAnimator = ValueAnimator.ofInt(3, 300)
+valueAnimator.duration = 3000
+valueAnimator.interpolator = DecelerateInterpolator()
+var value = 0
+valueAnimator.addUpdateListener {
+    val value = it.animatedValue as Int
+    linearLayout.layoutParams.width = value
+    linearLayout.requestLayout()
+}
+linearLayout.setOnClickListener {
+    valueAnimator.start()
+}
+        </pre>
+    </div>
+    <button class="accordion">Copy text</button>
+    <div class="panel">
+        <pre>
+val button3: Button = findViewById(R.id.button3)
+button3.setOnClickListener {
+    val clipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+    val clip = ClipData.newPlainText("label", findViewById&lt;TextView&gt;(R.id.textView6).text.toString())
+    clipboardManager.setPrimaryClip(clip)
+}
+
+        </pre>
+    </div>
+    <button class="accordion">放音槳</button>
+    <div class="panel">
+        <pre>
+val mediaPlayer = MediaPlayer.create(this, R.raw.bgm)
+mediaPlayer.isLooping = true
+mediaPlayer.setVolume(0.2f, 0.2f)
+mediaPlayer.start()
+
+        </pre>
+    </div>
+    <button class="accordion">播影片</button>
+    <div class="panel">
+        <pre>
+val videoView : VideoView = findViewById(R.id.videoView)
+val uri = Uri.parse("android.resource://$packageName/${R.raw.demo}")
+videoView.setVideoURI(uri)
+videoView.requestFocus()
+videoView.start()
+
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

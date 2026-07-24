@@ -1,0 +1,174 @@
+{
+  "trades": [
+    {
+      "id": "MAD",
+      "name": "Mobile Applications Development"
+    },
+    {
+      "id": "ST",
+      "name": "Software Testing"
+    }
+  ],
+  "competitors": [
+    {
+      "id": "T301",
+      "name": "Mina Zhang",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "CN",
+      "countryName": "China",
+      "flagEmoji": "🇨🇳",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T302",
+      "name": "Omar Ali",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "AE",
+      "countryName": "United Arab Emirates",
+      "flagEmoji": "🇦🇪",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T303",
+      "name": "Elena Rossi",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "IT",
+      "countryName": "Italy",
+      "flagEmoji": "🇮🇹",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T304",
+      "name": "Felix Weber",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "CH",
+      "countryName": "Switzerland",
+      "flagEmoji": "🇨🇭",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T305",
+      "name": "Nadia Khan",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "IN",
+      "countryName": "India",
+      "flagEmoji": "🇮🇳",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T306",
+      "name": "Sara Silva",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "PT",
+      "countryName": "Portugal",
+      "flagEmoji": "🇵🇹",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T307",
+      "name": "Tom Wilson",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "US",
+      "countryName": "United States of America",
+      "flagEmoji": "🇺🇸",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T308",
+      "name": "Luna Garcia",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "ES",
+      "countryName": "Spain",
+      "flagEmoji": "🇪🇸",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T309",
+      "name": "Hana Lee",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "KR",
+      "countryName": "Korea",
+      "flagEmoji": "🇰🇷",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T310",
+      "name": "Noel Martin",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "FR",
+      "countryName": "France",
+      "flagEmoji": "🇫🇷",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T311",
+      "name": "Eva Muller",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "DE",
+      "countryName": "Germany",
+      "flagEmoji": "🇩🇪",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T312",
+      "name": "Jack Chan",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "HK",
+      "countryName": "Hong Kong, China",
+      "flagEmoji": "🇭🇰",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T313",
+      "name": "Lea Smith",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "UK",
+      "countryName": "United Kingdom",
+      "flagEmoji": "🇬🇧",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T314",
+      "name": "Rina Sato",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "JP",
+      "countryName": "Japan",
+      "flagEmoji": "🇯🇵",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T315",
+      "name": "Dina Noor",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "MY",
+      "countryName": "Malaysia",
+      "flagEmoji": "🇲🇾",
+      "thumbnail": "assets/sample_3.png"
+    },
+    {
+      "id": "T316",
+      "name": "Luca Bianchi",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "IT",
+      "countryName": "Italy",
+      "flagEmoji": "🇮🇹",
+      "thumbnail": "assets/sample_3.png"
+    }
+  ]
+}

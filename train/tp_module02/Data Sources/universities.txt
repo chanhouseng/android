@@ -1,0 +1,139 @@
+university_id:1;
+university_name:University of Oxford;
+university_photo:https://example.com/photos/oxford.jpg;
+university_location:Oxford, England;
+university_website:https://www.ox.ac.uk;
+university_desc:A prestigious university known for its rigorous academic programs and strong emphasis on research.;
+
+university_id:2;
+university_name:University of Cambridge;
+university_photo:https://example.com/photos/cambridge.jpg;
+university_location:Cambridge, England;
+university_website:https://www.cam.ac.uk;
+university_desc:Renowned for its high academic standards and historic architecture, offering a wide range of courses.;
+
+university_id:3;
+university_name:Imperial College London;
+university_photo:https://example.com/photos/imperial.jpg;
+university_location:London, England;
+university_website:https://www.imperial.ac.uk;
+university_desc:A leading institution specializing in science, engineering, medicine, and business.;
+
+university_id:4;
+university_name:London School of Economics;
+university_photo:https://example.com/photos/lse.jpg;
+university_location:London, England;
+university_website:https://www.lse.ac.uk;
+university_desc:Famous for its social sciences and economics programs, with a strong focus on research and policy.;
+
+university_id:5;
+university_name:University College London;
+university_photo:https://example.com/photos/ucl.jpg;
+university_location:London, England;
+university_website:https://www.ucl.ac.uk;
+university_desc:Offers a diverse range of programs and is known for its multidisciplinary research initiatives.;
+
+university_id:6;
+university_name:King's College London;
+university_photo:https://example.com/photos/kings.jpg;
+university_location:London, England;
+university_website:https://www.kcl.ac.uk;
+university_desc:Known for its medical and humanities programs, with a rich history and diverse student body.;
+
+university_id:7;
+university_name:University of Manchester;
+university_photo:https://example.com/photos/manchester.jpg;
+university_location:Manchester, England;
+university_website:https://www.manchester.ac.uk;
+university_desc:A large university with a strong focus on research and a wide variety of academic programs.;
+
+university_id:8;
+university_name:University of Edinburgh;
+university_photo:https://example.com/photos/edinburgh.jpg;
+university_location:Edinburgh, Scotland;
+university_website:https://www.ed.ac.uk;
+university_desc:One of the oldest universities in the English-speaking world, known for its research and teaching quality.;
+
+university_id:9;
+university_name:University of Bristol;
+university_photo:https://example.com/photos/bristol.jpeg;
+university_location:Bristol, England;
+university_website:https://www.bristol.ac.uk;
+university_desc:Offers a broad range of courses and is known for its vibrant student community and strong research output.;
+
+university_id:10;
+university_name:University of Warwick;
+university_photo:https://example.com/photos/warwick.jpg;
+university_location:Coventry, England;
+university_website:https://www.warwick.ac.uk;
+university_desc:Known for its business, law, and international relations programs, with a strong focus on employability.;
+
+university_id:11;
+university_name:University of Glasgow;
+university_photo:https://example.com/photos/glasgow.jpg;
+university_location:Glasgow, Scotland;
+university_website:https://www.gla.ac.uk;
+university_desc:A historic university with a strong emphasis on research and teaching across a wide range of disciplines.;
+
+university_id:12;
+university_name:University of Birmingham;
+university_photo:https://example.com/photos/birmingham.jpg;
+university_location:Birmingham, England;
+university_website:https://www.birmingham.ac.uk;
+university_desc:Offers a variety of programs and is known for its strong links with industry and commerce.;
+
+university_id:13;
+university_name:University of Southampton;
+university_photo:https://example.com/photos/southampton.jpg;
+university_location:Southampton, England;
+university_website:https://www.southampton.ac.uk;
+university_desc:A research-intensive university with a strong focus on engineering and technology.;
+
+university_id:14;
+university_name:University of Leeds;
+university_photo:https://example.com/photos/leeds.jpg;
+university_location:Leeds, England;
+university_website:https://www.leeds.ac.uk;
+university_desc:Known for its research and teaching excellence across a wide range of disciplines.;
+
+university_id:15;
+university_name:University of Sheffield;
+university_photo:https://example.com/photos/sheffield.jpg;
+university_location:Sheffield, England;
+university_website:https://www.sheffield.ac.uk;
+university_desc:A research university with a strong emphasis on engineering, social sciences, and the arts.;
+
+university_id:16;
+university_name:University of Nottingham;
+university_photo:https://example.com/photos/nottingham.jpg;
+university_location:Nottingham, England;
+university_website:https://www.nottingham.ac.uk;
+university_desc:Offers a wide range of programs and is known for its research excellence and vibrant student community.;
+
+university_id:17;
+university_name:Newcastle University;
+university_photo:https://example.com/photos/newcastle.jpg;
+university_location:Newcastle, England;
+university_website:https://www.ncl.ac.uk;
+university_desc:Known for its research and teaching excellence, with a strong focus on medicine and health sciences.;
+
+university_id:18;
+university_name:Queen Mary University of London;
+university_photo:https://example.com/photos/queenmary.jpg;
+university_location:London, England;
+university_website:https://www.qmul.ac.uk;
+university_desc:A multidisciplinary university with a strong focus on research and innovation.;
+
+university_id:19;
+university_name:Durham University;
+university_photo:https://example.com/photos/durham.jpg;
+university_location:Durham, England;
+university_website:https://www.dur.ac.uk;
+university_desc:Renowned for its academic excellence and historic campus, offering a wide range of programs.;
+
+university_id:20;
+university_name:University of Exeter;
+university_photo:https://example.com/photos/exeter.jpg;
+university_location:Exeter, England;
+university_website:https://www.exeter.ac.uk;
+university_desc:Offers a diverse range of programs and is known for its strong focus on sustainability and environmental research.;

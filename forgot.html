@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">try catch 多用在日期不是這個格式就去轉試另一個格式</button>
+    <div class="panel">
+        <pre>
+val timeOut : LocalDate? = try {
+    LocalDate.parse(text, formatterList[0])
+}catch (e: Exception){
+    try {
+        LocalDate.parse(text, formatterList[1])
+    }catch (e: Exception){
+        try {
+            LocalDate.parse(text, formatterList[2])
+        }catch (e: Exception){
+            null
+        }
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">Bottom sheet Dialog 的背景設為透明</button>
+    <div class="panel">
+        <pre>
+bottomSheetDialog.window?.setDimAmount(0f)   <span>//除了bottomSheetDialog之外 alertDialog也可以用</span>
+        </pre>
+    </div>
+    <button class="accordion">把 AlertDialog 變成全螢幕</button>
+    <div class="panel">
+        <pre>
+alertDialog.window?.setClipToOutline(false)    <span>//有没有都差不多</span>
+
+alertDialog.window.apply {         <span>這個才是重點，將alertDialog setLayout都變成match_parent</span>
+    this!!.setLayout(
+        WindowManager.LayoutParams.MATCH_PARENT,
+        WindowManager.LayoutParams.MATCH_PARENT
+    )
+}
+        </pre>
+    </div>
+    <button class="accordion">多行文字的輸入框</button>
+    <div class="panel">
+        <pre>
+android:inputType="textMultiLine"     <span>//允許使用者輸入多行文字，並自動支援換行</span>
+android:scrollbars="vertical"         <span>//當文字超過可見範圍時，自動顯示垂直捲動條</span>
+android:minLines="3"                  <span>//預設最低高度為 3 行</span>
+        </pre>
+    </div>
+    <button class="accordion">取消之前的待辦事項，然後安排 3 秒後執行某件事</button>
+    <div class="panel">
+        <p style="color: blue;">在homework5中，輸入框改變後等三秒再顯示。如果用Thread.sleep就會不斷重覆等三秒，導致上一佪三秒完後顥示但我還在更改輸入</p>
+        <pre>
+private var searchHandler = Handler(Looper.getMainLooper() )    <span>//建立「排程器」</span>
+searchHandler.removeCallbacksAndMessages(null)                  <span>//清除這個 Handler 之前所有排定的任務和訊息，避免重複執行</span>
+searchHandler.postDelayed({}, 3000)                             <span>//在3 秒後，執行括號內的程式碼。</span>
+        </pre>
+    </div>
+    <button class="accordion">重覆地做相向動作</button>
+    <div class="panel">
+    <p style="color: blue;">(如向上行就會向上加向下重覆做)</p>
+        <pre>
+downAnim.repeatMode = Animation.REVERSE
+        </pre>
+    </div>
+    <button class="accordion">底線、刪除線</button>
+    <div class="panel">
+        <pre>
+view.findViewById&lt;TextView&gt;(R.id.textView2).paintFlags = Paint.UNDERLINE_TEXT_FLAG    <span>//底線</span>
+
+view.findViewById&lt;TextView&gt;(R.id.textView2).paintFlags = Paint.STRIKE_THRU_TEXT_FLAG    <span>//刪除線</span>
+        </pre>
+    </div>
+    <button class="accordion">ValueAnimator setDelay</button>
+    <div class="panel">
+        <pre>
+valueAnimator.startDelay = 2600 
+        </pre>
+    </div>
+    <button class="accordion"></button>
+    <div class="panel">
+        <pre>
+<<<<<<< HEAD
+editTextText2.transformationMethod = PasswordTransformationMethod()     <span>//密碼不可見</span>
+=======
+editTextText2.transformationMethod = PasswordTransformationMethod()    <span>//密碼不可見</span>
+>>>>>>> cc549e4d5db336862316433dfd8ca91828061af7
+editTextText2.transformationMethod = null     <span>//密碼可見</span>
+        </pre>
+    </div>
+    <button class="accordion"></button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion"></button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+
+<script src="js.js"></script>
+</body>
+</html>

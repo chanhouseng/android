@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+        viewPager2 = findViewById(R.id.viewPager2)
+        viewPager2.adapter = Adapter(this)
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                when(position){
+                    0 -> bottomNavigationView.selectedItemId = R.id.home
+                    1 -> bottomNavigationView.selectedItemId = R.id.message
+                    2 -> bottomNavigationView.selectedItemId = R.id.person
+                }
+            }
+        })
+
+        bottomNavigationView = findViewById(R.id.bottom)
+        bottomNavigationView.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.home -> {viewPager2.currentItem = 0}
+                R.id.message -> {viewPager2.currentItem = 1}
+                else -> {viewPager2.currentItem = 2}
+            }
+            true
+        }
+
+====================================================================================================================
+
+
+            AlertDialog.Builder(requireActivity())
+                .setTitle("hi")
+                .setCancelable(true)
+                .setMessage("no hi")
+                .setPositiveButton("go"){_,_ ->
+                    activity.bottomNavigationView.selectedItemId = R.id.home
+                }
+                .setNegativeButton("no go"){_, _ ->
+
+                }
+                .show()
+    </pre>
+</body>
+</html>

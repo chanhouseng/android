@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+        val activity = requireActivity() as MainActivity
+        val userName = activity.username
+        view.findViewById&lt;TextView&lt;(R.id.message).text = userName
+        view.findViewById&lt;Button&lt;(R.id.button).setOnClickListener {
+            AlertDialog.Builder(requireActivity())
+                .setTitle("Hi")
+                .setMessage("Have are you")
+                .setCancelable(true)
+                .setPositiveButton("continue"){_, _ ->
+                    activity.replaceFragment(home())
+                }
+                .setNegativeButton("cancel"){_, _ ->
+                }
+                .show()
+        }
+    </pre>
+</body>
+</html>

@@ -1,0 +1,134 @@
+{
+  "trades": [
+    {
+      "id": "MAD",
+      "name": "Mobile Applications Development"
+    },
+    {
+      "id": "ST",
+      "name": "Software Testing"
+    }
+  ],
+  "competitors": [
+    {
+      "id": "T201",
+      "name": "Grace Park",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "KR",
+      "countryName": "Korea",
+      "flagEmoji": "🇰🇷",
+      "thumbnail": "assets/sample_2.png"
+    },
+    {
+      "id": "T202",
+      "name": "Mateo Costa",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "BR",
+      "countryName": "Brazil",
+      "flagEmoji": "🇧🇷",
+      "thumbnail": "assets/sample_2.png"
+    },
+    {
+      "id": "T203",
+      "name": "Anna Schmidt",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "DE",
+      "countryName": "Germany",
+      "flagEmoji": "🇩🇪",
+      "thumbnail": "assets/sample_2.png"
+    },
+    {
+      "id": "T204",
+      "name": "Ivy Taylor",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "UK",
+      "countryName": "United Kingdom",
+      "flagEmoji": "🇬🇧",
+      "thumbnail": "assets/sample_2.png"
+    },
+    {
+      "id": "T205",
+      "name": "Kai Chen",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "TPE",
+      "countryName": "Chinese Taipei",
+      "flagEmoji": "🇹🇼",
+      "thumbnail": "assets/sample_2.png"
+    },
+    {
+      "id": "T206",
+      "name": "Ava Brown",
+      "tradeId": "MAD",
+      "tradeName": "Mobile Applications Development",
+      "countryCode": "AU",
+      "countryName": "Australia",
+      "flagEmoji": "🇦🇺",
+      "thumbnail": "assets/sample_2.png"
+    },
+    {
+      "id": "T207",
+      "name": "Mina Zhang",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "CN",
+      "countryName": "China",
+      "flagEmoji": "🇨🇳",
+      "thumbnail": "assets/sample_2.png"
+    },
+    {
+      "id": "T208",
+      "name": "Omar Ali",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "AE",
+      "countryName": "United Arab Emirates",
+      "flagEmoji": "🇦🇪",
+      "thumbnail": "assets/sample_2.png"
+    },
+    {
+      "id": "T209",
+      "name": "Elena Rossi",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "IT",
+      "countryName": "Italy",
+      "flagEmoji": "🇮🇹",
+      "thumbnail": "assets/sample_2.png"
+    },
+    {
+      "id": "T210",
+      "name": "Felix Weber",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "CH",
+      "countryName": "Switzerland",
+      "flagEmoji": "🇨🇭",
+      "thumbnail": "assets/sample_2.png"
+    },
+    {
+      "id": "T211",
+      "name": "Nadia Khan",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "IN",
+      "countryName": "India",
+      "flagEmoji": "🇮🇳",
+      "thumbnail": "assets/sample_2.png"
+    },
+    {
+      "id": "T212",
+      "name": "Sara Silva",
+      "tradeId": "ST",
+      "tradeName": "Software Testing",
+      "countryCode": "PT",
+      "countryName": "Portugal",
+      "flagEmoji": "🇵🇹",
+      "thumbnail": "assets/sample_2.png"
+    }
+  ]
+}

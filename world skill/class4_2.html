@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+<div class="panel">
+    <pre>
+<h3>login page</h3>
+findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
+    <mark>val requestBody = FormBody.Builder()
+        .add("username", username.text.toString())
+        .add("pw", password.text.toString())
+        .build()</mark>
+    val req = okhttp3.Request.Builder().url("https://www.cpttm.org.mo/ws/posts/login.php")
+        <mark>.post(requestBody)</mark>.build()
+    OkHttpClient().newCall(req).enqueue(object : Callback{
+        override fun onFailure(call: Call, e: IOException) {
+            runOnUiThread {
+                Toast.makeText(this@MainActivity, "please check network status", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            val resultString = response.body?.string()
+            val results = Gson().fromJson(resultString, GetToken::class.java)  <span>//GetToken Class 要睇返佢return 咩值返嚟
+            </span>
+            Data.token = results.token
+            runOnUiThread {
+                if(results.message == "success"){
+                    val intent = Intent(this@MainActivity, MainActivity2::class.java)
+                    intent.putExtra("token", results.token)
+                    startActivity(intent)
+                }
+                else{
+                    Toast.makeText(this@MainActivity, "login fail", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    })
+
+}
+
+<span>/////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
+<h3>data page</h3>
+var token = Data.token ?: intent.getStringExtra("token")
+val req = okhttp3.Request.Builder().url("https://www.cpttm.org.mo/ws/posts/index.php")
+    <mark>.addHeader("Authorization", "Bearer ${token}")</mark>
+    .build()
+OkHttpClient().newCall(req).enqueue(object : Callback{
+    override fun onFailure(call: Call, e: IOException) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onResponse(call: Call, response: Response) {
+        val resultString = response.body?.string()
+        val results = Gson().fromJson(resultString, Array&lt;ContentClass&gt;::class.java)
+        runOnUiThread {
+            for(result in results){
+                val layout = layoutInflater.inflate(R.layout.product, null)
+                layout.findViewById&lt;TextView&gt;(R.id.title).text = result.title
+                layout.findViewById&lt;TextView&gt;(R.id.content).text = result.content
+                layout.setOnClickListener {
+                    val intent = Intent(this@MainActivity2, MainActivity4::class.java)
+                    intent.putExtra("title", result.title ?: "")
+                    intent.putExtra("content", result.content ?: "")
+                    intent.putExtra("is_like", result.is_like)
+                    intent.putExtra("data", result.start_date.date ?: "")
+                    intent.putExtra("time", result.start_date.time ?: "")
+                    startActivity(intent)
+                }
+                if(result.is_like){
+                    layout.findViewById&lt;ImageView&gt;(R.id.isLike).setImageResource(R.drawable.like)
+                }
+                else{
+                    layout.findViewById&lt;ImageView&gt;(R.id.isLike).setImageResource(R.drawable.unlike)
+                }
+                layout.findViewById&lt;ImageView&gt;(R.id.isLike).setOnClickListener {         <span>//like 判斷和記錄</span>
+                    result.is_like = !result.is_like
+                    val requestBody = FormBody.Builder()             <span>//一定要俾個requestBody 即使唔add任何野</span>
+                        .build()
+                    val req = Request.Builder().url("https://www.cpttm.org.mo/ws/posts/${result.id}/likes")
+                        <mark>.addHeader("Authorization", "Bearer ${token}")</mark>       <span>攞token先可以入到去攞數據</span>
+                    if(result.is_like){
+                        layout.findViewById&lt;ImageView&gt;(R.id.isLike).setImageResource(R.drawable.like)
+                        req.post(requestBody)
+                    }
+                    else{
+                        layout.findViewById&lt;ImageView&gt;(R.id.isLike).setImageResource(R.drawable.unlike)
+                        req.delete(requestBody)          <span>true to false</span>
+                    }
+                    OkHttpClient().newCall(req.build()).enqueue(object : Callback{
+                        override fun onFailure(call: Call, e: IOException) {
+                        }
+
+                        override fun onResponse(
+                            call: Call,
+                            response: Response
+                        ) {
+                            val result = response.body?.string()
+                            runOnUiThread {
+                                Toast.makeText(this@MainActivity2, result, Toast.LENGTH_LONG).show()
+                            }
+                        }
+
+                    })
+
+                }
+                linearLayout.addView(layout)
+            }
+        }
+    }
+
+})
+
+<span>////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
+<h3>add page</h3>
+<mark>getId()</mark>
+button.setOnClickListener {
+    val title = findViewById&lt;EditText&gt;(R.id.title).text.toString()
+    val content = findViewById&lt;EditText&gt;(R.id.content).text.toString()
+    val data = findViewById&lt;EditText&gt;(R.id.data).text.toString()
+    val time = findViewById&lt;EditText&gt;(R.id.time).text.toString()
+    is_like = checkBox.isChecked
+
+    val jsonString = """      <span>//先俾個jsonString俾佢 之後入落個okhttp3到</span>
+    {
+        "title" : "title: $title",
+        "content" : "$content",
+        "start_date" : {
+            "date" : "$data",
+            "time" : "$time"
+        }
+    }
+    """.trimIndent()
+    <mark>val mediaType = "application/json; charset=utf-8".toMediaType()</mark>     <span>//設定格式JSON</span>
+    val req = Request.Builder().url("https://www.cpttm.org.mo/ws/posts/index.php")
+        .addHeader("Authorization", "Bearer ${token}")
+        <mark>.post(jsonString.toRequestBody(mediaType))</mark>     <span>//把內容加入去, 以JSON格式</span>
+        .build()
+    OkHttpClient().newCall(req).enqueue(object : Callback{
+        override fun onFailure(call: Call, e: IOException) {
+
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            val resultString = response.body?.string()
+            runOnUiThread {
+                //Toast.makeText(this@MainActivity3, result, Toast.LENGTH_SHORT).show()
+
+                <mark>goLike(is_like)</mark>          <span>程式唔一定由上至下運行 有唔同速度 所以要先getid再golike</span>
+            }
+        }
+
+    })
+}
+
+<span>function</span>
+        fun getId() {
+            val req1 = Request.Builder().url("https://www.cpttm.org.mo/ws/posts/index.php")
+                .addHeader("Authorization", "Bearer ${token}").build()
+            OkHttpClient().newCall(req1).enqueue(object : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+                }
+            
+                override fun onResponse(call: Call, response: Response) {
+                    val resultString = response.body?.string()
+                    val results = Gson().fromJson(resultString, Array&lt;ContentClass&gt;::class.java)
+                    newId = results.last().id + 1         <span>設置最新ID 即使冇加到 都唔會有跳ID的情況</span>
+                }
+            })
+        }
+
+        <span>就data page 的like 差唔多</span>
+        fun goLike(is_like: Boolean){
+            val requestBody = FormBody.Builder().build()
+        
+            Toast.makeText(this@MainActivity3,"osts/${newId}/likes",
+                Toast.LENGTH_SHORT).show()
+            val postsId = newId
+            val req2 = Request.Builder().url("https://www.cpttm.org.mo/ws/posts/${newId}/likes")
+                .addHeader("Authorization", "Bearer ${token}")
+            if(is_like){
+                req2.post(requestBody)
+            }
+            else{
+                req2.delete(requestBody)
+            }
+            OkHttpClient().newCall(req2.build()).enqueue(object : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+                
+                }
+            
+                override fun onResponse(call: Call, response: Response) {
+                    val resultString = response.body?.string()
+                    runOnUiThread {
+                        Toast.makeText(this@MainActivity3, resultString, Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@MainActivity3, MainActivity2::class.java)
+                        intent.putExtra("token", token)
+                        startActivity(intent)
+                    }
+                }
+            
+            })
+        }
+
+
+
+    </pre>
+</div>
+<script src="js.js"></script>
+</body>
+</html>
