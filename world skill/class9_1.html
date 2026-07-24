@@ -79,9 +79,9 @@ class MainActivity2 : AppCompatActivity() {
 
         val paint = Paint().apply{    <span>//建立畫筆設定</span>
             color = Color.WHITE
-            style = Paint.Style.STROKE
-            strokeWidth = 30f
-            isAntiAlias = true
+            style = Paint.Style.STROKE    <span>//「只畫邊框線條」，不填滿內部。畫一個圓時，只會看到白色圓圈，圓心是空的（透明的）；如果是 FILL 就會塗滿白色。</span>
+            strokeWidth = 30f    <span>//線條寬度設為 30 像素。</span>
+            isAntiAlias = true    <span>//讓斜線或圓弧的邊緣不會有鋸齒狀的馬賽克。</span>
             strokeJoin = Paint.Join.ROUND    <span>//線條轉角和結尾都是圓滑的</span>
             strokeCap = Paint.Cap.ROUND     <span>//讓線條更平滑、没有鋸齒</span>
         }
@@ -97,7 +97,7 @@ class MainActivity2 : AppCompatActivity() {
         mutableBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true)    <span>//把剛剛載入的 originalBitmap 放大或縮小，變成一張新的 Bitmap。這是可修改版本的 Bitmap。之後畫畫的所有線條都會畫在這張圖片上。</span>
 
         canvas = Canvas(mutableBitmap)    <span>//建立一個畫布，並把它綁定到 mutableBitmap 這張圖片上。以後都會直接畫在這張 mutableBitmap 上面。</span>
-        imageView.setImageBitmap(mutableBitmap)
+        imageView.setImageBitmap(mutableBitmap)    <span>//之後所有用畫筆（paint）畫的線條，都會直接留在這張 mutableBitmap 紙上，永遠改變這張紙。再把這張紙顯示在 ImageView 上，讓你看到。</span>
 
         imageView.setOnTouchListener { v, event -&gt;
             val x = event.x
@@ -105,25 +105,25 @@ class MainActivity2 : AppCompatActivity() {
 
             when(event.action){
                 MotionEvent.ACTION_DOWN -&gt; {
-                    path.moveTo(x, y)
+                    path.moveTo(x, y)    <span>//把畫筆的起點放在手指位置。</span>
                     lastX = x
                     lastY = y
                     true
                 }
 
                 MotionEvent.ACTION_MOVE -&gt; {
-                    path.quadTo(lastX, lastY, (lastX+x) / 2, (lastY + y) /2 )
+                    path.quadTo(lastX, lastY, (lastX+x) / 2, (lastY + y) /2 )     <span>//讓線條更平滑</span>
                     lastX = x
                     lastY = y
-                    canvas.drawPath(path, paint)
-                    imageView.invalidate()
+                    canvas.drawPath(path, paint)    <span>//把這段路徑用白色畫筆畫在紙上。</span>
+                    imageView.invalidate()    <span>//紙變了，快點重新顯示！</span>
                     true
                 }
 
-                MotionEvent.ACTION_UP -&gt; {
-                    path.lineTo(x, y)
-                    canvas.drawPath(path, paint)
-                    path.reset()
+                MotionEvent.ACTION_UP -&gt; { 
+                    path.lineTo(x, y)     <span>//把線條完整接到手指離開的位置。</span>
+                    canvas.drawPath(path, paint)    <span>再一次把最終線條畫上去。</span>
+                    path.reset()    <span>//清空這條路徑，下一筆不會跟上一筆連在一起</span>
                     imageView.invalidate()
                     true
                 }
