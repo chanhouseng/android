@@ -146,16 +146,16 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 
-    fun saveLayoutToGallery(view: View){
+    fun saveLayoutToGallery(view: View){    <span>//把屏幕上的某個區域（View）截取下來，變成一張數碼照片（Bitmap）</span>
         try {
-            val bitmap = Bitmap.createBitmap(
+            val bitmap = Bitmap.createBitmap(    <span>//生成空白點陣圖。</span>
                 view.width,
                 view.height,
-                Bitmap.Config.ARGB_8888
+                Bitmap.Config.ARGB_8888    <span>//設定色彩模式。</span>
             )
 
-            val canvas = Canvas(bitmap)
-            view.draw(canvas)
+            val canvas = Canvas(bitmap)    <span>//將畫布綁定到剛剛生成的空白點陣圖</span>
+            view.draw(canvas)     <span>//強制該元件將自身及所有子元件的內容（包含背景、圖片、按鈕、疊加的線條等）繪製到傳入的 canvas 上。</span>
 
             saveImageToGallery(bitmap)
         }catch (e: Exception){
@@ -163,23 +163,23 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 
-    fun saveImageToGallery(bitmap: Bitmap){
+    fun saveImageToGallery(bitmap: Bitmap){    <span>//把圖片存進相簿</span>
         try {
-            val fileName = "drawing_${System.currentTimeMillis()}.png"
+            val fileName = "drawing_${System.currentTimeMillis()}.png"    <span>//建立檔案名稱。</span>
 
-            val contentValues = ContentValues().apply {
-                put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
-                put(MediaStore.Images.Media.MIME_TYPE, "image/png")
-                put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+            val contentValues = ContentValues().apply {      <span>//儲存媒體檔案的元資料</span>
+                put(MediaStore.Images.Media.DISPLAY_NAME, fileName)    <span>//設定檔案在系統相簿中顯示的名稱。</span>
+                put(MediaStore.Images.Media.MIME_TYPE, "image/png")    <span>//設定檔案的 MIME 類型（標示為 PNG 圖片）</span>
+                put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)    <span>//設定儲存的相對路徑</span>
             }
 
-            val uri = contentResolver.insert(
+            val uri = contentResolver.insert(     <span>//插入一筆新記錄並取得系統分配給該檔案的 Uri</span>
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 contentValues
             )
 
             uri?.let {
-                contentResolver.openOutputStream(it)?.use { stream -&gt;
+                contentResolver.openOutputStream(it)?.use { stream -&gt;     <span>//開啟輸出位元組串流（用於寫入檔案資料）</span>
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
                 }
                 true
