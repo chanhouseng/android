@@ -83,16 +83,29 @@ view.findViewById&lt;TextView&gt;(R.id.textView2).paintFlags = Paint.STRIKE_THRU
 valueAnimator.startDelay = 2600 
         </pre>
     </div>
-    <button class="accordion"></button>
+    <button class="accordion">editText passwordText 可見不可見</button>
     <div class="panel">
         <pre>
 editTextText2.transformationMethod = PasswordTransformationMethod()    <span>//密碼不可見</span>
 editTextText2.transformationMethod = null     <span>//密碼可見</span>
         </pre>
     </div>
-    <button class="accordion"></button>
+    <button class="accordion">bottomNavigationView當點擊時才顯示文字，否則只顯示圖標</button>
     <div class="panel">
         <pre>
+&lt;com.google.android.material.bottomnavigation.BottomNavigationView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/bottom"
+    app:labelVisibilityMode="selected"    <span>//解釋:文字何時出現, 有三個輸入內容：1. selected: 只有「目前被選中的」那個按鈕會顯示文字，其他按鈕只顯示小圖示。
+                                                                                  2. labeled : 不管有沒有被選中，所有按鈕永遠都顯示文字。
+                                                                                  3. unlabeled : 全部不顯示文字，只顯示小圖示
+    </span>
+    app:menu="@menu/menu"/&gt;
+
+MainActivity.kt
+val bottom: BottomNavigationView = findViewById(R.id.bottom)
+bottom.selectedItemId = R.id.home    <span>//表示要選擇那一個</span>
 
         </pre>
     </div>
