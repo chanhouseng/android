@@ -1,0 +1,33 @@
+{
+  "goalKcal": 500,
+  "week": [
+    {
+      "day": "Mon",
+      "kcal": 320
+    },
+    {
+      "day": "Tue",
+      "kcal": 480
+    },
+    {
+      "day": "Wed",
+      "kcal": 510
+    },
+    {
+      "day": "Thu",
+      "kcal": 620
+    },
+    {
+      "day": "Fri",
+      "kcal": 430
+    },
+    {
+      "day": "Sat",
+      "kcal": 380
+    },
+    {
+      "day": "Sun",
+      "kcal": 560
+    }
+  ]
+}

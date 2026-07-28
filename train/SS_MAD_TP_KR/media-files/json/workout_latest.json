@@ -1,0 +1,37 @@
+[
+  {
+    "wrkoutTyCd": 0,
+    "name": "Outdoor Running",
+    "time": 1801,
+    "kcal": 162.1,
+    "step": 1801
+  },
+  {
+    "wrkoutTyCd": 1,
+    "name": "Treadmill",
+    "time": 2400,
+    "kcal": 192,
+    "step": 1200
+  },
+  {
+    "wrkoutTyCd": 2,
+    "name": "Swimming",
+    "time": 1200,
+    "kcal": 240,
+    "step": 0
+  },
+  {
+    "wrkoutTyCd": 3,
+    "name": "Outdoor Cycling",
+    "time": 3600,
+    "kcal": 360,
+    "step": 0
+  },
+  {
+    "wrkoutTyCd": 4,
+    "name": "Outdoor Walking",
+    "time": 2700,
+    "kcal": 108,
+    "step": 900
+  }
+]

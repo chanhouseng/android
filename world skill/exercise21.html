@@ -8,54 +8,56 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<pre>
-val main : LinearLayout = findViewById(R.id.main)
-val imageView : ImageView = findViewById(R.id.imageView)
-</pre>
-    <button class="accordion">放大</button>
+    <button class="accordion">Circle Progress</button>
     <div class="panel">
         <pre>
-var scaleFactor = 1f
-val scaleDetector = ScaleGestureDetector(this, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {    <span>//建立一個「縮放偵測器」</span>
-    override fun onScale(detector: ScaleGestureDetector): Boolean {
-        val scale = detector.scaleFactor    <span>//取得這一瞬間兩指的縮放比例</span>
-        val nextScale = scale * scaleFactor
-        if(nextScale in (1f..5f)){
-            scaleFactor = nextScale
-            imageView.scaleX = nextScale    <span>//把圖片的寬度和高度都縮放到新的倍數</span>
-            imageView.scaleY = nextScale
-            imageView.pivotX = detector.focusX    <span>//把縮放的中心點設成兩根手指的中間位置。</span>
-            imageView.pivotY = detector.focusY
-        }
-        return true
-    }
-})
+&lt;com.google.android.material.progressindicator.CircularProgressIndicator
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:indicatorSize="100dp"    <span>//設置圓形進度條的直徑大小</span>
+    app:trackColor="#999"      <span>//設置整條的顏色</span>
+    app:indicatorColor="#18abc8"    <span>//設置progress的顏色</span>
+    android:max="100"
+    android:progress="20"
+    app:trackThickness="15dp"    <span>//設置progress的粗度</span>
+    app:trackCornerRadius="0dp"    <span>//自帶會有圖角，可設定圖角</span>
+    app:indicatorInset="0dp"    <span>//設置progress與整個layout間的距離(類似padding) 但不影大小</span>
+    android:indeterminate="false"/&gt;    <span>//false會固定。true是無限旋轉(加載中)</span>
         </pre>
     </div>
-    <button class="accordion">移勳</button>
+    <button class="accordion">直線progress(可設粗度)</button>
     <div class="panel">
         <pre>
-val gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener(){    <span>//建立一個「手勢偵測器」</span>
-    override fun onScroll(
-        e1: MotionEvent?,
-        e2: MotionEvent,
-        distanceX: Float,
-        distanceY: Float
-    ): Boolean {
-        imageView.translationX -= distanceX    <span>//distanceX / distanceY 是這一瞬間手指移動的距離</span>
-        imageView.translationY -= distanceY
-        return true
-    }
-})
+&lt;com.google.android.material.progressindicator.LinearProgressIndicator
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:trackThickness="10dp"    <span>//設置粗度</span>
+    app:trackColor="#999"      <span>//設罝整條的顏色</span>
+    app:indicatorColor="#18abc8"    <span>//設置progress的顏色</span>
+    android:max="100"
+    android:progress="20"
+    app:trackCornerRadius="0dp"    <span>//自帶會有圖角，可設定圖角</span>
+    app:indicatorDirectionLinear="rightToLeft"/&gt;    <span>//設置progress的方向</span>
+
         </pre>
     </div>
-<pre>
-main.setOnTouchListener { v, event -&gt;
-    scaleDetector.onTouchEvent(event)    <span>//把所有的觸控事件同時交給兩個偵測器處理。</span>
-    gestureDetector.onTouchEvent(event)
-    true
-}
-</pre>
+    <button class="accordion">直線progress(不可設粗度)</button>
+    <div class="panel">
+        <pre>
+&lt;ProgressBar
+    android:id="@+id/progressBar"
+    style="?android:attr/progressBarStyleHorizontal"
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:progressBackgroundTint="#ff1111"    <span>//設置整條的顏色</span>
+    android:max="100"
+    android:progress="20"
+    android:progressTint="#18abc8"    <span>//設置progress的顏色</span>
+    android:layout_height="wrap_content" /&gt;
+
+        </pre>
+    </div>
 <script src="js.js"></script>
 </body>
 </html>

@@ -1,0 +1,10 @@
+{
+  "workout": {
+    "type": 0,
+    "name": "Outdoor Jogging",
+    "startTime": 1699975156,
+    "duration": 1801,
+    "kcal": 235,
+    "steps": 5210
+  }
+}

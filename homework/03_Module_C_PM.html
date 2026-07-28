@@ -8,29 +8,451 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button class="accordion">code</button>
+    <button class="accordion">MainActivity.kt</button>
     <div class="panel">
+        <mark>這個是LYON的動畫，但這個方法必須是會現在才改變位置，而不是previews時已有，所有在xml時，要設置做動畫前的位置，然後經這個動畫才能去到你想要的位置</mark>
         <pre>
+findViewById&lt;TextView&gt;(R.id.textViewL).animate().translationY(-100f).alpha(1f).setStartDelay(1000).setDuration(500).start()
+findViewById&lt;TextView&gt;(R.id.textViewY).animate().translationY(100f).alpha(1f).setStartDelay(1500).setDuration(500).start()
+findViewById&lt;ImageView&gt;(R.id.textViewO).animate().translationY(-100f).alpha(1f).setStartDelay(2000).setDuration(500).start()
+findViewById&lt;TextView&gt;(R.id.textViewN).animate().translationY(100f).alpha(1f).setStartDelay(2500).setDuration(500).start()
+findViewById&lt;ImageView&gt;(R.id.imageView1).animate().translationX(-100f).translationY(100f).alpha(0.4f).setStartDelay(3000).setDuration(200).start()
+findViewById&lt;ImageView&gt;(R.id.imageView2).animate().translationX(-100f).translationY(100f).alpha(0.4f).setStartDelay(3200).setDuration(200).start()
+findViewById&lt;ImageView&gt;(R.id.imageView3).animate().translationX(-100f).translationY(100f).alpha(0.4f).setStartDelay(3400).setDuration(200).start()
+findViewById&lt;ImageView&gt;(R.id.imageView4).animate().translationX(-100f).translationY(100f).alpha(0.4f).setStartDelay(3600).setDuration(200).start()
+findViewById&lt;ImageView&gt;(R.id.imageView5).animate().translationX(-100f).translationY(100f).alpha(1f).setStartDelay(3800).setDuration(200).start()
+findViewById&lt;ImageView&gt;(R.id.imageView6).animate().translationX(-100f).translationY(100f).alpha(1f).setStartDelay(4000).setDuration(200).start()
+findViewById&lt;ImageView&gt;(R.id.imageView7).animate().translationX(-100f).translationY(100f).alpha(1f).setStartDelay(4200).setDuration(200).start()
+findViewById&lt;ImageView&gt;(R.id.imageView8).animate().translationX(-100f).translationY(100f).alpha(1f).setStartDelay(4400).setDuration(200).start()
+findViewById&lt;ImageView&gt;(R.id.imageView9).animate().translationX(-100f).translationY(100f).alpha(1f).setStartDelay(4600).setDuration(200).start()
 
+<span>//跳下一版的過程冇動畫，是用intent`</span>
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">MainActivity2.kt</button>
     <div class="panel">
         <pre>
+class MainActivity2 : AppCompatActivity() {
+    private lateinit var progressBar1: ProgressBar
+    private lateinit var progressBar2: ProgressBar
+    private lateinit var progressBar3: ProgressBar
+    private lateinit var progressBar4: ProgressBar
+    private lateinit var progressBar5: ProgressBar
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main2)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        progressBar1 = findViewById(R.id.progressBar1)
+        progressBar2 = findViewById(R.id.progressBar2)
+        progressBar3 = findViewById(R.id.progressBar3)
+        progressBar4 = findViewById(R.id.progressBar4)
+        progressBar5 = findViewById(R.id.progressBar5)
+        val textView1: TextView = findViewById(R.id.textView1)
+        val textView2: TextView = findViewById(R.id.textView2)
+        val textView3: TextView = findViewById(R.id.textView3)
+        val textView4: TextView = findViewById(R.id.textView4)
+        val textView5: TextView = findViewById(R.id.textView5)
+        val imageView1: ImageView = findViewById(R.id.imageView1)
+        val imageView2: ImageView = findViewById(R.id.imageView2)
+        val textView6: TextView = findViewById(R.id.textView6)
+        val textView7: TextView = findViewById(R.id.textView7)
+        val textView8: TextView = findViewById(R.id.textView8)
+        val historiesArray = Gson().fromJson(historiesString, Array&lt;HistoriesClass&gt;::class.java)
+        var number = -1
+        val countDownTimer: CountDownTimer = object : CountDownTimer(15000, 3000) {
+            override fun onFinish() {
+                number = -1    <span>//要先加1</span>
+                start()
+            }
 
+            override fun onTick(millisUntilFinished: Long) {
+                number++
+                when (number) {
+                    0 -&gt; {
+                        animtor(progressBar1)
+                        textView1.setTextColor(Color.parseColor("#ffffff"))
+                        textView5.setTextColor(Color.parseColor("#49454f"))
+                        textView6.text = historiesArray[number].phase
+                        textView7.text = historiesArray[number].time_range
+                        textView8.text = historiesArray[number].intro
+                        imageView1.setImageResource(    <span>//原本應該的相</span>
+                            resources.getIdentifier(
+                                historiesArray[number].image.replace(
+                                    "histories/",
+                                    ""
+                                ).replace("jpeg", "").replace(".jpg", ""), "drawable", packageName
+                            )
+                        )
+                        imageView2.setImageResource(    <span>//下一張滑動的相</span>
+                            resources.getIdentifier(
+                                historiesArray[if(number == 4) 0 else number + 1].image.replace(
+                                    "histories/",
+                                    ""
+                                ).replace(".jpg", ""), "drawable", packageName
+                            )
+                        )
+                        val valueAnimator = ValueAnimator.ofInt(0, 400)
+                        valueAnimator.duration = 400
+                        var value = 0
+                        valueAnimator.addUpdateListener {
+                            value = it.animatedValue as Int
+                            imageView2.layoutParams.width = (value * resources.displayMetrics.density).toInt()
+                            imageView2.requestLayout()
+                        }
+                        valueAnimator.startDelay = 2600    <span>//setDelay就可以等XX秒才執行</span>
+                        valueAnimator.start()
+                        valueAnimator.addListener(object : AnimatorListenerAdapter(){
+                            override fun onAnimationEnd(animation: Animator, isReverse: Boolean) {
+                                super.onAnimationEnd(animation, isReverse)
+                                imageView2.layoutParams.width = 0    <span>//都已經到了下一個階段，變0下次再可以變長</span>
+                                imageView2.requestLayout()
+                            }
+                        })
+                        <mark>下面同理</mark>
+                    }
+
+                    1 -&gt; {
+                        animtor(progressBar2)
+                        textView2.setTextColor(Color.parseColor("#ffffff"))
+                        textView1.setTextColor(Color.parseColor("#49454f"))
+                        textView6.text = historiesArray[number].phase
+                        textView7.text = historiesArray[number].time_range
+                        textView8.text = historiesArray[number].intro
+                        imageView1.setImageResource(
+                            resources.getIdentifier(
+                                historiesArray[number].image.replace(
+                                    "histories/",
+                                    ""
+                                ).replace(".jpg", ""), "drawable", packageName
+                            )
+                        )
+                        imageView2.setImageResource(
+                            resources.getIdentifier(
+                                historiesArray[if(number == 4) 0 else number + 1].image.replace(
+                                    "histories/",
+                                    ""
+                                ).replace(".jpg", ""), "drawable", packageName
+                            )
+                        )
+                        val valueAnimator = ValueAnimator.ofInt(0, 400)
+                        valueAnimator.duration = 400
+                        var value = 0
+                        valueAnimator.addUpdateListener {
+                            value = it.animatedValue as Int
+                            imageView2.layoutParams.width = (value * resources.displayMetrics.density).toInt()
+                            imageView2.requestLayout()
+                        }
+                        valueAnimator.startDelay = 2600
+                        valueAnimator.start()
+                        valueAnimator.addListener(object : AnimatorListenerAdapter(){
+                            override fun onAnimationEnd(animation: Animator, isReverse: Boolean) {
+                                super.onAnimationEnd(animation, isReverse)
+                                imageView2.layoutParams.width = 0
+                                imageView2.requestLayout()
+                            }
+                        })
+                    }
+
+                    2 -&gt; {
+                        animtor(progressBar3)
+                        textView3.setTextColor(Color.parseColor("#ffffff"))
+                        textView2.setTextColor(Color.parseColor("#49454f"))
+                        textView6.text = historiesArray[number].phase
+                        textView7.text = historiesArray[number].time_range
+                        textView8.text = historiesArray[number].intro
+                        imageView1.setImageResource(
+                            resources.getIdentifier(
+                                historiesArray[number].image.replace(
+                                    "histories/",
+                                    ""
+                                ).replace(".jpg", ""), "drawable", packageName
+                            )
+                        )
+                        imageView2.setImageResource(
+                            resources.getIdentifier(
+                                historiesArray[if(number == 4) 0 else number + 1].image.replace(
+                                    "histories/",
+                                    ""
+                                ).replace(".jpg", ""), "drawable", packageName
+                            )
+                        )
+                        val valueAnimator = ValueAnimator.ofInt(0, 400)
+                        valueAnimator.duration = 400
+                        var value = 0
+                        valueAnimator.addUpdateListener {
+                            value = it.animatedValue as Int
+                            imageView2.layoutParams.width = (value * resources.displayMetrics.density).toInt()
+                            imageView2.requestLayout()
+                        }
+                        valueAnimator.startDelay = 2600
+                        valueAnimator.start()
+                        valueAnimator.addListener(object : AnimatorListenerAdapter(){
+                            override fun onAnimationEnd(animation: Animator, isReverse: Boolean) {
+                                super.onAnimationEnd(animation, isReverse)
+                                imageView2.layoutParams.width = 0
+                                imageView2.requestLayout()
+                            }
+                        })
+                    }
+
+                    3 -&gt; {
+                        animtor(progressBar4)
+                        textView4.setTextColor(Color.parseColor("#ffffff"))
+                        textView3.setTextColor(Color.parseColor("#49454f"))
+                        textView6.text = historiesArray[number].phase
+                        textView7.text = historiesArray[number].time_range
+                        textView8.text = historiesArray[number].intro
+                        imageView1.setImageResource(
+                            resources.getIdentifier(
+                                historiesArray[number].image.replace(
+                                    "histories/",
+                                    ""
+                                ).replace(".jpeg", "").replace(".jpg", ""), "drawable", packageName
+                            )
+                        )
+                        imageView2.setImageResource(
+                            resources.getIdentifier(
+                                historiesArray[if(number == 4) 0 else number + 1].image.replace(
+                                    "histories/",
+                                    ""
+                                ).replace(".jpeg", "").replace(".jpg", ""), "drawable", packageName
+                            )
+                        )
+                        val valueAnimator = ValueAnimator.ofInt(0, 400)
+                        valueAnimator.duration = 400
+                        var value = 0
+                        valueAnimator.addUpdateListener {
+                            value = it.animatedValue as Int
+                            imageView2.layoutParams.width = (value * resources.displayMetrics.density).toInt()
+                            imageView2.requestLayout()
+                        }
+                        valueAnimator.startDelay = 2600
+                        valueAnimator.start()
+                        valueAnimator.addListener(object : AnimatorListenerAdapter(){
+                            override fun onAnimationEnd(animation: Animator, isReverse: Boolean) {
+                                super.onAnimationEnd(animation, isReverse)
+                                imageView2.layoutParams.width = 0
+                                imageView2.requestLayout()
+                            }
+                        })
+                    }
+
+                    4 -&gt; {
+                        animtor(progressBar5)
+                        textView5.setTextColor(Color.parseColor("#ffffff"))
+                        textView4.setTextColor(Color.parseColor("#49454f"))
+                        textView6.text = historiesArray[number].phase
+                        textView7.text = historiesArray[number].time_range
+                        textView8.text = historiesArray[number].intro
+                        imageView1.setImageResource(
+                            resources.getIdentifier(
+                                historiesArray[number].image.replace(
+                                    "histories/",
+                                    ""
+                                ).replace(".jpeg", "").replace(".jpg", ""), "drawable", packageName
+                            )
+                        )
+                        imageView2.setImageResource(
+                            resources.getIdentifier(
+                                historiesArray[if(number == 4) 0 else number + 1].image.replace(
+                                    "histories/",
+                                    ""
+                                ).replace(".jpeg", "").replace(".jpg", ""), "drawable", packageName
+                            )
+                        )
+                        val valueAnimator = ValueAnimator.ofInt(0, 400)
+                        valueAnimator.duration = 400
+                        var value = 0
+                        valueAnimator.addUpdateListener {
+                            value = it.animatedValue as Int
+                            imageView2.layoutParams.width = (value * resources.displayMetrics.density).toInt()
+                            imageView2.requestLayout()
+                        }
+                        valueAnimator.startDelay = 2600
+                        valueAnimator.start()
+                        valueAnimator.addListener(object : AnimatorListenerAdapter(){
+                            override fun onAnimationEnd(animation: Animator, isReverse: Boolean) {
+                                super.onAnimationEnd(animation, isReverse)
+                                imageView2.layoutParams.width = 0
+                                imageView2.requestLayout()
+                            }
+                        })
+                    }
+                }
+
+            }
+
+
+        }
+        countDownTimer.start()
+        var startX = 0f
+        var startY = 0f
+        val linearLayout: LinearLayout = findViewById(R.id.main)
+        linearLayout.setOnTouchListener { _, event -&gt;
+            when(event.action){
+                MotionEvent.ACTION_DOWN -&gt; {
+                    startY = event.y
+                    startX = event.x
+                }
+
+                MotionEvent.ACTION_UP -&gt; {
+                    val moveX = event.x
+                    val moveY = event.y
+
+                    val delutaX = moveX - startX
+                    val delutaY = moveY - startY
+
+                    if(Math.abs(delutaY) &gt; Math.abs(delutaX)){
+                        if(delutaY &lt; 0){
+                            val intent = Intent(this, MainActivity3::class.java)
+                            startActivity(intent)
+                        }
+                        else{
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                }
+            }
+            true
+        }
+    }
+
+    fun animtor(progressBar: ProgressBar) {
+        val valueAnimator = ValueAnimator.ofInt(0, 100)
+        var value = 0
+        valueAnimator.duration = 3000
+        valueAnimator.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                super.onAnimationEnd(animation)
+                progressBar.progress = 0
+            }
+        })
+        valueAnimator.addUpdateListener {
+            value = it.animatedValue as Int
+            progressBar.progress = value
+            progressBar.requestLayout()
+        }
+        valueAnimator.start()
+    }
+}
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">MainActivity3(有兩條不斷下、上移的)</button>
     <div class="panel">
         <pre>
-
+findViewById&lt;LinearLayout&gt;(R.id.linearLayout1).animate().setDuration(100000).translationY(-9000f).setInterpolator(
+    LinearInterpolator()).start()
+findViewById&lt;LinearLayout&gt;(R.id.linearLayout2).animate().setDuration(100000).translationY(9000f).setInterpolator(
+    LinearInterpolator()).start()
         </pre>
     </div>
 
-    <button class="accordion">code</button>
+    <button class="accordion">MainActivity4.kt</button>
     <div class="panel">
         <pre>
+class MainActivity4 : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main4)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets -&gt;
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        val leftArea : LinearLayout = findViewById(R.id.leftArea)
+        val imageView: ImageView = findViewById(R.id.imageView)
+        val linearLayout1 : ChipGroup = findViewById(R.id.linearLayout1)
+        val rotateAnimation = RotateAnimation(0f,180f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        rotateAnimation.duration = 100
+        rotateAnimation.fillAfter = true
+        val rotateAnimation2 = RotateAnimation(180f,0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        rotateAnimation2.duration = 100
+        rotateAnimation2.fillAfter = true
+        val search: CardView = findViewById(R.id.editTextText2)
+        var true1 = false
+        imageView.setOnClickListener {    <span>//風口琴的設計</span>
+            true1 = !true1
+            if(true1){
+                linearLayout1.visibility = View.VISIBLE
+                imageView.startAnimation(rotateAnimation)
+            }
+            else{
+                imageView.startAnimation(rotateAnimation2)
+                linearLayout1.visibility = View.GONE
+            }
+        }
+        val scaleAnimation = ScaleAnimation(1f, 1.6f, 1f, 2.6f, Animation.RELATIVE_TO_SELF,0.9f,
+            Animation.RELATIVE_TO_SELF,  0.12f)
+        scaleAnimation.duration = 300
+        scaleAnimation.fillAfter = true
+        val scaleAnimation2 = ScaleAnimation(1.6f, 1f, 2.6f, 1f, Animation.RELATIVE_TO_SELF,0.9f,
+            Animation.RELATIVE_TO_SELF,  0.12f)
+        scaleAnimation2.duration = 300
+        scaleAnimation2.fillAfter = true
+        val map : ConstraintLayout = findViewById(R.id.map)
+        val button : CardView = findViewById(R.id.button)
+        var scaleBool = false
+        val searchEdit: EditText = findViewById(R.id.search_edit)
+        val searchContent : CardView = findViewById(R.id.searchContent)
+        val editTextText2: CardView = findViewById(R.id.editTextText2)
+        val linearLayout : LinearLayout = findViewById(R.id.linearLayout)
+        button.setOnClickListener {
+            scaleBool = !scaleBool
+            if(scaleBool){
+                map.pivotX = map.width * 0.9f    <span>// 設定縮放中心點 X = 右側 90%</span>
+                map.pivotY = map.height * 0.12f    <span>// 設定縮放中心點 Y = 上方 12%</span>
+                map.animate().setDuration(300).scaleX(1.45f).scaleY(2.65f).start()
+                map.bringToFront()
+                search.visibility = View.VISIBLE
+                findViewById&lt;ImageView&gt;(R.id.imageView10).scaleType = ImageView.ScaleType.CENTER_CROP
+                linearLayout.animate().scaleX(1/1.45f*1.3f).scaleY(1/2.65f*1.3f).setDuration(300).start()
+                button.animate().scaleX(1/1.45f*1.7f).scaleY(1/2.65f*1.7f).setDuration(300).start()
+            }
+            else{
+                map.pivotX = map.width * 0.9f
+                map.pivotY = map.height * 0.12f
+                findViewById&lt;ImageView&gt;(R.id.imageView10).scaleType = ImageView.ScaleType.CENTER
+                search.visibility = View.GONE
+                map.animate().setDuration(300).scaleX(1f).scaleY(1f).start()
+                button.animate().scaleX(1f).scaleY(1f).setDuration(300).start()
+            }
+        }
+        searchEdit.setOnFocusChangeListener{_, hasFocus -&gt;
+            if(hasFocus){
+                searchContent.animate().alpha(1f).translationY(10f).setDuration(500).start()
+            }
+            else{
+                searchContent.animate().alpha(0f).translationY(10f).setDuration(500).start()
+            }
+        }
 
+        val recommendLayout: RecyclerView = findViewById(R.id.reommendLayout)
+        val recommendList = Gson().fromJson(Data.recommendsString, Array&lt;RecommendClass&gt;::class.java).toList()
+        recommendLayout.adapter = recyclerAdapter(this, recommendList)
+        val layoutManager = GridLayoutManager(this, 2)
+        recommendLayout.layoutManager = layoutManager
+
+        val commentLayout  = findViewById&lt;LinearLayout&gt;(R.id.commentLayout)
+        val commentsArray = Gson().fromJson(Data.commentsString, Array&lt;CommentsClass&gt;::class.java)
+        for(result in commentsArray){
+            val layout = layoutInflater.inflate(R.layout.comments_pro, null)
+            layout.findViewById&lt;TextView&gt;(R.id.question).text = result.question
+            layout.findViewById&lt;TextView&gt;(R.id.username).text = result.username
+            layout.findViewById&lt;ImageView&gt;(R.id.image).setImageResource(resources.getIdentifier(result.avatar.replace("avatars/", "").replace(".png", ""), "drawable", packageName))
+            layout.findViewById&lt;TextView&gt;(R.id.answer).text = result.answer
+            layout.findViewById&lt;TextView&gt;(R.id.likes).text = "${result.likes} likes"
+            commentLayout.addView(layout)
+
+        }
+    }
+}
         </pre>
     </div>
     <button class="accordion">code</button>

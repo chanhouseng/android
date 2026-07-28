@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<pre>
+<mark>喺張圖加返個linearLayout會好啲</mark>
+val main : LinearLayout = findViewById(R.id.main)
+val imageView : ImageView = findViewById(R.id.imageView)
+</pre>
+    <button class="accordion">放大</button>
+    <div class="panel">
+        <pre>
+var scaleFactor = 1f
+val scaleDetector = ScaleGestureDetector(this, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {    <span>//建立一個「縮放偵測器」</span>
+    override fun onScale(detector: ScaleGestureDetector): Boolean {
+        val scale = detector.scaleFactor    <span>//取得這一瞬間兩指的縮放比例</span>
+        val nextScale = scale * scaleFactor
+        if(nextScale in (1f..5f)){
+            scaleFactor = nextScale
+            imageView.scaleX = nextScale    <span>//把圖片的寬度和高度都縮放到新的倍數</span>
+            imageView.scaleY = nextScale
+            imageView.pivotX = detector.focusX    <span>//把縮放的中心點設成兩根手指的中間位置。</span>
+            imageView.pivotY = detector.focusY
+        }
+        return true
+    }
+})
+        </pre>
+    </div>
+    <button class="accordion">移勳</button>
+    <div class="panel">
+        <pre>
+val gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener(){    <span>//建立一個「手勢偵測器」</span>
+    override fun onScroll(
+        e1: MotionEvent?,
+        e2: MotionEvent,
+        distanceX: Float,
+        distanceY: Float
+    ): Boolean {
+        imageView.translationX -= distanceX    <span>//distanceX / distanceY 是這一瞬間手指移動的距離</span>
+        imageView.translationY -= distanceY
+        return true
+    }
+})
+        </pre>
+    </div>
+<pre>
+main.setOnTouchListener { v, event -&gt;
+    scaleDetector.onTouchEvent(event)    <span>//把所有的觸控事件同時交給兩個偵測器處理。</span>
+    gestureDetector.onTouchEvent(event)
+    true
+}
+</pre>
+<script src="js.js"></script>
+</body>
+</html>

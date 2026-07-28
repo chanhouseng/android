@@ -1,0 +1,36 @@
+{
+  "goal": {
+    "kcal": 500,
+    "steps": 10000
+  },
+  "week": [
+    {
+      "day": "Mon",
+      "completed": true
+    },
+    {
+      "day": "Tue",
+      "completed": false
+    },
+    {
+      "day": "Wed",
+      "completed": true
+    },
+    {
+      "day": "Thu",
+      "completed": true
+    },
+    {
+      "day": "Fri",
+      "completed": false
+    },
+    {
+      "day": "Sat",
+      "completed": true
+    },
+    {
+      "day": "Sun",
+      "completed": false
+    }
+  ]
+}

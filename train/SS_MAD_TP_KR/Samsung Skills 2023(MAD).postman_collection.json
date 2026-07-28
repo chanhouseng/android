@@ -1,0 +1,426 @@
+{
+	"info": {
+		"_postman_id": "93864d8c-f381-4d33-bf9a-b257b00b25f5",
+		"name": "Samsung Skills 2023(MAD)",
+		"description": "STATUS_CD: Normal response at start with M\n\nSTATUS_CD: Error response at start with E\n\nSTATUS_MSG: Message if error response\n\nhost: Connection Host\n\nimgPrefix: Prefixes for Image Addresses (Typically, a combination of host, imgPrefix, and fileName)\n\n---\n\nType: JWT Beearer / Request Header  \nAlgorithm: a9c7c9b367316e66711951190d8fb9fe769a7705c8ac47be5018d138c80c75206b5537236796414f620f2a8f5d017b83339b700243d3fc640644b01f3bc8f362  \npayload: {\"TKN\" : \"{{api_token}}\"}",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "550722"
+	},
+	"item": [
+		{
+			"name": "0. Authenticate",
+			"item": [
+				{
+					"name": "000. Sign-in",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mberId\" : \"ssmad0@definejava.net\",\r\n    \"mberPassword\" : \"ssmad@2023\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/authenticate/signin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"authenticate",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "001.  200. Get profile - Bearer JWT Token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "002.  200. Get profile - Bearer Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "1. Workout",
+			"item": [
+				{
+					"name": "100. Today workout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/workout/today",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"workout",
+								"today"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "101. Latest workout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/workout/latest",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"workout",
+								"latest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "102. Weekly workout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/workout/weekly",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"workout",
+								"weekly"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "103. Complete workout(running type)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"wrkoutTyCd\": 0,\r\n    \"wrkoutTime\": 721,\r\n    \"kcal\": 64.8,\r\n    \"step\": 2884,\r\n    \"wrkoutDt\": 1698707220\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/workout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"workout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "104. Complete workout(not running type)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"wrkoutTyCd\": 3,\r\n    \"wrkoutTime\": 721,\r\n    \"kcal\": 64.8,\r\n    \"wrkoutDt\": 1698707220\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/workout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"workout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "105. Workout history",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/workout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"workout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Profile",
+			"item": [
+				{
+					"name": "200. Get profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "201. Update goal line",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"goalKcal\": 500.15,\r\n    \"goalStep\": 10001\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/profile/goal-line",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile",
+								"goal-line"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "202. Update user physical",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"height\": 178.5,\r\n    \"bdwgh\": 70.8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/profile/physical",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile",
+								"physical"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "jwt",
+		"jwt": [
+			{
+				"key": "payload",
+				"value": "{\"TKN\" : \"{{api_token}}\"}",
+				"type": "string"
+			},
+			{
+				"key": "secret",
+				"value": "a9c7c9b367316e66711951190d8fb9fe769a7705c8ac47be5018d138c80c75206b5537236796414f620f2a8f5d017b83339b700243d3fc640644b01f3bc8f362",
+				"type": "string"
+			},
+			{
+				"key": "algorithm",
+				"value": "HS256",
+				"type": "string"
+			},
+			{
+				"key": "isSecretBase64Encoded",
+				"value": false,
+				"type": "boolean"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "headerPrefix",
+				"value": "Bearer",
+				"type": "string"
+			},
+			{
+				"key": "queryParamKey",
+				"value": "token",
+				"type": "string"
+			},
+			{
+				"key": "header",
+				"value": "{}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://ssmad.db.pe.kr:50001/api",
+			"type": "string"
+		},
+		{
+			"key": "api_token",
+			"value": "lHcP0yKUoMe84lxNpWMozJTtY//5DHXuAzzm/Xs9WrDePVUEAZkfuGEMyU5Bd0P+HJVea/uEkv4aVygjBJZdcg",
+			"type": "string"
+		}
+	]
+}
