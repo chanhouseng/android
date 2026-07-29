@@ -8,91 +8,239 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button class="accordion">code</button>
+    <p><mark>邏輯是九張圖片不動，每張相給它們一個object，包含數字和圖片，數字會有兩個相同用於匹配，圖片用來顯示。有一個hadSet去檢查已經加了分的圖片的數字。有兩個值分別是數字和imageView，前者檢查是否配對。後者檢查是否點擊了同一張相。同一數字即配對成功，把這個數字加入hadSet。</mark></p>
+    <p><mark>因為有九個object，所以每次相開始遊戲會有一個1-9的混亂數組，然後去抽其一，對應是第幾個object，達至隨機的效果</mark></p>
+    <button class="accordion">MainActivity3.kt</button>
     <div class="panel">
         <pre>
+val rankingLayout = findViewById&lt;LinearLayout&gt;(R.id.rankingLayout)
+val noPlayerLayout = findViewById&lt;LinearLayout&gt;(R.id.noPlayerLayout)
+val numberOne = findViewById&lt;LinearLayout&gt;(R.id.numberOne)
+val numberTwo = findViewById&lt;LinearLayout&gt;(R.id.numberTwo)
+val numberThree = findViewById&lt;LinearLayout&gt;(R.id.numberThree)
+val prefs = getSharedPreferences("data", MODE_PRIVATE)
+if(prefs.getString("playDate", "") != "") {
+    rankingLayout.visibility = View.VISIBLE
+    noPlayerLayout.visibility = View.GONE
+    val prefsArray = Gson().fromJson(prefs.getString("playDate", ""), Array&lt;PlayDateClass&gt;::class.java)
+    var ranking = 1
+    numberOne.removeAllViews()
+    numberTwo.removeAllViews()
+    numberThree.removeAllViews()
+    for(result in prefsArray){
+        val textView1 = TextView(this)
+        textView1.text = ranking.toString()
+        textView1.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+        numberOne.addView(textView1)
+
+        val textView2 = TextView(this)
+        textView2.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+        textView2.text = result.name
+        numberTwo.addView(textView2)
+
+        val textView3 = TextView(this)
+        textView3.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+        textView3.text = result.time
+        println(result.time)
+        numberThree.addView(textView3)
+        ranking ++
+    }
+}
+
+val button : Button = findViewById(R.id.button)
+button.setOnClickListener {
+    val custom = layoutInflater.inflate(R.layout.play_name_alert, null)
+    val editText = custom.findViewById&lt;EditText&gt;(R.id.editTextText)
+    val editNumber = custom.findViewById&lt;TextView&gt;(R.id.editNumber)
+    val alertDialog = AlertDialog.Builder(this).setView(custom).show()
+    alertDialog.setCanceledOnTouchOutside(false)
+    editText.doOnTextChanged { text, start, before, count -&gt;
+        editNumber.text = editText.text.toString().length.toString()
+    }
+    custom.findViewById&lt;Button&gt;(R.id.button2).setOnClickListener {
+        val intent = Intent(this, MainActivity4::class.java)
+        intent.putExtra("name" , editText.text.toString())
+        startActivity(intent)
+    }
+}
 
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">MainActivity4.kt</button>
     <div class="panel">
         <pre>
+var value = 0    <span>//畫面中需要顯示毫秒，用valueAnimator就有那種效果</span>
+valueAnimator = ValueAnimator.ofInt(0, 999)
+valueAnimator.duration = 999
+valueAnimator.addUpdateListener {
+    value = it.animatedValue as Int
+    textView11.text = value.toString()
+    if(timeLimit != LocalTime.of(0, 0, 0, 0)){
+        checkTime()    <span>//顯示時間和檢查時候超過limited之用</span>
+    }
+}
+countDownTimer = object : CountDownTimer(currentTimeLeft, 1000){
+    override fun onFinish() {
+        timeUse++
+        currentTimeLeft = 1000L
+        showTime()     <span>//顯示分杪</span>
+        if(!isPaused){
+            startCountDownTimer()    <span>//繼續這個countdown</span>
+        }
+    }
+
+    override fun onTick(millisUntilFinished: Long) {
+        currentTimeLeft = millisUntilFinished    <span>//暫停可以攞返餘下的時間</span>
+        valueAnimator.start()    <span>//一秒一次毫杪的效果</span>
+    }
+
+}
+val prefs = getSharedPreferences("data", MODE_PRIVATE)
+val prefsJson = prefs.getString("playDate", null)
+if(prefsJson != null){
+    val prefsArray = Gson().fromJson(prefsJson, Array&lt;PlayDateClass&gt;::class.java)    <span>//用於設置time limit</span>
+    if(prefsArray.size &gt;= 3){    
+        timeLimit = LocalTime.parse(prefsArray.last().time, Data.formatter)      
+    }
+}
+
+val button: Button = findViewById(R.id.button3)
+val numberList = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9).shuffled()    <span>//混亂的數組去抽</span>
+button.setOnClickListener {
+    startCountDownTimer()
+    imageView14.visibility = View.GONE
+    findViewById&lt;LinearLayout&gt;(R.id.bottom_sheet).animate().translationY(0f).setDuration(470).start()
+    button.visibility = View.GONE
+    imageView1.setOnClickListener {
+        val numberListNumber = numberList[0]
+        checkImage(numberListNumber, it as ImageView)  
+    }  
+    imageView2.setOnClickListener {
+        val numberListNumber = numberList[1]
+        checkImage(numberListNumber, it as ImageView)
+    }
+    imageView3.setOnClickListener {
+        val numberListNumber = numberList[2]
+        checkImage(numberListNumber, it as ImageView)
+    }
+    imageView4.setOnClickListener {
+        val numberListNumber = numberList[3]
+        checkImage(numberListNumber, it as ImageView)
+    }
+    imageView5.setOnClickListener {
+        val numberListNumber = numberList[4]
+        checkImage(numberListNumber, it as ImageView)
+    }
+    imageView6.setOnClickListener {
+        val numberListNumber = numberList[5]
+        checkImage(numberListNumber, it as ImageView)
+    }
+    imageView7.setOnClickListener {
+        val numberListNumber = numberList[6]
+        checkImage(numberListNumber, it as ImageView)
+    }
+    imageView8.setOnClickListener {
+        val numberListNumber = numberList[7]
+        checkImage(numberListNumber, it as ImageView)
+    }
+    imageView9.setOnClickListener {
+        val numberListNumber = numberList[8]
+        checkImage(numberListNumber, it as ImageView)
+    }
+}
+
 
         </pre>
     </div>
-    <button class="accordion">code</button>
+
+    <button class="accordion">fun checkImage</button>
     <div class="panel">
         <pre>
+    fun checkImage(numberListNumber: Int, imageView: ImageView) {    <span>//傳入嚟嘅numberListNumber係指第幾個object</span>
+        if(!(checkedNumber.contains(Data.playNumber[numberListNumber].number))){    <span>//檢查是否已配對成功</span>
+            imageView.setImageResource(Data.playNumber[numberListNumber].img)
+            if (number != -1) {    <span>//分情況，係第一次暗定第二次暗相</span>
+                if(imageView != view){     <span>//檢查係咪暗同一張相</span>
+                    if (number == Data.playNumber[numberListNumber].number) {   
+                        checkedNumber.add(number)
+                        point++
+                        pointTextView.text = point.toString()
+                        view = null
+                        number = -1
+                        if(point == 4){
+                            stopTimer()
+                            valueAnimator.cancel()
+                            showTime()
+                            Thread{
+                                Thread.sleep(300)
+                                runOnUiThread {
+                                    showWin()
+                                }
+                            }.start()
+                        }
+                    } else {
+                        Thread{
+                            Thread.sleep(250.toLong())
+                            runOnUiThread {
+                                view?.setImageResource(R.drawable.mystery)
+                                imageView.setImageResource(R.drawable.mystery)
+                                view = null
+                                number = -1
+                            }
+                        }.start()
+                    }
+                }
+
+            } else {
+                number = Data.playNumber[numberListNumber].number    <span>//儲存返個object入面的數字</span>
+                view = imageView
+            }
+        }
+    }
+        </pre>
+    </div>
+    <button class="accordion">fun showWin</button>
+    <div class="panel">
+        <pre>
+    fun showWin(){
+        alreadyLoad = false
+        val useTime = "00:${timeTextView.text}.${textView11.text.padStart(3,'0')}"
+        val myId = if(Data.playDate.size == 0) 0 else Data.playDate.last().id + 1
+        Data.playDate.add(PlayDateClass(myId, intent.getStringExtra("name").toString(),useTime ))     <span>//記錄返時間、名同分數</span>
+        Data.playDate.sortBy { LocalTime.parse(it.time, Data.formatter) }    
+        while(Data.playDate.size > 3){   
+            Data.playDate.removeLast()    <span>//因為已經排左序，所以最後嘅時間一定係最慢</span>
+        }
+        val editor = getSharedPreferences("data", MODE_PRIVATE).edit()
+        editor.putString("playDate", Gson().toJson(Data.playDate))
+        editor.apply()
+
+        <span>......</span>
+    }
+        </pre>
+    </div>
+    <button class="accordion">Date.kt</button>
+    <div class="panel">
+        <pre>
+val formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS")
+val playNumber = arrayListOf&lt;PlayClass&gt;(
+    PlayClass(1, R.drawable.fish),
+    PlayClass(1, R.drawable.fish),
+    PlayClass(2, R.drawable.lion),
+    PlayClass(2, R.drawable.lion),
+    PlayClass(3, R.drawable.wolf),
+    PlayClass(3, R.drawable.wolf),
+    PlayClass(4, R.drawable.bear),
+    PlayClass(4, R.drawable.bear),
+    PlayClass(5, R.drawable.dragon),
+    PlayClass(5, R.drawable.dragon),
+)
+
+var playDate = arrayListOf&lt;PlayDateClass&gt;()    <span>//成功的資料</span>
 
         </pre>
     </div>
-
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
+    <p>其他嘅都係啲顯示alertDialog無乜用</p>
 <script src="js.js"></script>
 </body>
 </html>

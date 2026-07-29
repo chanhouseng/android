@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">eventFragment.kt</button>
+    <div class="panel">
+        <pre>
+load(1)
+chip1.setOnClickListener { _ -&gt;
+    load(1)
+}
+chip2.setOnClickListener { _ -&gt;
+    load(2)
+}
+chip3.setOnClickListener { _ -&gt;
+    load(3)
+}
+fun load(number: Number){
+    chipGroup.clearCheck()    <span>//清除所有的check，之後再isChecked</span>
+    linearLayout.removeAllViews()
+    var list = listOf&lt;eventClass&gt;()
+        when(number){
+        1 -&gt; {
+            list = Data.eventList
+            chip1.isChecked = true
+        }
+        2 -&gt; {
+            chip2.isChecked = true
+            list = Data.eventList.filter { !it.isRead }
+        }
+        else -&gt; {
+            chip3.isChecked = true
+            list = Data.eventList.filter { it.isRead }
+        }
+    }
+    for(result in list){
+        val layout = layoutInflater.inflate(R.layout.event_pro, null)
+        layout.findViewById&lt;TextView&gt;(R.id.textView2).text = result.title
+        layout.findViewById&lt;TextView&gt;(R.id.textView3).text = result.description
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView).setImageResource(resources.getIdentifier(result.image.replace(".png", "").replace(".jpeg", "").replace(".jpg", ""), "drawable", requireActivity().packageName))
+        if(result.isRead){
+            layout.findViewById&lt;TextView&gt;(R.id.textView4).text = "Read"
+        }
+        else{
+            layout.findViewById&lt;TextView&gt;(R.id.textView4).text = "Unread"
+        }
+        layout.setOnClickListener {
+            result.isRead = true
+            val intent = Intent(requireActivity(), MainActivity2::class.java)
+            intent.putExtra("image", result.image)
+            intent.putExtra("isRead", result.isRead)
+            intent.putExtra("title", result.title)
+            intent.putExtra("description", result.description)
+            intent.putExtra("count", result.count)
+            intent.putExtra("thumbnails", result.thumbnails)
+            startActivity(intent)
+            result.count++
+        }
+        linearLayout.addView(layout)
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt</button>
+    <div class="panel">
+        <p><span>//點入去的product</span></p>
+        <pre>
+imageView1.setImageResource(
+    resources.getIdentifier(imageArray!!.get(0).replace(".png", "").replace(".jpeg", "").replace(".jpg", ""), "drawable", packageName))
+imageView2.setImageResource(
+    resources.getIdentifier(imageArray!!.get(1).replace(".png", "").replace(".jpeg", "").replace(".jpg", ""), "drawable", packageName))
+imageView3.setImageResource(
+    resources.getIdentifier(imageArray!!.get(2).replace(".png", "").replace(".jpeg", "").replace(".jpg", ""), "drawable", packageName))
+imageView1.setOnClickListener {
+    showImage(0)
+}
+imageView2.setOnClickListener {
+    showImage(1)
+}
+imageView3.setOnClickListener {
+    showImage(2)
+}
+fun showImage(number: Int) {
+    val imageArray =  intent.getStringArrayExtra("thumbnails")
+    val layout = layoutInflater.inflate(R.layout.event_alert, null)    <span>//HorizontalScrollView放喺alert以滿足滑動的要求</span>
+    val imageView = layout.findViewById&lt;ImageView&gt;(R.id.imageView5)
+    val imageView2 = layout.findViewById&lt;ImageView&gt;(R.id.imageView6)
+    val imageView3 = layout.findViewById&lt;ImageView&gt;(R.id.imageView7)
+    imageView.setImageResource(resources.getIdentifier(imageArray!!.get(number).replace(".png", "").replace(".jpeg", "").replace(".jpg", ""), "drawable", packageName))
+    imageView2.setImageResource(resources.getIdentifier(imageArray!!.get(if(number+1&gt;=imageArray.size) number - 2 else number + 1).replace(".png", "").replace(".jpeg", "").replace(".jpg", ""), "drawable", packageName))    <span>//邏輯問題，舉例可想到</span>
+    imageView3.setImageResource(resources.getIdentifier(imageArray!!.get(if(number+2&gt;=imageArray.size) number - 1 else number + 2).replace(".png", "").replace(".jpeg", "").replace(".jpg", ""), "drawable", packageName))
+    val alertDialog = AlertDialog.Builder(this).setView(layout).show()
+    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+}
+        </pre>
+    </div>
+    <button class="accordion">recyclerView_adapter.kt</button>
+    <div class="panel">
+        <p><span>//ticket頁面有兩個recyclerView的地方</span></p>
+        <pre>
+class recyclerView_adapter(private val list: List&lt;TicketClass&gt;, val context: Context): RecyclerView.Adapter&lt;recyclerView_adapter.recycHolder&gt;() {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): recycHolder {
+        println(1)
+
+        val layout = LayoutInflater.from(parent.context).inflate(R.layout.ticket_pro, parent, false)
+        return recycHolder(layout)
+    }
+
+    override fun onBindViewHolder(
+        holder: recycHolder,
+        position: Int
+    ) {
+        println(1)
+        holder.textView9.text = "${list[position].seat.take(1)}${if(list[position].seat.substring(1,2)=="0") list[position].seat.substring(2,3) else list[position].seat.substring(1,3)} Row${    <span>//呢個係攞值，因為佢可能係01or10，最大分別係之前有冇個0，所以就要睇如果第一個0即單位數，取後位，不是則都都取</span>
+            if (list[position].seat.substring(
+                    3,4
+                ) == "0"
+            ) list[position].seat.substring(4,5)
+                 else list[position].seat.substring(
+                3,
+                5
+            )
+        } Column${
+            if (list[position].seat.substring(5,6) == "0") list[position].seat.substring(6,7)       <span>//經過不斷的試，就可以攞到你想嘅野</span>
+                 else list[position].seat.substring(5, 7)
+        }"
+        holder.textView8.text = list[position].attendeeName
+        holder.main.setOnClickListener {
+            val intent = Intent(context, MainActivity4::class.java)
+            intent.putExtra("isOpeningCeremony", list[position].isOpeningCeremony)
+            intent.putExtra("attendeeName", list[position].attendeeName)
+            intent.putExtra("time", list[position].time)
+            intent.putExtra("seat", list[position].seat)
+            intent.putExtra("image", list[position].image)
+            context.startActivity(intent)
+        }
+
+    }
+
+    override fun getItemCount(): Int {
+        return list.size
+    }
+
+    inner class recycHolder(itView: View): RecyclerView.ViewHolder(itView){
+        val textView8 = itView.findViewById&lt;TextView&gt;(R.id.textView8)
+        val main = itView.findViewById&lt;LinearLayout&gt;(R.id.main)
+        val textView9 = itView.findViewById&lt;TextView&gt;(R.id.textView9)
+    }
+
+}
+        </pre>
+    </div>
+
+    <button class="accordion">MainActivity4.kt</button>
+    <div class="panel">
+        <pre>
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+    val seat = intent.getStringExtra("seat")
+    findViewById&lt;TextView&gt;(R.id.type).text = "Ticket type: ${if(intent.getBooleanExtra("isOpeningCeremony", false)) "Opening Ceremony" else "Closing Ceremony"}"
+    findViewById&lt;TextView&gt;(R.id.name).text = "Audience's name: ${intent.getStringExtra("attendeeName")}"
+    findViewById&lt;TextView&gt;(R.id.time).text = "Time: ${LocalDateTime.parse(intent.getStringExtra("time")).format(formatter)}"
+    findViewById&lt;TextView&gt;(R.id.seat).text = "Seat: ${seat!!.take(1)}${if(seat.substring(1,2)=="0") seat.substring(2,3) else seat.substring(1,3)} Row${
+        if (seat.substring(
+                3,4
+            ) == "0"
+        ) seat.substring(4,5)
+        else seat.substring(
+            3,
+            5
+        )
+    } Column${
+        if (seat.substring(5,6) == "0") seat.substring(6,7)
+        else seat.substring(5, 7)
+    }"
+
+    findViewById&lt;Button&gt;(R.id.button4).setOnClickListener {
+        saveLayoutGallery(linearLayout)
+    }
+    val imageView8: ImageView = findViewById(R.id.imageView8)
+    if(intent.getStringExtra("image")?.contains("content://") == true){     <span>//因為發現uri同R.drawable最大分別係之前有個content://，即如果有content://就係uri啲相，反之則係預設。但也可以用try</span>
+        imageView8.setImageURI(intent.getStringExtra("image")?.toUri())
+    }
+    else{
+        val imageId = resources.getIdentifier(
+            intent.getStringExtra("image")?.replace(".png", "")
+                ?.replace(".jpeg", "")?.replace(".jpg", ""), "drawable", packageName)
+        imageView8.setImageResource(imageId)
+    }
+
+        </pre>
+    </div>
+    <button class="accordion">MainActivity3.kt</button>
+    <div class="panel">
+        <pre>
+    private var uri2: Uri? = null
+    private val pickPhoto = registerForActivityResult(ActivityResultContracts.PickVisualMedia()){ uri ->
+        imageView9.setImageURI(uri)
+        if (uri != null) {
+            uri2 = uri    <span>//先儲存，真建立就放值</span>
+        }
+    }
+
+findViewById&lt;Button&gt;(R.id.button2).setOnClickListener {
+    pickPhoto.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+}
+val spinnerList = listOf("Opening Ceremony","Closing Ceremony")
+val spinner : Spinner = findViewById(R.id.spinner)
+spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, spinnerList)
+findViewById&lt;Button&gt;(R.id.button3).setOnClickListener {
+    val intent = Intent(this, MainActivity::class.java)
+    intent.putExtra("number", 2)
+    val isOpeningCeremony = if(spinner.selectedItemPosition == 0) true else false
+    val abc = listOf("A", "B", "C")
+    val seat = abc.random()
+    Data.ticketList.add(TicketClass(isOpeningCeremony, findViewById&lt;EditText&gt;(R.id.editTextText).text.toString(),
+        LocalDateTime.now().toString(),"${seat}${(1..9).random().toString().padStart(2, '0')}${
+            (1..9).random().toString().padStart(2, '0')
+        }${(1..9).random().toString().padStart(2, '0')}", uri2.toString()))     <span>//所以要儲存uri，之後再try去變成uri顯示</span>
+    startActivity(intent)
+}
+
+
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

@@ -26,6 +26,33 @@
             <p>homework6常用</p>
         </pre>
     </div>
+    <button class="accordion">打開google map</button>
+    <div class="panel">
+        <pre>
+        layout.findViewById&lt;TextView&gt;(R.id.textView23).setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_VIEW
+            intent.setPackage("com.google.android.apps.maps")    <span>//打開google map</span>
+            startActivity(intent)
+        }
+            <a href="../homework/02_Module_A_PM.html">02_Module_A_PM有</a>
+        </pre>
+    </div>
+    <button class="accordion">打開apps</button>
+    <div class="panel">
+        <pre>
+val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0"))   <span>//打開地圖</span>
+val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"))    <span>//打開google</span>
+val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:0912345678"))    <span>//打開電話</span>
+
+val intent = Intent(Intent.ACTION_SENDTO).apply {    <span>//打開郵件</span>
+    data = Uri.parse("mailto:")    <span>// 顯示郵件應用</span>
+    putExtra(Intent.EXTRA_EMAIL, arrayOf("recipient@example.com"))    <span>//支援多位收件人</span>
+    putExtra(Intent.EXTRA_SUBJECT, "郵件主旨")
+    putExtra(Intent.EXTRA_TEXT, "郵件內容")
+}
+        </pre>
+    </div>
 <script src="js.js"></script>
 </body>
 </html>

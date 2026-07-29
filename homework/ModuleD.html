@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">test</button>
+    <div class="panel">
+        <pre>
+class ApplicationUITesting {
+    private lateinit var device: UiDevice
+    private val PACKAGE_NAME = "edu.ws2024.a03.moduled"
+
+    @Before
+    fun setUp(){
+        device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        device.pressHome()
+    }
+
+    @Test
+    fun startTesting(){
+        Log.d("Step No: 1", "Step No: 1, Application Startup")
+        val context = ApplicationProvider.getApplicationContext&lt;Context&gt;()
+        val intent = context.packageManager.getLaunchIntentForPackage(PACKAGE_NAME)
+        context.startActivity(intent)
+        Thread.sleep(1000)
+
+        Log.d("Step No: 2", "Step No: 2,Click the third item in the category")
+        val type = device.findObject(By.res(PACKAGE_NAME, "type3"))
+        type.click()
+        Thread.sleep(1000)
+
+        Log.d("Step No: 3", "Step No: 3,Slide the product list and find the tenth item")
+        val scrollView = UiScrollable(UiSelector().scrollable(true))
+        scrollView.scrollToEnd(10)
+        Thread.sleep(1000)
+
+        Log.d("Step No: 4", "Step No: 4,Click the increase button for the tenth item three times")
+        val button = device.findObject(UiSelector().className("android.widget.ImageView").instance(16))    <span>//因為個button係動態JSON生成，所以好難設個id。所以呢個係揾class係button，再數係第幾個</span>
+        button.click()
+        Thread.sleep(1000)
+
+        Log.d("Step No: 5", "Step No: 5,Click the fourth item in the category")
+        val type4 = device.findObject(By.res(PACKAGE_NAME, "type4"))
+        type4.click()
+        Thread.sleep(1000)
+
+        Log.d("Step No: 6", "Step No: 6,Click the increase button for the first item six times")
+        val button6 = device.findObject(UiSelector().className("android.widget.ImageView").instance(1))    <span>//界面有唔同到，佢數出嚟第幾個都會有所唔同</span>
+        val button7 = device.findObject(UiSelector().className("android.widget.ImageView").instance(2))
+        button6.click()
+        button7.click()
+        button7.click()
+        button7.click()
+        button7.click()
+        button7.click()
+        Thread.sleep(1000)
+
+        Log.d("Step No: 7", "Step No: 7,Click the decrease button for the first item once")
+        button6.click()
+        Thread.sleep(1000)
+
+        Log.d("Step No: 8", "Step No: 8,Click the shopping cart button")
+        val imageView4 = device.findObject(By.res(PACKAGE_NAME, "imageView4"))
+        imageView4.click()
+        Thread.sleep(1000)
+
+        Log.d("Step No: 9", "Step No: 9,Click the \"Submit\" utton")
+        val submit = device.findObject(UiSelector().text("Submit"))
+        submit.click()
+        Thread.sleep(1000)
+
+        Log.d("Step No: 10", "Step No: 10, Enter text in the Name input box")
+        val name = device.findObject(By.res(PACKAGE_NAME, "nameEdit"))
+        name.text = "Mary"
+        Thread.sleep(1000)
+
+        Log.d("Step No: 11", "Step No: 11, Enter text into the Phone input box")
+        val phoneEdit = device.findObject(By.res(PACKAGE_NAME,"phoneEdit" ))
+        phoneEdit.text = "0612345678"
+        Thread.sleep(1000)
+
+        Log.d("Step No: 12", "Step No: 12, Enter text into the Address input box")
+        val addressEdit = device.findObject(By.res(PACKAGE_NAME, "addressEdit"))
+        addressEdit.text = "123Rue Franklin, Lyon"
+        Thread.sleep(1000)
+
+        Log.d("Step No: 13", "Step No: 13, Click the \"Cash\" radio button")
+        val cash = device.findObject(UiSelector().text("Cash"))
+        cash.click()
+        Thread.sleep(1000)
+
+        Log.d("Step No: 14", "Step No: 14, Click the \"Check out\" button")
+        val check = device.findObject(UiSelector().text("Check out"))
+        check.click()
+        Thread.sleep(1000)
+
+        Log.d("Step No: 15", "Step No: 15, Click the \"Confirm\" button")
+        val con = device.findObject(UiSelector().text("Confirm"))
+        con.click()
+        Thread.sleep(1000)
+
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity.kt</button>
+    <div class="panel">
+        <pre>
+for(type in Data.foodTypeArray){
+    val textView : TextView = typeChooseLayout.getChildAt(typeNumber) as TextView
+    textView.text = type.name
+    typeNumber++
+}
+typeClick(typeText1)
+showProduct(1)
+typeText1.setOnClickListener { typeClick(it as TextView)
+    showProduct(1)}
+typeText2.setOnClickListener { typeClick(it as TextView)
+    showProduct(2)}
+typeText3.setOnClickListener { typeClick(it as TextView)
+    showProduct(3)}
+typeText4.setOnClickListener { typeClick(it as TextView)
+    showProduct(4)}
+typeText5.setOnClickListener { typeClick(it as TextView)
+    showProduct(5)}
+typeText6.setOnClickListener { typeClick(it as TextView)
+    showProduct(6)}
+typeText7.setOnClickListener { typeClick(it as TextView)
+    showProduct(7)}
+typeText8.setOnClickListener { typeClick(it as TextView)
+    showProduct(8)}
+
+carImage.setOnClickListener {
+    val allNumberObject2 = Data.foodMenuArray.filter { it.number &gt; 0 }
+    var allNumber2 = 0
+    for(number in allNumberObject2){
+        allNumber2 += number.number
+    }
+    if(allNumber2 &gt; 0){
+        val custom = layoutInflater.inflate(R.layout.bottom_sheet_cart, null)
+        val bottomSheetDialog = BottomSheetDialog(this)
+        bottomSheetDialog.setContentView(custom)
+        bottomSheetDialog.show()
+        custom.findViewById&lt;ImageView&gt;(R.id.imageView5).setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+        bottomSheetDialog.setCanceledOnTouchOutside(false)
+        custom.findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("Do you want to empty the Cart?")
+                .setPositiveButton("Confirm"){_, _ -&gt;
+                    for(number in allNumberObject2){
+                        number.number = 0
+                    }
+                    custom.findViewById&lt;LinearLayout&gt;(R.id.linearLayout).removeAllViews()
+                    bottomSheetDialog.dismiss()
+                    showProduct(nowPage)
+
+                }
+                .setNegativeButton("Cancel"){_, _ -&gt;
+
+                }
+                .show()
+        }
+        custom.findViewById&lt;Button&gt;(R.id.button3).setOnClickListener {
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+        }
+        val results = Data.foodMenuArray.filter { it.number &gt; 0 }
+        var total = 0f
+        for(result in results){
+            total += result.number * result.price.toFloat()
+        }
+        custom.findViewById&lt;TextView&gt;(R.id.totalText).text = "Total: ${String.format("%.1f", total)}"
+        for(result in results){
+            val layout = layoutInflater.inflate(R.layout.oder_pro, null)
+            layout.findViewById&lt;TextView&gt;(R.id.textView3).text = result.name
+            layout.findViewById&lt;ImageView&gt;(R.id.imageView).setImageResource(resources.getIdentifier(result.image_url.replace(".png", "").replace(".jpeg" , "").replace(".jpg", ""), "drawable", packageName))
+            if (result.number &gt;= 5){
+                layout.findViewById&lt;TextView&gt;(R.id.textView2).visibility = View.VISIBLE
+                layout.findViewById&lt;TextView&gt;(R.id.textView2).text = result.price
+                layout.findViewById&lt;TextView&gt;(R.id.textView4).text = "$${String.format("%.1f", result.price.toFloat() * 0.9f)}"
+                layout.findViewById&lt;TextView&gt;(R.id.textView2).paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            }
+            else{
+                layout.findViewById&lt;TextView&gt;(R.id.textView4).text = result.price
+            }
+            layout.findViewById&lt;TextView&gt;(R.id.textView7).text = "x${result.number}"
+            custom.findViewById&lt;LinearLayout&gt;(R.id.linearLayout).addView(layout)
+
+        }
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity.kt (showProduct)</button>
+    <div class="panel">
+<mark>show 返所有的元素(當點擊時)</mark>
+        <pre>
+fun showProduct(number:Int){
+    showTotal()
+    nowPage = number
+    linearLayout.removeAllViews()
+    if(number != 8){
+        nothing.visibility = View.GONE
+        val results = Data.foodMenuArray.filter { it.type_id == number.toString() }
+        val allNumberObject2 = Data.foodMenuArray.filter { it.number > 0 }
+        var allNumber2 = 0
+        for(number in allNumberObject2){
+            allNumber2 += number.number
+        }
+        if(allNumber2 == 0) carNumberText.visibility = View.INVISIBLE else {
+            t10Number.text = allNumber2.toString()
+            carNumberText.visibility = View.VISIBLE
+        }
+        for(result in results){
+            val layout = layoutInflater.inflate(R.layout.car_pro , null)
+            layout.findViewById&lt;TextView>(R.id.textView3).text = result.name
+            layout.findViewById&lt;TextView>(R.id.textView2).text = result.remark
+            layout.findViewById&lt;ImageView>(R.id.imageView).setImageResource(resources.getIdentifier(result.image_url.replace(".png", "").replace(".jpeg" , "").replace(".jpg", ""), "drawable", packageName))
+            layout.findViewById&lt;TextView>(R.id.textView4).text = "$${result.price}"
+            val addButton = layout.findViewById&lt;LinearLayout>(R.id.addButton)
+            val removeButton = layout.findViewById&lt;LinearLayout>(R.id.removeButton)
+            val proNumber = layout.findViewById&lt;TextView>(R.id.textView5)
+            if(result.number > 0){
+                proNumber.visibility = View.VISIBLE
+                removeButton.visibility = View.VISIBLE
+                proNumber.text = result.number.toString()
+            }
+            addButton.setOnClickListener {
+                result.number++
+                if(result.number == 1){
+                    removeButton.visibility = View.VISIBLE
+                    proNumber.visibility = View.VISIBLE
+                    carNumberText.visibility = View.VISIBLE
+                }
+                proNumber.text = result.number.toString()
+                val allNumberObject = Data.foodMenuArray.filter { it.number > 0 }
+                var allNumber = 0
+                for(number in allNumberObject){
+                    allNumber += number.number
+                }
+                t10Number.text = allNumber.toString()
+                showTotal()
+
+            }
+            removeButton.setOnClickListener {
+                if(result.number >= 1){
+                    result.number--
+                    if(result.number == 0){
+                        removeButton.visibility = View.INVISIBLE
+                        proNumber.visibility = View.INVISIBLE
+                    }
+                    proNumber.text = result.number.toString()
+                    val allNumberObject = Data.foodMenuArray.filter { it.number > 0 }
+                    var allNumber = 0
+                    for(number in allNumberObject){
+                        allNumber += number.number
+                    }
+                    if(allNumber == 0) carNumberText.visibility = View.INVISIBLE else t10Number.text = allNumber.toString()
+                    showTotal()
+                }
+            }
+            linearLayout.addView(layout)
+        }
+    }
+    else{
+        nothing.visibility = View.VISIBLE
+    }
+}
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

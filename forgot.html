@@ -30,6 +30,7 @@ val timeOut : LocalDate? = try {
     <div class="panel">
         <pre>
 bottomSheetDialog.window?.setDimAmount(0f)   <span>//除了bottomSheetDialog之外 alertDialog也可以用</span>
+alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))     <span>//上面的是alertDialog外的背景透明，但layout即使没有背景也不會透明。而這個就是只將有內容的東西顯示，完全没有背景(除已設背景)</span>
         </pre>
     </div>
     <button class="accordion">把 AlertDialog 變成全螢幕</button>
@@ -123,6 +124,13 @@ android:progressTint="#18abc8"    <span>//progress的顏色</span>
 android:progressBackgroundTint="#fff"    <span>//没有progress的顏色</span>
         </pre>
     </div>
+    <button class="accordion"></button>
+    <div class="panel">
+        <pre>
+substring(1,2)   <span>//前面係你要攞第幾個字符(0,1,2) 後面係去到目標位置再加1，即使只攞一個都要加1</span>
+        </pre>
+    </div>
+    
 
 <script src="js.js"></script>
 </body>

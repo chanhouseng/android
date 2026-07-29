@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <p><mark>呢個難就難在homeFragment嘅左邊要用recyclerAdapter先可以有瀑布式，但右邊又喺homeFragment，仲要喺recyclerAdapter 去controllor homeFragment的內容。</mark></p>
+    <p><mark>破題方法就係俾個值俾recyclerAdapter就可以控制好多野</mark></p>
+    <button class="accordion">homeFragment.kt</button>
+    <div class="panel">
+        <pre>
+recycLayout.setOnLongClickListener {    <span>//可以左右兩個對調</span>
+    val dragData = ClipData.newPlainText("drag_data", "data")
+    val dragShadowBuilder = View.DragShadowBuilder(it)
+    it.startDragAndDrop(dragData, dragShadowBuilder, it, 0)
+    it.visibility = View.INVISIBLE
+    true
+}
+rightLayout.setOnDragListener { view, event -&gt;
+    when(event.action){
+        DragEvent.ACTION_DRAG_STARTED -&gt; true
+        DragEvent.ACTION_DRAG_EXITED -&gt; true
+        DragEvent.ACTION_DROP -&gt; {
+            val v = event.localState as View
+            mainLayout.removeViewAt(0)
+            mainLayout.addView(v)
+            v.visibility = View.VISIBLE
+            true
+        }
+        DragEvent.ACTION_DRAG_ENDED -&gt; {
+            val v = event.localState as View
+            v.visibility = View.VISIBLE
+        }
+        else -&gt; false
+    }
+    true
+}
+view.findViewById&lt;ImageView&gt;(R.id.imageView6).setOnClickListener {
+    constrainLayout.visibility = View.VISIBLE
+    recycThing.visibility = View.GONE
+}
+
+val recyclerView : RecyclerView = view.findViewById(R.id.recyclerView)
+val req = Request.Builder().url("${Data.link}api/diary").build()
+OkHttpClient().newCall(req).enqueue(object : Callback{
+    override fun onFailure(call: Call, e: IOException) {
+        activity.runOnUiThread {
+            Toast.makeText(activity, e.message.toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onResponse(call: Call, response: Response) {
+        val resultString = response.body?.string()
+        val results = Gson().fromJson(resultString, HomeClass::class.java)
+        val resultList = results.data.toList()
+        Data.allPostList = results.data
+        Data.allPostList.sortedByDescending { it.diary_upload_datetime }
+        activity.runOnUiThread {
+            recyclerView.adapter = recyclerAdapter(activity, this@homeFragment, resultList)
+            val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            recyclerView.layoutManager = layoutManager
+        }
+    }
+
+})
+        </pre>
+    </div>
+    <button class="accordion">recyclerAdapter.kt</button>
+    <div class="panel">
+        <pre>
+class recyclerAdapter(var mainActivity: MainActivity, var Homefragment: homeFragment,private var list: List&lt;MsgData&gt;): RecyclerView.Adapter&lt;recyclerAdapter.ViewHolder&gt;() {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
+        val layout = LayoutInflater.from(parent.context).inflate(R.layout.home_pro, parent, false)
+        return ViewHolder(layout)
+    }
+
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int
+    ) {
+        holder.imageView.load("${Data.link}${list[position].diary_image}"){
+            placeholder(R.drawable.art_icon_la_tour_eiffel)
+            crossfade(true)
+        }
+        holder.title.text = list[position].diary_title
+        holder.author.text = list[position].diary_upload_username
+        holder.linearLayout.setOnClickListener {
+            Homefragment.checkRecyclerView?.setBackgroundResource(0)    <span>//喺homeFragment記錄左上一次邊個被點擊，宜家就要清除返</span>
+            Homefragment.checkRecyclerView = holder.linearLayout
+            holder.linearLayout.setBackgroundResource(R.drawable.recyc_back)
+            Homefragment.constrainLayout.visibility = View.GONE
+            Homefragment.recycThing.visibility = View.VISIBLE
+            Homefragment.imageView7.setOnClickListener {
+                if(Data.isSign){
+                    val requestBody = FormBody.Builder().add("diary_id", list[position].diary_id).build()
+                    val req = Request.Builder().url("${Data.link}api/diary/collection").addHeader("Authorization", "Bearer ${Data.token}").put(requestBody).build()
+                    OkHttpClient().newCall(req).enqueue(object : Callback{
+                        override fun onFailure(call: Call, e: IOException) {
+
+                        }
+
+                        override fun onResponse(call: Call, response: Response) {
+                            mainActivity.runOnUiThread {
+                                Homefragment.imageView7.setBackgroundResource(R.drawable.icon_star_filled_gold)
+                            }
+                        }
+
+                    })
+
+                }else{
+                    Toast.makeText(mainActivity, "Please sign in", Toast.LENGTH_SHORT).show()
+                }
+            }
+            Homefragment.imageView8.setOnClickListener {
+                val clipboardManager = mainActivity.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                val clipData = ClipData.newPlainText("label", list[position].diary_title)
+                clipboardManager.setPrimaryClip(clipData)
+                Toast.makeText(mainActivity, "The copy was successful", Toast.LENGTH_SHORT).show()
+            }
+            val req = Request.Builder().url("${Data.link}${list[position].diary_main_text}").build()
+            OkHttpClient().newCall(req).enqueue(object : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val resultString = response.body?.string()
+                    val results = Gson().fromJson(resultString, RecyclerTextClass::class.java)
+                    mainActivity.runOnUiThread {
+                        Homefragment.imageView5.load("${Data.link}${list[position].diary_image}"){
+                            placeholder(R.drawable.art_icon_la_tour_eiffel)
+                            crossfade(true)
+                        }
+                        Homefragment.textView7.text = results.title
+                        val formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy hh:mm a")
+                        val formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                        val localDataObject = LocalDateTime.parse(list[position].diary_upload_datetime, formatterInput)
+                        Homefragment.textView8.text = "${list[position].diary_upload_username} ${localDataObject.format(formatter)}"
+                        Homefragment.textView9.text = results.summary
+                        for(result in results.paragraphs){
+                            val textView = TextView(mainActivity)
+                            textView.text = result
+                            Homefragment.pageLayout.addView(textView)
+                        }
+                    }
+                }
+
+            })
+        }
+
+
+    }
+
+    <span>......</span>
+}
+        </pre>
+    </div>
+    <button class="accordion">travelFragment (把位置圖標加入的部分)</button>
+    <div class="panel">
+        <pre>
+for(result in Data.jsonList){
+    val imageView14 = ImageView(activity)
+    imageView14.setOnLongClickListener {    <span>//for 後面可以移動圖標</span>
+        val dragData = ClipData.newPlainText("drag_data", "data")
+        val dragShadowBuilder = View.DragShadowBuilder(it)
+        it.startDragAndDrop(dragData, dragShadowBuilder, it, 0)
+        it.visibility = View.INVISIBLE
+        true
+    }
+    imageView14.translationY = result.location_mark_x_y_of_map_image[1].toFloat()    <span>//按佢俾嘅x,y放入去</span>
+    imageView14.translationX = result.location_mark_x_y_of_map_image[0].toFloat()
+    imageView14.setImageResource(R.drawable.icon_map_marker)
+    imageView14.layoutParams = ViewGroup.LayoutParams(pxToDp(80), pxToDp(80))
+    imageView14.setOnClickListener {    
+        val layout = layoutInflater.inflate(R.layout.location_alert, null)
+        layout.findViewById&lt;TextView&gt;(R.id.textView21).text = result.location_name
+        layout.findViewById&lt;TextView&gt;(R.id.textView22).text = result.location_introduction
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView16).setImageResource(activity.resources.getIdentifier(result.location_scene_image.replace(".jpg", ""), "drawable", activity.packageName))
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView17).setImageResource(activity.resources.getIdentifier(result.location_map_image.replace(".jpg", ""), "drawable", activity.packageName))
+        val alertDialog = AlertDialog.Builder(activity).setView(layout).show()
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView15).setOnClickListener {
+            alertDialog.dismiss()
+        }
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView16).setOnClickListener {
+            val layout2 = layoutInflater.inflate(R.layout.image_alert, null)
+            layout2.findViewById&lt;ImageView&gt;(R.id.imageView18).setImageResource(activity.resources.getIdentifier(result.location_scene_image.replace(".jpg", ""), "drawable", activity.packageName))
+            val alertDialog = AlertDialog.Builder(activity).setView(layout2).show()
+            alertDialog.window.apply {    <span>//應該係要全屏嗰alertDialog</span>
+                this!!.setLayout(
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.MATCH_PARENT
+                )
+            }
+        }
+        layout.findViewById&lt;TextView&gt;(R.id.textView23).setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_VIEW
+            intent.setPackage("com.google.android.apps.maps")    <span>//打開google map</span>
+            startActivity(intent)
+        }
+    }
+    main.addView(imageView14)
+}
+        </pre>
+    </div>
+
+    <button class="accordion">travelFragment (移動位置圖標)</button>
+    <div class="panel">
+        <pre>
+main.setOnDragListener { view, event -&gt;
+    when(event.action){
+        DragEvent.ACTION_DRAG_STARTED -&gt; true
+        DragEvent.ACTION_DRAG_EXITED -&gt; true
+        DragEvent.ACTION_DROP -&gt; {
+            val v = event.localState as ImageView
+            val destination = view as FrameLayout
+            var myView = ImageView(activity)
+            if(destination.contains(v)){
+                destination.removeView(v)
+                myView = v
+            }
+            myView.setImageResource(R.drawable.icon_map_marker)
+            myView.setOnLongClickListener {
+                val dragData = ClipData.newPlainText("drag_data", "data")
+                val dragShadowBuilder = View.DragShadowBuilder(it)
+                it.startDragAndDrop(dragData, dragShadowBuilder, it, 0)
+                it.visibility = View.INVISIBLE
+                true
+            }
+            myView.x = event.x - 65f
+            myView.y = event.y - 65f
+            myView.layoutParams = ViewGroup.LayoutParams(pxToDp(80), pxToDp(80))
+            destination.addView(myView)
+        }
+        DragEvent.ACTION_DRAG_ENDED -&gt; {
+            val v = event.localState as ImageView
+            v.visibility = View.VISIBLE
+        }
+        else -&gt; false
+    }
+    true
+}
+        </pre>
+    </div>
+    <button class="accordion">travelFragment (放大、移動圖片)</button>
+    <div class="panel">
+        <pre>
+var scaleFactor = 1f
+val imageView13: ImageView = view.findViewById(R.id.imageView13)
+val scaleDetector = ScaleGestureDetector(activity, object : ScaleGestureDetector.SimpleOnScaleGestureListener(){
+    override fun onScale(detector: ScaleGestureDetector): Boolean {
+        val scale = detector.scaleFactor
+        val nextScale = scaleFactor * scale
+        if(nextScale in 1f..5f){
+            scaleFactor = nextScale
+            imageView13.scaleX = scaleFactor
+            imageView13.scaleY = scaleFactor
+            imageView13.pivotY = detector.focusY
+            imageView13.pivotX = detector.focusX
+        }
+        return true
+    }
+})
+
+val gestureDetector = GestureDetector(activity, object : GestureDetector.SimpleOnGestureListener(){
+    override fun onScroll(
+        e1: MotionEvent?,
+        e2: MotionEvent,
+        distanceX: Float,
+        distanceY: Float
+    ): Boolean {
+        imageView13.translationX -= distanceX
+        imageView13.translationY -= distanceY
+        return true
+    }
+})
+
+main.setOnTouchListener { v, event -&gt;
+    scaleDetector.onTouchEvent(event)
+    gestureDetector.onTouchEvent(event)
+    true
+}
+
+
+        </pre>
+    </div>
+    <button class="accordion">travelFragment (畫畫)</button>
+    <div class="panel">
+        <pre>
+val saveButton: CardView = view.findViewById(R.id.saveButton)
+val drawButton: CardView = view.findViewById(R.id.drawButton)
+drawButton.setOnClickListener {
+    view.findViewById&lt;LinearLayout&gt;(R.id.l1).setBackgroundColor((Color.parseColor("#92bcab")))
+    val paint = Paint().apply {
+        color = Color.RED
+        style = Paint.Style.STROKE
+        strokeWidth = 30f
+        isAntiAlias = true
+        strokeJoin = Paint.Join.ROUND
+        strokeCap = Paint.Cap.ROUND
+    }
+    val path = Path()
+    var lastX = 0f
+    var lastY = 0f
+    val width = resources.displayMetrics.widthPixels
+    val height = resources.displayMetrics.heightPixels
+    originalBitmap = BitmapFactory.decodeResource(resources, R.drawable.map_paris_city)
+    mutableBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true)
+    canvas = Canvas(mutableBitmap)
+    imageView13.setImageBitmap(mutableBitmap)
+
+    imageView13.setOnTouchListener { v, event -&gt;
+        val x = event.x
+        val y = event.y
+
+        when(event.action){
+            MotionEvent.ACTION_DOWN -&gt; {path.moveTo(x, y)
+                lastX = x
+                lastY = y
+                true
+            }
+
+            MotionEvent.ACTION_MOVE -&gt; {
+                path.quadTo(lastX, lastY, (lastX + x) / 2, (lastY + y) / 2)
+                lastX = x
+                lastY = y
+                canvas.drawPath(path, paint)
+                imageView13.invalidate()
+                true
+            }
+
+            MotionEvent.ACTION_UP -&gt; {
+                path.lineTo(x, y)
+                canvas.drawPath(path, paint)
+                path.reset()
+                imageView13.invalidate()
+                true
+            }
+
+            else -&gt; false
+        }
+
+    }
+}
+
+
+        </pre>
+    </div>
+    <button class="accordion">travelFragment (儲存圖片)</button>
+    <div class="panel">
+        <pre>
+saveButton.setOnClickListener {
+    saveLayoutToGallery(main)
+}
+fun saveLayoutToGallery(view: View) {
+    try {
+        val bitmap = Bitmap.createBitmap(
+            view.width,
+            view.height,
+            Bitmap.Config.ARGB_8888
+        )
+
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+
+        saveImageToGallery(bitmap)
+    } catch (e: Exception) {
+        Toast.makeText(activity, "保存失敗: ${e.message}", Toast.LENGTH_SHORT).show()
+    }
+}
+
+fun saveImageToGallery(bitmap: Bitmap) {
+    try {
+        val fileName = "drawable_${System.currentTimeMillis()}.png"
+        val contentValues = ContentValues().apply {
+            put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
+            put(MediaStore.Images.Media.MIME_TYPE, "image/png")
+            put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+        }
+
+        val uri = requireActivity().contentResolver?.insert(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            contentValues
+        )
+        uri?.let {
+            activity?.contentResolver?.openOutputStream(it)?.use { stream -&gt;
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            }
+            true
+        } ?: false
+        Toast.makeText(activity, "Save to gallery", Toast.LENGTH_SHORT).show()
+
+    } catch (e: Exception) {
+        Toast.makeText(activity, e.message.toString(), Toast.LENGTH_SHORT).show()
+    }
+}
+
+
+        </pre>
+    </div>
+    <button class="accordion">accountFragment</button>
+    <div class="panel">
+        <p>當時嗰個JSON讀唔啱，所以做唔到</p>
+        <pre>
+view.findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
+    signInOutPage.visibility = View.VISIBLE
+}
+val textView13: TextView = view.findViewById(R.id.textView13)
+editTextText.doOnTextChanged { text, start, before, count -&gt;
+    if(text.toString().contains("@") && text.toString().last() != '@' && text.toString().length &gt; 3){
+        textView13.visibility = View.INVISIBLE
+    }
+    else{
+        textView13.visibility = View.VISIBLE
+    }
+}
+val textView14: TextView = view.findViewById(R.id.textView14)
+editTextText2.doOnTextChanged { text, start, before, count -&gt;
+    if(text.toString().length &gt;= 6 && text.toString().any { it.isDigit() } && text.toString().any { it.isLetter() }){
+        textView14.visibility = View.INVISIBLE
+    }
+    else{
+        textView14.visibility = View.VISIBLE
+    }
+}
+println(editTextText2.inputType.toString())
+println(editTextText.inputType.toString())
+view.findViewById&lt;ImageView&gt;(R.id.imageView10).setOnTouchListener { v, event -&gt;
+    when(event.action){
+        MotionEvent.ACTION_DOWN -&gt; {
+            editTextText2.transformationMethod = null
+        }
+
+        MotionEvent.ACTION_UP -&gt; {
+            editTextText2.transformationMethod = PasswordTransformationMethod()
+        }
+    }
+    true
+}
+
+view.findViewById&lt;TextView&gt;(R.id.textView12).setOnClickListener {
+    val custom = layoutInflater.inflate(R.layout.webview_alert, null)
+    val webView = custom.findViewById&lt;WebView&gt;(R.id.webView)
+    webView.settings.javaScriptEnabled = true
+    webView.loadUrl("${Data.link}api/user-agreement")
+    val alertDialog = AlertDialog.Builder(activity).setView(custom).show()
+    custom.findViewById&lt;ImageView&gt;(R.id.imageView11).setOnClickListener {
+        alertDialog.dismiss()
+    }
+    alertDialog.setCanceledOnTouchOutside(false)
+}
+
+view.findViewById&lt;Button&gt;(R.id.button2).setOnClickListener {
+    Data.token = "B71283231C469480B948B2BAF"
+    signInOutPage.visibility = View.GONE
+    Data.isSign = true
+    val mediaPlayer : MediaPlayer = MediaPlayer.create(activity, R.raw.sign_in_succes)
+    mediaPlayer.start()
+    username.visibility = View.VISIBLE
+    showFav()
+}
+
+
+fun showFav(){
+    val req = Request.Builder().url("${Data.link}api/diary/collection").addHeader("Authorization", "Bearer ${Data.token}").build()
+    OkHttpClient().newCall(req).enqueue(object : Callback{
+        override fun onFailure(call: Call, e: IOException) {
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            val resultString = response.body?.string()
+            val results = Gson().fromJson(resultString, getCollection::class.java)
+            requireActivity().runOnUiThread {
+                for(result in results.data){
+                    val favoritesList = Data.allPostList.filter { it.diary_id == result.diary_id }
+                    for(favorites in favoritesList){
+                        val layout = layoutInflater.inflate(R.layout.favorites_pro, null)
+                        layout.findViewById&lt;TextView&gt;(R.id.textView15).text = favorites.diary_title
+                        layout.findViewById&lt;TextView&gt;(R.id.textView17).text = favorites.diary_upload_username
+                        layout.findViewById&lt;TextView&gt;(R.id.textView18).text = favorites.diary_upload_datetime
+                        layout.findViewById&lt;TextView&gt;(R.id.textView19).text = favorites.diary_main_text
+                        layout.findViewById&lt;ImageView&gt;(R.id.imageView12).load("${Data.link}${favorites.diary_image}"){
+                            placeholder(R.drawable.scene_10)
+                        }
+                        linearLayout.addView(layout)
+                    }
+                }
+            }
+        }
+
+    })
+}
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>
