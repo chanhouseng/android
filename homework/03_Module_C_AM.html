@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">MainActivity.kt</button>
+    <h2>好多都係cap圖，cap圖至上，之後再自己排</h2>
+    <div class="panel">
+        <pre>
+val text2 = "We are thrilled to invite you to join us for an extraordinary event that will immerse you in the world of art. "
+val text1 = "Experience Art"
+val valueAnimator = ValueAnimator.ofInt(0, text1.length)
+valueAnimator.duration = 1000
+valueAnimator.interpolator = LinearInterpolator()
+valueAnimator.addUpdateListener {
+    textView.text = text1.take(it.animatedValue as Int)
+}
+val value2 = ValueAnimator.ofInt(0, text2.length)
+value2.duration = 3000
+value2.interpolator = LinearInterpolator()
+value2.addUpdateListener {
+    textView2.text = text2.take(it.animatedValue as Int)
+}
+valueAnimator.addListener(object : AnimatorListenerAdapter(){
+    override fun onAnimationEnd(animation: Animator) {
+        super.onAnimationEnd(animation)
+        value2.start()      <span>//一個animation完左就call另一個</span>
+    }
+})
+value2.addListener(object : AnimatorListenerAdapter(){
+    override fun onAnimationEnd(animation: Animator) {
+        super.onAnimationEnd(animation)
+        button.animate().alpha(1f).setDuration(1000).start()
+    }
+})
+val view = findViewById&lt;LinearLayout&gt;(R.id.view)
+val value1 = ValueAnimator.ofInt(pxTodp(502), 0)     <span>//有個黑影預設係覆蓋曬，之後再慢慢變0。layout_gravityy要set bottom，唔係佢就由從下到上而非由上到下</span>
+value1.duration = 2000
+value1.interpolator = LinearInterpolator()
+value1.addUpdateListener {
+    view.layoutParams.height = it.animatedValue as Int
+    view.requestLayout()
+}
+value1.start()
+value1.addListener(object : AnimatorListenerAdapter(){
+    override fun onAnimationEnd(animation: Animator) {
+        super.onAnimationEnd(animation)
+        valueAnimator.start()      <span>//一個animation完左就call另一個</span>
+    }
+})
+        </pre>
+    </div>
+    <button class="accordion">activity_main2.xml</button>
+    <div class="panel">
+        <p><mark>見到冇乜功能嘅一版可以直接cap 圖，再用constainLayout放返啲透明嘅view去intent</mark></p>
+    </div>
+    <button class="accordion">MainActivity3.kt</button>
+    <div class="panel">
+        <p><span>//選日期嗰版</span></p>
+        <pre>
+            <mark>可點擊嘅就有ID</mark>
+t13.setOnClickListener { load(it as TextView) }
+t14.setOnClickListener { load(it as TextView) }
+t15.setOnClickListener { load(it as TextView) }
+t16.setOnClickListener { load(it as TextView) }
+t18.setOnClickListener { load(it as TextView) }
+t19.setOnClickListener { load(it as TextView) }
+t20.setOnClickListener { load(it as TextView) }
+t21.setOnClickListener { load(it as TextView) }
+t22.setOnClickListener { load(it as TextView) }
+t23.setOnClickListener { load(it as TextView) }
+t25.setOnClickListener { load(it as TextView) }
+t26.setOnClickListener { load(it as TextView) }
+t27.setOnClickListener { load(it as TextView) }
+t28.setOnClickListener { load(it as TextView) }
+t29.setOnClickListener { load(it as TextView) }
+t30.setOnClickListener { load(it as TextView) }
+remove1.setOnClickListener {
+    if(number1&gt;1){
+        number1--
+        textView1.text = number1.toString()
+    }
+}
+remove2.setOnClickListener {
+    if(number2&gt;1){
+        number2--
+        textView2.text = number2.toString()
+    }
+}
+add1.setOnClickListener {
+    if(number1&lt;8){
+        number1++
+        textView1.text = number1.toString()
+    }
+}
+add2.setOnClickListener {
+    if(number2&lt;8){
+        number2++
+        textView2.text = number2.toString()
+    }
+}
+
+    fun load(view: TextView){
+        t13.setBackgroundResource(0)
+        t14.setBackgroundResource(0)
+        t15.setBackgroundResource(0)
+        t16.setBackgroundResource(0)
+        t18.setBackgroundResource(0)
+        t19.setBackgroundResource(0)
+        t20.setBackgroundResource(0)
+        t21.setBackgroundResource(0)
+        t22.setBackgroundResource(0)
+        t23.setBackgroundResource(0)
+        t25.setBackgroundResource(0)
+        t26.setBackgroundResource(0)
+        t27.setBackgroundResource(0)
+        t28.setBackgroundResource(0)
+        t29.setBackgroundResource(0)
+        t30.setBackgroundResource(0)
+
+        view.setBackgroundResource(R.drawable.text_back)
+    }
+        </pre>
+    </div>
+
+<script src="js.js"></script>
+</body>
+</html>

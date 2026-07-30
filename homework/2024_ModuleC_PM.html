@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>題目要求少，就冇完善到有功能，而好多野都係預設，所以會簡單</h2>
+    <button class="accordion">MainActivity.kt</button>
+    <p><span>//因為第一版同第二版要有動畫連接，所以一二版要喺同一個activity到</span></p>
+    <div class="panel">
+        <pre>
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom)
+        if(intent.getBooleanExtra("order", false)){    <span>//之後會有要求返orderFragment</span>
+            replaceFragment(orderFragment())
+            bottomNavigationView.selectedItemId = R.id.order
+            page1.alpha = 0f        
+            page2.alpha = 1f
+        }
+        findViewById&lt;Button&gt;(R.id.button5).setOnClickListener {    <span>//去第二版</span>
+            page1.animate().alpha(0f).setDuration(1500).setInterpolator(LinearInterpolator()).start()
+            page2.animate().alpha(1f).setDuration(1500).setInterpolator(LinearInterpolator()).start()
+            replaceFragment(homeFragment())
+            bottomNavigationView.selectedItemId = R.id.home
+        }
+        if(intent.getBooleanExtra("relog", false)){
+            replaceFragment(homeFragment())
+            bottomNavigationView.selectedItemId = R.id.home
+            page1.alpha = 0f
+            page2.alpha = 1f
+        }
+        bottomNavigationView.itemActiveIndicatorColor = ColorStateList.valueOf(Color.TRANSPARENT)
+        bottomNavigationView.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.order -> replaceFragment(orderFragment())
+                R.id.home -> replaceFragment(homeFragment())
+            }
+            true
+        }
+        </pre>
+    </div>
+    <button class="accordion">homeFragment.kt</button>
+    <div class="panel">
+        <pre>
+view.findViewById&lt;LinearLayout&gt;(R.id.title).animate().setDuration(800).translationY(0f).setStartDelay(500).start()    <span>//左邊嗰條野跌落嚟</span>
+showUi(menu1Layout)
+menu1Layout.setOnClickListener {
+    showUi(it as LinearLayout)     <span>//攞返佢暗嘅嗰個，之後再show返對應嘅內容同title</span>
+}
+menu2Layout.setOnClickListener {
+    showUi(it as LinearLayout)
+}
+menu3Layout.setOnClickListener {
+    showUi(it as LinearLayout)
+}
+imageView9.setOnClickListener {
+    shopCart.visibility = View.VISIBLE
+    bottomSheet.visibility = View.GONE
+}
+val submit : LinearLayout = view.findViewById(R.id.submit)
+submit.setOnClickListener {
+    val intent = Intent(activity, MainActivity2::class.java)
+    startActivity(intent)
+}
+shopCart.setOnClickListener {
+    l1.removeAllViews()
+    l2.removeAllViews()
+    bottomSheet.visibility = View.VISIBLE
+    shopCart.visibility = View.GONE
+    var o = 0f
+    for(food in Data.orderList){
+        o += (food.count?.times(food.discounted_price.replace("€", "").toFloat()))!!    <span>//計total</span>
+    }
+    textView11.text = "€${String.format("%.2f", o)}"
+    var k = 0
+    for(result in Data.orderList){
+        val layout = layoutInflater.inflate(R.layout.shop_cart_pro, null)
+        layout.findViewById&lt;TextView&gt;(R.id.textView7).text = result.name
+        layout.findViewById&lt;TextView&gt;(R.id.textView10).text = result.count.toString()
+        layout.findViewById&lt;TextView&gt;(R.id.textView8).text = result.discounted_price
+        layout.findViewById&lt;TextView&gt;(R.id.textView9).text = result.original_price
+        layout.findViewById&lt;TextView&gt;(R.id.textView9).paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView4).setImageResource(resources.getIdentifier(result.image_url.lowercase().replace(" ", "_").replace(".jpg", "").replace(".png", ""), "drawable", requireActivity().packageName))
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView8).setOnClickListener {    <span>//加數量，題目冇乜要求就最大係9</span>
+            result.count?.let { it1 -&gt;
+                if(it1 &lt;= 8){
+                    result.count = result.count!! + 1
+                    layout.findViewById&lt;TextView&gt;(R.id.textView10).text = result.count.toString()
+                    var i = 0f
+                    for(food in Data.orderList){
+                        i += (food.count?.times(food.discounted_price.replace("€", "").toFloat()))!!    <span>//show total</span>
+                    }
+                    textView11.text = "€${String.format("%.2f", i)}"
+                }
+            }
+        }
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView6).setOnClickListener {    <span>//減</span>
+            result.count?.let { it1 -&gt;
+                if(it1 &gt;= 2){
+                    result.count = result.count!! - 1
+                    layout.findViewById&lt;TextView&gt;(R.id.textView10).text = result.count.toString()
+                    var i = 0f
+                    for(food in Data.orderList){
+                        i += (food.count?.times(food.discounted_price.replace("€", "").toFloat()))!!
+                    }
+                    textView11.text = "€${String.format("%.2f", i)}"
+                }
+            }
+        }
+        when(k%2){
+            0 -&gt; l1.addView(layout)
+            1 -&gt; l2.addView(layout)
+        }
+        k++
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">homeFragment.kt (showUi function)</button>
+    <div class="panel">
+        <pre>
+fun showUi(linearLayout: LinearLayout){
+    menu1.visibility = View.GONE
+    menu2.visibility = View.GONE
+    menu3.visibility = View.GONE
+    val textView = linearLayout.getChildAt(1)
+    textView.visibility = View.VISIBLE
+    val list = when(linearLayout.id){
+        R.id.menu1Layout -&gt; Data.mainFood
+        R.id.menu2Layout -&gt; Data.pastriesFood
+        else -&gt; Data.SoupsFood
+    }
+    linear1.removeAllViews()
+    linearLayout2.removeAllViews()
+    for(result in list){
+        val imageView = layoutInflater.inflate(R.layout.image_pro, null)    <span>//上面嗰啲相都整pro，唔係要整margin就好煩</span>
+        imageView.findViewById&lt;ImageView&gt;(R.id.imageView1).setImageResource(resources.getIdentifier(result.image_url.lowercase().replace(" ", "_").replace(".jpg", "").replace(".png", ""), "drawable", requireActivity().packageName))
+        linear1.addView(imageView)
+        val layout = layoutInflater.inflate(R.layout.food1_pro, null)
+        layout.findViewById&lt;TextView&gt;(R.id.textView3).text = result.name
+        layout.findViewById&lt;TextView&gt;(R.id.textView5).text = result.discounted_price
+        layout.findViewById&lt;TextView&gt;(R.id.textView6).text = result.original_price
+        layout.findViewById&lt;TextView&gt;(R.id.textView6).paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView5).setImageResource(resources.getIdentifier(result.image_url.lowercase().replace(" ", "_").replace(".jpg", "").replace(".png", ""), "drawable", requireActivity().packageName))
+        val number = layout.findViewById&lt;TextView&gt;(R.id.textView30)
+        val removeImage = layout.findViewById&lt;ImageView&gt;(R.id.removeImage)
+        val addImage = layout.findViewById&lt;ImageView&gt;(R.id.addImage)
+        addCart()
+        result.count.let {    <span>//未暗嘅都要show返啲數</span>
+            if(it&lt;=0){
+                number.visibility = View.GONE
+                removeImage.visibility = View.GONE
+            } else{
+                number.visibility = View.VISIBLE
+                removeImage.visibility = View.VISIBLE
+                number.text = result.count.toString()
+            }
+        }
+        addImage.setOnClickListener {    <span>//加</span>
+            result.count += 1
+            result.count.let { it1 -&gt;
+                if(it1==1){
+                    number.visibility = View.VISIBLE
+                    removeImage.visibility = View.VISIBLE
+                }
+                number.text = result.count.toString()
+                addCart()       <span>//shopCard 上面嗰個數字</span>
+            }
+        }
+        removeImage.setOnClickListener {
+            result.count.let { it1 -&gt;
+                if(it1&gt;=1){
+                    result.count -= 1
+                    result.count.let { it1 -&gt;
+                        if(it1==0){
+                            number.visibility = View.GONE
+                            removeImage.visibility = View.GONE
+                        }
+                        number.text = result.count.toString()
+                        addCart()
+                    }
+                }
+            }
+        }
+        linearLayout2.addView(layout)
+
+    }
+}
+        </pre>
+    </div>
+
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>
