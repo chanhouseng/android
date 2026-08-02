@@ -1,0 +1,302 @@
+{
+  "notes": [
+    {
+      "title": "WorldSkills",
+      "lastOpenedAt": "2024-04-24T18:30:00Z",
+      "content": [
+        {
+          "type": "image",
+          "imageId": 1
+        },
+        {
+          "type": "text",
+          "text": "WorldSkills is a global movement that aims to change the lives of young people through skills."
+        },
+        {
+          "type": "listItem",
+          "text": "brings together governments, industries, businesses and educators",
+          "children": []
+        },
+        {
+          "type": "listItem",
+          "text": "gives young people the chance to compete, experience and learn how to become the best in their skill of choice",
+          "children": []
+        },
+        {
+          "type": "listItem",
+          "text": "global hub for skills excellence and development",
+          "children": []
+        },
+        {
+          "type": "listItem",
+          "text": "committed to raising the profile and recognition of skilled people",
+          "children": []
+        },
+        {
+          "type": "listItem",
+          "text": "skills competitions are important for:",
+          "children": [
+            {
+              "type": "listItem",
+              "text": "achieving economic growth",
+              "children": []
+            },
+            {
+              "type": "listItem",
+              "text": "personal success",
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Competitions:"
+        },
+        {
+          "type": "checkboxListItem",
+          "isChecked": true,
+          "text": "WorldSkills Abu Dhabi 2017",
+          "children": []
+        },
+        {
+          "type": "checkboxListItem",
+          "isChecked": true,
+          "text": "WorldSkills Kazan 2019",
+          "children": []
+        },
+        {
+          "type": "checkboxListItem",
+          "isChecked": true,
+          "text": "WorldSkills Competition 2022 Special Edition",
+          "children": []
+        },
+        {
+          "type": "checkboxListItem",
+          "isChecked": false,
+          "text": "WorldSkills Lyon 2024",
+          "children": [
+            {
+              "type": "checkboxListItem",
+              "isChecked": true,
+              "text": "Competition Preparation Week",
+              "children": []
+            },
+            {
+              "type": "checkboxListItem",
+              "isChecked": false,
+              "text": "Competition",
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "checkboxListItem",
+          "isChecked": false,
+          "text": "WorldSkills Shanghai 2026",
+          "children": []
+        }
+      ]
+    },
+    {
+      "title": "Skills at the Guangzhou Invitational Competition",
+      "lastOpenedAt": "2024-04-26T11:00:00Z",
+      "content": [
+        {
+          "type": "listItem",
+          "text": "IT Network Systems Administration",
+          "children": [
+            {
+              "type": "image",
+              "imageId": 2
+            },
+            {
+              "type": "listItem",
+              "text": "Providing information technology (IT) services to commercial and public sectors to ensure systems run smoothly and without interruption.",
+              "children": []
+            },
+            {
+              "type": "listItem",
+              "text": "IT Network Systems Administration could be for you if you like:",
+              "children": [
+                {
+                  "type": "listItem",
+                  "text": "Complex problems",
+                  "children": []
+                },
+                {
+                  "type": "listItem",
+                  "text": "Fixing things",
+                  "children": []
+                },
+                {
+                  "type": "listItem",
+                  "text": "Using computers",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "text": "Mechanical Engineering CAD",
+          "children": [
+            {
+              "type": "image",
+              "imageId": 3
+            },
+            {
+              "type": "listItem",
+              "text": "Using computer software as a tool to create and improve manufacturing projects from ship-building to the aerospace industry.",
+              "children": []
+            },
+            {
+              "type": "listItem",
+              "text": "Mechanical Engineering CAD could be for you if you like:",
+              "children": [
+                {
+                  "type": "listItem",
+                  "text": "Being creative",
+                  "children": []
+                },
+                {
+                  "type": "listItem",
+                  "text": "Complex problems",
+                  "children": []
+                },
+                {
+                  "type": "listItem",
+                  "text": "Making things",
+                  "children": []
+                },
+                {
+                  "type": "listItem",
+                  "text": "Using computers",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "text": "Mobile Applications Development",
+          "children": [
+            {
+              "type": "image",
+              "imageId": 4
+            },
+            {
+              "type": "listItem",
+              "text": "Mobile Applications Developers use technology and design to create apps which are appealing and function well on phones.",
+              "children": []
+            },
+            {
+              "type": "listItem",
+              "text": "Mobile Applications Development could be for you if you like:",
+              "children": [
+                {
+                  "type": "listItem",
+                  "text": "Complex problems",
+                  "children": []
+                },
+                {
+                  "type": "listItem",
+                  "text": "Making things",
+                  "children": []
+                },
+                {
+                  "type": "listItem",
+                  "text": "Using computers",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "text": "Refrigeration and Air Conditioning",
+          "children": [
+            {
+              "type": "image",
+              "imageId": 5
+            },
+            {
+              "type": "listItem",
+              "text": "Keeping refrigeration and air conditioning working is essential to the modern world.",
+              "children": []
+            },
+            {
+              "type": "listItem",
+              "text": "Refrigeration and Air Conditioning could be for you if you like:",
+              "children": [
+                {
+                  "type": "listItem",
+                  "text": "Fixing things",
+                  "children": []
+                },
+                {
+                  "type": "listItem",
+                  "text": "Making things",
+                  "children": []
+                },
+                {
+                  "type": "listItem",
+                  "text": "Using tools",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "text": "Web Technologies",
+          "children": [
+            {
+              "type": "image",
+              "imageId": 6
+            },
+            {
+              "type": "listItem",
+              "text": "Planning and designing, as well as testing websites, maintaining them, incorporating third party platforms, and integrating social media platforms.",
+              "children": []
+            },
+            {
+              "type": "listItem",
+              "text": "Web Technologies could be for you if you like:",
+              "children": [
+                {
+                  "type": "listItem",
+                  "text": "Being creative",
+                  "children": []
+                },
+                {
+                  "type": "listItem",
+                  "text": "Complex problems",
+                  "children": []
+                },
+                {
+                  "type": "listItem",
+                  "text": "Fixing things",
+                  "children": []
+                },
+                {
+                  "type": "listItem",
+                  "text": "Making things",
+                  "children": []
+                },
+                {
+                  "type": "listItem",
+                  "text": "Using computers",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

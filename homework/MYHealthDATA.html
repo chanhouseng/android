@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">MainActivity3.kt</button>
+    <div class="panel">
+        <pre>
+imageView4.setOnClickListener {
+    load(it as LinearLayout)
+}
+imageView5.setOnClickListener {
+    load(it as LinearLayout)
+}
+findViewById&lt;TextView&gt;(R.id.textView5).text = "Hi ${Data.username}"
+editTextText3.setText(Data.username)
+findViewById&lt;Button&gt;(R.id.button5).setOnClickListener {
+    if(editTextText3.text.isNotEmpty()&&
+        editTextText4.text.isNotEmpty()&&
+        editTextText5.text.isNotEmpty()&&
+        editTextText6.text.isNotEmpty()&&
+        editTextText7.text.isNotEmpty()&&
+        editTextText8.text.isNotEmpty()){
+        Data.height = editTextText4.text.toString()
+        Data.weight = editTextText5.text.toString()
+        Data.steps = editTextText7.text.toString().toInt()
+        Data.water = editTextText8.text.toString().toInt()
+        val intent = Intent(this, MainActivity4::class.java)
+        startActivity(intent)
+    }
+    else{
+        Toast.makeText(this, "all input fields must be filled", Toast.LENGTH_SHORT).show()
+    }
+}
+findViewById&lt;EditText&gt;(R.id.editTextText4).setOnClickListener {
+    val layout = layoutInflater.inflate(R.layout.number_alert, null)
+    val alertDialog = AlertDialog.Builder(this).setView(layout).show()
+    layout.findViewById&lt;TextView&gt;(R.id.textView11).text = "Tall"
+    val numberPicker1 = layout.findViewById&lt;NumberPicker&gt;(R.id.numberPicker1)
+    val numberPicker2 = layout.findViewById&lt;NumberPicker&gt;(R.id.numberPicker2)
+    numberPicker1.maxValue = 200
+    numberPicker1.minValue = 1
+    numberPicker1.minValue = 180
+    numberPicker2.maxValue = 9
+    numberPicker2.minValue = 5
+    numberPicker2.minValue = 0
+    layout.findViewById&lt;TextView&gt;(R.id.textView13).text = "cm"
+    layout.findViewById&lt;Button&gt;(R.id.button7).setOnClickListener {
+        alertDialog.dismiss()
+    }
+    layout.findViewById&lt;Button&gt;(R.id.button6).setOnClickListener {
+        alertDialog.dismiss()
+        findViewById&lt;EditText&gt;(R.id.editTextText4).setText("${numberPicker1.value}.${numberPicker2.value}")
+    }
+}
+
+findViewById&lt;EditText&gt;(R.id.editTextText5).setOnClickListener {
+    val layout = layoutInflater.inflate(R.layout.number_alert, null)
+    val alertDialog = AlertDialog.Builder(this).setView(layout).show()
+    layout.findViewById&lt;TextView&gt;(R.id.textView11).text = "Weight"
+    val numberPicker1 = layout.findViewById&lt;NumberPicker&gt;(R.id.numberPicker1)
+    val numberPicker2 = layout.findViewById&lt;NumberPicker&gt;(R.id.numberPicker2)
+    numberPicker1.maxValue = 200
+    numberPicker1.minValue = 1
+    numberPicker1.minValue = 80
+    numberPicker2.maxValue = 9
+    numberPicker2.minValue = 5
+    numberPicker2.minValue = 0
+    layout.findViewById&lt;TextView&gt;(R.id.textView13).text = "cm"
+    layout.findViewById&lt;Button&gt;(R.id.button7).setOnClickListener {
+        alertDialog.dismiss()
+    }
+    layout.findViewById&lt;Button&gt;(R.id.button6).setOnClickListener {
+        alertDialog.dismiss()
+        findViewById&lt;EditText&gt;(R.id.editTextText5).setText("${numberPicker1.value}.${numberPicker2.value}")
+    }
+}
+findViewById&lt;EditText&gt;(R.id.editTextText7).setOnClickListener {
+    val layout = layoutInflater.inflate(R.layout.number_alert, null)
+    val alertDialog = AlertDialog.Builder(this).setView(layout).show()
+    layout.findViewById&lt;TextView&gt;(R.id.textView11).text = "Steps"
+    val numberPicker1 = layout.findViewById&lt;NumberPicker&gt;(R.id.numberPicker1)
+    val numberPicker2 = layout.findViewById&lt;NumberPicker&gt;(R.id.numberPicker2)
+    layout.findViewById&lt;TextView&gt;(R.id.textView12).visibility = View.GONE
+    numberPicker1.visibility = View.GONE
+    numberPicker2.maxValue = 10000
+    numberPicker2.minValue = 5000
+    numberPicker2.minValue = 0
+    layout.findViewById&lt;TextView&gt;(R.id.textView13).text = "Steps"
+    layout.findViewById&lt;Button&gt;(R.id.button7).setOnClickListener {
+        alertDialog.dismiss()
+    }
+    layout.findViewById&lt;Button&gt;(R.id.button6).setOnClickListener {
+        alertDialog.dismiss()
+        findViewById&lt;EditText&gt;(R.id.editTextText7).setText("${numberPicker2.value}")
+    }
+}
+findViewById&lt;EditText&gt;(R.id.editTextText8).setOnClickListener {
+    val layout = layoutInflater.inflate(R.layout.number_alert, null)
+    val alertDialog = AlertDialog.Builder(this).setView(layout).show()
+    layout.findViewById&lt;TextView&gt;(R.id.textView11).text = "Water"
+    val numberPicker1 = layout.findViewById&lt;NumberPicker&gt;(R.id.numberPicker1)
+    val numberPicker2 = layout.findViewById&lt;NumberPicker&gt;(R.id.numberPicker2)
+    layout.findViewById&lt;TextView&gt;(R.id.textView12).visibility = View.GONE
+    numberPicker1.visibility = View.GONE
+    numberPicker2.maxValue = 3000
+    numberPicker2.minValue = 2000
+    numberPicker2.minValue = 0
+    layout.findViewById&lt;TextView&gt;(R.id.textView13).text = "ml"
+    layout.findViewById&lt;Button&gt;(R.id.button7).setOnClickListener {
+        alertDialog.dismiss()
+    }
+    layout.findViewById&lt;Button&gt;(R.id.button6).setOnClickListener {
+        alertDialog.dismiss()
+        findViewById&lt;EditText&gt;(R.id.editTextText8).setText("${numberPicker2.value}")
+    }
+}
+
+fun load(view: LinearLayout){
+    imageView4.setBackgroundColor(Color.TRANSPARENT)
+    imageView5.setBackgroundColor(Color.TRANSPARENT)
+    view.setBackgroundColor(Color.parseColor("#18abc8"))
+    when(view.id){
+        R.id.imageView4 -&gt; Data.isboy = true
+        R.id.imageView5 -&gt; Data.isboy = false
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">homeFragment.kt</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>
