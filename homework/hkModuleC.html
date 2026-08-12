@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+viewPager2.adapter = viewPager2_adatper(this)
+viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+    override fun onPageSelected(position: Int) {
+        val root = supportFragmentManager.findFragmentByTag("f$position")?.view ?: return
+        root.post {
+            val widthSpec = View.MeasureSpec.makeMeasureSpec(root.width, View.MeasureSpec.EXACTLY)
+            val heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+            root.measure(widthSpec, heightSpec)
+            val h = root.measuredHeight
+            if(h &gt; 0){
+                viewPager2.layoutParams.height = h
+                viewPager2.requestLayout()
+            }
+        }
+    }
+})
+
+val list = listOf("News", "Results", "History")
+TabLayoutMediator(tabLayout, viewPager2){tab, position -&gt;
+    tab.text = list[position]
+}.attach()
+findViewById&lt;ImageView&gt;(R.id.imageView2).setOnClickListener {
+    val bottomSheetDialog = BottomSheetDialog(this)
+    val layout = layoutInflater.inflate(R.layout.bottom_sheet, null)
+    bottomSheetDialog.setContentView(layout)
+    bottomSheetDialog.show()
+    layout.findViewById&lt;Switch&gt;(R.id.switch1).setOnCheckedChangeListener { buttonView, isChecked -&gt;    <span>//黑暗和光亮模式</span>
+        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK   
+        if(currentNightMode == Configuration.UI_MODE_NIGHT_YES){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+        else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+    }
+}
+
+val maxScroll = 207
+scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY -&gt;
+    if(scrollY &lt; (207-90)/0.4 && scrollY != 0){    <span>//動態令圖片因應scrollY的值而改變(都係靈機一現，先將佢地有個關係，之後再調整)</span>
+        val params = imageView3.layoutParams
+        params.height = ((maxScroll-scrollY*0.4)*resources.displayMetrics.density).toInt()
+        imageView3.requestLayout()
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

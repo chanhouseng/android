@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>以數組為先，加入數組之後再load啲ID同畫面，喺數組統一處理冇咁麻煩</h1>
+    <button class="accordion">MainActivity.kt</button>
+    <div class="panel">
+        <pre>
+if(Data.isFirst){     <span>//要將個json變成arrayList，而且只可以運行一次</span>
+    for(result in Data.sampleNoteArray){
+        Data.noteList.add(result)
+    }
+    Data.isFirst = false
+}
+for(result in Data.noteList){
+    val layout = layoutInflater.inflate(R.layout.title_pro ,null)
+    layout.findViewById&lt;TextView&gt;(R.id.textView2).text = result.title
+    layout.setOnClickListener {
+        val intent = Intent(this, MainActivity2::class.java)
+        Data.hostList.clear()     <span>//記錄之前更改的記錄(作用於上一步)。如果唔clear就會好亂，反正題目又冇話唔比clear</span>
+        intent.putExtra("noteTime", result.lastOpenedAt)    <span>//冇ID可以記錄，時間係唯一</span>
+        startActivity(intent)
+    }
+    linearLayout.addView(layout)
+}
+findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
+    val intent = Intent(this, MainActivity2::class.java)
+    intent.putExtra("noteTime", "0")
+    startActivity(intent)
+}
+
+
+        </pre>
+    </div>
+    <button class="accordion">Data.kt</button>
+    <div class="panel">
+        <pre>
+class NoteClass(var title: String, var lastOpenedAt: String, var content: ArrayList&lt;ContentClass&gt;)
+
+class ContentClass(var type: String, var imageId: String ?= "", var text: String? ="",
+                   var children: ArrayList&lt;ContentClass&gt; ?= arrayListOf(), var isChecked: Boolean ?= false,
+                   var id : String ?= ""){
+    fun deepCopy(): ContentClass{     <span>//.clone或者複製多一個arrayList，佢當中的arraylist都係有關聯性，呢個就可以令佢地嘅arrayList複製而冇關聯性</span>
+        val newChild = children?.map { it.deepCopy() }?.toMutableList() as? ArrayList&lt;ContentClass&gt; ?: arrayListOf()
+        
+        return ContentClass(
+            type,imageId, text, newChild, isChecked, id
+        )
+
+        <span>//代入一層可理解，先將佢啲children 所有項都deepCopy，即係不斷地令佢(ContentClass)的children都做同一樣野</span>
+        <span>//做啲咩?因為佢係.map，本身就係指緊children呢個項，就要將choldren複製arrayList&lt;ContentClass&gt;，不成功就變arrayList空數組</span>
+        <span>//成功複製之後就回傳返成個ContentClass，其他值不變，只變chilren</span>
+    }
+}
+class Data {
+    companion object{ 
+        val sampleNoteJson = """
+            [
+                {
+                  "title": "WorldSkills",
+                  "lastOpenedAt": "2024-04-24T18:30:00Z",
+                  "content": [
+                    {
+                      "type": "image",
+                      "imageId": 1
+                    },
+                    {
+                      "type": "text",
+                      "text": "WorldSkills is a global movement that aims to change the lives of young people through skills."
+                    }
+
+                ....
+
+            ]
+        }
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">check_box_pro</button>
+    <div class="panel">
+        <mark>就係用一個linearLayout hor包住checkBox同editText。跟住喺下面再有一個linearLayout，佢啲子代就可以加入到呢到，實現很多層的效果。</mark>
+        <pre>
+&lt;LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"&gt;
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"&gt;
+
+        &lt;CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text="" /&gt;
+
+        &lt;EditText
+            android:id="@+id/editTextText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="text"/&gt;
+    &lt;/LinearLayout&gt;
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"&gt;
+        &lt;View
+            android:layout_width="30dp"
+            android:layout_height="match_parent"/&gt;
+        &lt;LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/linearLayout"
+            android:orientation="vertical"/&gt;
+    &lt;/LinearLayout&gt;
+&lt;/LinearLayout&gt;
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt (入嚟要load嘅野)</button>
+    <div class="panel">
+        <pre>
+lateinit var note : NoteClass    <span>//記錄宜家要更改邊個note，成個檔嘅value就靠呢個嚟更改</span>
+var nowId: String? = ""     
+var hostNumber = 0    <span>//前第幾步</span>
+var isRestoring = false
+private lateinit var linearLayout: LinearLayout
+private lateinit var titleEdit : EditText
+
+
+titleEdit = findViewById(R.id.editTextText)
+linearLayout = findViewById(R.id.linearLayout)
+val timeId = intent.getStringExtra("noteTime")
+if(timeId == "0"){
+    note = NoteClass("", LocalDateTime.now().toString(),arrayListOf(ContentClass("text")))    <span>//create note</span>
+    Data.noteList.add(note)
+    load()
+}
+else{
+    note = Data.noteList.find { it.lastOpenedAt == timeId }!!    <span>//代入嚟宜家係邊個note，可以對呢個note進行更改</span>
+    titleEdit.setText(note.title)
+    load()
+}
+findViewById&lt;Button&gt;(R.id.button2).setOnClickListener {
+    val intent = Intent(this, MainActivity::class.java)
+    if(timeId == "0"){
+        Data.noteList[Data.noteList.size-1] = note     <span>//因為之前已經加左入去，咁加嘅一定會喺最後，如果係加完出左去再返嚟就已經會有timeId，唔會等於0</span>
+    }
+    else{
+        var noteNow = Data.noteList.find { it.lastOpenedAt == timeId }!!
+        noteNow.content = note.content
+        noteNow.title = note.title
+        noteNow.lastOpenedAt = note.lastOpenedAt    <span>//將所有代返曬入去，唔怕關聯性係因為已經唔會再改</span>
+    }
+    startActivity(intent)
+}
+saveHost()    <span>//空白先記錄，可以俾用戶返回到最開始的樣子</span>
+
+        </pre>
+    </div>    
+    <button class="accordion">MainActivity2.kt (title editText)</button>
+    <div class="panel">
+        <pre>
+titleEdit.doOnTextChanged { text, start, before, count -&gt;
+    if(isRestoring) return@doOnTextChanged    <span>//因為喺回到上一步嗰到佢會setText返title，但係如果set左佢就有textChange，所以要有個變量，如果佢係history所改嘅textEdit就唔會有Listener</span>
+    var title = text.toString()
+    note.title = title
+    saveHost()
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt (向右縮排)</button>
+    <div class="panel">
+        <pre>
+leftImage.setOnClickListener {
+    var list = nowId!!.split("-")    <span>//每次按一個editText都會俾一個nowId，係由load()去產去的ID，如1-0，即代表係第二個元素嘅第一個子元素</span>
+    if(list.isNullOrEmpty()){     <span>//因為第一第元素冇"-"，所以會係empty，咁就代一個俾佢</span>
+        list = listOf(nowId) as List&lt;String&gt;
+    }
+    if(list[0] != "") {    <span>//如果nowId=""(冇揀editText)就會變成佢冇值，但係空符串。</span>
+        if (list[0].toInt() != 0) {    <span>//向左縮排唔俾佢冇兄元素</span>
+            if (note.content[list[0].toInt() - 1].type != "image" || note.content[list[0].toInt() - 1].type != "text") {    <span>//同樣佢前面唔能夠係不攜帶子元素的元素</span>
+                if (list.size &gt; 1) {    <span>//list.size大於1，即佢有子元素，就要不斷遞歸落去</span>
+                    val noteObject = note.content[list[0].toInt()]     
+                    leftObject(noteObject, list.takeLast(list.size - 1))     <span>//將佢代返佢嘅子元素嗰層同子元素嘅list</span>
+                } else {
+                    note.content[list[0].toInt() - 1].children!!.add(note.content[list[0].toInt()])    <span>//喺佢前一項加返呢一項，之後再deleted返</span>
+                    note.content.removeAt(list[0].toInt())
+                    saveHost()
+                    load()
+                }
+            }
+        }
+    }
+    nowId = ""
+}
+
+
+fun leftObject(noteObject: ContentClass, list: List&lt;String&gt;){
+    if(list.isNotEmpty()){
+        if(list.size &gt; 1){
+            leftObject(noteObject.children!![list[0].toInt()], list.takeLast(list.size - 1))    <span>//如果佢list唔係淨返一個，即代表唔係呢一層，所以要繼續代下去。直到去到嗰層先可以進行縮排</span>
+        }
+        else{
+            println(list[0].toInt())
+            if(list[0].toInt() != 0) {
+                if(note.content[list[0].toInt()-1].type != "image" || note.content[list[0].toInt()-1].type != "text") {    <span>//同上</span>
+                    noteObject.children!![list[0].toInt() - 1].children!!.add(noteObject.children!![list[0].toInt()])
+                    noteObject.children!!.removeAt(list[0].toInt())
+                    saveHost()
+                    load()
+                }
+            }
+        }
+    }
+}
+
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt (向右減少縮排)</button>
+    <div class="panel">
+        <pre>
+rightImage.setOnClickListener {    <span>//邏輯同上</span>
+    var list = nowId!!.split("-")
+    if(list.isNullOrEmpty()){
+        list = listOf(nowId) as List&lt;String&gt;
+    }
+    if(list[0] != "") {
+        if (list.size &gt; 1) {    <span>//因為減縮係要喺佢嘅父元素加，所以list嘅數要有兩個先可以得佢嘅父元素</span>
+            if (list.size &gt; 2) {
+                val noteObject = note.content[list[0].toInt()]    <span>//list.size唔係2，即代表佢仲未係最後嗰兩層，要繼續遞</span>
+                rightObject(noteObject, list.takeLast(list.size - 1))
+            } else {
+                if (list[1].toInt() == note.content[list[0].toInt()].children!!.size - 1) {    <span>//要係佢宜家嗰層嘅最後一個(題目要求)</span>
+                    note.content.add(
+                        list[0].toInt() + 1,       <span>//加喺佢嘅當前父層嘅下一個，反正都已經確認佢有list.size係2，所以可以硬寫</span>
+                        note.content[list[0].toInt()].children!![list[1].toInt()]
+                    )
+                    note.content[list[0].toInt()].children?.removeAt(list[1].toInt())
+                    saveHost()
+                    load()
+                }
+            }
+        }
+    }
+    nowId = ""
+}
+fun rightObject(noteObject: ContentClass, list: List&lt;String&gt;){
+    if(list.isNotEmpty()){
+        if(list.size &gt; 2){
+            rightObject(noteObject.children!![list[0].toInt()], list.takeLast(list.size-1))    <span>//同上</span>
+        }
+        else{
+            if(list[1].toInt() == noteObject.children!![list[0].toInt()].children!!.size-1){
+                noteObject.children!!.add(list[0].toInt()+1,noteObject.children!![list[0].toInt()].children!![list[1].toInt()])
+                noteObject.children!![list[0].toInt()].children?.removeAt(list[1].toInt())
+                saveHost()
+                load()
+            }
+        }
+    }
+}
+
+
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt (加文字)</button>
+    <div class="panel">
+        <pre>
+addTextImage.setOnClickListener {
+    var list = nowId!!.split("-")    <span>//同(縮排)</span>
+    if(list.isNullOrEmpty()){
+        if(nowId!!.any { it.isDigit() }){
+            list = listOf(nowId) as List&lt;String&gt;
+        }
+    }
+    if(list[0] != ""){    
+        if(list.size &gt; 1){    <span>//即使係加文字，佢都要知道加喺邊，所以要揾返佢嘅位置先有得加</span>
+            val noteObject = note.content[list[0].toInt()]
+            nowObject(noteObject, list.takeLast(list.size-1), "text")
+        }
+        else{
+            note.content.add(list[0].toInt()+1,ContentClass("text"))
+            saveHost()
+            load()
+        }
+    }
+    nowId = ""
+}
+fun nowObject(noteObject: ContentClass, list: List&lt;String&gt;, status: String){
+    if(list.isNotEmpty()){
+        if(list.size &gt; 1){
+            nowObject(noteObject.children!![list[0].toInt()], list.takeLast(list.size-1), status)
+        }
+        else{
+            noteObject.children!!.add(list[0].toInt()+1, ContentClass(status))
+            saveHost()
+            load()
+        }
+    }
+}
+
+
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt (加入所選擇的圖片)</button>
+    <div class="panel">
+        <pre>
+pickImage.setOnClickListener {
+    var list = nowId!!.split("-")
+    if(list.isNullOrEmpty()){
+        list = listOf(nowId) as List&lt;String&gt;
+    }
+    if(list[0] != "") {
+        if (list.size &gt; 1) {
+            val noteObject = note.content[list[0].toInt()]    <span>//同(縮排)</span>
+            pickPhotoObject(noteObject, list.takeLast(list.size - 1), "image")
+        } else {
+            pendNote = note.content
+            listNumber = list[0].toInt() + 1
+            pickPhoto.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+    }
+    nowId = ""
+}
+
+fun pickPhotoObject(noteObject: ContentClass, list: List&lt;String&gt;, status: String){
+    if(list.isNotEmpty()){
+        if(list.size &gt; 1){
+            nowObject(noteObject.children!![list[0].toInt()], list.takeLast(list.size-1), status)     <span>//同樣需要揾返佢嘅位置</span>
+        }
+        else{
+            if(status == "image"){
+                pendNote = noteObject.children!!    <span>//又係臨時值，記低宜家喺邊層，之後用戶選擇完之後可以加返落嗰層</span>
+                listNumber = list[0].toInt()+1
+                pickPhoto.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            }
+        }
+    }
+}
+
+val pickPhoto = registerForActivityResult(ActivityResultContracts.PickVisualMedia()){uri -&gt;
+    if(uri != null){
+        println(uri)
+        pendNote!!.add(listNumber, ContentClass("image", uri.toString()))   <span>//加入數組</span>
+        load()
+        saveHost()
+    }
+}
+
+
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt (加入拍照的圖片)</button>
+    <div class="panel">
+        <pre>
+takePhotoImage.setOnClickListener {
+    var list = nowId!!.split("-")
+    if(list.isNullOrEmpty()){
+        list = listOf(nowId) as List&lt;String&gt;
+    }
+    if(list[0] != "") {
+        if (list.size &gt; 1) {
+            val noteObject = note.content[list[0].toInt()]
+            takePhotoObject(noteObject, list.takeLast(list.size - 1), "image")    <span>//需要揾返佢嘅位置</span>
+        } else {
+            pendNote = note.content     <span>//又係臨時值，記低宜家喺邊層，之後用戶選擇完之後可以加返落嗰層</span>
+            listNumber = list[0].toInt() + 1
+            photoUri = createImageUri()    <span>//就係喺圖片庫建立一個uri，之後拍照就將將相放入去得到uri再存入數組</span>
+            takePhoto.launch(photoUri)     <span>//啟動相機 App，並將 photoUri 傳遞給相機，告訴它：「拍完照請直接將高解析度圖片存到這個路徑」。</span>
+        }
+    }
+    nowId = ""
+}
+fun takePhotoObject(noteObject: ContentClass, list: List&lt;String&gt;, status: String){
+    if(list.isNotEmpty()){
+        if(list.size &gt; 1){
+            nowObject(noteObject.children!![list[0].toInt()], list.takeLast(list.size-1), status)
+        }
+        else{
+            if(status == "image"){
+                pendNote = noteObject.children!!
+                listNumber = list[0].toInt()+1
+                photoUri = createImageUri()    
+                takePhoto.launch(photoUri)
+            }
+        }
+    }
+}
+lateinit var photoUri: Uri
+val takePhoto = registerForActivityResult(ActivityResultContracts.TakePicture()){result -&gt;    <span>//定義了「輸入」是 Uri（照片要存哪裡），「輸出」是 Boolean（拍照是否成功）。</span>
+    if(result){
+        pendNote.add(listNumber, ContentClass("image", photoUri.toString()))    <span>//因為佢有返回uri，就可以直接用，bitmap好難去儲存同顯示返張相</span>
+        load()
+        saveHost()
+    }
+}
+fun createImageUri(): Uri {    <span>//在手機的「Pictures」資料夾中建立一個新的 JPEG 圖片檔案，並取得它的 Uri 路徑</span>
+    val contentValues = ContentValues().apply {   <span>//其實同儲存圖片差唔多，可以理解係我要set好啲相片的資料，之後再返回一個uri以表示將佢嘅資料</span>
+        put(MediaStore.Images.Media.DISPLAY_NAME, "photo_${System.currentTimeMillis()}.jpg")
+        put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+        put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+    }
+    return contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)!!
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt (加listItem)</button>
+    <div class="panel">
+        <pre>
+listImage.setOnClickListener {
+    var list = nowId!!.split("-")
+    if(list.isNullOrEmpty()){
+        list = listOf(nowId) as List&lt;String&gt;
+    }
+    if(list[0] != "") {
+        if (list.size &gt; 1) {
+            val noteObject = note.content[list[0].toInt()]
+            nowObject(noteObject, list.takeLast(list.size - 1), "listItem")
+        } else {
+            note.content.add(list[0].toInt() + 1, ContentClass("listItem"))
+            saveHost()
+            load()
+        }
+    }
+    nowId = ""
+}
+fun nowObject(noteObject: ContentClass, list: List&lt;String&gt;, status: String){    <span>//因為佢都會回傳個status，咁就可以重用啲啲嘅function</span>
+    if(list.isNotEmpty()){
+        if(list.size &gt; 1){
+            nowObject(noteObject.children!![list[0].toInt()], list.takeLast(list.size-1), status)
+        }
+        else{
+            noteObject.children!!.add(list[0].toInt()+1, ContentClass(status))
+            saveHost()
+            load()
+        }
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt (加checkBox)</button>
+    <div class="panel">
+        <pre>
+checkBoxImage.setOnClickListener {
+    var list = nowId!!.split("-")
+    if(list.isNullOrEmpty()){
+        list = listOf(nowId) as List&lt;String&gt;
+    }
+    if(list[0] != "") {
+        if (list.size &gt; 1) {
+            val noteObject = note.content[list[0].toInt()]
+            nowObject(noteObject, list.takeLast(list.size - 1), "checkboxListItem")
+        } else {
+            note.content.add(list[0].toInt() + 1, ContentClass("checkboxListItem"))
+            saveHost()
+            load()
+        }
+    }
+    nowId = ""
+}
+fun nowObject(noteObject: ContentClass, list: List&lt;String&gt;, status: String){
+    if(list.isNotEmpty()){
+        if(list.size &gt; 1){
+            nowObject(noteObject.children!![list[0].toInt()], list.takeLast(list.size-1), status)
+        }
+        else{
+            noteObject.children!!.add(list[0].toInt()+1, ContentClass(status))
+            saveHost()
+            load()
+        }
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt (load function)</button>
+    <div class="panel">
+        <mark>load就係透過顯示佢地出嚟之後，都俾埋個ID俾佢地，咁到時點擊就可以攞到佢地嘅位置(我都唔知我點樣諗出嚟)</mark>
+        <pre>
+fun load(){
+    var i = 0
+    linearLayout.removeAllViews()
+    for(result in note.content){
+        result.id = "${i}"    <span>//第一層ID</span>
+        if(result.type == "image"){     <span>//妢係唔同類型有唔同操作</span>
+            val imageView = ImageView(this)
+            if(result.imageId?.contains("content://") == true){     <span>//分係uri定預設檔名，不過可以試下用try</span>
+                imageView.setImageURI(result.imageId?.toUri())
+            }
+            else if(result.imageId?.any{it.isDigit()} ?: false){
+                imageView.setBackgroundResource(R.drawable.cupcake)
+            }
+            imageView.layoutParams = ViewGroup.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,    
+                1000)
+            imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+            linearLayout.addView(imageView)
+        }
+        else if(result.type == "text"){
+            val editText = EditText(this)
+            editText.setText(result.text)
+            editText.setOnFocusChangeListener{_, hasFocus -&gt;
+                if(hasFocus){
+                    nowId = result.id
+                    println(nowId)
+                }
+            }
+            editText.doOnTextChanged { text, start, before, count -&gt;
+                if(isRestoring){
+                    return@doOnTextChanged
+                }
+                result.text = text.toString()
+                saveHost()
+            }
+            linearLayout.addView(editText)
+        }
+        else if(result.type == "listItem"){
+            val layout = layoutInflater.inflate(R.layout.list_item_pro, null)
+            layout.findViewById&lt;EditText&gt;(R.id.editTextText3).setText(result.text)
+            if(!result.children.isNullOrEmpty()){     <span>//如果佢仲有子元素，就要繼續load落去，進入遞歸函數</span>
+                loadListItem(result.id,result.children!!, layout)
+            }
+            layout.findViewById&lt;EditText&gt;(R.id.editTextText3).setOnFocusChangeListener{_, hasFocus -&gt;
+                if(hasFocus){
+                    nowId = result.id
+                }
+            }
+            layout.findViewById&lt;EditText&gt;(R.id.editTextText3).doOnTextChanged { text, start, before, count -&gt;
+                if(isRestoring){
+                    return@doOnTextChanged    <span>//都係setText會觸發listener，以防止此事所以有限制</span>
+                }
+                result.text = text.toString()
+                saveHost()
+            }
+            linearLayout.addView(layout)
+        }
+        else if(result.type == "checkboxListItem"){
+            val layout = layoutInflater.inflate(R.layout.check_box_pro, null)
+            layout.findViewById&lt;EditText&gt;(R.id.editTextText3).setText(result.text)
+            if(result.isChecked == true){
+                layout.findViewById&lt;CheckBox&gt;(R.id.checkBox).isChecked = true
+            }
+            if(!result.children.isNullOrEmpty()){
+                loadListItem(result.id, result.children!!, layout)
+            }
+            layout.findViewById&lt;EditText&gt;(R.id.editTextText3).setOnFocusChangeListener{_, hasFocus -&gt;
+                if(hasFocus){
+                    nowId = result.id
+                }
+            }
+            layout.findViewById&lt;EditText&gt;(R.id.editTextText3).doOnTextChanged { text, start, before, count -&gt;
+                if(isRestoring){
+                    return@doOnTextChanged
+                }
+                result.text = text.toString()
+                saveHost()
+            }
+            linearLayout.addView(layout)
+        }
+        i++
+    }
+}
+
+fun loadListItem(resultId: String?, children: ArrayList&lt;ContentClass&gt;, layout: View){    
+    var k = 0
+    for(children1 in children){
+        children1.id = resultId    <span>//佢要繼承返父的ID</span>
+        children1.id += "-${k}"    <span>//都要自己加返啲ID</span>
+        if(children1.type == "image"){
+            val imageView = ImageView(this)
+            if(children1.imageId?.contains("content://") == true){
+                imageView.setImageURI(children1.imageId?.toUri())
+            }
+            else if(children1.imageId?.any{it.isDigit()} ?: false){
+                imageView.setBackgroundResource(R.drawable.cupcake)
+            }
+            imageView.layoutParams = ViewGroup.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
+                1000)
+            imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+            layout.findViewById&lt;LinearLayout&gt;(R.id.linearLayout).addView(imageView)    <span>//要喺父加入view，如果唔係就會斷左</span>
+        }
+        else if(children1.type == "text"){
+            val editText = EditText(this)
+            editText.setText(children1.text)
+            editText.setOnFocusChangeListener{_, hasFocus -&gt;
+                if(hasFocus){
+                    nowId = children1.id
+                }
+            }
+            editText.doOnTextChanged { text, start, before, count -&gt;
+                if(isRestoring) return@doOnTextChanged
+                children1.text = text.toString()
+                saveHost()
+            }
+            layout.findViewById&lt;LinearLayout&gt;(R.id.linearLayout).addView(editText)
+        }
+        else if (children1.type == "listItem"){
+            val layout2 = layoutInflater.inflate(R.layout.list_item_pro, null)
+            layout2.findViewById&lt;EditText&gt;(R.id.editTextText3).setText(children1.text)
+            if(!children1.children.isNullOrEmpty()){
+                loadListItem(children1.id, children1.children!!, layout2)    <span>//因為宜家layout2變左父，佢啲子代要加入layout2，唔係就會變左佢地係同輩</span>
+            }
+            layout2.findViewById&lt;EditText&gt;(R.id.editTextText3).setOnFocusChangeListener{_, hasFocus -&gt;
+                if(hasFocus){
+                    nowId = children1.id
+                    println(nowId)
+                }
+            }
+            layout2.findViewById&lt;EditText&gt;(R.id.editTextText3).doOnTextChanged { text, start, before, count -&gt;
+                if(isRestoring) return@doOnTextChanged
+                children1.text = text.toString()
+                saveHost()
+            }
+            layout.findViewById&lt;LinearLayout&gt;(R.id.linearLayout).addView(layout2)
+        }
+        else if (children1.type == "checkboxListItem"){
+            val layout2 = layoutInflater.inflate(R.layout.check_box_pro, null)
+            layout2.findViewById&lt;EditText&gt;(R.id.editTextText3).setText(children1.text)
+            if(children1.isChecked == true){
+                layout2.findViewById&lt;CheckBox&gt;(R.id.checkBox).isChecked = true
+            }
+            if(!children1.children.isNullOrEmpty()){
+                loadListItem(children1.id,children1.children!!, layout2)
+            }
+            layout2.findViewById&lt;EditText&gt;(R.id.editTextText3).setOnFocusChangeListener{_, hasFocus -&gt;
+                if(hasFocus){
+                    nowId = children1.id
+                    println(nowId)
+                }
+            }
+            layout2.findViewById&lt;EditText&gt;(R.id.editTextText3).doOnTextChanged { text, start, before, count -&gt;
+                if(isRestoring) return@doOnTextChanged
+                children1.text = text.toString()
+                saveHost()
+            }
+            layout.findViewById&lt;LinearLayout&gt;(R.id.linearLayout).addView(layout2)
+        }
+        k++
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt (返回上一步)</button>
+    <div class="panel">
+        <h2>有個Data.hostList去記低曬佢更改的記錄，並係記錄成個note就冇咁麻煩要記底邊條邊條改左</h2>
+        <mark>邏輯：攞返佢嘅記錄，複製一份再進行其他操作</mark>
+        <pre>
+backImage.setOnClickListener {
+    if(Data.hostList.size-1-hostNumber != 0)     <span>//加左先就係-1，未加就係0，因為如果佢係0再加大，即係再減一個更大的數變成-1，根本就冇數組係有第-1項</span>{    
+        hostNumber++
+        val noteClone = Data.hostList[Data.hostList.size-1-hostNumber]    <span>//因為有hostNumber記錄返宜家我睇到邊個記錄，所以就每次加1，跟住就可以攞到嗰個記錄啲數據</span>
+        val noteCloneList = noteClone.content.map { it.deepCopy() } as ArrayList&lt;ContentClass&gt;    <span>//因為有關聯性，如果直接攞佢嗰個值去更改，咁佢嘅記錄就會更改，之前嗰記錄冇左，佢就變得好奇怪。呢個係將佢啲children都要經過複製再用</span>
+        note = NoteClass(noteClone.title, LocalDateTime.now().toString(), noteCloneList)
+        isRestoring = true     <span>//因為宜家係show返佢嘅history，唔可以當係用戶改editText又儲存history，咁只會冇限地遞迴落去</span>
+        titleEdit.setText(note.title)
+        load()
+        isRestoring = false
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt (下一步)</button>
+    <div class="panel">
+        <pre>
+forwardImage.setOnClickListener {
+    if(Data.hostList.size-1-hostNumber != 0){
+        if(hostNumber != 0){    <span>//hostNumber係0即代表佢已經係最新記錄，冇得再下一步</span>
+            hostNumber--
+            val noteClone = Data.hostList[Data.hostList.size-1-hostNumber]    <span>//同上</span>
+            val noteCloneList = noteClone.content.map { it.deepCopy() } as ArrayList&lt;ContentClass&gt;
+            note = NoteClass(noteClone.title, LocalDateTime.now().toString(), noteCloneList)
+            isRestoring = true
+            titleEdit.setText(note.title)
+            load()
+            isRestoring = false
+        }
+    }
+}
+
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <h3>喺改變內容嘅時間就call 呢個function，用嚟記低改左啲咩</h3>
+        <pre>
+fun saveHost(){
+<span>//        val noteContent = note.content.clone() as ArrayList&lt;ContentClass&gt;     //.clone()復製新的一個東西</span>
+<span>//        val noteContent = ArrayList(note.content)    //呢個都係複製一份嘅意思，但係佢呢個係淺層複製，淨係可以複製你現時呢一層，再落下嗰啲複製唔到</span>
+        val noteContent = note.content.map { it.deepCopy() } as ArrayList&lt;ContentClass&gt;
+        if(hostNumber != 0){
+            Data.hostList.removeAll(Data.hostList.takeLast(hostNumber))    <span>//棧的結構：先進後出，後入嚟嘅佢會先出去，(出去都可以被作唔要了)所以當佢喺有上一步嘅情況下改變左內容，即係佢之前啲野唔要了，就係睇佢返回左幾多就唔要幾多。或者可以咁樣理解，佢返回上一步即係將啲野移赴左，如果佢再加其他野咁就有一個棧又入左嚟，咁之前啲就唔要，佢上一步就會係加入之的一步。所以都係要deleted中間嘅所有野</span>
+            hostNumber = 0
+        }
+        val noteNow = NoteClass(note.title, LocalDateTime.now().toString(),noteContent)
+        Data.hostList.add(noteNow)
+    }
+
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt (deleted)</button>
+    <div class="panel">
+        <pre>
+deleteImage.setOnClickListener {
+    var list = nowId!!.split("-")
+    if(list.isNullOrEmpty()){
+        list = listOf(nowId) as List&lt;String&gt;
+    }
+    if(list[0] != "") {
+        if (list.size &gt; 1) {
+            val noteObject = note.content[list[0].toInt()]
+            removeObject(noteObject, list.takeLast(list.size - 1))   
+        } else {
+            note.content.removeAt(list[0].toInt())    <span>//很容易理解，都係揾返佢喺邊跟住remove左就可以</span>
+            saveHost()
+            load()
+        }
+    }
+    nowId = ""
+}
+fun removeObject(noteObject: ContentClass, list: List&lt;String&gt;){
+    if(list.isNotEmpty()){
+        if(list.size &gt; 1){
+            removeObject(noteObject.children!![list[0].toInt()], list.takeLast(list.size-1))
+        }
+        else{
+            noteObject.children!!.removeAt(list[0].toInt())
+            saveHost()
+            load()
+        }
+    }
+}
+
+
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

@@ -135,79 +135,248 @@ fun load(view: LinearLayout){
     <button class="accordion">homeFragment.kt</button>
     <div class="panel">
         <pre>
+var photo = arrayListOf&lt;Uri?&gt;()
+val pickerPhoto = registerForActivityResult(ActivityResultContracts.PickVisualMedia()){uri -&gt;
+    imageView16.setImageURI(uri)
+    photo.add(uri)
+}
+view.findViewById&lt;TextView&gt;(R.id.textView16).text = "Height: ${Data.height}"
+view.findViewById&lt;TextView&gt;(R.id.textView18).text = "Weight: ${Data.weight}"
+Data.bmi = (Data.weight.toFloat()/(Data.height.toFloat()*Data.height.toFloat()/100/100)).toString()
+view.findViewById&lt;TextView&gt;(R.id.textView17).text = "BMI: ${String.format("%.2f", Data.bmi.toFloat())}"
+
+val textView20: TextView = view.findViewById(R.id.textView20)
+val progressBar: ProgressBar = view.findViewById(R.id.progressBar)
+val textView21: TextView =view.findViewById(R.id.textView21)
+linearLayout = view.findViewById(R.id.linearLayout)
+
+textView20.text = "${Data.nowSteps} / ${Data.steps} Steps"
+progressBar.max = Data.steps
+progressBar.progress = Data.nowSteps
+textView21.text = "${((Data.nowSteps.toFloat() / Data.steps.toFloat()).toFloat()*100).toInt()}%"    <span>//計百分比</span>
+val imageView13: ImageView = view.findViewById(R.id.imageView13)
+load()    <span>// show 返foods啲相</span>
+imageView13.setOnClickListener {
+    val popupMenu = PopupMenu(requireActivity(), it)
+    popupMenu.menuInflater.inflate(R.menu.menu2, popupMenu.menu)
+    popupMenu.show()
+    popupMenu.setOnMenuItemClickListener {
+        when(it.itemId){
+            R.id.addFood -&gt; {
+                val layout = layoutInflater.inflate(R.layout.add_image, null)
+                val chipGroup = layout.findViewById&lt;ChipGroup&gt;(R.id.chipGroup)
+                val chip1: Chip = layout.findViewById(R.id.chip1)
+                val chip2: Chip = layout.findViewById(R.id.chip2)
+                val chip3: Chip = layout.findViewById(R.id.chip3)
+                layout.findViewById&lt;FrameLayout&gt;(R.id.addArea).setOnClickListener {
+                    pickerPhoto.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                }
+                var status = ""
+                chip1.setOnClickListener {
+                    chipGroup.clearCheck()
+                    chip1.isChecked = true
+                    status = "Breakfast"
+                }
+                chip2.setOnClickListener {
+                    chipGroup.clearCheck()
+                    chip2.isChecked = true
+                    status = "Lunch"
+                }
+                chip3.setOnClickListener {
+                    chipGroup.clearCheck()
+                    chip3.isChecked = true
+                    status = "Dinner"
+                }
+                val alertDialog = AlertDialog.Builder(requireActivity()).setView(layout).show()
+                imageView16 = layout.findViewById(R.id.imageView16)    <span>//喺alertDialog被select嗰張相</span>
+                layout.findViewById&lt;Button&gt;(R.id.button9).setOnClickListener {
+                    alertDialog.dismiss()
+                }
+                layout.findViewById&lt;Button&gt;(R.id.button10).setOnClickListener {
+                    Data.imageUri.add(imageListClass2(photo.last(), status))
+                    alertDialog.dismiss()
+                    load()
+                    photo.clear()    <span>//photo list的作用係驚用戶揀嚟揀去可能會error嘅情況而設的一個緩存，所以佢決定左邊張之後會再clear返</span>
+                }
+            }
+            else -&gt; {
+                val layout = layoutInflater.inflate(R.layout.add_alert, null)
+                var status = 0
+                val imageView1: ImageView = layout.findViewById&lt;ImageView&gt;(R.id.imageView19)
+                val imageView2: ImageView = layout.findViewById&lt;ImageView&gt;(R.id.imageView20)
+                val imageView3: ImageView = layout.findViewById&lt;ImageView&gt;(R.id.imageView21)
+                imageView1.setBackgroundColor(Color.parseColor("#18abc8"))
+                imageView1.setOnClickListener {
+                    imageView2.setBackgroundColor(Color.TRANSPARENT)
+                    imageView3.setBackgroundColor(Color.TRANSPARENT)
+                    imageView1.setBackgroundColor(Color.parseColor("#18abc8"))
+                    status = 0
+                }
+                imageView2.setOnClickListener {
+                    imageView1.setBackgroundColor(Color.TRANSPARENT)
+                    imageView3.setBackgroundColor(Color.TRANSPARENT)
+                    imageView2.setBackgroundColor(Color.parseColor("#18abc8"))
+                    status = 1
+                }
+                imageView3.setOnClickListener {
+                    imageView2.setBackgroundColor(Color.TRANSPARENT)
+                    imageView1.setBackgroundColor(Color.TRANSPARENT)
+                    imageView3.setBackgroundColor(Color.parseColor("#18abc8"))
+                    status = 2
+                }
+                val alertDialog = AlertDialog.Builder(requireActivity()).setView(layout).show()
+                layout.findViewById&lt;Button&gt;(R.id.button13).setOnClickListener {
+                    alertDialog.dismiss()
+                }
+                layout.findViewById&lt;Button&gt;(R.id.button14).setOnClickListener {
+                    Data.alarmsList.add(AlarmClass(status, "${layout.findViewById&lt;EditText&gt;(R.id.editTextText9).text.toString()} : ${layout.findViewById&lt;EditText&gt;(R.id.editTextText10).text.toString()}", false))
+                    alertDialog.dismiss()
+                }
+            }
+        }
+        true
+    }
+}
+
+textView26 = view.findViewById(R.id.textView26)
+textView26.text = "${Data.nowWater} / ${Data.water} ml"
+textView27 = view.findViewById(R.id.textView27)
+textView27.text = "${String.format("%.1f", (Data.nowWater.toFloat() / Data.water.toFloat()).toFloat()*100)}%"
+val button11 : Button = view.findViewById(R.id.button11)
+val button12 : Button = view.findViewById(R.id.button12)
+button11.setOnClickListener {
+    addWater(100)
+}
+button12.setOnClickListener {
+    addWater(250)
+}
+val imageView120: ImageView = view.findViewById&lt;ImageView&gt;(R.id.imageView120)
+imageView120.setOnClickListener {
+    val popupMenu = PopupMenu(requireActivity(), it)
+    popupMenu.menuInflater.inflate(R.menu.menu3, popupMenu.menu)
+    popupMenu.show()
+    popupMenu.setOnMenuItemClickListener {
+        when(it.itemId){
+            R.id.addAlarm -&gt; {
+                val layout = layoutInflater.inflate(R.layout.add_alert, null)
+                var status = 0
+                val imageView1: ImageView = layout.findViewById&lt;ImageView&gt;(R.id.imageView19)
+                val imageView2: ImageView = layout.findViewById&lt;ImageView&gt;(R.id.imageView20)
+                val imageView3: ImageView = layout.findViewById&lt;ImageView&gt;(R.id.imageView21)
+                imageView2.setBackgroundColor(Color.parseColor("#18abc8"))
+                imageView1.setOnClickListener {
+                    imageView2.setBackgroundColor(Color.TRANSPARENT)
+                    imageView3.setBackgroundColor(Color.TRANSPARENT)
+                    imageView1.setBackgroundColor(Color.parseColor("#18abc8"))
+                    status = 0
+                }
+                imageView2.setOnClickListener {
+                    imageView1.setBackgroundColor(Color.TRANSPARENT)
+                    imageView3.setBackgroundColor(Color.TRANSPARENT)
+                    imageView2.setBackgroundColor(Color.parseColor("#18abc8"))
+                    status = 1
+                }
+                imageView3.setOnClickListener {
+                    imageView2.setBackgroundColor(Color.TRANSPARENT)
+                    imageView1.setBackgroundColor(Color.TRANSPARENT)
+                    imageView3.setBackgroundColor(Color.parseColor("#18abc8"))
+                    status = 2
+                }
+                val alertDialog = AlertDialog.Builder(requireActivity()).setView(layout).show()
+                layout.findViewById&lt;Button&gt;(R.id.button13).setOnClickListener {
+                    alertDialog.dismiss()
+                }
+                layout.findViewById&lt;Button&gt;(R.id.button14).setOnClickListener {
+                    Data.alarmsList.add(AlarmClass(status, "${layout.findViewById&lt;EditText&gt;(R.id.editTextText9).text.toString()} : ${layout.findViewById&lt;EditText&gt;(R.id.editTextText10).text.toString()}", false))
+                    alertDialog.dismiss()
+                }
+            }
+        }
+        true
+    }
+}
+fun load(){
+    linearLayout.removeAllViews()
+    for(result in Data.imageList){
+        val layout = layoutInflater.inflate(R.layout.image_back, null)
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView14).setImageResource(result.image)
+        layout.findViewById&lt;TextView&gt;(R.id.textView24).text = result.status
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView15).setOnClickListener {
+            linearLayout.removeView(layout)
+        }
+        linearLayout.addView(layout)
+    }
+    for(result in Data.imageUri){    <span>//setimageUri同普通嘅drawable唔一樣，不過都可以用try去set返張相就唔使咁</span>
+        val layout = layoutInflater.inflate(R.layout.image_back, null)
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView14).setImageURI(result?.image)
+        layout.findViewById&lt;TextView&gt;(R.id.textView24).text = result?.status
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView15).setOnClickListener {
+            linearLayout.removeView(layout)
+        }
+        linearLayout.addView(layout)
+    }
+}
+
 
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">Data.kt</button>
     <div class="panel">
         <pre>
+class Data {
+    companion object{
+        var username = ""
+        var height = ""
+        var weight = ""
+        var bmi = ""
+        var steps = 0
+        var water = 0
+        var isboy = true
+        var nowSteps = 300
+        var nowWater = 200
+        var imageList = arrayListOf(
+            imageListClass(R.drawable.breakfast_5204360_640, "Breakfast"),
+            imageListClass(R.drawable.burger_987256_640, "Lunch"),
+            imageListClass(R.drawable.chocolate_8455786_640, "Dinner"))
+
+        var imageUri = arrayListOf&lt;imageListClass2?&gt;()
+        var alarmsList = arrayListOf&lt;AlarmClass&gt;()
+    }
+}
+class AlarmClass(var status: Int, var time:String, var isTaken: Boolean)
+class imageListClass(var image: Int, var status: String)
+class imageListClass2(var image: Uri?, var status: String)
+
 
         </pre>
     </div>
 
-    <button class="accordion">code</button>
+    <button class="accordion">alarmFragment.kt</button>
     <div class="panel">
         <pre>
+override fun onResume() {    <span>//我喺到諗緊其實佢好似有時係會實時關聯，有時又唔會。最好都係寫呢個去實時update下</span>
+    super.onResume()
+    val linearLayout = view.findViewById&lt;LinearLayout&gt;(R.id.linearLayout)
+    linearLayout.removeAllViews()
+    for(result in Data.alarmsList){
+        val layout = layoutInflater.inflate(R.layout.alarm_pro, null)
+        layout.findViewById&lt;TextView&gt;(R.id.textView31).text = result.time
+        val drawable = when(result.status){
+            0 -&gt; R.drawable.food_dinner_svgrepo_com
+            1 -&gt; R.drawable.water_drop_fill0_wght400_grad0_opsz24
+            else  -&gt; R.drawable.etc_svgrepo_com
+        }
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView23).setImageResource(drawable)
+        val switch = layout.findViewById&lt;Switch&gt;(R.id.switch1)
+        switch.isChecked = result.isTaken
+        switch.setOnCheckedChangeListener { buttonView, isChecked -&gt;
+            result.isTaken = !result.isTaken
+        }
+        linearLayout.addView(layout)
+    }
 
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
+}
 
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
 
         </pre>
     </div>

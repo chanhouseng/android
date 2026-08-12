@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "currency": "CNY",
+  "rounding": "round final monetary value to 2 decimal places",
+  "plans": [
+    {
+      "plan_id": "P_TEST",
+      "name": "Quick Test",
+      "runtime_duration_seconds": 15,
+      "billing_minutes": 30,
+      "unlock_fee": 0.8,
+      "base_price_per_30_minutes": 1.2,
+      "insurance_fee": 0.5,
+      "extension_seconds": 15,
+      "overtime_block_seconds": 10,
+      "overtime_rate_per_block": 0.5
+    },
+    {
+      "plan_id": "P_CITY",
+      "name": "City Ride",
+      "runtime_duration_seconds": 1800,
+      "billing_minutes": 30,
+      "unlock_fee": 1.0,
+      "base_price_per_30_minutes": 2.5,
+      "insurance_fee": 0.8,
+      "extension_seconds": 1800,
+      "overtime_block_seconds": 600,
+      "overtime_rate_per_block": 1.0
+    },
+    {
+      "plan_id": "P_EXPLORER",
+      "name": "Explorer Ride",
+      "runtime_duration_seconds": 3600,
+      "billing_minutes": 60,
+      "unlock_fee": 1.0,
+      "base_price_per_30_minutes": 2.2,
+      "insurance_fee": 0.8,
+      "extension_seconds": 1800,
+      "overtime_block_seconds": 600,
+      "overtime_rate_per_block": 1.2
+    }
+  ]
+}

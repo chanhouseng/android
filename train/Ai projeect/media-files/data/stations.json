@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "stations": [
+    {
+      "station_id": "S001",
+      "name": "Central Square",
+      "district": "Central",
+      "capacity": 6,
+      "distance_km": 0.4,
+      "coordinates": {
+        "x": 0.48,
+        "y": 0.42
+      }
+    },
+    {
+      "station_id": "S002",
+      "name": "Riverside Walk",
+      "district": "Riverside",
+      "capacity": 5,
+      "distance_km": 1.2,
+      "coordinates": {
+        "x": 0.32,
+        "y": 0.58
+      }
+    },
+    {
+      "station_id": "S003",
+      "name": "City Museum",
+      "district": "Central",
+      "capacity": 5,
+      "distance_km": 0.8,
+      "coordinates": {
+        "x": 0.56,
+        "y": 0.34
+      }
+    },
+    {
+      "station_id": "S004",
+      "name": "University Gate",
+      "district": "North",
+      "capacity": 5,
+      "distance_km": 2.6,
+      "coordinates": {
+        "x": 0.61,
+        "y": 0.18
+      }
+    },
+    {
+      "station_id": "S005",
+      "name": "Old Town Market",
+      "district": "West",
+      "capacity": 4,
+      "distance_km": 1.9,
+      "coordinates": {
+        "x": 0.22,
+        "y": 0.45
+      }
+    },
+    {
+      "station_id": "S006",
+      "name": "Tech Park",
+      "district": "East",
+      "capacity": 5,
+      "distance_km": 3.8,
+      "coordinates": {
+        "x": 0.79,
+        "y": 0.43
+      }
+    },
+    {
+      "station_id": "S007",
+      "name": "South Gate",
+      "district": "South",
+      "capacity": 4,
+      "distance_km": 2.9,
+      "coordinates": {
+        "x": 0.49,
+        "y": 0.77
+      }
+    },
+    {
+      "station_id": "S008",
+      "name": "Harbor Terminal",
+      "district": "Riverside",
+      "capacity": 5,
+      "distance_km": 4.1,
+      "coordinates": {
+        "x": 0.17,
+        "y": 0.71
+      }
+    }
+  ]
+}

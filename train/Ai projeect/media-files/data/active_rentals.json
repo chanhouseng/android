@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "initialization_rule": "On first import, started_at = current time - seed_elapsed_seconds; planned_end_at = started_at + the plan runtime duration. Persist resulting ISO 8601 timestamps locally.",
+  "active_rentals": [
+    {
+      "rental_id": "AR001",
+      "member_id": "M005",
+      "bike_id": "B014",
+      "origin_station_id": "S004",
+      "plan_id": "P_TEST",
+      "insurance_selected": true,
+      "seed_elapsed_seconds": 5
+    },
+    {
+      "rental_id": "AR002",
+      "member_id": "M005",
+      "bike_id": "B021",
+      "origin_station_id": "S006",
+      "plan_id": "P_CITY",
+      "insurance_selected": false,
+      "seed_elapsed_seconds": 300
+    },
+    {
+      "rental_id": "AR003",
+      "member_id": "M002",
+      "bike_id": "B030",
+      "origin_station_id": "S008",
+      "plan_id": "P_TEST",
+      "insurance_selected": false,
+      "seed_elapsed_seconds": 18
+    }
+  ]
+}

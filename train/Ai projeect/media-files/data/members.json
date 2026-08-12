@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "members": [
+    {
+      "member_id": "M001",
+      "name": "Alex Chen",
+      "phone": "13800138001",
+      "tier": "Standard",
+      "discount_rate": 0.0
+    },
+    {
+      "member_id": "M002",
+      "name": "Bella Wong",
+      "phone": "13900139002",
+      "tier": "Student",
+      "discount_rate": 0.08
+    },
+    {
+      "member_id": "M003",
+      "name": "Carlos Li",
+      "phone": "13600136003",
+      "tier": "Silver",
+      "discount_rate": 0.05
+    },
+    {
+      "member_id": "M004",
+      "name": "Diana Xu",
+      "phone": "13700137004",
+      "tier": "Gold",
+      "discount_rate": 0.1
+    },
+    {
+      "member_id": "M005",
+      "name": "Ethan Zhang",
+      "phone": "13500135005",
+      "tier": "Standard",
+      "discount_rate": 0.0
+    },
+    {
+      "member_id": "M006",
+      "name": "Fiona Lam",
+      "phone": "13400134006",
+      "tier": "Student",
+      "discount_rate": 0.08
+    }
+  ]
+}

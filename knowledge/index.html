@@ -53,6 +53,31 @@ val intent = Intent(Intent.ACTION_SENDTO).apply {    <span>//打開郵件</span>
 }
         </pre>
     </div>
+    <button class="accordion">動態加入多行layout</button>
+    <div class="panel">
+        <pre>
+val linearLayout = timeLayout.getChildAt(l%7) as LinearLayout   <span>//有幾就i%幾，每次i+1就係下一行加layout，就唔使recyclerView。用getChildAt又唔使再分情況。</span>
+linearLayout.addView(layout)
+        </pre>
+    </div>
+    <button class="accordion">日期選擇器最小可選日期設為「今天」</button>
+    <div class="panel">
+        <pre>
+            datePickerDialog.datePicker.minDate = System.currentTimeMillis()
+        </pre>
+    </div>
+    <button class="accordion">Double</button>
+    <div class="panel">
+        <pre>
+var numberKm : Double = 0.0
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
 <script src="js.js"></script>
 </body>
 </html>

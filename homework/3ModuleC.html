@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">MainActivity.kt</button>
+    <div class="panel">
+        <pre>
+val prefs = getSharedPreferences("data", MODE_PRIVATE)
+val json = prefs.getString("json", Data.recordsJson)    <span>//返回本機的值</span>
+val recordsArray = Gson().fromJson(json, Array&lt;RecordClass&gt;::class.java)
+for(result in recordsArray){
+    Data.recordsList.add(result)
+    if(!(LocalDate.parse(result.date).isAfter(LocalDate.now())) && !(LocalDate.parse(result.date).isBefore(LocalDate.now()))){
+        haveToday = result    <span>//佢係今日的話就代入嚟個object</span>
+    }
+}
+if(haveToday == null){    <span>//如果冇今日的值</span>
+    val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+    val formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    haveToday = RecordClass("REC-${LocalDate.now().format(formatter)}-A", "${    <span>//預設ID值</span>
+        LocalDate.now().format(formatter2)
+    }")
+}
+haveToday?.let {     <span>//null 就要有呢個。if(haveToday == null)</span>
+    Data.recordsList.add(it)
+    Data.todayRecord = it
+}
+var isLogin = false
+findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
+    val intent = Intent(this, MainActivity2::class.java)
+    isLogin = true
+    startActivity(intent)
+}
+if(isLogin){
+    val intent = Intent(this, MainActivity2::class.java)
+    startActivity(intent)
+}
+
+
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt</button>
+    <div class="panel">
+        <pre>
+todayRecord = Data.todayRecord
+view.findViewById&lt;TextView&gt;(R.id.textView6).text = "Run Date: ${todayRecord.date}"
+view.findViewById&lt;TextView&gt;(R.id.textView7).text = "Status: ${todayRecord.status}"
+for(result in Data.todayRecord.stops!!.sortedBy { it.time}){    <span>//show stops</span>
+    val layout = layoutInflater.inflate(R.layout.event_pro, null)
+    layout.findViewById&lt;TextView&gt;(R.id.textView8).text = result.time
+    layout.findViewById&lt;TextView&gt;(R.id.textView9).text = result.spotName
+    layout.findViewById&lt;TextView&gt;(R.id.textView10).text = "$${result.cashInAmount}"
+    layout.findViewById&lt;TextView&gt;(R.id.textView11).text = "${result.latitude}, ${result.longitude}"
+    linearLayout.addView(layout)
+}
+if(Data.todayRecord.stops!!.size == 0){
+    view.findViewById&lt;TextView&gt;(R.id.textView20).visibility = View.VISIBLE
+}
+view.findViewById&lt;Button&gt;(R.id.button2).setOnClickListener {
+    activity.replaceFragment(addCashRecordFragment())
+}
+view.findViewById&lt;Button&gt;(R.id.button3).setOnClickListener {
+    activity.replaceFragment(checkoutSummaryFragment())
+}
+
+        </pre>
+    </div>
+    <button class="accordion">addCashRecordFragment.kt</button>
+    <div class="panel">
+        <pre>
+view.findViewById&lt;Button&gt;(R.id.button6).setOnClickListener {    <span>//random 經緯度</span>
+    editTextText3.setText("${((1000000..1000000000).random()).toFloat() / 100000}")
+    editTextText4.setText("${((10000000..1000000000).random()).toFloat() / 100000}")
+}
+view.findViewById&lt;Button&gt;(R.id.button5).setOnClickListener {
+    if(editTextText.text.toString().isNotEmpty() && editTextText.text.any { it.isDigit() }){
+        val tryCash : Int ? = try {
+            editTextText.text.toString().toInt()    <span>//佢有數字唔代表佢冇字符，如果強行轉換可能會閃退</span>
+        }catch (e: Exception){
+             0
+        } as Int?
+        if(tryCash != 0){
+            if(editTextText2.text.isNotEmpty()){
+                if(editTextText3.text.isNotEmpty() && editTextText4.text.isNotEmpty()){
+                    val date = LocalTime.now()
+                    val formatter = DateTimeFormatter.ofPattern("HH:mm")
+                    Data.todayRecord.stops!!.add(StopsClass(date.format(formatter), editTextText2.text.toString(), editTextText.text.toString().toInt(), editTextText3.text.toString().toFloat(),editTextText4.text.toString().toFloat() ))
+                    activity.replaceFragment(dailyRunFragment())
+                    activity.save()
+                }
+                else{
+                    textView12.text = "The longitude should not be empty and must be numeric. "
+                }
+            }
+            else{
+                textView12.text = "Spot name should not be empty"
+            }
+        }
+        else{
+            textView12.text = "Cash in amount input error"
+        }
+    }
+    else{
+        textView12.text = "Cash in amount input error"
+    }
+}
+view.findViewById&lt;Button&gt;(R.id.button4).setOnClickListener {
+    activity.replaceFragment(dailyRunFragment())
+}
+
+
+        </pre>
+    </div>
+
+    <button class="accordion">checkoutSummaryFragment.kt</button>
+    <div class="panel">
+        <pre>
+view.findViewById&lt;TextView&gt;(R.id.textView14).text = "Run Date: ${Data.todayRecord.date}"
+val today = Data.todayRecord
+var cash = 0
+for(result in today.stops!!){
+    cash += result.cashInAmount    <span>//計total cash</span>
+}
+view.findViewById&lt;TextView&gt;(R.id.textView9).text = "$${cash}"
+var numberKm : Double = 0.0
+var i = 0
+if(today.stops!!.size &lt; 2){
+    numberKm = 0.0
+}
+else{
+    while (i &lt; today.stops!!.size-1){    <span>//因為佢要用到n同n+1，所以用for做唔到</span>
+        val x = (today.stops!![i].latitude.minus(today.stops!![i+1].latitude))*(today.stops!![i].latitude.minus(today.stops!![i+1].latitude))
+        val y = (today.stops!![i].longitude.minus(today.stops!![i+1].longitude))*(today.stops!![i].longitude.minus(today.stops!![i+1].longitude))
+        val xy = Math.sqrt((x+y).toDouble())    <span>//計距離</span>
+        numberKm += xy
+        i++
+    }
+}
+view.findViewById&lt;TextView&gt;(R.id.textView10).text = "${String.format("%.2f", numberKm)}km"
+view.findViewById&lt;TextView&gt;(R.id.textView11).text = "${today.stops!!.size}"
+view.findViewById&lt;Button&gt;(R.id.button7).setOnClickListener {
+    today.status = "completed"
+    today.totalCashIn = cash
+    today.totalDistanceKm = String.format("%.2f", numberKm).toFloat()
+    activity.replaceFragment(dailyRunFragment())
+    activity.save()
+}
+view.findViewById&lt;Button&gt;(R.id.button8).setOnClickListener {
+    activity.replaceFragment(dailyRunFragment())
+}
+
+
+        </pre>
+    </div>
+    <button class="accordion">recordsFragment.kt</button>
+    <div class="panel">
+        <pre>
+for(result in Data.recordsList.sortedBy { it.date }){
+    val layout = layoutInflater.inflate(R.layout.record_rpo, null)
+    layout.findViewById&lt;TextView&gt;(R.id.textView15).text = result.date
+    layout.findViewById&lt;TextView&gt;(R.id.textView16).text = "Total Cash In: ${result.totalCashIn}"
+    if(result.totalDistanceKm == 0f){
+        layout.findViewById&lt;TextView&gt;(R.id.textView17).text = "Travel Distance: --"
+    }
+    else{
+        layout.findViewById&lt;TextView&gt;(R.id.textView17).text = "Travel Distance: ${result.totalDistanceKm}"
+    }
+    layout.findViewById&lt;Button&gt;(R.id.button9).text = result.status
+    if(result.status == "Active"){
+        layout.findViewById&lt;Button&gt;(R.id.button9).setBackgroundColor(Color.parseColor("#edf1f4"))
+    }
+    linearLayout.addView(layout)
+}
+if(Data.recordsList.size == 0){
+    view.findViewById&lt;TextView&gt;(R.id.textView20).visibility = View.VISIBLE
+}
+
+
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">LotteryFragment.kt</button>
+    <div class="panel">
+        <pre>
+val spinnerList = listOf("Mobile Applications Development", "Software Testing")
+status = spinnerList[0]
+loadList()
+spinner.adapter = ArrayAdapter(activity, android.R.layout.simple_spinner_dropdown_item, spinnerList)
+spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{    <span>//更改比賽賽項</span>
+    override fun onItemSelected(
+        parent: AdapterView&lt;*&gt;?,
+        view: View?,
+        position: Int,
+        id: Long
+    ) {
+        status = spinnerList[position]    
+        loadList()
+        loadSeat()
+        load()
+        loadCompetitor()
+        if(seatList.filter { it.id == "" }.size != 0){     <span>//如果仲有啲seat係冇人坐，就可放random按鈕</span>
+            randomButton.isEnabled = true
+        }
+        else{
+            randomButton.isEnabled = false
+        }
+    }
+
+    override fun onNothingSelected(parent: AdapterView&lt;*&gt;?) {
+    }
+
+}
+
+loadSeat()
+load()
+loadCompetitor()
+shake.isEnabled = false
+randomButton.setOnClickListener {    <span>//隨機比賽者按鈕</span>
+    competitorCard.visibility = View.GONE    <span>//顯示選手卡</span>
+    selectedCard.visibility = View.VISIBLE
+    random = Data.testData3Array.competitors.filter { it.tradeName == status }.filter { !it.haveSeat }.random()    <span>//隨機揾一個選手</span>
+    if(random!!.thumbnail.contains("content://")){     <span>//唔可以用try，try佢會返回一個空白相片</span>
+        imageView3.setImageURI(random!!.thumbnail.toUri())
+    }else{
+        imageView3.setImageResource(resources.getIdentifier(random!!.thumbnail.replace(".png", "").replace("assets/",""), "drawable", requireActivity().packageName))
+    }
+    textView10.text = random!!.name
+    textView11.text = random!!.flagEmoji
+    shake.isEnabled = true
+}
+
+shake.setOnClickListener {      <span>//隨機坐座位</span>
+    val seat = seatList.filter { it.id == "" }.random()   
+    seat.id = random!!.id
+    random!!.haveSeat = true    <span>//因為抽取選手同安排坐位唔係同一個function，所以要用全局變量去記低佢</span>
+    textView4.text = random!!.name
+    textView2.text = "${random!!.countryName}  ${random!!.flagEmoji}"
+    textView5.text = "Seat: ${seat.seat}"
+    if(random!!.thumbnail.contains("content://")){
+        imageView.setImageURI(random!!.thumbnail.toUri())
+    }else{
+        imageView.setImageResource(resources.getIdentifier(random!!.thumbnail.replace(".png", "").replace("assets/",""), "drawable", requireActivity().packageName))
+    }
+    random = null    <span>//清空返選手</span>
+    competitorCard.visibility = View.VISIBLE
+    selectedCard.visibility = View.GONE
+    shake.isEnabled = false
+    loadSeat()
+    load()
+    loadCompetitor()
+    if(seatList.filter { it.id == "" }.size == 0){    <span>//如果所有位都已經有人了</span>
+        shake.isEnabled = false
+        randomButton.isEnabled = false
+    }
+
+}
+view.findViewById&lt;Button&gt;(R.id.button2).setOnClickListener {    <span>//reset 按鈕</span>
+    if(seatList.filter { !it.isLog }.size != 0){
+        for(result in seatList.filter { !it.isLog }){    <span>//將所有冇lock到嘅都返回曬，變返冇值</span>
+            val competitor = Data.testData3Array.competitors.find { it.id == result.id }
+            competitor?.haveSeat = false
+            result.id = ""
+        }
+        randomButton.isEnabled = true
+        loadSeat()
+        load()
+        loadCompetitor()
+    }
+
+}
+
+view.findViewById&lt;Button&gt;(R.id.button4).setOnClickListener {   <span>//儲存選手卡相片</span>
+    saveLayoutGallery(competitorCard)  
+}
+        </pre>
+    </div>
+    <button class="accordion">LotteryFragment function(loadSeat 設置seat的內容，類似table做法，但因為係同層所以放便好多)</button>
+    <div class="panel">
+        <mark>//各種的判斷</mark>
+        <pre>
+fun loadSeat(){
+    Data.seatLayout.clear()
+    for(result in seatList){
+        val layout = layoutInflater.inflate(R.layout.seat_pro, null)
+        if(result.id != ""){
+            layout.findViewById&lt;TextView&gt;(R.id.textView6).visibility = View.GONE
+            layout.findViewById&lt;LinearLayout&gt;(R.id.competitorLayout).visibility = View.VISIBLE
+            val competitor = Data.testData3Array.competitors.find { it.id == result.id }!!
+            layout.findViewById&lt;TextView&gt;(R.id.textView7).text = competitor.flagEmoji
+            layout.findViewById&lt;TextView&gt;(R.id.textView8).text = competitor.name
+            if(competitor.thumbnail.contains("content://")){
+                layout.findViewById&lt;ImageView&gt;(R.id.imageView2).setImageURI(competitor.thumbnail.toUri())
+            }
+            else{
+                layout.findViewById&lt;ImageView&gt;(R.id.imageView2).setImageResource(resources.getIdentifier(competitor.thumbnail.replace(".png", "").replace("assets/",""), "drawable", requireActivity().packageName))
+            }
+
+        }
+        else{
+            layout.findViewById&lt;TextView&gt;(R.id.textView6).visibility = View.VISIBLE
+            layout.findViewById&lt;LinearLayout&gt;(R.id.competitorLayout).visibility = View.GONE
+            layout.findViewById&lt;TextView&gt;(R.id.textView6).text = result.seat.toString()
+        }
+        if(result.isLog){
+            layout.findViewById&lt;ImageView&gt;(R.id.imageView4).visibility = View.VISIBLE
+        }
+        else{
+            layout.findViewById&lt;ImageView&gt;(R.id.imageView4).visibility = View.GONE
+        }
+        layout.setOnClickListener {
+            result.isLog = !result.isLog
+            if(result.isLog){
+                layout.findViewById&lt;ImageView&gt;(R.id.imageView4).visibility = View.VISIBLE
+            }
+            else{
+                layout.findViewById&lt;ImageView&gt;(R.id.imageView4).visibility = View.GONE
+            }
+        }
+        layout.setOnLongClickListener {
+            if(result.id != ""){
+                competitorCard.visibility = View.VISIBLE
+                selectedCard.visibility = View.GONE
+                val competitor = Data.testData3Array.competitors.find { it.id == result.id }!!
+                textView4.text = competitor.name
+                textView2.text = "${competitor.countryName}  ${competitor.flagEmoji}"
+                if(competitor.thumbnail.contains("content://")){
+                    imageView.setImageURI(competitor.thumbnail.toUri())
+                }else{
+                    imageView.setImageResource(resources.getIdentifier(competitor.thumbnail.replace(".png", "").replace("assets/",""), "drawable", requireActivity().packageName))
+                }
+                textView5.text = "Seat: ${result.seat}"
+            }
+            true
+        }
+        Data.seatLayout.add(layout)    <span>//就係用seatLayout array去裝曬所有view，到時就顯示︳但係佢唔會有關聯性，所以每次都要call之後顯示</span>
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">LotteryFragment function(load 真正load返啲seat出嚟)</button>
+    <div class="panel">
+        <pre>
+fun load(){
+    val size = Data.seatLayout.size
+    l1.removeAllViews()
+    l2.removeAllViews()
+    l3.removeAllViews()
+    when(size%2){    <span>//分奇偶數有唔同要求</span>
+        0 -&gt; {
+            val l1Size = (size-4)/2
+            println(l1Size)
+            for(result in Data.seatLayout.take(l1Size).reversed()){
+                l1.addView(result)
+            }
+            for(result in Data.seatLayout.subList(l1Size, l1Size+4)){
+                l2.addView(result)
+            }
+            for(result in Data.seatLayout.takeLast(l1Size)){
+                l3.addView(result)
+            }
+        }
+        1 -&gt; {
+            val l1Size = (size-3)/2
+            println(l1Size)
+            for(result in Data.seatLayout.take(l1Size).reversed()){
+                l1.addView(result, 0)
+            }
+            for(result in Data.seatLayout.subList(l1Size, l1Size+3)){
+                l2.addView(result)
+            }
+            for(result in Data.seatLayout.takeLast(l1Size)){
+                l3.addView(result)
+            }
+        }
+    }
+}
+        </pre>
+    </div>
+
+    <button class="accordion">LotteryFragmentn function(loadCompetitor)</button>
+    <div class="panel">
+        <pre>
+fun loadCompetitor(){
+    countLayout.removeAllViews()
+    for(result in Data.testData3Array.competitors.filter { it.tradeName == status }.filter { !it.haveSeat }){    <span>//兩層判斷，是否有座位同該賽項。不過用"有没有座位"有啲唔好，咁啱寫到佢錯誤，因為如果用competitor array去揾個座位就會揾唔返，如people Fragment，如果要揾座位就冇得揾</span>
+        val layout = layoutInflater.inflate(R.layout.competitor_pro, null)
+        layout.findViewById&lt;TextView&gt;(R.id.textView7).text = result.flagEmoji
+        layout.findViewById&lt;TextView&gt;(R.id.textView8).text = result.name
+        if(result.thumbnail.contains("content://")){
+            layout.findViewById&lt;ImageView&gt;(R.id.imageView2).setImageURI(result.thumbnail.toUri())
+        }else{
+            layout.findViewById&lt;ImageView&gt;(R.id.imageView2).setImageResource(resources.getIdentifier(result.thumbnail.replace(".png", "").replace("assets/",""), "drawable", requireActivity().packageName))
+        }
+        countLayout.addView(layout)
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">LotteryFragmentn function(loadList 因為有兩個賽項，即係要攞兩個array去裝住先可以喺兩個賽項之間切換都可以記得佢地嘅座位，如果唔係就會變左competitor知道自己有位，但唔知喺邊，所以haveSet應該係一個數，都可以攞嚟記低坐左喺邊)</button>
+    <div class="panel">
+        <pre>
+fun loadList(){
+    if(!isCome){
+        Data.seatList.clear()
+        var i = 1
+        while (i &lt;= Data.testData3Array.competitors.filter { it.tradeName == "Mobile Applications Development" }.size){
+            Data.seatList.add(SeatClass(i))
+            i++
+        }
+
+        Data.seatList2.clear()
+        var k = 1
+        while (k &lt;= Data.testData3Array.competitors.filter { it.tradeName == "Software Testing" }.size){
+            Data.seatList2.add(SeatClass(k))
+            k++
+        }
+        isCome = true
+    }
+    when(status){
+        "Mobile Applications Development" -&gt; seatList = Data.seatList    <span>//所有關於seatList就會每次換，唔可以用Data.seatList</span>
+        else -&gt; seatList = Data.seatList2    <span>//同時也有關聯性</span>
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">PeopleFragment</button>
+    <div class="panel">
+        <pre>
+view.findViewById&lt;ImageView&gt;(R.id.imageView6).setOnClickListener {
+    val intent = Intent(activity, MainActivity2::class.java)
+    intent.putExtra("id", "")
+    startActivity(intent)
+}
+
+val spinner : Spinner = view.findViewById(R.id.spinner)
+val spinnerList = listOf("All trades", "Mobile Applications Development", "Software Testing")
+spinner.adapter = ArrayAdapter(activity, android.R.layout.simple_spinner_dropdown_item, spinnerList)
+spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+    override fun onItemSelected(
+        parent: AdapterView&lt;*&gt;?,
+        view: View?,
+        position: Int,
+        id: Long
+    ) {
+        status = spinnerList[position]
+        load()    <span>//篩選功能</span>
+    }
+
+    override fun onNothingSelected(parent: AdapterView&lt;*&gt;?) {
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">PeopleFragment function(laod load competitor information)</button>
+    <div class="panel">
+        <pre>
+fun load(){
+    linearLayout.removeAllViews()
+    val list = when(status){
+        "All trades" -&gt; Data.testData3Array.competitors.toList()
+        else -&gt; Data.testData3Array.competitors.filter { it.tradeName == status }
+    } as List&lt;CompetitorsClass&gt;
+    for(result in list){
+        val layout = layoutInflater.inflate(R.layout.people_pro, null)
+        layout.findViewById&lt;TextView&gt;(R.id.textView12).text = result.name
+        layout.findViewById&lt;TextView&gt;(R.id.textView13).text = "${result.tradeName}  -  ${result.countryCode}"
+        if(result.thumbnail.contains("content://")){
+            layout.findViewById&lt;ImageView&gt;(R.id.imageView5).setImageURI(result.thumbnail.toUri())
+        }else{
+            layout.findViewById&lt;ImageView&gt;(R.id.imageView5).setImageResource(resources.getIdentifier(result.thumbnail.replace(".png", "").replace("assets/",""), "drawable", requireActivity().packageName))
+        }
+        layout.findViewById&lt;TextView&gt;(R.id.textView14).setOnClickListener {
+            val intent = Intent(requireActivity(), MainActivity2::class.java)
+            intent.putExtra("id", result.id)
+            startActivity(intent)
+        }
+        linearLayout.addView(layout)
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+for(result in Data.countryArray){
+    spinnerList3.add(result.name)
+}
+spinner2.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, spinnerList2)
+spinner3.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, spinnerList3)
+if(intent.getStringExtra("id") != ""){
+    val person = Data.testData3Array.competitors.find { it.id ==  intent.getStringExtra("id")}!!
+    nameEdit.setText(person.name)
+    if(person.thumbnail.contains("content://")){
+        imageView7.setImageURI(person.thumbnail.toUri())
+    }else{
+        imageView7.setImageResource(resources.getIdentifier(person.thumbnail.replace(".png", "").replace("assets/",""), "drawable", packageName))
+    }
+    var i = 0
+    while (i &lt; spinnerList2.size-1){
+        if(spinnerList2[i] == person.tradeName){
+            break
+        }
+        i++
+    }
+    spinner2.setSelection(i)
+    var k = 0
+    while (k &lt; spinnerList3.size-1){    <span>//揾返係第幾項，需要i,k呢兩個數字</span>
+        if(spinnerList3[i] == person.countryName){
+            break
+        }
+        k++
+    }
+    spinner3.setSelection(k)
+    findViewById&lt;TextView&gt;(R.id.textView15).text = "Edit Competitor"
+}
+findViewById&lt;ImageView&gt;(R.id.imageView7).setOnClickListener {
+    pickPhoto.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+}
+findViewById&lt;Button&gt;(R.id.button5).setOnClickListener {
+    val country = spinnerList3[spinner3.selectedItemPosition]
+    val trade = spinnerList2[spinner2.selectedItemPosition]
+    val people = Data.testData3Array.competitors.find { it.tradeName == trade && it.countryName == country }   <span>//如果有能找到，即已經是重複，不能有重複的</span>
+    if(people == null){
+        if(intent.getStringExtra("id") != ""){     <span>//揾返佢嘅object，更改它的內容</span>
+            val person = Data.testData3Array.competitors.find { it.id ==  intent.getStringExtra("id")}!!    
+            person.name = nameEdit.text.toString()
+            person.tradeName = spinnerList2[spinner2.selectedItemPosition]
+            person.countryName = spinnerList3[spinner3.selectedItemPosition]
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        else{     <span>//加一個新的object</span>
+            val id = Data.testData3Array.competitors.last().id.takeLast(3).toString().toInt()
+            val code = Data.countryArray.find { it.name == spinnerList3[spinner3.selectedItemPosition] }?.code
+            val emoji = Data.countryArray.find { it.name == spinnerList3[spinner3.selectedItemPosition] }?.emoji
+            Data.testData3Array.competitors.add(CompetitorsClass("T${id+1}", nameEdit.text.toString(), spinnerList2[spinner2.selectedItemPosition],code, spinnerList3[spinner3.selectedItemPosition], emoji, uri2.toString()))
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+    }
+    else{
+        Toast.makeText(this, "Each country/region can be used by only one competitor within the same trade." ,Toast.LENGTH_SHORT).show()
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">Data.kt</button>
+    <div class="panel">
+        <pre>
+class TestDateClass(var competitors: ArrayList&lt;CompetitorsClass&gt;)
+class CompetitorsClass(var id: String, var name: String, var tradeName: String, var countryCode: String?, var countryName: String, var flagEmoji: String?, var thumbnail: String, var haveSeat: Boolean = false)
+class SeatClass(var seat: Int, var id: String = "", var isLog : Boolean = false)
+class countryClass(var code: String,var name : String, var emoji: String)
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

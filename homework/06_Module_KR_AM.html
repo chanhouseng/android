@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">MainActivity.kt</button>
+    <div class="panel">
+        <pre>
+textView2.setOnClickListener {    <span>//移去下一版的邏輯</span>
+    nowId ++     <span>//從1開始</span>
+    if(nowId == 5){
+        nowId = 1    <span>//可以循環</span>
+    }
+    val drawable = when(nowId){
+        1 -&gt; R.drawable.welcome_screen_image1
+        2 -&gt; R.drawable.welcome_screen_image2
+        3 -&gt; R.drawable.welcome_screen_image3
+        else  -&gt; R.drawable.welcome_screen_image4
+    }
+    imageView.setImageResource(drawable)
+    viewList[nowId-1].setBackgroundColor(Color.WHITE)
+    if(nowId != 1){
+        viewList[nowId-2].setBackgroundColor(Color.parseColor("#4f4e50"))   <span>//因為從1開始，所以前一項要再-1，即-2</span>
+    }
+    else{
+        viewList[3].setBackgroundColor(Color.parseColor("#4f4e50"))     <span>//現時係1，之前係4，3嘅時候係白色，所以要整3</span>
+    }
+    if(nowId == 4){
+        textView2.visibility = View.GONE
+        button.visibility = View.VISIBLE
+    }
+}
+var lastX = 0f
+var lastY = 0f
+imageView.setOnTouchListener { v, event -&gt;
+    when(event.action){
+        MotionEvent.ACTION_MOVE -&gt; {
+            lastX = event.x
+            lastY = event.y
+        }
+
+        MotionEvent.ACTION_UP -&gt; {
+            val moveX = event.x
+            val moveY = event.y
+
+            val defaltX = moveX - lastX
+            val defaltY = moveY - lastY
+
+            if(Math.abs(defaltX) &gt; Math.abs(defaltY)){
+                if(defaltX &gt; 0){    <span>//邏輯同上</span>
+                    if(nowId != 5){
+                        nowId ++
+                        if(nowId == 5){
+                            nowId = 1
+                        }
+                        val drawable = when(nowId){
+                            1 -&gt; R.drawable.welcome_screen_image1
+                            2 -&gt; R.drawable.welcome_screen_image2
+                            3 -&gt; R.drawable.welcome_screen_image3
+                            else  -&gt; R.drawable.welcome_screen_image4
+                        }
+                        imageView.setImageResource(drawable)
+                        viewList[nowId-1].setBackgroundColor(Color.WHITE)
+                        if(nowId != 1){
+                            viewList[nowId-2].setBackgroundColor(Color.parseColor("#4f4e50"))
+                        }
+                        else{
+                            viewList[3].setBackgroundColor(Color.parseColor("#4f4e50"))
+                        }
+                        if(nowId == 4){
+                            textView2.visibility = View.GONE
+                            button.visibility = View.VISIBLE
+                        }
+                    }
+                }
+            }
+        }
+    }
+    true
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt</button>
+    <div class="panel">
+        <pre>
+val symList = listOf("~", "!", "@", "#", "^", "&", "*")
+findViewById&lt;Button&gt;(R.id.button2).setOnClickListener {
+    val edit1 : EditText = findViewById(R.id.editTextTextEmailAddress)
+    val edit2 : EditText = findViewById(R.id.editTextTextPassword)
+
+    if(edit1.text.toString().contains("@") && edit2.text.any { it.isLetterOrDigit() }){
+        if (edit2.text.any { !it.isLetterOrDigit() && !it.isWhitespace() }){    <span>//!it.isLetterOrDigit() && !it.isWhitespace()表示不是英文數字，又不是空白，即係特殊符號</span>
+            if(edit2.text.contains(symList[0]) ||    <span>//只可以包含這些特殊符號，否則不能進入</span>
+                edit2.text.contains(symList[1]) ||
+                edit2.text.contains(symList[2]) ||
+                edit2.text.contains(symList[3]) ||
+                edit2.text.contains(symList[4]) ||
+                edit2.text.contains(symList[5]) ||
+                edit2.text.contains(symList[6]) ){
+                if(Data.user.email == edit1.text.toString() && Data.user.password == edit2.text.toString()){
+                    val intent = Intent(this, MainActivity3::class.java)
+                    startActivity(intent)
+                }
+                else{
+                    Toast.makeText(this, "password error", Toast.LENGTH_SHORT).show()
+                }
+            }
+            else{
+                Toast.makeText(this, "password error", Toast.LENGTH_SHORT).show()
+            }
+        }
+        else{
+            Toast.makeText(this, "password error", Toast.LENGTH_SHORT).show()
+        }
+    }
+    else{
+        Toast.makeText(this, "input the basis formatter", Toast.LENGTH_SHORT).show()
+    }
+
+}
+        </pre>
+    </div>
+    <button class="accordion">homeFragment.kt</button>
+    <div class="panel">
+        <pre>
+activity.background.visibility = View.GONE    <span>//workout嗰到有個大背景圖片放在喺MainActivity到，所以唔需要圖片時就要gone</span>
+activity.bottom.setBackgroundColor(Color.parseColor("#5386af"))
+val progress: CircularProgressIndicator = view.findViewById(R.id.progress)    <span>//下面都係顯示返啲data</span>
+val progress2: CircularProgressIndicator = view.findViewById(R.id.progress2)
+val progress1 = (Data.goalAndToday.today.kcal*100)/Data.goalAndToday.goal.kcal
+progress.progress = progress1.toInt()
+val progressData2 = (Data.goalAndToday.today.steps*100)/Data.goalAndToday.goal.steps
+progress2.progress = progressData2
+view.findViewById&lt;TextView&gt;(R.id.textView4).text = "${String.format("%.1f", Data.goalAndToday.today.kcal)} / ${
+    String.format(
+        "%.1f",
+        Data.goalAndToday.goal.kcal
+    )
+} kcal"
+view.findViewById&lt;TextView&gt;(R.id.textView5).text = "${Data.goalAndToday.today.steps} / ${Data.goalAndToday.goal.steps} steps"
+view.findViewById&lt;TextView&gt;(R.id.textView6).setOnClickListener {
+    Toast.makeText(activity, "This feature is in preparation", Toast.LENGTH_SHORT).show()
+}
+val data2 = Data.latest.last()    <span>//最新的運動記錄</span>
+view.findViewById&lt;TextView&gt;(R.id.textView8).text = data2.name
+val timeHour = data2.time/3600
+val timeMinute = (data2.time%3600)/60
+val timeSeconds = (data2.time%3600)%60
+view.findViewById&lt;TextView&gt;(R.id.textView9).text = "${timeHour.toString().padStart(2,'0')}:${
+    timeMinute.toString().padStart(2, '0')
+}:${timeSeconds.toString().padStart(2, '0')} | ${String.format("%.2f", data2.kcal)}kcal | ${data2.steps}steps | "
+val drawable = when(data2.name){
+    "Outdoor Running" -&gt; R.drawable.workout_icon_1
+    "Treadmill" -&gt; R.drawable.workout_icon_2
+    "Swimming" -&gt; R.drawable.workout_icon_3
+    "Outdoor Cycling" -&gt; R.drawable.workout_icon_4
+    else -&gt; R.drawable.workout_icon_5
+}
+view.findViewById&lt;ImageView&gt;(R.id.imageView5).setImageResource(drawable)
+view.findViewById&lt;TextView&gt;(R.id.textView10).setOnClickListener {
+    activity.replaceFragment(workoutFragment())
+    activity.bottom.selectedItemId = R.id.workout
+}
+val data3 = Gson().fromJson(Data.weeklyGoalJson, weeklyGoalClass::class.java)
+var trueCount = 0
+for(result in data3.week){
+    if(result.completed){
+        trueCount ++
+    }
+}
+view.findViewById&lt;TextView&gt;(R.id.textView13).text = "${trueCount} / 7 Archived"
+val linearLayout: LinearLayout = view.findViewById(R.id.linearLayout)
+for(result in data3.week){
+    val layout = layoutInflater.inflate(R.layout.pro, null)
+    if(result.completed){
+        layout.findViewById&lt;CircularProgressIndicator&gt;(R.id.progress).setIndicatorColor(Color.parseColor("#42ce00"))
+        layout.findViewById&lt;CircularProgressIndicator&gt;(R.id.progress).progress = 100
+    }
+    else{
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView6).visibility = View.GONE
+        val kcal = (result.completedKcal*50)/result.goalKcal      <span>//兩個總和是100，所以各自要取50</span>
+        val steps = (result.completedSteps*50)/result.goalSteps
+        layout.findViewById&lt;CircularProgressIndicator&gt;(R.id.progress).progress = kcal + steps
+    }
+    linearLayout.addView(layout)
+}
+        </pre>
+    </div>
+
+    <button class="accordion">workoutFragment.kt</button>
+    <div class="panel">
+        <pre>
+viewPager2.adapter = viewAdapter(activity)
+bottomNavigationView.setBackgroundColor(Color.TRANSPARENT)    <span>//bottomNavigationView顯示透明背景</span>
+activity.bottom.setBackgroundColor(Color.TRANSPARENT)        
+activity.background.visibility = View.VISIBLE
+bottomNavigationView.setOnItemSelectedListener {
+    when(it.itemId){
+        R.id.id0 -&gt; viewPager2.currentItem = 0
+        R.id.id1 -&gt; viewPager2.currentItem = 1
+        R.id.id2 -&gt; viewPager2.currentItem = 2
+        R.id.id3 -&gt; viewPager2.currentItem = 3
+        R.id.id4 -&gt; viewPager2.currentItem = 4
+    }
+    true
+}
+viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+    override fun onPageSelected(position: Int) {
+        super.onPageSelected(position)
+        when(position){
+            0 -&gt; bottomNavigationView.selectedItemId = R.id.id0
+            1 -&gt; bottomNavigationView.selectedItemId = R.id.id1
+            2 -&gt; bottomNavigationView.selectedItemId = R.id.id2
+            3 -&gt; bottomNavigationView.selectedItemId = R.id.id3
+            4 -&gt; bottomNavigationView.selectedItemId = R.id.id4
+        }
+    }
+})
+        </pre>
+    </div>
+    <button class="accordion">id0Fragment.kt(滑動式運動入口)</button>
+    <div class="panel">
+        <h3>下面嘅都係1按內容而改變，所以有幾版就copy幾版，改一隻字就得，冇咁麻煩。同時都有滑動的效果</h3>
+        <pre>
+view.findViewById&lt;LinearLayout&gt;(R.id.main).setBackgroundColor(Color.TRANSPARENT)
+val showList = Data.latest.filter { it.name == "Outdoor Running" }.sortedByDescending { it.workoutTyCd }[0]    <span>//show 上次呢項運動的最新記錄</span>
+view.findViewById&lt;TextView&gt;(R.id.textView15).text = showList.name
+val hour = (showList.time/3600).toString().padStart(2,'0')
+val minu = ((showList.time%3600)/60).toString().padStart(2,'0')
+val seco = ((showList.time%3600)%60).toString().padStart(2,'0')
+view.findViewById&lt;TextView&gt;(R.id.textView16).text = "${hour}hours ${minu}mins ${seco}seconds"
+view.findViewById&lt;TextView&gt;(R.id.textView17).text = "${String.format("%.2f", showList.kcal)}kcal"
+val drawable = when(showList.name){
+    "Outdoor Running" -&gt; R.drawable.workout_1
+    "Treadmill" -&gt; R.drawable.workout_2
+    "Swimming" -&gt; R.drawable.workout_3
+    "Outdoor Cycling" -&gt; R.drawable.workout_4
+    else -&gt; R.drawable.workout_5
+}
+view.findViewById&lt;ImageView&gt;(R.id.imageView7).setImageResource(drawable)
+view.findViewById&lt;Button&gt;(R.id.button3).setOnClickListener {
+    val intent = Intent(activity, MainActivity4::class.java)
+    intent.putExtra("name", showList.name)
+    startActivity(intent)
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity4.kt (做運動嗰版)</button>
+    <div class="panel">
+        <pre>
+name = intent.getStringExtra("name").toString()
+textView18.text = name     <span>//運動名</span>
+var isStop = false
+var kcalNum = 0f
+when(name){
+    "Outdoor Running" -&gt; {
+        type = 1
+        imageView10.setImageResource(R.drawable.workout_1)
+        kcalNum = 0.09f
+    }
+    "Treadmill" -&gt; {
+        type = 2
+        imageView10.setImageResource(R.drawable.workout_2)
+        kcalNum = 0.08f
+    }
+    "Swimming" -&gt; {
+        type = 0
+        imageView10.setImageResource(R.drawable.workout_3)
+        kcalNum = 0.2f
+        textView21.visibility = View.GONE
+    }
+    "Outdoor Cycling" -&gt; {
+        type = 0
+        imageView10.setImageResource(R.drawable.workout_4)
+        kcalNum = 0.1f
+        textView21.visibility = View.GONE
+    }
+    "Outdoor Walking" -&gt; {
+        type = 3
+        imageView10.setImageResource(R.drawable.workout_5)
+        kcalNum = 0.04f
+    }
+}
+var time = 0
+val countDownTimer : CountDownTimer = object : CountDownTimer(if(type == 0) 1000L else (type * 1000).toLong(), 1000){    <span>//佢仲要計幾多步，有啲就係兩秒一步，有啲就係三秒一步</span>
+    override fun onFinish() {
+        if(type != 0){    <span>//加步數</span>
+            steps++
+            textView21.text = "${steps} Steps"
+        }
+        if(!isStop){
+            start()
+        }
+    }
+
+    override fun onTick(millisUntilFinished: Long) {
+        time++
+        kcal += kcalNum
+        textView19.text = "${String.format("%.2f", kcal)} kcal"
+        textView20.text = "${(time/3600).toString().padStart(2,'0')}:${
+            ((time % 3600)/60).toString().padStart(2, '0')
+        }:${((time % 3600)%60).toString().padStart(2, '0')} Time"
+    }
+
+}
+countDownTimer.start()
+val button4: Button = findViewById(R.id.button4)
+button4.setOnClickListener {    <span>//暫停按鈕</span>
+    isStop = !isStop
+    if(isStop){
+        countDownTimer.cancel()
+        button4.text = "Resume"
+    }
+    else{
+        countDownTimer.start()
+        button4.text = "Pause"
+    }
+}
+val button5: Button = findViewById(R.id.button5)
+button5.setOnClickListener {
+    countDownTimer.cancel()
+    AlertDialog.Builder(this)
+        .setTitle("Would you like to finish your workout?")
+        .setNegativeButton("No"){_, _ -&gt;
+            countDownTimer.start()
+        }
+        .setPositiveButton("Yes"){_, _ -&gt;
+            Data.latest.add(workoutLatestClass(Data.latest.last().workoutTyCd + 1, name, time, kcal, steps))    <span>//將今次記錄加返入list</span>
+            val intent = Intent(this, MainActivity3::class.java)
+            intent.putExtra("id", 1)
+            startActivity(intent)
+        }
+        .show()
+}
+        </pre>
+    </div>
+    <button class="accordion">profileFragment.kt</button>
+    <div class="panel">
+        <pre>
+view.findViewById&lt;TextView&gt;(R.id.textView22).text = Data.user.name
+view.findViewById&lt;TextView&gt;(R.id.textView23).text = Data.user.email
+view.findViewById&lt;TextView&gt;(R.id.textView24).text = "${Data.user.height} cm"
+view.findViewById&lt;TextView&gt;(R.id.textView25).text = "${Data.user.weight} kg"
+val bmi = (Data.user.weight)/(Data.user.height*Data.user.height/100f/100f)
+view.findViewById&lt;TextView&gt;(R.id.textView26).text = "${String.format("%.2f",bmi)} bmi"
+view.findViewById&lt;TextView&gt;(R.id.textView31).text = "BMI ${String.format("%.2f", bmi)}"
+val textView32: TextView = view.findViewById(R.id.textView32)
+val textView33: TextView = view.findViewById(R.id.textView33)
+val progressBar: ProgressBar = view.findViewById(R.id.progressBar)
+when {    <span>//因應bmi不同而顯示不同內容</span>
+    bmi &lt;= 18.4 -&gt; {
+        textView32.text  = "You are almost there!"
+        textView33.text  = "Let's try a little harder "
+        progressBar.progress = 125
+    }
+    bmi &gt;= 18.5 && bmi &lt;= 22.9 -&gt; {
+        textView32.text  = "You’re doing great!"
+        textView33.text  = "Maintain this weight"
+        progressBar.progress = 125*3
+    }
+    bmi &gt;= 23 && bmi &lt;= 24.9  -&gt; {
+        textView32.text  = "You are almost there!"
+        textView33.text  = "Let's try a little harder"
+        progressBar.progress = 125*6
+    }
+    bmi &gt;= 25  -&gt; {
+        textView32.text  = "Pay more attention to it"
+        textView33.text  = "Health Planner will help you!"
+        progressBar.progress = 125*9
+    }
+}
+activity.background.visibility = View.GONE
+activity.bottom.setBackgroundColor(Color.parseColor("#5386af"))
+view.findViewById&lt;TextView&gt;(R.id.textView35).setOnClickListener {
+    val layout = layoutInflater.inflate(R.layout.bottom_alert, null)
+    val bottomSheetDialog = BottomSheetDialog(activity)
+    bottomSheetDialog.setContentView(layout)
+    bottomSheetDialog.show()
+    layout.findViewById&lt;Button&gt;(R.id.button6).setOnClickListener {
+        bottomSheetDialog.dismiss()
+        Data.user.height = layout.findViewById&lt;EditText&gt;(R.id.editTextText).text.toString().toFloat()
+        Data.user.weight = layout.findViewById&lt;EditText&gt;(R.id.editTextText2).text.toString().toFloat()
+        view.findViewById&lt;TextView&gt;(R.id.textView24).text = "${Data.user.height} cm"
+        view.findViewById&lt;TextView&gt;(R.id.textView25).text = "${Data.user.weight} kg"
+        val bmi = (Data.user.weight)/(Data.user.height*Data.user.height/100f/100f)
+        view.findViewById&lt;TextView&gt;(R.id.textView26).text = "${String.format("%.2f",bmi)} bmi"
+        view.findViewById&lt;TextView&gt;(R.id.textView31).text = "BMI ${String.format("%.2f", bmi)}"
+        when {
+            bmi &lt;= 18.4 -&gt; {
+                textView32.text  = "You are almost there!"
+                textView33.text  = "Let's try a little harder "
+                progressBar.progress = 125
+            }
+            bmi &gt;= 18.5 && bmi &lt;= 22.9 -&gt; {
+                textView32.text  = "You’re doing great!"
+                textView33.text  = "Maintain this weight"
+                progressBar.progress = 125*3
+            }
+            bmi &gt;= 23 && bmi &lt;= 24.9  -&gt; {
+                textView32.text  = "You are almost there!"
+                textView33.text  = "Let's try a little harder"
+                progressBar.progress = 125*6
+            }
+            bmi &gt;= 25  -&gt; {
+                textView32.text  = "Pay more attention to it"
+                textView33.text  = "Health Planner will help you!"
+                progressBar.progress = 125*9
+            }
+        }
+    }
+}
+view.findViewById&lt;TextView&gt;(R.id.textView34).setOnClickListener {
+    val layout = layoutInflater.inflate(R.layout.bottom_alert, null)
+    val bottomSheetDialog = BottomSheetDialog(activity)
+    bottomSheetDialog.setContentView(layout)
+    layout.findViewById&lt;TextView&gt;(R.id.textView37).text = "Set Goal line"
+    bottomSheetDialog.show()
+    layout.findViewById&lt;EditText&gt;(R.id.editTextText).setHint("Kcal")
+    layout.findViewById&lt;EditText&gt;(R.id.editTextText2).setHint("Steps")
+    layout.findViewById&lt;Button&gt;(R.id.button6).setOnClickListener {
+        bottomSheetDialog.dismiss()
+        Data.goalAndToday.goal.kcal = layout.findViewById&lt;EditText&gt;(R.id.editTextText).text.toString().toFloat()
+        Data.goalAndToday.goal.steps = layout.findViewById&lt;EditText&gt;(R.id.editTextText2).text.toString().toInt()
+    }
+}
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

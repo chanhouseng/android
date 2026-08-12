@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">setOnScrollChangeListener</button>
+    <div class="panel">
+        <pre>
+    val textView : TextView = findViewById(R.id.textView)
+    val textView2 : TextView = findViewById(R.id.textView2)
+    val textView3 : TextView = findViewById(R.id.textView3)
+    val textList = listOf(textView, textView2, textView3)
+    var n = 1
+    val scrollView2: HorizontalScrollView = findViewById(R.id.scrollView2)
+
+    <mark>scrollView2.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY -&gt;</mark>
+        var maxScroll = 700
+        var scrollXNew = 0
+        when{
+            scrollX &lt; 700 -&gt; {
+                n = 1
+                scrollXNew = scrollX
+            }
+            scrollX in 700..&lt;1400 -&gt; {
+                n = 2
+                scrollXNew = scrollX -700
+            }
+            else -&gt; n = 3
+        }
+
+        val alpha = (scrollXNew.toFloat()/maxScroll.toFloat()).coerceIn(0f, 1f)
+        val tranY2 = (scrollXNew.toFloat()/ maxScroll.toFloat()).coerceIn(0f, 1f)*30
+        if(n != 3){
+            textList[n-1].translationY = -30 + tranY2
+            textList[n-1].alpha = 1f-alpha
+            textList[n].translationY = -tranY2
+            textList[n].alpha = alpha
+        }
+    }
+
+
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>
