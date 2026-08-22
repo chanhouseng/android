@@ -123,6 +123,11 @@ type KnowledgeItem = {
     code: string
     note?: string
   }>
+  media: Array<{
+    type: "image"
+    src: string
+    alt: string
+  }>
   relatedLinks: Array<{
     label: string
     href: string
@@ -135,6 +140,7 @@ type KnowledgeItem = {
 - `component` 是主要組件分類，例如 `AlertDialog`、`Progress`、`TabLayout`。
 - `category` 是較廣的輔助分類，例如「介面與元件」、「資料與儲存」、「網絡與 API」、「圖片／媒體／檔案」、「動畫與互動」、「日期與時間」、「其他」。
 - 原有廣東話筆記、說明和程式碼原樣保留；只統一新版介面文字為繁體中文。
+- 原有知識圖片完整保留；缺少替代文字時，以知識點標題產生清楚的圖片說明。
 - 無法確定組件的內容歸入「待分類」，不自行猜測。
 - 空白範本項目不匯入正式資料。
 
@@ -243,6 +249,7 @@ type ProjectItem = {
 遷移工具讀取 `knowledge/index.html` 和 `forgot.html` 中既有的 accordion 標題與內容，產生初步結構化資料。遷移後需逐項檢查：
 
 - 標題與程式碼沒有遺漏。
+- 圖片路徑和圖片說明可以正常顯示。
 - 內部連結仍指向正確檔案。
 - `forgot.html` 內容不附加「易忘」或來源標記。
 - 不能確定的組件放入「待分類」，列入人工確認清單。
