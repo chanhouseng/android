@@ -1,0 +1,52 @@
+{
+  "events": [
+    {
+      "activityId": 2,
+      "eventName": "Music Festival",
+      "location": "London",
+      "activateDate": "2023-12-18",
+      "photo": "photo2",
+      "isActive": true
+    },
+    {
+      "activityId": 4,
+      "eventName": "Art Exhibition",
+      "location": "Rome",
+      "activateDate": "2023-12-21",
+      "photo": "photo4",
+      "isActive": true
+    },
+    {
+      "activityId": 1,
+      "eventName": "Tech Conference",
+      "location": "Vienna",
+      "activateDate": "2023-12-29",
+      "photo": "photo1",
+      "isActive": true
+    },
+    {
+      "activityId": 3,
+      "eventName": "Fashion Show",
+      "location": "Dublin",
+      "activateDate": "2023-11-21",
+      "photo": "photo3",
+      "isActive": false
+    },
+    {
+      "activityId": 6,
+      "eventName": "Film Screening",
+      "location": "Paris",
+      "activateDate": "2023-11-20",
+      "photo": "photo6",
+      "isActive": false
+    },
+    {
+      "activityId": 5,
+      "eventName": "Food Expo",
+      "location": "Madrid",
+      "activateDate": "2023-11-14",
+      "photo": "photo5",
+      "isActive": false
+    }
+  ]
+}

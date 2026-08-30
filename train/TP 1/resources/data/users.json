@@ -1,0 +1,23 @@
+[
+  {
+    "user_id": "USR-001",
+    "email": "ankit@example.com",
+    "password": "ankit123",
+    "auth_token": "TKN-ANKIT-A1B2C3D4E5F6G7H8",
+    "created_at": "2025-01-10 09:00:00"
+  },
+  {
+    "user_id": "USR-002",
+    "email": "priya@example.com",
+    "password": "priya456",
+    "auth_token": "TKN-PRIYA-Z9Y8X7W6V5U4T3S2",
+    "created_at": "2025-02-14 11:30:00"
+  },
+  {
+    "user_id": "USR-003",
+    "email": "rahul@example.com",
+    "password": "rahul789",
+    "auth_token": "TKN-RAHUL-Q1W2E3R4T5Y6U7I8",
+    "created_at": "2025-03-01 08:45:00"
+  }
+]

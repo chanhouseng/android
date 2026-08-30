@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3>呢到有好多個都係用pro，因為佢要似(反正冇計到時間)</h3>
+    <button class="accordion">MainActivity.kt (頂部倒數換和滑動換)</button>
+    <div class="panel">
+        <pre>
+var startX = 0f
+var startY = 0f
+findViewById&lt;FrameLayout&gt;(R.id.frameLayout).setOnTouchListener { v, event -&gt;
+    when(event.action){
+        MotionEvent.ACTION_DOWN -&gt; {
+            startY = event.y
+            startX = event.x
+        }
+
+        MotionEvent.ACTION_UP -&gt; {
+            val moveX = event.x
+            val moveY = event.y
+            val deltaX = moveX - startX
+            val deltaY = moveY - startY
+            if(Math.abs(deltaX) &gt; Math.abs(deltaY)){
+                if(deltaX &gt; 0){
+                    countDownTimer.cancel()
+                    if(now == 0){
+                        now = Data.jsonArray.books.size -1
+                    }
+                    else{
+                        now --
+                    }
+                    countDownTimer.start()      <span>//因為用一個countDownTimer，就可以將佢地啲野寫一次，之後調用countDownTimer即可。同埋佢一開始就會跳一下，所以就可以用到</span>
+                }
+                else{
+                    countDownTimer.cancel()
+                    if(now == Data.jsonArray.books.size-1){
+                        now = 0
+                    }
+                    else{
+                        now ++
+                    }
+                    countDownTimer.start()
+                }
+            }
+        }
+    }
+    true
+}
+findViewById&lt;ImageView&gt;(R.id.lastButton).setOnClickListener {
+    countDownTimer.cancel()
+    if(now == 0){
+        now = Data.jsonArray.books.size -1
+    }
+    else{
+        now --
+    }
+    countDownTimer.start()
+}
+findViewById&lt;ImageView&gt;(R.id.nextButton).setOnClickListener {
+    countDownTimer.cancel()
+    if(now == Data.jsonArray.books.size-1){
+        now = 0
+    }
+    else{
+        now ++
+    }
+    countDownTimer.start()
+}
+countDownTimer = object : CountDownTimer(5000, 5000){
+    override fun onFinish() {
+        if(now != Data.jsonArray.books.size -1){     <span>//不同唔使咁樣，其實用%都可以。就now = (now + 1) % Data.jsonArray.books.size</span>
+            now++
+        }
+        else{
+            now = 0
+        }
+        start()
+    }
+
+    override fun onTick(millisUntilFinished: Long) {
+        val book = Data.jsonArray.books[now]
+        imageView3.setImageResource(resources.getIdentifier(book.id.replace("-", "_").replace("ä", "_").replace("ú", "_"), "drawable", packageName))
+        textView3.text = book.title
+        textView4.text = book.author
+        textView5.text = book.description
+        textView9.text = "(${book.reviews} reviews)"
+        textView6.text = book.rating.toString()
+        button.setOnClickListener {
+            val intent = Intent(this@MainActivity, MainActivity2::class.java)
+            intent.putExtra("id", book.id)
+            startActivity(intent)
+        }
+    }
+}
+countDownTimer.start()
+        </pre>
+    </div>
+    <button class="accordion">MainActivity.kt (下面三列預覽)</button>
+    <div class="panel">
+        <pre>
+findViewById&lt;ImageView&gt;(R.id.leftB1).setOnClickListener {
+    createAnim(h1, -1*scrollValue)
+}
+findViewById&lt;ImageView&gt;(R.id.leftB2).setOnClickListener {
+    createAnim(h2, -1*scrollValue)
+}
+findViewById&lt;ImageView&gt;(R.id.leftB3).setOnClickListener { createAnim(h3, -1*scrollValue) }
+findViewById&lt;ImageView&gt;(R.id.rightB1).setOnClickListener { createAnim(h1, scrollValue) }
+findViewById&lt;ImageView&gt;(R.id.rightB2).setOnClickListener { createAnim(h2, scrollValue) }
+findViewById&lt;ImageView&gt;(R.id.rightB3).setOnClickListener { createAnim(h3, scrollValue) }
+
+fun createAnim(scrollView: HorizontalScrollView, number: Int){          <span>number嘅作用係分清佢係向左定向右，咁就唔使寫兩個</span>
+    val valeuAnimator = ValueAnimator.ofInt(scrollView.scrollX, scrollView.scrollX + number)
+    valeuAnimator.duration = 400
+    valeuAnimator.interpolator = LinearInterpolator()
+    valeuAnimator.addUpdateListener {
+        scrollView.scrollX = it.animatedValue as Int
+    }
+    valeuAnimator.start()
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt (下面三列預覽 Fun Art Gallery)</button>
+    <div class="panel">
+        <pre>
+loadFan(0)
+trendingButton.setOnClickListener {
+    loadFan(0)
+    numberNow= 0        <span>//numberNow嘅作用就係只係為左upload you art嗰到，佢可以按返用戶之前嘅選擇顯示返個順序。不得不load，用戶add 完相要load，但又唔知佢之前睇緊邊個順序，就要記低</span>
+}
+nowsetButton.setOnClickListener {
+    loadFan(1)
+    numberNow = 1
+}
+        </pre>
+    </div>
+
+    <button class="accordion">MainActivity2.kt -- loadfun() (包含放大圖片功能)</button>
+    <div class="panel">
+        <pre>
+fun loadFan(number: Int){
+    var k = 0
+    while (k &lt; 2){
+        tList[k].setTextColor(Color.parseColor("#404e64"))    <span>//變返預設顏色</span>
+        lList[k].setBackgroundResource(R.drawable.sort_back2)
+        k++
+    }
+    tList[number].setTextColor(Color.parseColor("#ffffff"))
+    lList[number].setBackgroundResource(R.drawable.sort_back)
+    l1.removeAllViews()    <span>//三列顯示</span>
+    l2.removeAllViews()
+    l3.removeAllViews()
+    var i = 0
+    var list = Data.jsonArray.fanArt.filter { it.bookId == book.id }
+    when(number){
+        0 -&gt; list = list.sortedByDescending { it.likes }
+        1 -&gt; list = list.sortedByDescending { it.createdAt }
+    }
+    var p = 0
+    for(result in list){
+        var thisNumber = p     <span>//唔可以直接用p，因為有關聯性，p會係最大嘅嗰個數，所以要先複製一個出嚟先</span>
+        val layout = layoutInflater.inflate(R.layout.fan_pro, null)
+        layout.findViewById&lt;TextView&gt;(R.id.textView29).text = result.likes.toString()
+        layout.findViewById&lt;TextView&gt;(R.id.textView31).text = result.shares.toString()
+        layout.findViewById&lt;TextView&gt;(R.id.textView30).text = result.artist
+        val params = layout.findViewById&lt;ImageView&gt;(R.id.imageView6).layoutParams
+        params.height = (result.height ).toInt()    <span>//個JSON有設定圖片嘅高度</span>
+        if(result.id.contains("content://")){
+            layout.findViewById&lt;ImageView&gt;(R.id.imageView6).setImageURI(result.id.toUri())    <span>//事實係唔可以用try，因為setUri佢點都可以顯示到</span>
+        }
+        else{
+            layout.findViewById&lt;ImageView&gt;(R.id.imageView6).setImageResource(resources.getIdentifier(result.id.replace("-", "_").replace("ä", "_").replace("ú", "_"), "drawable", packageName))
+        }
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView6).setOnLongClickListener {
+            val popupMenu = PopupMenu(this, it)
+            popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
+            popupMenu.show()
+            popupMenu.setOnMenuItemClickListener {
+                when(it.itemId){
+                    R.id.save -&gt; {
+                        saveLayoutGallery(layout.findViewById&lt;ImageView&gt;(R.id.imageView6))
+                    }
+                    else -&gt; {}
+                }
+                true
+            }
+            true
+        }
+
+        <mark>//放大圖片alert</mark>
+        layout.findViewById&lt;ImageView&gt;(R.id.imageView6).setOnClickListener {
+            val bigLayout = layoutInflater.inflate(R.layout.big_alert, null)
+            val alert = AlertDialog.Builder(this).setView(bigLayout).show()
+            bigLayout.findViewById&lt;TextView&gt;(R.id.textView41).text = result.artist
+            alert.setCanceledOnTouchOutside(false)
+            bigFunNumber = thisNumber     <span>//攞返睇下宜家係邊個，bigFunNumber嘅作用都係為左可以向前向後滑動點擊換圖片</span>
+            if(list[bigFunNumber].id.contains("content://")){
+                bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView18).setImageURI(list[bigFunNumber].id.toUri())
+            }
+            else{
+                bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView18).setImageResource(resources.getIdentifier(list[bigFunNumber].id.replace("-", "_").replace("ä", "_").replace("ú", "_"), "drawable", packageName))
+            }
+            val textView = bigLayout.findViewById&lt;TextView&gt;(R.id.textView44)
+            textView.text = "${bigFunNumber+1} / ${list.size}"
+            bigLayout.findViewById&lt;TextView&gt;(R.id.textView42).text = list[bigFunNumber].likes.toString()
+            bigLayout.findViewById&lt;TextView&gt;(R.id.textView43).text = list[bigFunNumber].shares.toString()
+            var startX = 0f
+            var startY = 0f
+            bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView18).setOnTouchListener { v, event -&gt;
+                when(event.action){
+                    MotionEvent.ACTION_DOWN -&gt; {
+                        startY = event.y
+                        startX = event.x
+                    }
+
+                    MotionEvent.ACTION_UP -&gt; {
+                        val moveX = event.x
+                        val moveY = event.y
+                        val deltaX = moveX - startX
+                        val deltaY = moveY - startY
+                        if(Math.abs(deltaX) &gt; Math.abs(deltaY)){
+                            if(deltaX &gt; 0){
+                                if(bigFunNumber != 0){
+                                    bigFunNumber --     <span>//滑動嘅時候進行更改</span>
+                                    if(list[bigFunNumber].id.contains("content://")){
+                                        bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView18).setImageURI(list[bigFunNumber].id.toUri())
+                                    }
+                                    else{
+                                        bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView18).setImageResource(resources.getIdentifier(list[bigFunNumber].id.replace("-", "_").replace("ä", "_").replace("ú", "_"), "drawable", packageName))
+                                    }
+                                    textView.text = "${bigFunNumber+1} / ${list.size}"
+                                    bigLayout.findViewById&lt;TextView&gt;(R.id.textView42).text = list[bigFunNumber].likes.toString()
+                                    bigLayout.findViewById&lt;TextView&gt;(R.id.textView43).text = list[bigFunNumber].shares.toString()
+                                }
+                            }
+                            else{
+                                if(bigFunNumber != list.size-1){
+                                    bigFunNumber ++
+                                    if(list[bigFunNumber].id.contains("content://")){
+                                        bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView18).setImageURI(list[bigFunNumber].id.toUri())
+                                    }
+                                    else{
+                                        bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView18).setImageResource(resources.getIdentifier(list[bigFunNumber].id.replace("-", "_").replace("ä", "_").replace("ú", "_"), "drawable", packageName))
+                                    }
+                                    textView.text = "${bigFunNumber+1} / ${list.size}"
+                                    bigLayout.findViewById&lt;TextView&gt;(R.id.textView42).text = list[bigFunNumber].likes.toString()
+                                    bigLayout.findViewById&lt;TextView&gt;(R.id.textView43).text = list[bigFunNumber].shares.toString()
+                                }
+                            }
+                        }
+                    }
+                }
+                true
+            }
+            bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView17).setOnClickListener {
+                alert.dismiss()
+                bigFunNumber = 0
+            }
+
+            bigLayout.findViewById&lt;LinearLayout&gt;(R.id.leftButton).setOnClickListener {
+                if(bigFunNumber != 0){
+                    bigFunNumber --         <span>//點擊按鈕時也進行更改</span>
+                    if(list[bigFunNumber].id.contains("content://")){
+                        bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView18).setImageURI(list[bigFunNumber].id.toUri())
+                    }
+                    else{
+                        bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView18).setImageResource(resources.getIdentifier(list[bigFunNumber].id.replace("-", "_").replace("ä", "_").replace("ú", "_"), "drawable", packageName))
+                    }
+                    textView.text = "${bigFunNumber+1} / ${list.size}"
+                    bigLayout.findViewById&lt;TextView&gt;(R.id.textView42).text = list[bigFunNumber].likes.toString()
+                    bigLayout.findViewById&lt;TextView&gt;(R.id.textView43).text = list[bigFunNumber].shares.toString()
+                }
+
+            }
+            bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView22).setOnClickListener {
+                list[bigFunNumber].shares += 1
+                bigLayout.findViewById&lt;TextView&gt;(R.id.textView43).text = list[bigFunNumber].shares.toString()
+            }
+            var isLike = false
+            bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView21).setOnClickListener {
+                isLike = !isLike
+                if(isLike){
+                    list[bigFunNumber].likes += 1
+                    bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView21).setImageResource(R.drawable.baseline_favorite_24)
+                }
+                else{
+                    list[bigFunNumber].likes -= 1
+                    bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView21).setImageResource(R.drawable.outline_favorite_border_24)
+                }
+                bigLayout.findViewById&lt;TextView&gt;(R.id.textView42).text = list[bigFunNumber].likes.toString()
+            }
+            bigLayout.findViewById&lt;LinearLayout&gt;(R.id.rightButton).setOnClickListener {
+                if(bigFunNumber != list.size-1){
+                    bigFunNumber ++
+                    if(list[bigFunNumber].id.contains("content://")){
+                        bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView18).setImageURI(list[bigFunNumber].id.toUri())
+                    }
+                    else{
+                        bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView18).setImageResource(resources.getIdentifier(list[bigFunNumber].id.replace("-", "_").replace("ä", "_").replace("ú", "_"), "drawable", packageName))
+                    }
+                    textView.text = "${bigFunNumber+1} / ${list.size}"
+                    bigLayout.findViewById&lt;TextView&gt;(R.id.textView42).text = list[bigFunNumber].likes.toString()
+                    bigLayout.findViewById&lt;TextView&gt;(R.id.textView43).text = list[bigFunNumber].shares.toString()
+                }
+            }
+            bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView23).setOnClickListener {
+                saveLayoutGallery(bigLayout.findViewById&lt;ImageView&gt;(R.id.imageView23))
+                Toast.makeText(this, "Saved to gallerya", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        val linearLayout = linear.getChildAt(i%3) as LinearLayout
+        linearLayout.addView(layout)
+        i++
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt loadCustom() (顯示preview pages)</button>
+    <div class="panel">
+        <pre>
+<span>顯示alert內容</span>
+fun loadCustom(custom: View){
+    custom.findViewById&lt;TextView&gt;(R.id.textView34).text = "Preview - Page ${reviewNumber+1} of ${book.totalPages}"
+    if(book.previewPages != null && reviewNumber &lt; book.previewPages!!.size){    <span>//可能唔俾previews或者已經超過previews的上限</span>
+        custom.findViewById&lt;TextView&gt;(R.id.textView35).text = book.previewPages?.get(reviewNumber)
+    }
+    custom.findViewById&lt;LinearLayout&gt;(R.id.pageLayout).removeAllViews()
+    var i = 0
+    while(i &lt;= book.totalPages-1){
+        val layout = layoutInflater.inflate(R.layout.page_pro, null)
+        if(book.previewPages != null){
+            if(i &lt; book.previewPages!!.size){     <span>//可以previews的範圍</span>
+                layout.findViewById&lt;LinearLayout&gt;(R.id.canView).visibility = View.VISIBLE
+                layout.findViewById&lt;LinearLayout&gt;(R.id.canotView).visibility = View.GONE
+                layout.findViewById&lt;TextView&gt;(R.id.textView37).text = (i+1).toString()
+                if (i == reviewNumber){
+                    layout.findViewById&lt;LinearLayout&gt;(R.id.canView).setBackgroundResource(R.drawable.cliuck_page_back)
+                    custom.findViewById&lt;CardView&gt;(R.id.alertLayout).visibility = View.GONE
+                    custom.findViewById&lt;TextView&gt;(R.id.textView36).setTextColor(Color.parseColor("#248155"))
+                    custom.findViewById&lt;TextView&gt;(R.id.textView36).text = "Preview Available"
+                }
+            }
+            else{       <span>//不可以previews的範圍</span>
+                layout.findViewById&lt;LinearLayout&gt;(R.id.canotView).visibility = View.VISIBLE
+                layout.findViewById&lt;LinearLayout&gt;(R.id.canView).visibility = View.GONE
+                if (i == reviewNumber){
+                    layout.findViewById&lt;LinearLayout&gt;(R.id.canotView).setBackgroundResource(R.drawable.click_no_back)
+                    custom.findViewById&lt;CardView&gt;(R.id.alertLayout).visibility = View.VISIBLE
+                    custom.findViewById&lt;TextView&gt;(R.id.textView36).setTextColor(Color.parseColor("#b8742a"))
+                    custom.findViewById&lt;TextView&gt;(R.id.textView36).text = "Purchase Required"
+                }
+            }
+        }
+        else{          <span>//沒有preview pages</span>
+            layout.findViewById&lt;LinearLayout&gt;(R.id.canotView).visibility = View.VISIBLE
+            layout.findViewById&lt;LinearLayout&gt;(R.id.canView).visibility = View.GONE
+            if (i == reviewNumber){
+                layout.findViewById&lt;LinearLayout&gt;(R.id.canotView).setBackgroundResource(R.drawable.click_no_back)
+                custom.findViewById&lt;CardView&gt;(R.id.alertLayout).visibility = View.VISIBLE
+                custom.findViewById&lt;TextView&gt;(R.id.textView36).setTextColor(Color.parseColor("#b8742a"))
+                custom.findViewById&lt;TextView&gt;(R.id.textView36).text = "Purchase Required"
+            }
+        }
+        var kI = i
+        layout.setOnClickListener {
+            reviewNumber = kI      <span>//雖然會令APP變慢，但係對於比賽係個好方法，唔使改好多野，喺前面寫曬就得，就能夠實現即時更新</span>
+            loadCustom(custom)
+        }
+        custom.findViewById&lt;LinearLayout&gt;(R.id.pageLayout).addView(layout)
+        i++
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity2.kt 調用loadCustom的地方</button>
+    <div class="panel">
+        <pre>
+findViewById&lt;Button&gt;(R.id.button2).setOnClickListener {
+    val custom = layoutInflater.inflate(R.layout.reviews_alert, null)
+    val alertDialog = AlertDialog.Builder(this).setView(custom).show()
+    custom.findViewById&lt;TextView&gt;(R.id.textView33).text = book.title
+    loadCustom(custom)
+    custom.findViewById&lt;ImageView&gt;(R.id.imageView13).setOnClickListener {
+        alertDialog.dismiss()
+    }
+    alertDialog.setCanceledOnTouchOutside(false)
+    custom.findViewById&lt;Button&gt;(R.id.button7).setOnClickListener {
+        if(reviewNumber &lt; book.totalPages-1){
+            reviewNumber++      <span>//加完先再load</span>
+            loadCustom(custom)
+            if(reviewNumber == book.totalPages-1){
+                custom.findViewById&lt;Button&gt;(R.id.button7).isEnabled = false
+            }
+            if(reviewNumber != 0){
+                custom.findViewById&lt;Button&gt;(R.id.button6).isEnabled = true
+            }
+        }
+    }
+    custom.findViewById&lt;Button&gt;(R.id.button6).setOnClickListener {
+        if(reviewNumber &gt; 0){
+            reviewNumber--
+            loadCustom(custom)
+        }
+        if(reviewNumber == 0){
+            custom.findViewById&lt;Button&gt;(R.id.button6).isEnabled = false
+        }
+        if(reviewNumber != book.totalPages-1){
+            custom.findViewById&lt;Button&gt;(R.id.button7).isEnabled = true
+        }
+    }
+}
+        </pre>
+    </div>
+    <button class="accordion">MainAcitivty2.kt 上傳fun arr</button>
+    <div class="panel">
+        <pre>
+val pickPhoto = registerForActivityResult(ActivityResultContracts.PickVisualMedia()){uri -&gt;
+    if(uri != null){
+        imageView15.setImageURI(uri)
+        imageUri = uri      <span>//暫存uri，之後可以save落個list到</span>
+    }
+}
+
+findViewById&lt;Button&gt;(R.id.button3).setOnClickListener {
+    val layout = layoutInflater.inflate(R.layout.load_fan_alert, null)
+    val alertDialog = AlertDialog.Builder(this).setView(layout).show()
+    layout.findViewById&lt;ImageView&gt;(R.id.imageView14).setOnClickListener {
+        alertDialog.dismiss()
+    }
+    layout.findViewById&lt;Button&gt;(R.id.button5).setOnClickListener {
+        alertDialog.dismiss()
+    }
+    imageView15 = layout.findViewById&lt;ImageView&gt;(R.id.imageView15)
+    imageView15.setOnClickListener {
+        pickPhoto.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+    layout.findViewById&lt;Button&gt;(R.id.button4).setOnClickListener {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        var list = Data.jsonArray.fanArt as ArrayList
+        list.add(FanArtClass(imageUri.toString(), book.id, 0, 0,
+            "You",
+            LocalDate.now().format(formatter)))
+        alertDialog.dismiss()
+        loadFan(numberNow)
+    }
+}
+        </pre>
+    </div>
+
+<script src="js.js"></script>
+</body>
+</html>

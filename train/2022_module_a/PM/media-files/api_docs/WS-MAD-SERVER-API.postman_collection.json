@@ -1,0 +1,655 @@
+{
+	"info": {
+		"_postman_id": "8becab23-878c-4cac-afa3-f380b5fa7e6e",
+		"name": "WS-MAD-SERVER-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Images",
+			"item": [
+				{
+					"name": "Image Photos Information",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}image/photos",
+							"host": [
+								"{{BASE_URL}}image"
+							],
+							"path": [
+								"photos"
+							]
+						},
+						"description": "Response the information about photos list from the server."
+					},
+					"response": [
+						{
+							"name": "200 Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "pageNumber",
+											"value": "0",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}image/photos",
+									"host": [
+										"{{BASE_URL}}image"
+									],
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Apr 2022 01:02:22 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"data\": {\n        \"firstPageNumber\": 0,\n        \"totalPhotos\": 18,\n        \"totalPage\": 2\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Image Photos Data",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "pageNumber",
+									"value": "1",
+									"description": "Page Number of the photos' list",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}image/photos",
+							"host": [
+								"{{BASE_URL}}image"
+							],
+							"path": [
+								"photos"
+							]
+						},
+						"description": "Response the photo list from the server according to the page number provided."
+					},
+					"response": [
+						{
+							"name": "200 Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "pageNumber",
+											"value": "0",
+											"description": "Page Number of the photos' list",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}image/photos",
+									"host": [
+										"{{BASE_URL}}image"
+									],
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Apr 2022 01:11:58 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"data\": [\n        {\n            \"visit-count\": \"389\",\n            \"heat\": \"1004\",\n            \"url\": \"http://192.168.0.199:8080/api/image/photos/No_00009.jpg\"\n        },\n        {\n            \"visit-count\": \"249\",\n            \"heat\": \"2699\",\n            \"url\": \"http://192.168.0.199:8080/api/image/photos/No_00010.jpg\"\n        },\n        {\n            \"visit-count\": \"296\",\n            \"heat\": \"1934\",\n            \"url\": \"http://192.168.0.199:8080/api/image/photos/No_00011.jpg\"\n        },\n        {\n            \"visit-count\": \"358\",\n            \"heat\": \"1402\",\n            \"url\": \"http://192.168.0.199:8080/api/image/photos/No_00012.jpg\"\n        },\n        {\n            \"visit-count\": \"207\",\n            \"heat\": \"2976\",\n            \"url\": \"http://192.168.0.199:8080/api/image/photos/No_00013.jpg\"\n        },\n        {\n            \"visit-count\": \"398\",\n            \"heat\": \"1116\",\n            \"url\": \"http://192.168.0.199:8080/api/image/photos/No_00014.jpg\"\n        },\n        {\n            \"visit-count\": \"229\",\n            \"heat\": \"2367\",\n            \"url\": \"http://192.168.0.199:8080/api/image/photos/No_00015.jpg\"\n        },\n        {\n            \"visit-count\": \"322\",\n            \"heat\": \"2326\",\n            \"url\": \"http://192.168.0.199:8080/api/image/photos/No_00016.jpg\"\n        },\n        {\n            \"visit-count\": \"335\",\n            \"heat\": \"1138\",\n            \"url\": \"http://192.168.0.199:8080/api/image/photos/No_00017.jpg\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "400 Unsuccess",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "pageNumber",
+											"value": "100",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}image/photos",
+									"host": [
+										"{{BASE_URL}}image"
+									],
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Apr 2022 01:08:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 400,\n    \"msg\": \"PageNumber out of limit.\",\n    \"data\": null\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Skills",
+			"item": [
+				{
+					"name": "Skills-types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}skills-types",
+							"host": [
+								"{{BASE_URL}}skills-types"
+							]
+						},
+						"description": "Response the skills-types list from the server."
+					},
+					"response": [
+						{
+							"name": "200 Sucess",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}skills-types",
+									"host": [
+										"{{BASE_URL}}skills-types"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Apr 2022 01:23:57 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"data\": [\n        {\n            \"skillTypeId\": 0,\n            \"name\": \"Manufacturing and Engineering Technology\",\n            \"skills\": {\n                \"0000\": \"Industrial Mechanics\",\n                \"0001\": \"Manufacturing Team Challenge\",\n                \"0002\": \"Mechatronics\",\n                \"0003\": \"Mechanical Engineering CAD\",\n                \"0004\": \"CNC Turning\",\n                \"0005\": \"CNC Milling\"\n            }\n        },\n        {\n            \"skillTypeId\": 1,\n            \"name\": \"Information and Communication Technology\",\n            \"skills\": {\n                \"1000\": \"Information Network Cabling\",\n                \"1001\": \"IT Software Solutions for Business\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Skills Item",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}skills/:id",
+							"host": [
+								"{{BASE_URL}}skills"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1000",
+									"description": "Skill Id"
+								}
+							]
+						},
+						"description": "Response the skill information from the server according to the skill's id provided."
+					},
+					"response": [
+						{
+							"name": "200 Get Skill of id:1000 Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}skills/:id",
+									"host": [
+										"{{BASE_URL}}skills"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1000",
+											"description": "Skill Id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Apr 2022 01:31:04 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"data\": {\n        \"id\": \"1000\",\n        \"name\": \"Information Network Cabling\",\n        \"introduction\": \"The occupations related to “Information Network Cabling” are deeply related to the technology that supports modern information societies in which lives can be more comfortable and sustainable.\",\n        \"img\": \"http://192.168.0.199:8080/api/image/skills_images/1000.jpg\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Videos",
+			"item": [
+				{
+					"name": "Videos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}video",
+							"host": [
+								"{{BASE_URL}}video"
+							]
+						},
+						"description": "Response the videos list from the server."
+					},
+					"response": [
+						{
+							"name": "200 Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}video",
+									"host": [
+										"{{BASE_URL}}video"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 May 2022 07:52:38 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"data\": [\n        {\n            \"uuid\": \"2D6A33E7-AE3C-FCFA-5AF1-249C71C1AC57\",\n            \"name\": \"Welcome to WorldSkills 2022 in Shanghai\",\n            \"url\": \"http://192.168.0.199:8080/apivideo/ws_welcome.mp4\",\n            \"length\": 134468\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Video Comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}video/comment",
+							"host": [
+								"{{BASE_URL}}video"
+							],
+							"path": [
+								"comment"
+							]
+						},
+						"description": "Response the video comments from the server."
+					},
+					"response": [
+						{
+							"name": "200 Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}video/comment",
+									"host": [
+										"{{BASE_URL}}video"
+									],
+									"path": [
+										"comment"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 May 2022 08:27:38 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"data\": [\n        {\n            \"uuid\": \"8985550e-e29e-466c-88e3-bb6f0730e7bf\",\n            \"ipAddress\": \"192.168.0.199\",\n            \"commentText\": \"This is a new video.\",\n            \"commentTime\": 1653292873166,\n            \"videoUUID\": \"2D6A33E7-AE3C-FCFA-5AF1-249C71C1AC57\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Video Comments Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"commentText\" : \"Nice video that make me happy.\",\n    \"videoUUID\"   : \"C80137E8-4FAE-980C-A222-BB5F1A76CE2B\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}video/comment",
+							"host": [
+								"{{BASE_URL}}video"
+							],
+							"path": [
+								"comment"
+							]
+						},
+						"description": "Add a video comment according to video's id into server and response the POST status from the server."
+					},
+					"response": [
+						{
+							"name": "200 POST Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"commentText\": \"Nice video that make me happy.\",\n    \"videoUUID\": \"2D6A33E7-AE3C-FCFA-5AF1-249C71C1AC57\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}video/comment",
+									"host": [
+										"{{BASE_URL}}video"
+									],
+									"path": [
+										"comment"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 May 2022 08:01:47 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"msg\": \"Success\",\n    \"data\": {\n        \"uuid\": \"fa187f4f-2260-4aa9-b2bd-9ab40fa7f939\",\n        \"ipAddress\": \"192.168.1.1\",\n        \"commentText\": \"Nice video that make me happy.\",\n        \"commentTime\": 1653292907527,\n        \"videoUUID\": \"2D6A33E7-AE3C-FCFA-5AF1-249C71C1AC57\"\n    }\n}"
+						},
+						{
+							"name": "400 POST Unsuccess",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"commentText\": \"Nice video that make me happy.\",\n    \"videoUUID\": \"C80137E8-4FAE-980C-A222-BB5F1A71CE2B\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}video/comment",
+									"host": [
+										"{{BASE_URL}}video"
+									],
+									"path": [
+										"comment"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 May 2022 08:28:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 400,\n    \"msg\": \"No video of this UUID can be found.\",\n    \"data\": null\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://192.168.0.199:8080/api/"
+		}
+	]
+}

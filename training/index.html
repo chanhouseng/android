@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="瀏覽並下載 WorldSkills 行動應用開發訓練題目。">
+  <title>訓練題目檔案庫</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#file-list">跳至檔案列表</a>
+
+  <main id="training-browser" class="app-shell">
+    <header class="page-header">
+      <div class="heading-group">
+        <p class="eyebrow">WorldSkills · Mobile Applications Development</p>
+        <h1>訓練題目檔案庫</h1>
+        <p class="intro">沿著原始資料夾結構尋找題目，選取檔案即可下載。</p>
+      </div>
+    </header>
+
+    <section class="browser-surface" aria-labelledby="browser-heading">
+      <h2 id="browser-heading" class="sr-only">題目檔案瀏覽器</h2>
+
+      <div class="browser-toolbar">
+        <nav id="breadcrumbs" class="breadcrumbs" aria-label="目前路徑"></nav>
+
+        <form id="search-form" class="search" role="search">
+          <label for="search-input">搜尋整個 train/</label>
+          <div class="search-control">
+            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="11" cy="11" r="6.5"></circle>
+              <path d="m16 16 4 4"></path>
+            </svg>
+            <input id="search-input" type="search" autocomplete="off" spellcheck="false"
+              placeholder="輸入檔名或路徑" aria-describedby="search-summary">
+            <button id="clear-search" class="clear-search" type="button" hidden>清除</button>
+          </div>
+          <p id="search-summary" class="search-summary" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <p id="route-notice" class="route-notice" role="status" hidden></p>
+
+      <div class="content-heading">
+        <h2 id="content-title">資料夾內容</h2>
+        <p id="item-count" class="item-count" aria-hidden="true"></p>
+      </div>
+
+      <ul id="file-list" class="entries-grid" aria-labelledby="content-title" aria-busy="true"></ul>
+
+      <div id="state-panel" class="state-panel" role="status">
+        <p id="state-title" class="state-title">正在載入檔案…</p>
+        <p id="state-message" class="state-message"></p>
+        <button id="state-action" class="state-action" type="button" hidden></button>
+      </div>
+
+      <p id="announcements" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

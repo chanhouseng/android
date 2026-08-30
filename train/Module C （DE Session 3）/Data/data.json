@@ -1,0 +1,722 @@
+{
+  "books": [
+    {
+      "id": "book-schiller-untergang",
+      "title": "Schatz der Welten: Untergang",
+      "author": "Joachim Schiller",
+      "rating": 4.4,
+      "reviews": 847,
+      "tags": ["Fantasy", "Adventure", "Epic"],
+      "description": "In a world of mystery and magic, a young adventurer takes on the quest, to search for a long-forgotten treasure in the wilderness of the Durabor. Soon he experiences the magical wonders of the fantastic realm – and the demonic dangers lingering beneath. Just as he sets foot into the sprawling forest, dark forces rise from the underworld, threatening to claim the lands of the flourishing kingdom of Norskom. – A danger, that only the keen adventurers in the wilderness can confine, as they strive to protect their mystical world. Untergang is a gripping opening to Joachim Schiller's epic fantasy trilogy, rich with myth, betrayal, and the long shadow of fallen empires.",
+      "previewPages": [
+        "Prolog\n\nTim war ein gewöhnlicher Junge. Normal groß, normal nett, mittelmäßig schlau. Kein Genie, aber auch nicht dumm. Nicht anders, nicht besonders. Bis er eines Jahres, während der Pause der Feldarbeit, einen Mann kennenlernte, der ihm etwas von Portalen und fremden Welten erzählte. Ein Mann mit einem weißen, struppigen Bart, nur noch wenigen Zähnen und einer wilden Frisur, die die Narben in seinem Gesicht verdeckte. Ihm fehlte ein Auge und seine Kleidung war löchrig, genauso wie er selbst. Geheimnisse flossen aus ihm heraus wie aus einem undichten Fass, dem er wirklich ähnlich sah.\n\nAn einem dicken Ledergürtel trug er ein Schwert und unzählige kleine Trophäen. Kleine Knochen und aller möglicher Krimskrams zierten das Lederstück und schienen allein schon Tausende unglaubliche Dinge zu erzählen. Die eigentlichen Geschichten wusste allerdings der Mann selbst zum Besten zu geben.\n\nEr erzählte von Welten, wie sie Tim sich nicht vorstellen konnte. Der Mann berichtete von Monstern, Burgen, Schlössern, Drachen und Magiern. Von Räubern war die Rede. Sie würden alles Mögliche stehlen, einschließlich der Seelen verlorener Menschen. Mit ausladenden Gesten versuchte der alte, dicke Mann, ihm begreifbar zu machen, was für Reichtümer in der weiten Welt zu warten schienen. Von riesigen Bergen voll Gold und Silber schwafelte er. Große Stapel von Münzen und allen nur erdenklichen Schätzen sollten dort draußen liegen. Und man müsse sie nur suchen, erzählte er. Würde man ein Räuber, könnte man große Reichtümer erwerben, aber man sollte sich immer zu schützen wissen. Man würde sich in große Gefahr begeben. Er schwärmte mit wohlklingenden Worten von Diamanten, Juwelen, Gold und der allbezwingenden Macht.\n\nTim war begeistert. Neugierig hatte er damals diesem Mann zugehört. Nur allzu gerne wäre er reich und mächtig, wie viele dieser Abenteurer. Nur allzu gerne würde er aus dieser verdammten Welt ausbrechen, die ihn schon seit all den Jahren enttäuscht hatte. Nur allzu ge...",
+        "Ende, um sich dieses Andenken zu bewahren.\n\nInsbesondere sein Vater maß Frieda sehr viel Bedeutung zu und schien nichts anderes für heilig zu halten. Alles drehte sich um dieses kleine Haustier, dem er auch jetzt gerade wieder eine Sonderfütterung zukommen ließ. Sie sollte groß und stark werden.\n\nEilig rannte Tim über das Feld und zog an seinem Vater vorüber, der ihn lauthals anbrüllte: „Wo rennst du schon wieder hin, Junge?“ Man hörte ihm regelrecht an, wie er schon zu erahnen versuchte, was sein Sohn wieder ausheckte. Er musste sich wohl etwas sehr Schlimmes ausmalen, das war offensichtlich.\n\nDoch Tim ignorierte das. Er schnappte sich einen Stein vom Boden und warf ihn provokant auf seinen wütenden Vater, der noch erboster zu ihm blickte, Frieda losließ und ebenso schnell hinter seinem Sohn herrannte.\n\nLaut brüllend, stampfte sein Vater über den Boden, während Tim lauthals lachend über den zweiten Zaun sprang und hinter einem Strauch verschwand. Zeternd folgte ihm sein Vater bis zum Rand der Weide, wo er stehen blieb und laut rufend und fluchend Tim hinterher brüllte. „Du verdammter Bengel! Wenn ich dich in die Finger bekomme, dann kannst du dir schon denken, was geschehen wird!“ Laut schnaubend trat er auf einen Stein und ließ eine Staubwolke aufwirbeln. „Du kannst dir ja schon mal ausdenken, wie viele Schläge angemessen sind!“ Dann drehte er sich um und kehrte zu Frieda zurück.\n\nErleichtert machte Tim sich wieder auf und setzte seinen Weg zu Finn, seinem besten und vermutlich einzigen Freund, fort. Mit schnellen Schritten rannte er den Weg entlang und erreichte schließlich den Hof seines Freundes. Vor ihm stoben die Hühner auseinander und gaben wild gackernd die Tür frei. Tim klopfte laut gegen das Holz und wartete. Von drinnen waren Geräusche zu hören. Es war also wenigstens jemand da.\n\nNur Momente später fand er sich mit Finn auf einem umgekippten Trog sitzend wieder und sprach mit ihm über all das, was ihm gerade erzählt worden war. Er beri...",
+        "Untergang\n\nAls Tim gerade einunddreißig geworden war, zwang ihn sein Vater, endgültig aus dem Haus auszuziehen. Er solle sich doch endlich eine feste Arbeit suchen und seine Bestimmung finden.\n\nNoch am selben Tag packte er wütend seine Sachen und fand dabei an der Wand hinter seinem Bett, unter der Wolldecke versteckt, einige Kratzer an der Wand: Ein großer Drache mit scharfen Zähnen war in die Wand geritzt. Daneben standen zwei Personen. Ein Pfeil zeigte auf die kleine Gestalt – Ich, stand dort geschrieben, eines der wenigen Worte, das er in seinem Leben zu schreiben gelernt hatte.\n\nSofort kam ihm die Erinnerung an diesen Tag wieder. Im Süden des Tales waren sie gewesen, er und ein alter Mann, der ihm den Pfad über die Hügel gezeigt hatte und … ja was eigentlich?\n\nTim stand seufzend von dem Bett auf und verließ den Raum. Mit einem letzten Blick begutachtete er sein Zimmer. Unordentlich wie immer, allerdings nun ohne seinen Kram. Er durchquerte die Wohnstube, in der es tagein, tagaus nach Tabak stank. Schnell wie ein Fuchs huschte er am Zimmer seines Vaters vorbei, öffnete die Tür und stand im Freien.\n\nEr atmete tief ein und ging los. Es war gerade Erntezeit, wie damals. Der Tagstern stand hoch oben am Himmel und erwärmte das Tal, in dem das Dorf lag. Über dem See im Osten des Tals sammelten sich einige Vögel, um Jagd auf Fische zu machen, die bei dieser Trockenheit, die hier herrschte, nur knapp unter der Wasseroberfläche des einzigen Teiches in diesem Tal schwammen. Die Bäume hatten begonnen, ihre Blätter abzuwerfen. Des Öfteren sah man kleine Nagetiere über den Boden huschen, die sich für die kältere Zeit des Jahres Nahrung suchten, genauso wie es die Menschen taten.\n\nAus einigen Schornsteinen der Häuser stieg Rauch auf, es war wohl bald Mittagszeit. Doch das interessierte Tim nicht mehr. Weder seine Mutter noch sonst irgendwer in diesem Dorf würde ihm nach all den Jahren der Faulheit noch eine Mahlzeit zubereiten. Er wusste, was das für eine A...",
+        "„He, Finn!“, grüßte Tim seinen Freund, während er die knarrende Tür hinter sich ein Stück weit wieder schloss. Ein wenig musste sie offen bleiben, damit der Alkoholgestank dieses Haus verließ.\n\nSchwerfällig stellte sein alter Freund erst die Flasche ab, dann ein halbleeres Glas. Daraufhin drehte er sich um und stierte hinter der Sessellehne hervor. Sein gequältes Gesicht verwandelte sich in eine grinsende Fratze.\n\n„Hallo!“, murrte er zurück.\n\n„Sag mal“, begann Tim zu erzählen, während er sich auf einen Stuhl setzte, „weißt du noch, damals als ich dir von dem Räuber erzählt habe, weißt du noch, was ich da genau gesagt habe?“\n\nFinn runzelte die Stirn. „Nein“, gab er zur Antwort. „Aber du hast mir da was gegeben, wir haben es uns zusammen angesehen, keine Ahnung, was da drinstand.“\n\n„Was war das?“, fragte Tim weiter.\n\n„Ein altes dickes Buch. Etwas löchrig, aber immer noch in Ordnung!“, brummte Finn.\n\n„Wo? Wo hast du dieses Buch?“, fragte Tim plötzlich laut.\n\n„Gleich hinten, im Weinlager“, entgegnete Finn gleichgültig.\n\nTim stand sofort auf und stürmte zu der Tür, die in den Raum mit den Weinregalen führen sollte, und riss sie auf. Vor sich sah er die Regale, die sonst immer voll mit allen möglichen Flaschen waren. Der Großteil war schon ausgetrunken. Nur in den hinteren Regalen lagen vereinzelt noch einige volle.\n\nLangsam betrat er den Raum, spähte nach links und nach rechts. Ringsherum kahle Regale, weiter nichts. Auf dem Boden lagen Scherben ohne Ende, die von einem kleinen Wutanfall zeugten.\n\n„Wo soll das Buch sein?“, rief er zur Tür hinaus. In dem leeren Raum hallte seine Stimme. Eine Fledermaus erhob sich und huschte durch die offene Tür hinaus in die Freiheit, nur um festzustellen, dass es zu hell und warm draußen war. Sofort machte sie kehrt und flog zurück in den dunklen kühlen Raum.\n\n„Weiß nicht. Irgendwo hinter einem Regal“, meinte Finn zu der Frage. „Ich stolpere ständig drüber. Da hab' ich's vor wenigen Tagen mal beiseitegetre...",
+        "Noch am selben Tag brachen sie auf. Jeder packte zusammen, was er brauchte. So lief Tim zum Norden des Dorfes hinaus. Es gab etwas Kostbares, das er nicht zurücklassen wollte. Ein steiniger Weg führte ihn ein Stück weit in die Berge hinaus, bis er schließlich auf einer Anhöhe ankam. Der Wind wehte über ihn hinweg. Eine angenehme Brise.\n\nKurz ließ er seinen Blick schweifen. Vor sich erkannte er in einiger Ferne das unendlich große Moor, das sich rings um ihre Welt zog, so hieß es. Leichter Nebel lag über dem Horizont und waberte im sanften Lufthauch vor sich hin. Und vor ihm führten die schweren Felsmassen hinauf zu ihm, die jedem Wind und Wetter trotzten.\n\nTim bückte sich und schob einige schwere Steine beiseite. Schon tat sich ein schmaler Schacht im Boden auf, in dem sich etwas Funkelndes verbarg. Angestrengt streckte er seinen Arm in die Tiefe und Kniff die Augen zu, um sich ganz auf das zu konzentrieren, was sich dort unten verbarg.\n\n„Komm schon“, presste er angespannt hervor und streckte sich noch ein bisschen weiter in die Tiefe. „Ha!“ Er griff nach der dünnen goldenen Kette und zog sie hervor.\n\nVorsichtig ließ er das teure Schmuckstück in die Höhe gleiten und auf seine linke Hand sinken. Es war ein Talisman, den ihm sein Großvater vor langer Zeit vermacht hatte. Weder er noch sein Großvater wussten um die Bedeutung und die Herkunft dieses Talismans. Es war ein kleines goldenes Schmuckstück. Vermutlich ein altes Geschenk. Dieses kleine bisschen Heimat wollte er sich nicht nehmen lassen. Es war eine Erinnerung an die einzige Person aus seiner Familie, die wirklich an ihn geglaubt zu haben schien. Wirklich sicher war er sich dabei nicht, da es Jahre her und er ein kleines Kind gewesen war. Höchstwahrschienlich trübte seine Erinnerung die Realität.\n\nTrotzdem hatte er immer das Gefühl gehabt, dass sein Großvater in ihm einen klugen Burschen gesehen und an ihn geglaubt hatte. Und deshalb nahm er ihn mit, diesen kleinen, offensichtlich kaputten Tali...",
+        "und aus der Ferne kalt und kaum zu sehen sei.\n\nDoch dazu meinte man, dass sich so ein großer Himmelskörper nicht bewegen könne. Er würde einfach schrumpfen. Bei Kälte würde sich doch auch sonst alles zusammenziehen, warum denn nicht der Tagstern. Diese Diskussionen führten oft dazu, dass irgendeiner der Ketzerei wegen auf dem Scheiterhaufen landete, worüber man sich besonders während der kalten Zeit freute, da es selten so große Feuer gab. Es war jedes Mal ein riesiger Aufwand, der dafür betrieben wurde. Bäume wurden gefällt, dann errichtete man einen großen Haufen und jagte den Delinquenten quer durch das Dorf, um ihn ein letztes Mal bloßzustellen und ihm die Chance zu geben, seine Worte zu widerrufen – was ihn trotzdem nicht gerettet hätte.\n\nTim und Finn hatten den Anfang des Pfades erreicht und gingen den Hügel hinauf. Der weiche Sand hatte sich in der Sonne stark erhitzt, weshalb sie sich beeilten, zu den Bäumen zu gelangen. Sie erreichten nach wenigen Minuten den Waldrand. Tim blickte noch einmal zurück. Dies sollte wohl der Abschied von seiner Heimat werden. Eine neue Zukunft wartete auf sie. Hoffentlich war es eine bessere Zeit, die nun auf sie zukam. Er blickte in den Wald. Bäume. Nur Bäume. Nichts anderes war dort erkennbar. Lediglich ein Pfad führte zwischen ihnen hindurch.\n\nTim atmete laut ein und aus. Dann machte er einen Schritt und betrat den Wald. Finn beäugte ihn verunsichert und wunderte sich nur, was das Ganze sollte. Tim, der nun merkte, dass er die ganze Zeit von ihm angestarrt worden war, erwiderte für einen kurzen Moment den fragenden Blick. Die gleichgültige und zweifelnde Miene seines Kumpanen verunsicherte ihn kurz. Ob es wirklich so eine gute Idee war, mit diesem Schwachkopf allein durch die Welt zu laufen? Aber dieser Gedanke verschwand so schnell, wie er gekommen war. Tim strich über seine Kleidung, zog seine Weste gerade, nickte und ging los in den Wald. Es war so weit, sein Abenteuer konnte beginnen. Durabor, so hatte der M..."
+      ],
+      "totalPages": 391,
+      "publishingDate": "2021-10-01",
+      "isEditorPick": true
+    },
+    {
+      "id": "book-schiller-norskoms-rache",
+      "title": "Schatz der Welten: Norskoms Rache",
+      "author": "Joachim Schiller",
+      "rating": 4.6,
+      "reviews": 1203,
+      "tags": ["Fantasy", "Adventure", "Epic"],
+      "description": "The second book in the Schatz der Welten trilogy. Hoping to have expelled the evil from the Durabor, the kingdom of Norskom longes for new safety. But the sinister desires of Mardok, the god of war, force the worlds into new chaos. Soon, new challenges emerge from the underworld, that convey a clear message: the darkness has not been defeated yet! Norskoms Rache raises the stakes of the trilogy to breathtaking heights, deepening the world's mythology while delivering relentless momentum.",
+      "previewPages": null,
+      "totalPages": 389,
+      "publishingDate": "2023-07-23",
+      "isEditorPick": true
+    },
+    {
+      "id": "book-schiller-die-gefallenen-elben",
+      "title": "Schatz der Welten: Die gefallenen Elben",
+      "author": "Joachim Schiller",
+      "rating": 4.8,
+      "reviews": 2014,
+      "tags": ["Fantasy", "Adventure", "Epic"],
+      "description": "The stunning conclusion to Joachim Schiller's Schatz der Welten trilogy. The truth about the fallen elves – a civilisation driven by dark magic – is finally revealed. Alongside the true power of the gods, that decide over the mystical Durabors fate. The adventurers of the human kingdom of Norskom are ground down between their inner struggles, and the devastating plans of Mardok, the god of war, as they hope to guide their world into a new peaceful future. Die gefallenen Elben is an epic, emotionally devastating finale that rewards every page of the journey.",
+      "previewPages": [
+        "Prolog\n\nEin fester Griff packte ihn und riss ihn fort aus jener Welt, in der man ihn einsam zurückgelassen hatte. Fort aus der Düsternis und erdrückenden Hitze.\n\nGerade hatte er noch grauenhafte Schmerzen erleiden müssen, sich von Krämpfen geplagt nicht mehr bewegen können. Nun wich diese Starre und ließ ihn in Freiheit durch die Dunkelheit gleiten.\n\nDann tat sich ein schwarzer Raum vor ihm auf. Kurz darauf erschien eine Kutsche, in deren Wagen er Platz nehmen sollte. Eine knochige Hand half ihm die Stufe hinauf und schloss die Tür hinter ihm. Nur Sekunden später setzte sich das Gefährt unter lauten Peitschenhieben in Bewegung und kreiste durch die unendliche Leere zwischen den Welten, in der nur die Götter walten konnten.\n\nMit neugierigen Augen spähte Finn aus der Kutsche hinaus und erkannte hell leuchtende Wolkenformationen. Irgendwo dort unten ruhte der Durabor. Immer wieder lugten grüne Blätter zwischen den weißen Schlieren hervor. Zwischendurch erkannte er sogar deutlich einige Berge und den Donnerstrom, der sich rauschend seinen Weg durch die Wildnis bahnte.\n\nDann wanderte sein Blick wieder zurück zur Kutsche. Eine rostige Laterne, aus der sanftes Kerzenlicht hervordrang, wackelte an einem Haken vor sich hin. Das kleine Flämmchen im Innern kämpfte gegen die eisige Kälte an, die sich von außen an dem Metall ausbreitete. An einem zweiten Haken schaukelte ein erloschener Leuchter hin und her, der genau diesen Kampf verloren hatte, sodass sich über dessen Oberfläche bereits dicke Eisblumen zogen.\n\nNeugierig lehnte sich Finn ein Stück aus der Kutsche heraus und spähte zum Kutschbock. Die tiefschwarzen",
+        "Rappen, die das Gefährt zogen, waren nicht zu übersehen. Aus ihren Nüstern drang eisiger Dampf hervor, der sich über ihre Köpfe zog und hinter den Ohren wirbelnd mit dem Äther der Leere vermengte. Dahinter konnte er die Zügel erkennen, mit denen der Kutscher sie lenkte. Es war jener knochige Kutscher, der ihn zuvor in das Gefährt befördert hatte.\n\nUnter ihnen zog die Landschaft brausend hinweg, während die mit scharfkantigen Spitzen gespickten Räder durch die Luft ratterten. Von fern donnernden Hufschlägen begleitet, rollten sie zwischen den Welten entlang, bis sie wieder in düstere Gefilde eintauchten. Mit einem Mal verschwanden die leuchtend hellen Wolken um sie herum und gaben den Raum für rötlich glitzernden Rauch frei, der sie wie ein hungriges Ungeheuer verschlang.\n\nDas Einzige, was er durch den dichten Rauch hindurch noch erahnen konnte, war ein rotglühendes Zeichen, das auf den Scheuklappen der Pferde prangte, als sie ihre Köpfe widerspenstig zur Seite reckten. Doch ehe er die Symbole genauer betrachten konnte, riss der Kutscher die Zügel herum und hieß die Pferde, in einem steilen Bogen hinab in den dichten Qualm zu sinken.\n\nVerwundert drehte Finn ebenso seinen Kopf zur anderen Seite und wollte dort aus der Kutsche hinausblicken. Doch gerade als er sich seitlich auf dem Sitz abstützen musste, erblickte er erstaunt ein altbekanntes Gesicht: „Heroffad?“, wunderte er sich.\n\nDer alte Magier öffnete seine verschlafenen Augen und musterte seinen Sitznachbarn. „Finn?“, entgegnete er ebenso verwundert. „Was ist geschehen?“ Finn wusste nicht ganz, was Heroffad meinte, doch seine weiteren Worte machten ihm schnell klar, worauf er hinauswollte: „Wie bist du gestorben?“\n\nErschrocken wich Finn ein Stück zurück und musterte Heroffad. Ein dunkler Blutfleck prangte auf dessen Mantel, der sich vom Bauchraum ausgehend beinahe über das gesamte Kleidungsstück ausgebreitet hatte.\n\n„Ich, ich“, stammelte er, „ich weiß es nicht.“ Entgeistert starrte er auf seine...",
+        "Kurz darauf ließ er sich stöhnend ihnen gegenüber nieder und die Tür wurde geschlossen, sodass die Kutsche weiter durch die Dunkelheit rollte. Mit seinem einzigen Auge musterte er seine Begleiter eindringlich und blieb schlussendlich aufmerksam an Finn hängen.\n\n„Meine Güte“, brummte der dicke Mann, „dass auch du in all dem Chaos stirbst, hätte ich bald vermutet müssen. Aber was verschlägt einen elenden Pechvogel wie dich auch nach Unterwelt?“\n\nVerdutzt musterte Finn seinen neuen Begleiter. „Also war ich wirklich dort?“ Sein Gegenüber nickte. „Und nicht nur du“, brummte er. „Hoffen wir, dass Tim dem Unheil entkommen konnte. Oder meinst du, dass wir ihn auch noch aufgabeln werden?“ Entgeistert blickte Finn ihm entgegen. „Was wollt Ihr damit sagen?“ „Junge“, lachte der Dicke, „Unterwelt ist mit Ach und Krach untergegangen. Jeder in dieser Welt ist entweder tot oder ein verdammter Glückspilz!“ Endlich erkannte Finn, wer ihm gegenübersaß: Es war der alte Räuber, der ihnen einst das düstere Buch aus den Tiefen Unterwelts hatte zukommen lassen. Alte Bilder flirrten vor seinem inneren Auge, die er im Schock seines Todes offenbar kurzzeitig vergessen hatte. „Elender Bastard!“, fauchte er, „Ihr seid allein schuld an dieser Misere! Ohne Euer Buch wären wir nie hier gewesen! Nur wegen Euch bin ich tot! Nur wegen Euch stirbt vielleicht auch Tim!“ Lachend klopfte sich der Räuber auf seinen durchlöcherten Oberschenkel und grunzte: „Oh du einfältiger Blinder. – Was hier geschieht, ist um so vieles größer als du und ich. Mach dir nichts draus. Wer stirbt, der stirbt eben. Und wer lebt, der lebt aus einem Grund. Also hoff' du nur, dass dein Freund noch etwas in dieser Welt zu leisten hat. Hoffe du nur, dass er noch eine Bedeutung für das Schicksal trägt, denn sonst werden ihn die Götter nicht retten!“\n\nHeroffad, der der Diskussion bislang nur stumm gelauscht hatte, mischte sich mit ruhigem Tonfall ein: „Mach dir keine Sorgen, Finn. Wenn Tim ebenso wie ihr beide in der Dü...",
+        "„Dann können es keine Visionen sein“, grübelte Heroffad, „denn immerhin bin ich tot …“\n\n„Da war noch etwas“, fuhr Finn fort. „Ein dunkler Gegenstand. Doch so recht kann ich ihn nicht beschreiben. Die Bilder in meinen Erinnerungen sind viel zu … trüb. Als wären sie echt, aber doch eine Lüge.“ Wieder verfiel Heroffad in angestrengtes Grübeln. „Danke, dass du mir davon berichtet hast. Ich werde mir Gedanken machen, was es damit auf sich hat. Leider sehe ich aber keinen Weg, wie ich Tim an deinen Gedanken teilhaben lassen könnte.“\n\nResignierend sank Finn auf seinem Sitzplatz zusammen. Es war wirklich hoffnungslos. Was auch immer diese Bilder ihm hatten begreiflich machen sollen, war für immer für die Lebenden verloren. Gebannt in die Düsternis seiner Gedanken. „Oh, seht nur“, unterbrach der Räuber das verdatterte Schweigen, „wir sind am Ziel unserer letzten Reise.“ Vor ihnen tat sich ein Loch in den pechschwarzen Schwaden auf und gab den Blick auf ewig weite Landschaften frei. Unter ihnen zogen Millionen Kreaturen hinweg. Die meisten mussten Menschen sein. Selbst von hier oben konnten sie viele der entstellten Gesichter und zermürbten Körper erkennen, die in der Verdammnis gefangen waren. Dies musste sie sein: die Welt, die nach allen Welten folgte. Die Welt des Todes! Stumme Wächter hielten die Toten in ihrer ewigen Pein gefangen. Sie wachten über die unendlichen Passagen, die durch die Dunkelheit bis hinein in die Wolken ragten. Links und rechts erstreckten sich Gatter, zwischen denen die Menschen wie Vieh eingepfercht wurden und einsam schweigend umherwandelten. Dann kam die Kutsche mit einem Ruck zum Stehen und die Türen öffneten sich. Ein Podest, umringt von dunklen Dämonen, tat sich vor ihnen auf. Und im Zentrum thronte jene Gestalt, die sie zuvor gesehen hatten, als der Räuber in die Kutsche gestiegen war. Eine ferne Stimme begann, ihre Namen zu verlesen. Zuerst wurde Heroffad aufgerufen und kletterte daraufhin aus der Kutsche. Der Tod erhob sich von s..."
+      ],
+      "totalPages": 464,
+      "publishingDate": "2025-11-20",
+      "isEditorPick": true
+    },
+    {
+      "id": "book-steinbeck-geheimcode-worldskills",
+      "title": "Geheimcode WorldSkills",
+      "author": "Paul Steinbeck",
+      "rating": 4.3,
+      "reviews": 1876,
+      "tags": ["Crime", "Thriller", "Regional Crime"],
+      "description": "When a stolen prototype disappears from the WorldSkills competition venue on the eve of the opening ceremony, detective Steven Plodowski finds himself thrust into a world of gifted young craftspeople, corporate espionage, and international intrigue. The thief is somewhere among thousands of competitors, experts, and officials from across the globe – and Plodowski has seventy-two hours before the prototype is used for something far more dangerous than winning a medal. A fast-paced thriller that takes readers inside the breathtaking world of the world vocational championships.",
+      "previewPages": [
+        "Zum Buch\n\nDie Welt bereitet sich auf die Weltmeisterschaften der Berufe vor. Die Besten ihres Landes werden in wenigen Wochen bei der größten Veranstaltung ihrer Art in Kolumbien antreten. Doch ausgerechnet im Betrieb eines der deutschen Teilnehmer geschieht ein grausamer Mord. Der unglückliche Tote ist niemand Geringeres als der Bundestrainer und Ausbilder für die Polymechaniker.\n\nKommissar Plodowski taucht im oberschwäbischen Ravensburg in eine Welt der internationalen Mafia und Industriespionage ein, die unglücklicherweise kollidiert mit den Weltmeisterschaften der Berufe und den Vorbereitungen für die Veranstaltung in Kolumbien. Mittendrin Julian, einer der besten Polymechaniker Deutschlands. Die Ermittlungen drohen ihm den erhofften Sieg bei den Meisterschaften zu rauben.\n\nFür Plodowski entwickelt sich aus einem Mordfall eine dramatische wirtschaftspolitische Affäre, die ihn selbst in große Gefahr bringt – und sein Leben verändert.",
+        "Winterkalt\n\nSteven Plodowski wunderte sich gewaltig, als ihm die bulligen Sicherheitsleute den Zugang verwehrten.\n\n»Ich bin doch ein Kommissar, darf überallhin!« Er blaffte den Sicherheitsmann missgelaunt an.\n\nDoch die Antwort war knapp und zackig. »Hier nicht! Selbst der Papst gilt bei uns als Sicherheitsrisiko.“\n\nDer Blick des Beamten streifte die hohen Sicherheitszäune, die das Werksgelände umfingen. Gerade mal dreißig Autominuten südlich von Ravensburg lag die massige Ansammlung von strahlendweißen Fabrikhallen an der Gemeindegrenze einer kleinen oberschwäbischen Stadt. Ausgedehnte Fichtenwälder zogen sich hinter dem Gelände die Hänge hoch. Dem Kommissar schien es, abseits von Ravensburg in einer vollkommen anderen Welt gelandet zu sein. Diese harten Kontraste zwischen Industriekultur und reinster Natur entwickelten eine ungewöhnliche Szenerie.\n\nEr wandte sich wieder dem bulligen Wachmann zu. »Und dann gibt es einen Toten? Wie geht das? Einen Toten dürfte es doch nicht geben, bei so viel Hochsicherheit, könnte man meinen.“\n\nKalter Nieselregen benetzte an diesem Morgen im März seinen beinahe kahl geschorenen Schädel. Ungeduldig schaute er dem Pförtner hinter der Panzerglasscheibe zu, wie dieser behäbig mehrere Formulare ausfüllte.\n\n»Geht es nicht schneller? Ich muss zum Tatort!«\n\nEin halbes Dutzend dunkelgekleideter Sicherheitsbeamter tummelte sich an der Eingangspforte. »Best Secure« prangte auf deren gut wattierten Jacken.\n\nPlodowski zog unwillkürlich seinen dünnen Trenchcoat enger zusammen. Es war zu früh gewesen, als der Anruf ihn erreichte, um über korrekte Kleidung an einem jener matschig kalten Wintertage nachzudenken. Tage, an denen man zu vergessen schien, dass es je einen Sommer gegeben hatte. Überraschend für den März. Nebel waberte durchs Schussental. Einfach nur nass grau.\n\n»Gehen Sie nach hinten in Halle 11«, knackte es metallisch aus dem Lautsprecher. In der Luke vor ihm tauchte ein Besucherausweis auf.\n\nTrotzig nahm St...",
+        "Produktionseinrichtung. In ihr verriet die mit Lösungsmittel geschwängerte Luft, dass Lack und Farbe verarbeitet wurde. »Hier ist Halle 10, die vorletzte Fertigungsstufe, bevor es in die Qualitätsprüfung in die Elf geht.“\n\n»Dort ist auch der Tatort?« Ihm taten bereits die Füße weh.\n\nEin lauter Hupton schmetterte durch die Hallen, just als sie endlich an ihr Ziel gelangten. Der Kommissar zuckte unwillkürlich zusammen. Hatten sie einen Alarm ausgelöst? »Es ist das Ende der Nachtschicht. Sie ist um sechs fertig.“\n\n»Ach, gehen die Roboter jetzt mit ihren Produktionsstraßen nach Hause?«, scherzte Steven. Keine Reaktion.\n\nNur wenige Menschen kamen ihnen entgegen, nur wenige überholten sie. Das war also die Fabrik der Zukunft? Kaum mehr Menschen in den Hallen, und die, die da waren, verstarben auf eigentümliche Weise.\n\n»So, hier sind wir. Er liegt noch da, wo wir ihn gefunden haben – schlimm zugerichtet. In einer der großen Roboteranlagen eingequetscht.“\n\nSeine Begleiter entließen Steven mit einem kurzen Nicken. Andere Kollegen in der Halle übernahmen die Überwachung. Sie waren so maulfaul wie ihre Vorgänger. Obendrein schienen sie geklont zu sein, mutmaßte Steven beim Anblick der bulligen Typen mit ihrem Kurzhaarschnitt. Das markante Logo »Best Secure« schien nicht nur auf der dunklen Jacke zu prangen, sondern auf deren Gemüt eingeprägt.\n\n»Wo sind wir hier nur gelandet?« Kriminalhauptkommissar Plodowski schüttelte die letzten Tropfen Regen von seiner kahlen Stirn. Seine nassen Schuhe hinterließen hässliche Flecke auf dem glatten Fabrikboden.\n\nKollegin Kerstin Neumann nickte ihm freundschaftlich zu und nahm ihn beim Arm: »Komm, ich führ dich rüber. Hast du schon was im Magen? Er sieht nicht wirklich appetitlich aus.« Sie scherzte: Wer konnte schon frühstücken, wenn um 4:30 Uhr das Telefon klingelte? Zumindest er war da gewöhnlich noch im Bett. »Wir sind übrigens im Ausbildungs- und Trainingscenter.“\n\nSie zeigte mit einer Hand nach vorn, und wies auf ein ...",
+        "Plodowski spürte seine Knie nun doch weich werden. Solch ein Anblick auf nüchternem Magen tat nicht gut. Der Geruch stieg in seine Nase. Ein typischer Geruch, der solchen Tatorten eigen war. Und wenn man im idyllischen Oberschwaben ohnehin nicht oft damit konfrontiert wurde, dann …\n\n»Gibt es hier einen Kaffee?«\n\n»Jepp, komm mit. Dann können wir auch gleich den Spind prüfen.“\n\nSie staksten vorsichtig durch das Labyrinth umhergeschleuderter Metallteile und Körperreste in Richtung Kantine.\n\n»Was liegt denn hier überall herum?« Steven blieb stehen. »Na, Reste vom Toten.“\n\nKerstin blickte ihn verständnislos an. »Nein, ich meine dieses Metall. Kommt das aus der Maschine?« Er blickte sich um.\n\nSeine Kollegin zuckte mit den Schultern. »Keine Ahnung.“\n\nSie wollte ihren Weg fortsetzen, doch Steven deutete auf eine benachbarte Anlage: »Habt ihr diese schon untersucht? Die Teile scheinen von hier zu stammen.“\n\nZielstrebig bewegte er sich auf die besagte Maschine zu. Offenbar eine Lackieranlage, wie farbige Sprühköpfe in ihrem Inneren vermuten ließen.\n\n»Nein, haben wir noch nicht. Wie kommst du darauf?« Kerstin gesellte sich zu ihm.\n\nEr deutete auf herunterhängende Schläuche, aus denen noch immer Farbe tropfte. »Abgerissene Ventile, Diffuser und Kompressoren. Eingedellte Abdeckplatten an der Anlage, siehst du? Dann hier die Kratzspuren auf dem Boden. Die Farbtanks dieser Lackieranlage wurden kräftig verschoben. Da ist was mächtig dagegen geknallt und hat ordentlich Schäden angerichtet. Hat hier eventuell ein Kampf stattgefunden?«\n\nSie beobachtete fasziniert, wie er mit seinem für ihn typisch schräg gestellten Kopf und der fahrig über den glatten Schädel streichenden Hand dastand und jedes Detail musterte. Unentwegt wanderten seine tiefbraunen Augen von der Lackieranlage hinüber zum Käfig und zurück. »Die KTU soll das hier auch prüfen, sprichst du bitte mit den Kollegen?« Und schon marschierte er, Kerstin im Gefolge, zur Kantine.\n\nDeren Tür öffnete sich mit ...",
+        "an jene Zeit in sich barg. »Alles so sauber hier. Man könnte ja ohne Weiteres auf dem spiegelglatten Boden frühstücken.“\n\nEr blickte den langen Gang hinunter. Kerstin konnte sich ihr Lächeln nicht verkneifen. »Nein, ehrlich. Kein Gestank, kein Rauch, kein Lärm, wie man sich eine Fabrik sonst vorstellt.“\n\nStattdessen beobachteten sie Roboterarme, deren Bewegungen so unfassbar schnell waren, dass man sie mit bloßem Auge nicht mehr wahrnehmen konnte. »Früher konnte man noch erkennen, was die ganzen Maschinen herstellten. Irgendwie waren damals die einzelnen Bauteile größer, und Menschen montierten die fertigen Produkte zusammen. Heute aber ist alles so winzig klein und hinter irgendwelchen Abdeckungen versteckt. Man sieht gar nicht, wie das alles geschieht. Ist am Ende einfach fertig. Wie von Geisterhand.“\n\nSteven kam aus dem Staunen nicht heraus.\n\nSeine Kollegin nickte zustimmend: »Es ist wie bei Raumschiff Enterprise. Die Dinge kommen fertig aus dem Zauberapparat. Aus diesem, diesem …«\n\n»Replikator?«\n\n»Ja! Stimmt, Replikator. Scheinbar sind wir nicht mehr weit davon entfernt.“\n\nSie fasste Steven beim Arm und zog ihn mit sich fort: »Wie geht es denn nun zu Hause?“\n\n»Was?« Steven blickte irritiert zu seiner Kollegin.\n\n»Na, wie geht es mit eurem Kunsthappening weiter? Wirst du nun in das Hasenkostüm klettern?“\n\nSteven Plodowski wandte unwillkürlich den Blick ab. Kein gutes Thema! »Nie in diesem Leben – und nie in einem der folgenden!“\n\nDie Kunsteskapaden seiner Frau sollten andere Verrückte mitmachen, nur nicht er selbst.\n\nKerstin gluckste vor Freude. »Der Anblick mitten in der Fußgängerzone hätte mir schon ganz gut gefallen. Den Kollegen sicherlich auch.“\n\nEin solcher erschien gerade in Begleitung zweier ernst blickender Personen.\n\n»Guten Morgen, Valmir. Kann man schon wach sein?“\n\nDer Angesprochene fuhr sich verlegen mit der Hand durch die zerzausten Haare. Sein leichtes Nicken war lediglich eine Andeutung. Schwerfällig lotste er seine beiden Kol...",
+        "»Dort. Gleich nach der Tür rechts. Die Männer.“\n\nDer Schichtleiter gab per Hand noch ein paar Befehle an einen der umstehenden Mitarbeiter, und schon marschierte Steven mit diesem zum Ausgang. »Und dass mir niemand hier umherläuft. Verstanden? Bleiben Sie vom Tatort und dem ganzen Bereich fern!“\n\n»Aber die Produktion …«\n\n»Nichts ›die Produktion‹! Herrschaftszeiten. Es geht hier um einen Todesfall. Mord womöglich! Verstanden? Wenn ich will, dann lass ich die ganze Fabrik sperren!“\n\nHeftig stampfte Plodowski auf den Boden und stieß die Tür auf, gefolgt von weiteren Aufpassern. Die kühle frische Luft, die sie dort empfing, ließ ihn wieder ein wenig ruhiger werden.\n\n»Kannten Sie den Toten?« Er wandte sich einem seiner neuen Bewacher zu.\n\nDer jedoch schüttelte den Kopf. »Nicht wirklich gut. So, wie man sich eben bei der Arbeit kennenlernt. Privat gab es keinen Kontakt.“\n\n»Das heißt? Wissen Sie nun etwas, oder wissen Sie nichts?“\n\n»Nichts, was die anderen nicht auch wüssten.“\n\nWarum mussten diese Schwaben immer so wortkarg sein? Arbeitsam, aber wortkarg. Auffordernd blickte er ihn an. »Ein Spieler soll er gewesen sein. Alles Geld, was er verdient hat, soll er verspielt haben, in Lindau im Casino. Und …«\n\n»Und?«\n\n»Ja, mit den Frauen soll er es gehabt haben. Alle, die da so unterwegs waren. Auch die von Kollegen – sagt man.“\n\n»So, sagt man.“\n\nSteven versuchte, so teilnahmslos wie möglich zu wirken. Vielleicht hielt das den Redefluss aufrecht.\n\n»Aber ein hervorragender Fachmann war er – trotz allem.“\n\nSie kamen vor einem Schrank mit der Aufschrift »Tobias Strecker« zum Stehen. Steven rüttelte an der Tür, ohne Erfolg.\n\n»Wie gehen die Spinde auf?« Er ärgerte sich über die Passivität des Herrn, der ihn begleitete. Langsam und wortlos öffnete der Angesprochene mit einem Transponder den Schrank des Toten.\n\n»Wie konnten Sie den jetzt öffnen?« Misstrauen lag in des Kommissars Stimme.\n\n»Na, weil ich der Facilitymanager bin, also der Hausmeister. Ich da..."
+      ],
+      "totalPages": 356,
+      "publishingDate": "2021-04-15",
+      "isEditorPick": true
+    },
+    {
+      "id": "book-steinbeck-rache-schwabenkinder",
+      "title": "Die Rache der Schwabenkinder",
+      "author": "Paul Steinbeck",
+      "rating": 4.5,
+      "reviews": 932,
+      "tags": ["Crime", "Historical Novel", "Regional Crime"],
+      "description": "Steven Plodowski ermittelt 2. A history teacher is found dead in a rural Swabian schoolhouse, clutching a seventeenth-century document about the infamous Schwabenkinder – children sent from Vorarlberg and Tyrol to work as farmhands in Swabia each spring. When a second death follows, Plodowski begins to suspect that centuries-old grievances have not died with the history books. The second Plodowski novel is darker and more personal than the first, weaving history into an unsettling present-day mystery.",
+      "previewPages": [
+        "Das Schicksal\n\nBeinahe 400 Jahre lang machten sich in den Alpenregionen Jahr für Jahr Heerscharen junger Menschen auf, um ins nördliche Voralpenland zu gelangen. Die Not und Armut trieben ihre Familien dazu, die Kinder schon ab dem sechsten Lebensjahr im März auf die lebensgefährliche Wanderschaft durch die schneebedeckten Berge zu schicken, in der Hoffnung, dass die Mädchen und Jungen auf den Kindermärkten in Ravensburg, Wangen oder Kempten von den schwäbischen Bauern auf Zeit gekauft wurden. Vorausgesetzt, sie kamen nach ihrer beschwerlichen Wanderschaft heil an.\n\nBis zu St. Martin mussten die Kinder dann bis zum Umfallen auf den Höfen arbeiten, litten unter chronischem Schlafmangel und unsäglichem Heimweh. Niemand kümmerte sich um sie, denn sie waren Kreaturen der unteren Klasse. Sie wurden ausgenutzt und nicht selten missbraucht. Nur wenige fanden gute Aufnahme und Behandlung.\n\nEinige verunglückten bei der Arbeit, wurden zu Krüppeln oder starben. Schwangerschaften junger Mädchen wurden ebenfalls dokumentiert.\n\nErst zu Beginn der Vierzigerjahre des 20. Jahrhunderts fand diese unglückliche Tradition ein Ende. Zurück blieb das persönliche Erinnern an das große Leid und die Entbehrungen, die man in der Blüte seiner Kindheit ertragen musste. Durch die Tabuisierung wurde diese Erinnerung tief in die eigene Biografie vergraben und konnte dort all das Unheil einer nicht verarbeiteten Familiengeschichte entfalten.\n\nÜber Generationen hinweg sind die Auswirkungen zu spüren. Doch man redet nicht gerne darüber. Das Schwabengehen ist trotz einiger Bemühungen bis heute eine verborgene Geschichte, die man nur an ausgewählten Stellen ans Tageslicht lässt – in Museen und bei Einzelausstellungen.",
+        "Aber: Es braut sich Unheil zusammen.\n\nEinzelne wollen Wiedergutmachung.\n\nEs dürstet sie nach Rache.",
+        "Schweres Erinnern\n\n++ August ++\n\nHeftig knallte Johannes Vetter die Praxistür zu. Der laute Donner hallte durch die enge Gasse der mittelalterlichen Bergstadt. Aufgewühlt fuhr er mit der Hand durch seine blonde Mähne, die wild in alle Richtungen ragte. Wütend? Nein, mehr als das. Saumäßig wütend! Und diese Wut ließ ihn mit einem kräftigen Tritt einen schweren Mülleimer gegen die Hauswand krachen. Ängstlich blickten um ihn herum Menschen aus den Fenstern.\n\n»Alles gut, Johannes? Brauchst du Hilfe?« Seine Therapeutin lehnte sich besorgt aus dem Fenster.\n\nDoch er beachtete sie nicht, rannte los, lief durch die Gassen der Stadt, stolperte über hervorstehende Randsteine in Richtung Waldhaus der psychiatrischen Klinik. Das unebene Kopfsteinpflaster ließ ihn straucheln. Nur mit Mühe konnte er einen Sturz vermeiden.\n\nDer junge Patient hatte keinen Blick für die wunderschönen Berge. Stattdessen lief wieder und wieder dieser schreckliche Film in ihm ab. Graue Fratzen vernebelten seinen Blick. Sie erschienen immer, wenn die Wut in ihm hochstieg, einer Lavamasse gleich, die mehr und mehr Druck entwickelte und mit einem Knall auszubrechen drohte. Nervös kratzte sich Johannes an den Unterarmen. Unentwegt. Er bemerkte es nicht, spürte nicht den Schmerz, den die langen Fingernägel auf der schon feurig roten Haut verursachten.\n\n»Schwermütig, ohne dass er weiß warum. Traurige Kindheit aufgrund dysfunktionaler Familienverhältnisse. Zeigt Verhaltensauffälligkeiten. Wird psychotherapeutisch behandelt. Bisher keine Veränderung. Auch die Schwester leidet an diesen Symptomen. Will seine Medikamente absetzen. Habe ihn ausdrücklich davor gewarnt.“\n\nEr flüsterte auswendig, was auf dem Papier in seiner Hand geschrieben stand. Notiert von dieser alten Zicke dort oben im ersten Stock. Er hatte ihn von ihrem Schreibtisch entwendet. Was erlaubte sie sich nur, über ihn und seine Familie so zu urteilen?\n\nEigentlich hätte er auf seinem gut dreieinhalb Kilometer langen Fußweg zur...",
+        "»Tsss, die Deutschen mal wieder«, brummte jemand am Nachbartisch.\n\nJohannes blickte zu dem Sprecher hinüber und nickte. Das Bier leerte sich schnell, nebelte ihn ein. Seine tiefblauen Augen erhielten einen matten Schleier. Doch dieser Schleier legte sich auch wohltuend auf sein Gehirn, lullte die Gedanken ein und ließ so langsam die Fratzen verschwinden. Diese ewigen Quälgeister.\n\n»Sie sind wieder in Scharen in Richtung Süden unterwegs«, kommentierte der Unbekannte am Nachbartisch. Er suchte das Gespräch. Doch Johannes nickte nur stumm. Er war mit seinem Bier beschäftigt und ließ sich vom Geschehen auf dem Platz vor ihnen ablenken.\n\nJohannes nannte Chur seine Heimat. Hier war er groß geworden. Mit Chur pflegte er eine Hassliebe, wie wohl jeder junge Mensch, den es aufgrund der Enge in die Welt hinaustrieb und doch immer wieder herzog. Die Enge der Stadt und der Täler gab Heimat und Geborgenheit – wenn man noch ein Kind war. Je älter Johannes aber wurde, desto magischer wurde die Anziehungskraft des Rheins, der mit mächtiger Kraft nach Norden strebte, in das weit ausladende Land der Deutschen und weiter in die Welt hinaus. Dorthin wollte der junge Mann nach seinem Studium an der ETH, jener Elitehochschule in Zürich, flüchten, denn auch Zürich war nicht genug weite Welt. Nach Mittel- oder Südamerika. Weit weg von diesen traurigen Orten. Es musste bald geschehen, das spürte er.\n\nEin kleiner Spatz platzierte sich frech vor ihm auf dem Bistrotisch. Er war im Begriff, Johannes den Rest seines Zimtkekses streitig zu machen. Verärgert warf dieser dem Dieb einen silbernen Kaffeelöffel entgegen, den er noch immer in der Hand gehalten hatte.\n\n»Verschwinde, du Biest. Kümmere dich um deinen eigenen Dreck.“\n\nEilig stopfte Johannes die Reste seines Kekses in den Mund, damit kein Vogel der Erde auf den Gedanken kommen konnte, es ebenfalls zu versuchen. Der Zettel mit seiner Diagnose knisterte in der Hosentasche, als er sich wieder aufrecht hinsetzte.\n\n»Vielleicht ...",
+        "Familie eine glückliche Zukunft genommen!« Johannes schüttelte sich, wollte die Gedanken an die letzte Sitzung verdrängen. »Darf ich mich zu euch setzen?« Er blickte fast schüchtern zur Gruppe der Senioren.\n\nDoch diese zögerten nicht lange und machten erfreut Platz. »Was ist dein Anliegen, junger Mann?«, forderte ihn einer der alten Herren auf, der seinen Blick richtig interpretierte.\n\nJohannes druckste etwas herum, startete aber direkt mit seinen Fragen, obschon das Bier ihn etwas beim Reden einschränkte. »Mich bewegen die Erzählungen von Großmutter, in denen sie vom vielen Leid in früheren Tagen sprach. Sie berichtete, dass das Leben in den Bergen für unsere Vorfahren mehr einer Hölle glich als einem lebenswerten Dasein. Sie sprach von Hunger, Kälte und Not, die die Menschen Jahr für Jahr nach Norden ins Alpenvorland trieben. Was wisst ihr selbst davon?« Die Runde räusperte sich. Niemand antwortete zunächst, bis die ehemalige Freundin seiner Großmutter reagierte. »Was genau meinst du denn? Es gab immer und überall viel Leid.“\n\n»Nun, zum Beispiel die Schwabenkinder oder Hütekinder! Wart ihr selbst welche?«\n\nUnruhe machte sich am Tisch breit. Aus dem willkommenen Gast wurde plötzlich ein ungemütlicher. »Nein, wir sind zu jung, um diese Zeit noch erlebt zu haben. Aber wir kennen die Geschichten. Warum willst du das wissen?«\n\n»Na, weil es Teil meiner Geschichte ist, weil es Teil der Geschichte unserer Familie ist, weil es wie ein schwarzer Fleck auf unser aller Vergangenheit lastet«, wollte Johannes antworten. Doch er behielt dies für sich. Stattdessen entgegnete er: »Ich will die Welt unserer Ahnen und das Leben in eurer Jugend kennenlernen und besser verstehen. Deshalb.“\n\nErwartungsvoll blickte er in die Runde. Die Kühle des Schattens war an diesem sengenden Sommertag eine Wohltat. Um die Stille zu überbrücken, schnappte sich Johannes wieder seinen Krug und nahm einen weiteren kräftigen Schluck des inzwischen lau gewordenen Bieres. Zu seiner Überrasc..."
+      ],
+      "totalPages": 344,
+      "publishingDate": "2024-02-10",
+      "isEditorPick": false
+    },
+    {
+      "id": "book-steinbeck-konstanz-tod-am-see",
+      "title": "Konstanz – Tod am See: Das Vermächtnis des Jan Hus",
+      "author": "Paul Steinbeck",
+      "rating": 4.7,
+      "reviews": 541,
+      "tags": ["Crime", "Historical Novel", "Thriller"],
+      "description": "Steven Plodowski ermittelt 4. A theologian is pulled from the Bodensee carrying a medieval letter that was never supposed to surface – a letter that implicates the Council of Constance in a cover-up surrounding the execution of Jan Hus in 1415. Six hundred years later, someone is prepared to kill again to keep the secret buried. Plodowski's most historically ambitious case takes him to the stunning shores of Lake Constance, where the past has never been more dangerous.",
+      "previewPages": null,
+      "totalPages": 332,
+      "publishingDate": "2026-04-01",
+      "isEditorPick": true
+    },
+    {
+      "id": "book-steinbeck-schwäbisches-gold",
+      "title": "Schwäbisches Gold",
+      "author": "Paul Steinbeck",
+      "rating": 4.2,
+      "reviews": 489,
+      "tags": ["Crime", "Regional Crime"],
+      "description": "Steven Plodowski ermittelt 3. A vintage car restoration workshop in the Swabian Alb is destroyed by fire – but not before someone removes what it was secretly storing for decades. The trail leads Plodowski through the post-war black market, a network of ageing car enthusiasts, and a hidden fortune whose owners never expected to be found. A sun-drenched Swabian summer noir.",
+      "previewPages": null,
+      "totalPages": 318,
+      "publishingDate": "2024-05-20",
+      "isEditorPick": false
+    },
+    {
+      "id": "book-steinbeck-ein-letztes-bild",
+      "title": "Ein letztes Bild",
+      "author": "Paul Steinbeck",
+      "rating": 4.1,
+      "reviews": 321,
+      "tags": ["Crime", "Literary Novel"],
+      "description": "A retired art conservator is found dead in her Stuttgart apartment, surrounded by photographs of a painting that officially doesn't exist. Plodowski's investigation unearths a wartime theft, a forged provenance, and a family that has protected a lie for eighty years. Ein letztes Bild is Paul Steinbeck's most intimate novel – a meditation on art, memory, and the weight of inherited guilt.",
+      "previewPages": null,
+      "totalPages": 302,
+      "publishingDate": "2024-09-12",
+      "isEditorPick": false
+    },
+    {
+      "id": "book-steinbeck-marcs-suche",
+      "title": "Marcs Suche",
+      "author": "Paul Steinbeck",
+      "rating": 4.4,
+      "reviews": 678,
+      "tags": ["Children's and Young Adult Literature", "Crime", "Historical"],
+      "description": "Fourteen-year-old Marc has one summer to find out what really happened to his grandfather – a man erased from every family photograph. A coming-of-age mystery that takes Marc through village archives, overgrown cemeteries, and the reluctant memories of very old people. Paul Steinbeck's warmest and most hopeful book.",
+      "previewPages": null,
+      "totalPages": 234,
+      "publishingDate": "2022-08-01",
+      "isEditorPick": false
+    },
+    {
+      "id": "book-steinbeck-die-grosse-wende",
+      "title": "Der Flug des Zitronenfalters: Die große Wende 2098",
+      "author": "Paul Steinbeck",
+      "rating": 3.9,
+      "reviews": 412,
+      "tags": ["Science Fiction", "Dystopia"],
+      "description": "2098. Germany's last functioning power grid has just gone dark. In a city held together by the expertise of its last generation of skilled tradespeople, one engineer refuses to accept that civilisation is over. A rare venture into speculative fiction from Steinbeck – and a love letter to the dignity of hands-on work.",
+      "previewPages": null,
+      "totalPages": 287,
+      "publishingDate": "2022-03-15",
+      "isEditorPick": false
+    },
+    {
+      "id": "book-vasarhelyi-a-tanú",
+      "title": "A Tanú / Der Zeuge / The Witness",
+      "author": "Eléna Vásárhelyi",
+      "rating": 4.3,
+      "reviews": 724,
+      "tags": ["Literary Novel", "Legal Drama", "Psychological"],
+      "description": "A celebrated architect is asked to testify at a war crimes tribunal about a building she designed – a building that was later used for purposes she claims she never intended. Told in four languages across four timelines, A Tanú is a formally daring novel about complicity, beauty, and whether a structure can be guilty of the acts committed inside it.",
+      "previewPages": null,
+      "totalPages": 352,
+      "publishingDate": "2023-03-22",
+      "isEditorPick": false
+    },
+    {
+      "id": "book-broekhuis-de-laatste-frequentie",
+      "title": "De Laatste Frequentie / The Last Frequency",
+      "author": "Finn Broekhuis",
+      "rating": 4.2,
+      "reviews": 567,
+      "tags": ["Science Fiction", "Thriller", "Science"],
+      "description": "A radio telescope in the Dutch polders picks up a signal that cannot be natural – and cannot, according to every expert consulted, be artificial either. The physicist tasked with analysing it begins to suspect the signal is not from space but from the deep past. A mesmerising blend of hard science and philosophical mystery, The Last Frequency asks what we would do if we received a message from a civilisation that no longer existed.",
+      "previewPages": null,
+      "totalPages": 378,
+      "publishingDate": "2024-06-10",
+      "isEditorPick": false
+    },
+    {
+      "id": "book-wengler-die-letzte-zeugin",
+      "title": "Die letzte Zeugin",
+      "author": "Tobias Wengler",
+      "rating": 4.6,
+      "reviews": 543,
+      "tags": ["Literary Novel", "Historical", "DDR"],
+      "description": "She is ninety-one years old and has never spoken about what she saw in Leipzig in October 1989. Now a documentary filmmaker wants her story, and she must decide what truth is owed to history – and what belongs to the dead. Wengler's most emotionally devastating novel is also his shortest, and his best.",
+      "previewPages": null,
+      "totalPages": 214,
+      "publishingDate": "2023-09-04",
+      "isEditorPick": true
+    },
+    {
+      "id": "book-vasarhelyi-hataron-atul",
+      "title": "Határon Át / Across the Border",
+      "author": "Eléna Vásárhelyi",
+      "rating": 4.6,
+      "reviews": 1543,
+      "tags": ["Literary Novel", "Historical", "Family Saga"],
+      "description": "Two siblings separated by the Iron Curtain in 1956 find each other again sixty years later – but the woman who answers the door is not who either of them expected. A quiet, devastating novel about identity, language, and the borders we carry inside ourselves. Published simultaneously in Hungarian, German, English, and Dutch.",
+      "previewPages": [
+        "She had not spoken Hungarian in forty-one years.",
+        "The word for 'brother' came back to her unbidden, the way all the important words do – not remembered, but surfaced.",
+        "She stood at the door and looked at the old man on her step and said nothing."
+      ],
+      "totalPages": 298,
+      "publishingDate": "2020-10-05",
+      "isEditorPick": true
+    },
+    {
+      "id": "book-broekhuis-de-codekloof",
+      "title": "De Codekloof / The Code Divide",
+      "author": "Finn Broekhuis",
+      "rating": 4.5,
+      "reviews": 1102,
+      "tags": ["Thriller", "Technologie", "Gesellschaft"],
+      "description": "When a whistleblower leaks evidence that an AI training platform used at vocational colleges across Europe has been systematically discriminating against applicants from working-class backgrounds, a young data journalist and a disgraced software engineer race to expose the truth before the system's creators bury it permanently. A razor-sharp tech thriller that asks who decides which skills the future is allowed to value.",
+      "previewPages": [
+        "The algorithm had a name. They called it MERIT.",
+        "Noor had been staring at the dataset for six hours when she noticed that MERIT gave lower scores to every applicant whose postcode began with a certain digit.",
+        "It wasn't a bug. It was too consistent to be a bug."
+      ],
+      "totalPages": 324,
+      "publishingDate": "2022-01-18",
+      "isEditorPick": true
+    },
+    {
+      "id": "book-mclintock-the-tide-warden",
+      "title": "The Tide Warden",
+      "author": "Sarah McLintock",
+      "rating": 4.7,
+      "reviews": 3421,
+      "tags": ["Literary Novel", "Mystical", "Nature"],
+      "description": "On the remote island of Haafey, a young woman inherits her grandmother's role as keeper of the tidal records – ledgers that have been kept continuously for two hundred years. When the most recent entries reveal something impossible, she must choose between the safety of the known and the truth waiting at the edge of the sea. Longlisted for the Booker Prize, The Tide Warden is a novel of quiet devastation.",
+      "previewPages": [
+        "The ledgers were kept in a chest made from the wood of a ship that had never returned.",
+        "Agnes opened the most recent volume and ran her finger down a column of numbers that had been entered by her grandmother's hand.",
+        "The last entry was dated three months before her grandmother died.",
+        "It recorded a tide that, according to every chart Agnes owned, should have been impossible."
+      ],
+      "totalPages": 312,
+      "publishingDate": "2017-08-03",
+      "isEditorPick": true
+    },
+    {
+      "id": "book-mclintock-the-ferrymans-daughter",
+      "title": "The Ferryman's Daughter",
+      "author": "Sarah McLintock",
+      "rating": 4.5,
+      "reviews": 1087,
+      "tags": ["Literary Novel", "Historical", "Psychological"],
+      "description": "In a small Scottish coastal town in 1972, the ferryman's daughter witnesses something she can't explain – and spends the next fifty years trying to. Told in alternating timelines, The Ferryman's Daughter is a haunting investigation into how a single moment can reshape an entire life, and how long a community can protect a shared silence.",
+      "previewPages": [
+        "The thing about living in a small town is that everyone knows what you saw.",
+        "The harder thing is that they also know what you are supposed to have seen.",
+        "Moira was seven years old in 1972 and she knew the difference, even then."
+      ],
+      "totalPages": 368,
+      "publishingDate": "2024-04-11",
+      "isEditorPick": false
+    },
+    {
+      "id": "book-wengler-schweigen-der-akten",
+      "title": "Das Schweigen der Akten",
+      "author": "Tobias Wengler",
+      "rating": 4.4,
+      "reviews": 892,
+      "tags": ["Literary Novel", "Historical", "DDR"],
+      "description": "A Leipzig archivist discovers that a file relating to his own family has been removed from the Stasi records – removed not after reunification, but six years before the Wall fell. His attempt to reconstruct what the file contained leads him into a web of informants, betrayals, and a love story that the state tried very hard to destroy. A debut of extraordinary restraint and power.",
+      "previewPages": [
+        "Akte 47-B/1978 war nicht verschwunden. Sie war nie da gewesen.",
+        "Das war der entscheidende Unterschied, und Konrad brauchte drei Wochen, um ihn zu verstehen.",
+        "Wenn eine Akte fehlt, wird sie gesucht. Wenn sie nie existiert hat, wird sie vergessen.",
+        "Jemand hatte dafür gesorgt, dass sie vergessen wurde."
+      ],
+      "totalPages": 341,
+      "publishingDate": "2017-03-14",
+      "isEditorPick": false
+    },
+    {
+      "id": "book-diallo-skills-of-gold",
+      "title": "Skills of Gold",
+      "author": "Amara Diallo",
+      "rating": 4.8,
+      "reviews": 5672,
+      "tags": ["Literary Novel", "Sports", "WorldSkills", "International"],
+      "description": "Five competitors. Five countries. One competition that will change all of them forever. Skills of Gold follows a young electrician from London, a carpenter from rural Japan, a plumber from Lagos, a pastry chef from Lyon, and a mechatronics specialist from São Paulo as they converge on a WorldSkills competition – and discover that the skills being tested are not always the ones that matter most. A joyful, urgent novel about excellence, belonging, and what it means to be the best at something the world has forgotten to value.",
+      "previewPages": [
+        "The opening ceremony was the first time Zara had ever stood in a room with ten thousand people and felt, somehow, less alone.",
+        "She looked at the flag-bearer ahead of her and thought: this person knows something I know.",
+        "Not a fact. A feeling. The particular satisfaction of a wire correctly stripped, a joint correctly made, a circuit that lights up the first time.",
+        "She had never expected that feeling to be something you could share."
+      ],
+      "totalPages": 389,
+      "publishingDate": "2023-08-17",
+      "isEditorPick": true
+    },
+    {
+      "id": "book-diallo-the-voltage-between-us",
+      "title": "The Voltage Between Us",
+      "author": "Amara Diallo",
+      "rating": 4.6,
+      "reviews": 2341,
+      "tags": ["Thriller", "Literary Novel", "WorldSkills", "International"],
+      "description": "Zara is back – now a WorldSkills expert judge, watching the next generation compete with a mixture of pride and unease. When a competitor from a country on the brink of civil war goes missing the night before the finals, Zara must decide how far outside her remit she is willing to go. A thrilling and deeply humane sequel to Skills of Gold.",
+      "previewPages": [
+        "Judging, Zara had discovered, was harder than competing.",
+        "When you competed, you only had to be better than yourself. When you judged, you had to see everyone else clearly – and that meant seeing all the things they were hiding.",
+        "Kojo was hiding something. She had known it since the draw."
+      ],
+      "totalPages": 342,
+      "publishingDate": "2025-02-20",
+      "isEditorPick": true
+    }
+  ],
+  "fanArt": [
+    {
+      "id": "schatz-der-welten-map-by-inkwolf",
+      "bookId": "book-schiller-untergang",
+      "likes": 3842,
+      "shares": 712,
+      "artist": "inkwolf",
+      "createdAt": "2022-01-14",
+      "width": 400,
+      "height": 600
+    },
+    {
+      "id": "kael-portrait-by-fantasiamara",
+      "bookId": "book-schiller-untergang",
+      "likes": 2104,
+      "shares": 398,
+      "artist": "fantasiamara",
+      "createdAt": "2022-03-05",
+      "width": 400,
+      "height": 300
+    },
+    {
+      "id": "norskom-by-dunkelzeichner",
+      "bookId": "book-schiller-norskoms-rache",
+      "likes": 1876,
+      "shares": 544,
+      "artist": "dunkelzeichner",
+      "createdAt": "2023-08-19",
+      "width": 400,
+      "height": 600
+    },
+    {
+      "id": "skills-of-gold-ceremony-by-brushfire",
+      "bookId": "book-diallo-skills-of-gold",
+      "likes": 5231,
+      "shares": 1893,
+      "artist": "brushfire",
+      "createdAt": "2023-09-02",
+      "width": 400,
+      "height": 300
+    },
+    {
+      "id": "zara-at-the-panel-by-circuitsketch",
+      "bookId": "book-diallo-the-voltage-between-us",
+      "likes": 2987,
+      "shares": 677,
+      "artist": "circuitsketch",
+      "createdAt": "2025-03-11",
+      "width": 400,
+      "height": 300
+    },
+    {
+      "id": "plodowski-swabia-by-krimitinten",
+      "bookId": "book-steinbeck-geheimcode-worldskills",
+      "likes": 1423,
+      "shares": 214,
+      "artist": "krimitinten",
+      "createdAt": "2022-07-30",
+      "width": 400,
+      "height": 600
+    },
+    {
+      "id": "haafey-island-by-tideline",
+      "bookId": "book-mclintock-the-tide-warden",
+      "likes": 4012,
+      "shares": 1021,
+      "artist": "tideline",
+      "createdAt": "2019-02-17",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "id": "hataron-atul-border-by-kettevalt",
+      "bookId": "book-vasarhelyi-hataron-atul",
+      "likes": 987,
+      "shares": 143,
+      "artist": "kettevalt",
+      "createdAt": "2021-04-23",
+      "width": 400,
+      "height": 300
+    },
+    {
+      "id": "merit-algorithm-by-databytes",
+      "bookId": "book-broekhuis-de-codekloof",
+      "likes": 2341,
+      "shares": 589,
+      "artist": "databytes",
+      "createdAt": "2022-11-08",
+      "width": 400,
+      "height": 600
+    },
+    {
+      "id": "voltage-between-us-finals-by-ampere",
+      "bookId": "book-diallo-the-voltage-between-us",
+      "likes": 3109,
+      "shares": 812,
+      "artist": "ampere_art",
+      "createdAt": "2025-03-28",
+      "width": 400,
+      "height": 300
+    },
+    {
+      "id": "untergang-ruins-at-dawn-by-vellichor",
+      "bookId": "book-schiller-untergang",
+      "likes": 1547,
+      "shares": 301,
+      "artist": "vellichor",
+      "createdAt": "2021-11-03",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "id": "untergang-archive-chamber-by-greyquill",
+      "bookId": "book-schiller-untergang",
+      "likes": 892,
+      "shares": 134,
+      "artist": "greyquill",
+      "createdAt": "2022-05-19",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "id": "untergang-parchment-glow-by-luminis",
+      "bookId": "book-schiller-untergang",
+      "likes": 2213,
+      "shares": 487,
+      "artist": "luminis",
+      "createdAt": "2023-01-07",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "id": "norskoms-rache-battle-by-stormforge",
+      "bookId": "book-schiller-norskoms-rache",
+      "likes": 3104,
+      "shares": 892,
+      "artist": "stormforge",
+      "createdAt": "2023-08-14",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "id": "norskoms-rache-oath-by-ashrender",
+      "bookId": "book-schiller-norskoms-rache",
+      "likes": 1788,
+      "shares": 322,
+      "artist": "ashrender",
+      "createdAt": "2024-02-28",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "id": "gefallene-elben-gate-by-voidbrush",
+      "bookId": "book-schiller-die-gefallenen-elben",
+      "likes": 4421,
+      "shares": 1337,
+      "artist": "voidbrush",
+      "createdAt": "2025-12-01",
+      "width": 400,
+      "height": 600
+    },
+    {
+      "id": "gefallene-elben-unterreich-by-depthscrawl",
+      "bookId": "book-schiller-die-gefallenen-elben",
+      "likes": 2876,
+      "shares": 601,
+      "artist": "depthscrawl",
+      "createdAt": "2025-12-17",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "id": "gefallene-elben-kael-finale-by-fantasymarco",
+      "bookId": "book-schiller-die-gefallenen-elben",
+      "likes": 5103,
+      "shares": 1988,
+      "artist": "fantasymarco",
+      "createdAt": "2025-11-27",
+      "width": 400,
+      "height": 600
+    },
+    {
+      "id": "worldskills-hall-by-perspektive",
+      "bookId": "book-steinbeck-geheimcode-worldskills",
+      "likes": 1902,
+      "shares": 407,
+      "artist": "perspektive",
+      "createdAt": "2021-09-12",
+      "width": 400,
+      "height": 600
+    },
+    {
+      "id": "worldskills-case-by-tracemarks",
+      "bookId": "book-steinbeck-geheimcode-worldskills",
+      "likes": 1143,
+      "shares": 198,
+      "artist": "tracemarks",
+      "createdAt": "2022-02-14",
+      "width": 400,
+      "height": 300
+    },
+    {
+      "id": "schwabenkinder-schoolhouse-by-nebelstift",
+      "bookId": "book-steinbeck-rache-schwabenkinder",
+      "likes": 743,
+      "shares": 91,
+      "artist": "nebelstift",
+      "createdAt": "2024-04-05",
+      "width": 400,
+      "height": 600
+    },
+    {
+      "id": "konstanz-letter-shore-by-seeglas",
+      "bookId": "book-steinbeck-konstanz-tod-am-see",
+      "likes": 2109,
+      "shares": 554,
+      "artist": "seeglas",
+      "createdAt": "2026-04-20",
+      "width": 400,
+      "height": 600
+    },
+    {
+      "id": "konstanz-hus-legacy-by-historienpinsel",
+      "bookId": "book-steinbeck-konstanz-tod-am-see",
+      "likes": 1387,
+      "shares": 278,
+      "artist": "historienpinsel",
+      "createdAt": "2026-05-01",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "id": "skills-of-gold-zara-workshop-by-wireframe",
+      "bookId": "book-diallo-skills-of-gold",
+      "likes": 3871,
+      "shares": 1102,
+      "artist": "wireframe",
+      "createdAt": "2023-10-11",
+      "width": 400,
+      "height": 600
+    },
+    {
+      "id": "skills-of-gold-five-flags-by-globeink",
+      "bookId": "book-diallo-skills-of-gold",
+      "likes": 4562,
+      "shares": 1674,
+      "artist": "globeink",
+      "createdAt": "2024-01-22",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "id": "skills-of-gold-opening-ceremony-by-arenaglow",
+      "bookId": "book-diallo-skills-of-gold",
+      "likes": 6012,
+      "shares": 2341,
+      "artist": "arenaglow",
+      "createdAt": "2024-03-08",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "id": "voltage-empty-workstation-by-neonseam",
+      "bookId": "book-diallo-the-voltage-between-us",
+      "likes": 2788,
+      "shares": 734,
+      "artist": "neonseam",
+      "createdAt": "2025-04-09",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "id": "hataron-winter-crossing-by-fagyos",
+      "bookId": "book-vasarhelyi-hataron-atul",
+      "likes": 1231,
+      "shares": 207,
+      "artist": "fagyos",
+      "createdAt": "2021-06-30",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "id": "hataron-photographs-by-emlekkep",
+      "bookId": "book-vasarhelyi-hataron-atul",
+      "likes": 876,
+      "shares": 112,
+      "artist": "emlekkep",
+      "createdAt": "2022-09-14",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "id": "a-tanu-courtroom-glass-by-torzulas",
+      "bookId": "book-vasarhelyi-a-tanú",
+      "likes": 654,
+      "shares": 88,
+      "artist": "torzulás",
+      "createdAt": "2023-05-19",
+      "width": 400,
+      "height": 600
+    },
+    {
+      "id": "codekloof-noor-at-laptop-by-pixeldrift",
+      "bookId": "book-broekhuis-de-codekloof",
+      "likes": 1987,
+      "shares": 443,
+      "artist": "pixeldrift",
+      "createdAt": "2022-08-03",
+      "width": 400,
+      "height": 600
+    },
+    {
+      "id": "codekloof-red-nodes-by-netloom",
+      "bookId": "book-broekhuis-de-codekloof",
+      "likes": 1544,
+      "shares": 312,
+      "artist": "netloom",
+      "createdAt": "2023-03-27",
+      "width": 400,
+      "height": 300
+    },
+    {
+      "id": "frequentie-polder-aurora-by-radiowave",
+      "bookId": "book-broekhuis-de-laatste-frequentie",
+      "likes": 2398,
+      "shares": 618,
+      "artist": "radiowave",
+      "createdAt": "2024-08-15",
+      "width": 400,
+      "height": 300
+    },
+    {
+      "id": "tide-warden-cliff-cottage-by-saltsketch",
+      "bookId": "book-mclintock-the-tide-warden",
+      "likes": 3214,
+      "shares": 877,
+      "artist": "saltsketch",
+      "createdAt": "2018-04-02",
+      "width": 400,
+      "height": 300
+    },
+    {
+      "id": "tide-warden-ledger-hands-by-inktide",
+      "bookId": "book-mclintock-the-tide-warden",
+      "likes": 2109,
+      "shares": 503,
+      "artist": "inktide",
+      "createdAt": "2019-11-21",
+      "width": 400,
+      "height": 300
+    },
+    {
+      "id": "ferrymans-daughter-jetty-1972-by-fogswell",
+      "bookId": "book-mclintock-the-ferrymans-daughter",
+      "likes": 1821,
+      "shares": 397,
+      "artist": "fogswell",
+      "createdAt": "2024-06-03",
+      "width": 400,
+      "height": 300
+    },
+    {
+      "id": "schweigen-der-akten-empty-folder-by-archivtinte",
+      "bookId": "book-wengler-schweigen-der-akten",
+      "likes": 1102,
+      "shares": 187,
+      "artist": "archivtinte",
+      "createdAt": "2018-02-11",
+      "width": 400,
+      "height": 300
+    },
+    {
+      "id": "letzte-zeugin-teacup-by-stille",
+      "bookId": "book-wengler-die-letzte-zeugin",
+      "likes": 1443,
+      "shares": 231,
+      "artist": "stille",
+      "createdAt": "2023-12-01",
+      "width": 400,
+      "height": 600
+    },
+    {
+      "id": "letzte-zeugin-october-window-by-herbstglas",
+      "bookId": "book-wengler-die-letzte-zeugin",
+      "likes": 987,
+      "shares": 144,
+      "artist": "herbstglas",
+      "createdAt": "2024-01-30",
+      "width": 400,
+      "height": 600
+    },
+    {
+      "id": "marcs-suche-cut-photo-by-scherenschnitt",
+      "bookId": "book-steinbeck-marcs-suche",
+      "likes": 1334,
+      "shares": 245,
+      "artist": "scherenschnitt",
+      "createdAt": "2023-06-18",
+      "width": 400,
+      "height": 400
+    }
+  ]
+}

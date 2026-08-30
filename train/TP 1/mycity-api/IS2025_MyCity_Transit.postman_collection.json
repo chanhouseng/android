@@ -1,0 +1,1110 @@
+{
+  "info": {
+    "_postman_id": "mycity-transit-2025-is08",
+    "name": "MyCity Transit API — IndiaSkills 2025",
+    "description": "Complete Postman collection for the MyCity Transit competition API.\n\n**Skill #08 — Mobile Applications Development**\nIndiaSkills Nationals 2025\n\n**Setup:**\n1. Import this collection into Postman\n2. Import the accompanying Environment file `IS2025_Env.json`\n3. Select the `IS2025 MyCity Transit` environment\n4. Run `[AUTH] Sign In` first — the auth_token is auto-saved to `{{auth_token}}`\n5. All protected endpoints will automatically use the saved token\n\n**Base URL:** `http://{{BASE_URL}}:{{SERVICE_PORT}}`\n\n**Pre-seeded accounts:**\n- ankit@example.com / ankit123\n- priya@example.com / priya456\n- rahul@example.com / rahul789",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "BASE_URL",     "value": "localhost",  "type": "string" },
+    { "key": "SERVICE_PORT", "value": "3000",        "type": "string" },
+    { "key": "auth_token",   "value": "",            "type": "string" }
+  ],
+  "item": [
+
+    {
+      "name": "🔐 Auth",
+      "description": "User sign-in and sign-up. A single endpoint handles both — new email = sign up, existing email + correct password = sign in.",
+      "item": [
+
+        {
+          "name": "[AUTH] Sign In — Existing User (ankit)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "if (json.data && json.data.auth_token) {",
+                  "    pm.collectionVariables.set('auth_token', json.data.auth_token);",
+                  "    pm.environment.set('auth_token', json.data.auth_token);",
+                  "    console.log('✅ auth_token saved:', json.data.auth_token);",
+                  "}",
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('auth_token present', () => pm.expect(json.data.auth_token).to.be.a('string').that.is.not.empty);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userEmailAddress\": \"ankit@example.com\",\n  \"userPassword\": \"ankit123\"\n}"
+            },
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/users/signin",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "users", "signin"]
+            },
+            "description": "Signs in with the pre-seeded account ankit@example.com.\n\nThe test script auto-saves `auth_token` to collection + environment variables so all protected requests work immediately."
+          },
+          "response": [
+            {
+              "name": "200 — Sign In Successful",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Sign in successful\",\n  \"data\": {\n    \"auth_token\": \"TKN-ANKIT-A1B2C3D4E5F6G7H8\"\n  }\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[AUTH] Sign In — Second User (priya)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "if (json.data && json.data.auth_token) {",
+                  "    pm.collectionVariables.set('auth_token', json.data.auth_token);",
+                  "    pm.environment.set('auth_token', json.data.auth_token);",
+                  "}",
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userEmailAddress\": \"priya@example.com\",\n  \"userPassword\": \"priya456\"\n}"
+            },
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/users/signin",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "users", "signin"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 — Sign In Successful (priya)",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Sign in successful\",\n  \"data\": {\n    \"auth_token\": \"TKN-PRIYA-Z9Y8X7W6V5U4T3S2\"\n  }\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[AUTH] Sign Up — New User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.test('Status is 200 or 201', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));",
+                  "pm.test('auth_token present', () => pm.expect(json.data.auth_token).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userEmailAddress\": \"competitor01@ws2025.in\",\n  \"userPassword\": \"comp2025\"\n}"
+            },
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/users/signin",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "users", "signin"]
+            },
+            "description": "A new email triggers sign-up and returns a fresh auth_token."
+          },
+          "response": [
+            {
+              "name": "201 — Sign Up Successful",
+              "status": "Created",
+              "code": 201,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Sign up successful\",\n  \"data\": {\n    \"auth_token\": \"TKN-NEW-9F8E7D6C5B4A3210\"\n  }\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[AUTH] Sign In — Wrong Password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 401', () => pm.response.to.have.status(401));",
+                  "pm.test('Error msg present', () => pm.expect(pm.response.json().msg).to.include('Incorrect password'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userEmailAddress\": \"ankit@example.com\",\n  \"userPassword\": \"wrongpass1\"\n}"
+            },
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/users/signin",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "users", "signin"]
+            }
+          },
+          "response": [
+            {
+              "name": "401 — Wrong Password",
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Sign in failed: Incorrect password. Please check your credentials and try again.\",\n  \"data\": null\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[AUTH] Sign In — Invalid Email Format",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userEmailAddress\": \"not-an-email\",\n  \"userPassword\": \"pass123\"\n}"
+            },
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/users/signin",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "users", "signin"]
+            }
+          },
+          "response": [
+            {
+              "name": "400 — Invalid Email",
+              "status": "Bad Request",
+              "code": 400,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Bad Request: Invalid email format\",\n  \"data\": null\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[AUTH] Sign In — Weak Password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userEmailAddress\": \"test@example.com\",\n  \"userPassword\": \"abc\"\n}"
+            },
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/users/signin",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "users", "signin"]
+            }
+          },
+          "response": [
+            {
+              "name": "400 — Weak Password",
+              "status": "Bad Request",
+              "code": 400,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Bad Request: Password must be at least 6 characters and include letters and numbers\",\n  \"data\": null\n}"
+            }
+          ]
+        }
+
+      ]
+    },
+
+    {
+      "name": "🚌 Transit Routes",
+      "description": "All transit routes (bus, metro, rapid) with stops and departure times.",
+      "item": [
+
+        {
+          "name": "[TRANSIT] Get All Routes",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Data is array', () => pm.expect(pm.response.json().data).to.be.an('array'));",
+                  "pm.test('Has routes', () => pm.expect(pm.response.json().data.length).to.be.above(0));",
+                  "pm.test('Route has stops', () => pm.expect(pm.response.json().data[0].stops).to.be.an('array'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/transit/routes",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "transit", "routes"]
+            },
+            "description": "Returns all 4 routes: BUS-22, BUS-45, METRO-1, RAPID-3 — each with full stop list, coordinates, status, colour, and next 3 departures."
+          },
+          "response": [
+            {
+              "name": "200 — All Routes",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Success\",\n  \"data\": [\n    {\n      \"route_id\": \"RTE-BUS-022\",\n      \"route_name\": \"Andheri to Bandra\",\n      \"route_number\": \"BUS-22\",\n      \"route_type\": \"bus\",\n      \"status\": \"on_time\",\n      \"color\": \"#F57C00\",\n      \"frequency_minutes\": 12,\n      \"operating_hours\": { \"start\": \"05:30\", \"end\": \"23:00\" },\n      \"next_departures\": [\n        \"2025-04-14 09:45:00\",\n        \"2025-04-14 09:57:00\",\n        \"2025-04-14 10:09:00\"\n      ],\n      \"stops\": [\n        {\n          \"stop_id\": \"STP-001\",\n          \"stop_name\": \"Andheri Bus Stand\",\n          \"sequence\": 1,\n          \"latitude\": 19.1197,\n          \"longitude\": 72.8468,\n          \"distance_from_user_m\": 320,\n          \"arrival_time\": \"09:45\",\n          \"map_x_percent\": 12,\n          \"map_y_percent\": 18\n        },\n        {\n          \"stop_id\": \"STP-002\",\n          \"stop_name\": \"Vile Parle Station\",\n          \"sequence\": 2,\n          \"latitude\": 19.1009,\n          \"longitude\": 72.849,\n          \"distance_from_user_m\": 1100,\n          \"arrival_time\": \"09:52\",\n          \"map_x_percent\": 22,\n          \"map_y_percent\": 30\n        }\n      ]\n    },\n    {\n      \"route_id\": \"RTE-METRO-001\",\n      \"route_name\": \"Versova to Ghatkopar\",\n      \"route_number\": \"METRO-1\",\n      \"route_type\": \"metro\",\n      \"status\": \"on_time\",\n      \"color\": \"#1E5FA8\",\n      \"frequency_minutes\": 6,\n      \"operating_hours\": { \"start\": \"05:30\", \"end\": \"23:30\" },\n      \"next_departures\": [\n        \"2025-04-14 09:48:00\",\n        \"2025-04-14 09:54:00\",\n        \"2025-04-14 10:00:00\"\n      ],\n      \"stops\": []\n    }\n  ]\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[TRANSIT] Get Bus Routes Only",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "var routes = pm.response.json().data;",
+                  "pm.test('All results are bus type', () => routes.forEach(r => pm.expect(r.route_type).to.equal('bus')));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/transit/routes?type=bus",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "transit", "routes"],
+              "query": [{ "key": "type", "value": "bus" }]
+            }
+          },
+          "response": [
+            {
+              "name": "200 — Bus Routes (BUS-22, BUS-45)",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Success\",\n  \"data\": [\n    { \"route_id\": \"RTE-BUS-022\", \"route_number\": \"BUS-22\", \"route_type\": \"bus\", \"status\": \"on_time\" },\n    { \"route_id\": \"RTE-BUS-045\", \"route_number\": \"BUS-45\", \"route_type\": \"bus\", \"status\": \"delayed\" }\n  ]\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[TRANSIT] Get Metro Routes Only",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/transit/routes?type=metro",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "transit", "routes"],
+              "query": [{ "key": "type", "value": "metro" }]
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "[TRANSIT] Get Cancelled Routes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/transit/routes?status=cancelled",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "transit", "routes"],
+              "query": [{ "key": "status", "value": "cancelled" }]
+            }
+          },
+          "response": [
+            {
+              "name": "200 — Cancelled (RAPID-3)",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Success\",\n  \"data\": [\n    {\n      \"route_id\": \"RTE-RAPID-003\",\n      \"route_number\": \"RAPID-3\",\n      \"route_type\": \"rapid\",\n      \"status\": \"cancelled\",\n      \"next_departures\": []\n    }\n  ]\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[TRANSIT] Get Single Route — BUS-22",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "var r = pm.response.json().data;",
+                  "pm.test('Correct route returned', () => pm.expect(r.route_id).to.equal('RTE-BUS-022'));",
+                  "pm.test('Has 5 stops', () => pm.expect(r.stops.length).to.equal(5));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/transit/routes/RTE-BUS-022",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "transit", "routes", "RTE-BUS-022"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 — BUS-22 Full Detail",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Success\",\n  \"data\": {\n    \"route_id\": \"RTE-BUS-022\",\n    \"route_name\": \"Andheri to Bandra\",\n    \"route_number\": \"BUS-22\",\n    \"route_type\": \"bus\",\n    \"status\": \"on_time\",\n    \"color\": \"#F57C00\",\n    \"frequency_minutes\": 12,\n    \"operating_hours\": { \"start\": \"05:30\", \"end\": \"23:00\" },\n    \"next_departures\": [\n      \"2025-04-14 09:45:00\",\n      \"2025-04-14 09:57:00\",\n      \"2025-04-14 10:09:00\"\n    ],\n    \"stops\": [\n      { \"stop_id\": \"STP-001\", \"stop_name\": \"Andheri Bus Stand\",    \"sequence\": 1, \"latitude\": 19.1197, \"longitude\": 72.8468, \"arrival_time\": \"09:45\", \"map_x_percent\": 12, \"map_y_percent\": 18 },\n      { \"stop_id\": \"STP-002\", \"stop_name\": \"Vile Parle Station\",   \"sequence\": 2, \"latitude\": 19.1009, \"longitude\": 72.849,  \"arrival_time\": \"09:52\", \"map_x_percent\": 22, \"map_y_percent\": 30 },\n      { \"stop_id\": \"STP-003\", \"stop_name\": \"Santacruz Depot\",      \"sequence\": 3, \"latitude\": 19.082,  \"longitude\": 72.849,  \"arrival_time\": \"09:59\", \"map_x_percent\": 35, \"map_y_percent\": 44 },\n      { \"stop_id\": \"STP-004\", \"stop_name\": \"Khar Road Junction\",   \"sequence\": 4, \"latitude\": 19.072,  \"longitude\": 72.8385, \"arrival_time\": \"10:06\", \"map_x_percent\": 50, \"map_y_percent\": 57 },\n      { \"stop_id\": \"STP-005\", \"stop_name\": \"Bandra Station East\",  \"sequence\": 5, \"latitude\": 19.0544, \"longitude\": 72.8405, \"arrival_time\": \"10:14\", \"map_x_percent\": 65, \"map_y_percent\": 72 }\n    ]\n  }\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[TRANSIT] Get Single Route — METRO-1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/transit/routes/RTE-METRO-001",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "transit", "routes", "RTE-METRO-001"]
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "[TRANSIT] Get Single Route — Not Found",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', () => pm.response.to.have.status(404));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/transit/routes/RTE-INVALID-999",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "transit", "routes", "RTE-INVALID-999"]
+            }
+          },
+          "response": [
+            {
+              "name": "404 — Route Not Found",
+              "status": "Not Found",
+              "code": 404,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Route not found\",\n  \"data\": null\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[TRANSIT] Get Nearby Stops — Andheri",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "var stops = pm.response.json().data;",
+                  "pm.test('Returns 3 stops', () => pm.expect(stops.length).to.equal(3));",
+                  "pm.test('Sorted by distance', () => pm.expect(stops[0].distance_m).to.be.at.most(stops[1].distance_m));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/transit/stops/nearby?lat=19.1197&lng=72.8468&limit=3",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "transit", "stops", "nearby"],
+              "query": [
+                { "key": "lat",   "value": "19.1197" },
+                { "key": "lng",   "value": "72.8468" },
+                { "key": "limit", "value": "3" }
+              ]
+            },
+            "description": "Returns the 3 nearest stops sorted by Haversine distance, deduplicated by stop_id."
+          },
+          "response": [
+            {
+              "name": "200 — 3 Nearest Stops",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Success\",\n  \"data\": [\n    {\n      \"stop_id\": \"STP-001\",\n      \"stop_name\": \"Andheri Bus Stand\",\n      \"latitude\": 19.1197,\n      \"longitude\": 72.8468,\n      \"distance_m\": 0,\n      \"route_id\": \"RTE-BUS-022\",\n      \"route_number\": \"BUS-22\",\n      \"route_type\": \"bus\",\n      \"next_arrival\": \"09:45\"\n    },\n    {\n      \"stop_id\": \"STP-023\",\n      \"stop_name\": \"Andheri Metro Station\",\n      \"latitude\": 19.1197,\n      \"longitude\": 72.8468,\n      \"distance_m\": 0,\n      \"route_id\": \"RTE-METRO-001\",\n      \"route_number\": \"METRO-1\",\n      \"route_type\": \"metro\",\n      \"next_arrival\": \"09:54\"\n    },\n    {\n      \"stop_id\": \"STP-002\",\n      \"stop_name\": \"Vile Parle Station\",\n      \"latitude\": 19.1009,\n      \"longitude\": 72.849,\n      \"distance_m\": 1056,\n      \"route_id\": \"RTE-BUS-022\",\n      \"route_number\": \"BUS-22\",\n      \"route_type\": \"bus\",\n      \"next_arrival\": \"09:52\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[TRANSIT] Get Nearby Stops — Missing Params",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/transit/stops/nearby",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "transit", "stops", "nearby"]
+            }
+          },
+          "response": [
+            {
+              "name": "400 — Missing lat/lng",
+              "status": "Bad Request",
+              "code": 400,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Bad Request: lat and lng query parameters are required\",\n  \"data\": null\n}"
+            }
+          ]
+        }
+
+      ]
+    },
+
+    {
+      "name": "🌤 Weather",
+      "description": "Current weather conditions and hourly forecast for Mumbai.",
+      "item": [
+
+        {
+          "name": "[WEATHER] Get Current Weather",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "var w = pm.response.json().data;",
+                  "pm.test('Has temperature', () => pm.expect(w.temperature_c).to.be.a('number'));",
+                  "pm.test('Has hourly forecast', () => pm.expect(w.hourly_forecast).to.be.an('array').with.lengthOf(10));",
+                  "pm.test('Has city name', () => pm.expect(w.city).to.equal('Mumbai'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/weather/current",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "weather", "current"]
+            },
+            "description": "Returns current conditions: temperature, feels-like, humidity, wind, UV, AQI, sunrise/sunset, and 10-hour forecast."
+          },
+          "response": [
+            {
+              "name": "200 — Mumbai Weather",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Success\",\n  \"data\": {\n    \"city\": \"Mumbai\",\n    \"state\": \"Maharashtra\",\n    \"country\": \"India\",\n    \"latitude\": 19.076,\n    \"longitude\": 72.8777,\n    \"temperature_c\": 32,\n    \"feels_like_c\": 36,\n    \"condition\": \"Partly Cloudy\",\n    \"condition_code\": \"partly_cloudy\",\n    \"humidity_pct\": 78,\n    \"wind_kmh\": 14,\n    \"wind_direction\": \"SW\",\n    \"visibility_km\": 6,\n    \"uv_index\": 7,\n    \"air_quality_index\": 142,\n    \"air_quality_label\": \"Unhealthy for Sensitive Groups\",\n    \"sunrise\": \"06:17 AM\",\n    \"sunset\": \"07:04 PM\",\n    \"last_updated\": \"2025-04-14 09:30:00\",\n    \"hourly_forecast\": [\n      { \"time\": \"10:00\", \"temp_c\": 32, \"condition\": \"Partly Cloudy\", \"rain_chance_pct\": 10 },\n      { \"time\": \"11:00\", \"temp_c\": 33, \"condition\": \"Partly Cloudy\", \"rain_chance_pct\": 15 },\n      { \"time\": \"12:00\", \"temp_c\": 34, \"condition\": \"Sunny\",         \"rain_chance_pct\": 5  },\n      { \"time\": \"13:00\", \"temp_c\": 35, \"condition\": \"Sunny\",         \"rain_chance_pct\": 5  },\n      { \"time\": \"14:00\", \"temp_c\": 34, \"condition\": \"Hazy\",          \"rain_chance_pct\": 20 },\n      { \"time\": \"15:00\", \"temp_c\": 33, \"condition\": \"Cloudy\",        \"rain_chance_pct\": 35 },\n      { \"time\": \"16:00\", \"temp_c\": 32, \"condition\": \"Light Rain\",    \"rain_chance_pct\": 60 },\n      { \"time\": \"17:00\", \"temp_c\": 30, \"condition\": \"Light Rain\",    \"rain_chance_pct\": 65 },\n      { \"time\": \"18:00\", \"temp_c\": 29, \"condition\": \"Cloudy\",        \"rain_chance_pct\": 40 },\n      { \"time\": \"19:00\", \"temp_c\": 28, \"condition\": \"Partly Cloudy\", \"rain_chance_pct\": 20 }\n    ]\n  }\n}"
+            }
+          ]
+        }
+
+      ]
+    },
+
+    {
+      "name": "🔔 Alerts",
+      "description": "Service disruptions, maintenance notices, and resolved alerts.",
+      "item": [
+
+        {
+          "name": "[ALERTS] Get All Alerts",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "var alerts = pm.response.json().data;",
+                  "pm.test('Returns 7 alerts', () => pm.expect(alerts.length).to.equal(7));",
+                  "pm.test('First alert is HIGH severity', () => pm.expect(alerts[0].severity).to.equal('high'));",
+                  "pm.test('Each alert has required fields', () => {\n  alerts.forEach(a => {\n    pm.expect(a.alert_id).to.be.a('string');\n    pm.expect(a.title).to.be.a('string');\n    pm.expect(a.severity).to.be.oneOf(['high','medium','low']);\n    pm.expect(a.status).to.be.oneOf(['active','planned','resolved']);\n  });\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/alerts",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "alerts"]
+            },
+            "description": "Returns all 7 alerts sorted by severity (high→low) then date (newest→oldest)."
+          },
+          "response": [
+            {
+              "name": "200 — All Alerts (7 records)",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Success\",\n  \"data\": [\n    {\n      \"alert_id\": \"ALT-001\",\n      \"title\": \"Metro Line 1 Delay\",\n      \"affected_routes\": [\"METRO-1\"],\n      \"affected_stop_ids\": [\"STP-023\", \"STP-024\", \"STP-025\"],\n      \"status\": \"active\",\n      \"severity\": \"high\",\n      \"type\": \"disruption\",\n      \"description\": \"Signalling fault causing delays of 10–15 minutes on Metro Line 1 between Andheri and Ghatkopar stations. Technicians are on site. Estimated resolution: 11:30 AM. Passengers are advised to use Bus Route 78 as an alternative or take the Western Railway suburban train from Andheri Station.\",\n      \"short_description\": \"Signalling fault causing delays of 10–15 min on Metro Line 1 between Andheri and Ghatkopar...\",\n      \"created_at\": \"2025-04-14 08:30:00\",\n      \"updated_at\": \"2025-04-14 09:15:00\",\n      \"estimated_resolution\": \"2025-04-14 11:30:00\"\n    },\n    {\n      \"alert_id\": \"ALT-003\",\n      \"title\": \"Rapid Line 3 — Full Day Cancellation\",\n      \"affected_routes\": [\"RAPID-3\"],\n      \"status\": \"active\",\n      \"severity\": \"high\",\n      \"type\": \"cancellation\",\n      \"description\": \"Rapid Line 3 (BKC to Thane) is completely cancelled for today...\",\n      \"short_description\": \"Rapid Line 3 fully cancelled today due to emergency infrastructure inspection...\",\n      \"created_at\": \"2025-04-14 05:00:00\",\n      \"updated_at\": \"2025-04-14 05:00:00\",\n      \"estimated_resolution\": \"2025-04-15 06:00:00\"\n    },\n    {\n      \"alert_id\": \"ALT-002\",\n      \"title\": \"Bus Route 22 Diversion — Bandra\",\n      \"affected_routes\": [\"BUS-22\"],\n      \"status\": \"active\",\n      \"severity\": \"medium\",\n      \"type\": \"diversion\",\n      \"description\": \"Due to the Bandra-Worli Sea Link road work, Bus Route 22 will be diverted...\",\n      \"short_description\": \"Bus Route 22 diverted via SV Road near Bandra due to Sea Link roadwork...\",\n      \"created_at\": \"2025-04-14 07:45:00\",\n      \"updated_at\": \"2025-04-14 07:45:00\",\n      \"estimated_resolution\": \"2025-04-14 14:00:00\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[ALERTS] Get Active Alerts Only",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "var alerts = pm.response.json().data;",
+                  "pm.test('All active', () => alerts.forEach(a => pm.expect(a.status).to.equal('active')));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/alerts?status=active",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "alerts"],
+              "query": [{ "key": "status", "value": "active" }]
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "[ALERTS] Get Planned Alerts Only",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/alerts?status=planned",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "alerts"],
+              "query": [{ "key": "status", "value": "planned" }]
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "[ALERTS] Get Resolved Alerts Only",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/alerts?status=resolved",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "alerts"],
+              "query": [{ "key": "status", "value": "resolved" }]
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "[ALERTS] Get High Severity Active Only",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/alerts?status=active&severity=high",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "alerts"],
+              "query": [
+                { "key": "status",   "value": "active" },
+                { "key": "severity", "value": "high"   }
+              ]
+            }
+          },
+          "response": []
+        }
+
+      ]
+    },
+
+    {
+      "name": "⭐ Saved Routes",
+      "description": "Save and retrieve a user's favourite routes. All endpoints require auth_token header.",
+      "item": [
+
+        {
+          "name": "[SAVED] Save a Route — BUS-22",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var code = pm.response.code;",
+                  "pm.test('Status 200 or 409', () => pm.expect(code).to.be.oneOf([200, 409]));",
+                  "if (code === 200) {",
+                  "  pm.test('save_id present', () => pm.expect(pm.response.json().data.save_id).to.be.a('string'));",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "auth_token",   "value": "{{auth_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"route_id\": \"RTE-BUS-022\"\n}"
+            },
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/routes/save",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "routes", "save"]
+            },
+            "description": "Saves BUS-22 for the currently signed-in user. Requires `auth_token` header.\n\n⚠️ Run `[AUTH] Sign In` first to populate `{{auth_token}}`."
+          },
+          "response": [
+            {
+              "name": "200 — Route Saved",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Success\",\n  \"data\": {\n    \"save_id\": \"SAV-006\",\n    \"route_id\": \"RTE-BUS-022\",\n    \"saved_at\": \"2025-04-14 10:05:00\"\n  }\n}"
+            },
+            {
+              "name": "409 — Already Saved",
+              "status": "Conflict",
+              "code": 409,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Route already saved\",\n  \"data\": { \"save_id\": \"SAV-001\", \"saved_at\": \"2025-04-10 08:30:00\" }\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[SAVED] Save a Route — METRO-1",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "auth_token",   "value": "{{auth_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"route_id\": \"RTE-METRO-001\"\n}"
+            },
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/routes/save",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "routes", "save"]
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "[SAVED] Save a Route — No Auth Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 401', () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"route_id\": \"RTE-BUS-022\"\n}"
+            },
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/routes/save",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "routes", "save"]
+            }
+          },
+          "response": [
+            {
+              "name": "401 — No Auth Token",
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Unauthorised: auth_token header missing\",\n  \"data\": null\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[SAVED] Get My Saved Routes",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "var data = pm.response.json().data;",
+                  "pm.test('Data is array', () => pm.expect(data).to.be.an('array'));",
+                  "if (data.length > 0) {",
+                  "  pm.test('Newest first', () => pm.expect(new Date(data[0].saved_at)).to.be.at.least(new Date(data[data.length-1].saved_at)));",
+                  "  pm.collectionVariables.set('last_save_id', data[0].save_id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "auth_token", "value": "{{auth_token}}" }],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/routes/saved",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "routes", "saved"]
+            },
+            "description": "Returns all routes saved by the currently authenticated user, newest first.\n\nThe test script saves the first `save_id` to `{{last_save_id}}` for the delete request."
+          },
+          "response": [
+            {
+              "name": "200 — My Saved Routes (ankit — 3 routes)",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Success\",\n  \"data\": [\n    {\n      \"save_id\": \"SAV-003\",\n      \"user_id\": \"USR-001\",\n      \"route_id\": \"RTE-BUS-045\",\n      \"route_number\": \"BUS-45\",\n      \"route_name\": \"Borivali to Dadar\",\n      \"route_type\": \"bus\",\n      \"origin_stop\": \"Malad Market\",\n      \"destination_stop\": \"Dadar TT Circle\",\n      \"saved_at\": \"2025-04-12 10:15:00\",\n      \"note\": \"Visit to Dadar market\"\n    },\n    {\n      \"save_id\": \"SAV-002\",\n      \"user_id\": \"USR-001\",\n      \"route_id\": \"RTE-METRO-001\",\n      \"route_number\": \"METRO-1\",\n      \"route_name\": \"Versova to Ghatkopar\",\n      \"route_type\": \"metro\",\n      \"origin_stop\": \"Andheri Metro Station\",\n      \"destination_stop\": \"Ghatkopar Metro Station\",\n      \"saved_at\": \"2025-04-11 18:00:00\",\n      \"note\": \"Weekend shopping route\"\n    },\n    {\n      \"save_id\": \"SAV-001\",\n      \"user_id\": \"USR-001\",\n      \"route_id\": \"RTE-BUS-022\",\n      \"route_number\": \"BUS-22\",\n      \"route_name\": \"Andheri to Bandra\",\n      \"route_type\": \"bus\",\n      \"origin_stop\": \"Andheri Bus Stand\",\n      \"destination_stop\": \"Bandra Station East\",\n      \"saved_at\": \"2025-04-10 08:30:00\",\n      \"note\": \"Daily office commute\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[SAVED] Delete a Saved Route",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Deleted msg', () => pm.expect(pm.response.json().msg).to.include('Deleted'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "auth_token", "value": "{{auth_token}}" }],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/routes/saved/{{last_save_id}}",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "routes", "saved", "{{last_save_id}}"]
+            },
+            "description": "Deletes the saved route whose ID was captured by the `Get My Saved Routes` test script into `{{last_save_id}}`."
+          },
+          "response": [
+            {
+              "name": "200 — Deleted",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Deleted successfully\",\n  \"data\": { \"save_id\": \"SAV-003\" }\n}"
+            },
+            {
+              "name": "404 — Not Found / Not Owned",
+              "status": "Not Found",
+              "code": 404,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Saved route not found\",\n  \"data\": null\n}"
+            }
+          ]
+        }
+
+      ]
+    },
+
+    {
+      "name": "📁 Resources",
+      "description": "Static resource files (maps, images, assets) and the privacy policy webpage.",
+      "item": [
+
+        {
+          "name": "[RESOURCES] List All Resources",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "var d = pm.response.json().data;",
+                  "pm.test('Has maps array', () => pm.expect(d.maps).to.be.an('array'));",
+                  "pm.test('Has app_assets', () => pm.expect(d.app_assets).to.be.an('array'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/resources/list",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "resources", "list"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 — Resource Index",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Success\",\n  \"data\": {\n    \"maps\": [\n      {\n        \"resource_id\": \"MAP-MUM-001\",\n        \"file\": \"resources/maps/mumbai_base.png\",\n        \"description\": \"Mumbai city base map with district boundaries\",\n        \"bounds\": { \"north\": 19.28, \"south\": 18.95, \"east\": 73.05, \"west\": 72.78 },\n        \"width_px\": 1200,\n        \"height_px\": 1600\n      }\n    ],\n    \"stop_images\": [\n      { \"stop_id\": \"STP-001\", \"file\": \"resources/stops/andheri_bus_stand.jpg\", \"caption\": \"Andheri Bus Stand\" }\n    ],\n    \"app_assets\": [\n      { \"key\": \"app_icon\", \"file\": \"resources/art_icon_citymove.png\", \"description\": \"App launcher icon\" }\n    ]\n  }\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[RESOURCES] Get Resource File — Map PNG",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200 or 404', () => pm.expect(pm.response.code).to.be.oneOf([200, 404]));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/resource?path=resources/maps/mumbai_base.png",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "resource"],
+              "query": [{ "key": "path", "value": "resources/maps/mumbai_base.png" }]
+            },
+            "description": "Returns the raw binary file. Place actual image files in `data/resources/maps/` on the server."
+          },
+          "response": [
+            {
+              "name": "404 — File Not Placed Yet",
+              "status": "Not Found",
+              "code": 404,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"msg\": \"Resource not found\",\n  \"data\": null\n}"
+            }
+          ]
+        },
+
+        {
+          "name": "[RESOURCES] Get Resource — Path Traversal Blocked",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404 (blocked)', () => pm.response.to.have.status(404));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/resource?path=../../server.js",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "resource"],
+              "query": [{ "key": "path", "value": "../../server.js" }]
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "[RESOURCES] Privacy Policy Webpage",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Content-Type is HTML', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('text/html'));",
+                  "pm.test('Page has close button', () => pm.expect(pm.response.text()).to.include('closeBtn'));",
+                  "pm.test('Page has Privacy Policy heading', () => pm.expect(pm.response.text()).to.include('Privacy Policy'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{BASE_URL}}:{{SERVICE_PORT}}/api/privacy-policy",
+              "protocol": "http",
+              "host": ["{{BASE_URL}}"],
+              "port": "{{SERVICE_PORT}}",
+              "path": ["api", "privacy-policy"]
+            },
+            "description": "Returns full HTML privacy policy page. Load this URL in a Flutter WebView.\n\nThe page contains a red 'Close ✕' button that is rendered inside the HTML — this is the ONLY way to dismiss the WebView dialog per the competition requirements."
+          },
+          "response": [
+            {
+              "name": "200 — HTML Privacy Policy Page",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "text/html" }],
+              "body": "<!DOCTYPE html>... (full HTML page with Privacy Policy content and in-page close button)"
+            }
+          ]
+        }
+
+      ]
+    }
+
+  ]
+}

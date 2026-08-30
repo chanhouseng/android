@@ -1,0 +1,72 @@
+[
+    {
+        "hotel_id": 1000,
+        "hotel_name": "Résidence Pierre & Vacances Premium les Crets",
+        "hotel_rating": 8.3,
+        "hotel_to_ski_distance": 6.7,
+        "hotel_cover_image": "cover/1000.jpg"
+    },
+    {
+        "hotel_id": 1001,
+        "hotel_name": "Duplex - Plein sud - Pied des pistes - 50m2 - Mottaret",
+        "hotel_rating": 9.4,
+        "hotel_to_ski_distance": 6.4,
+        "hotel_cover_image": "cover/1001.jpg"
+    },
+    {
+        "hotel_id": 1002,
+        "hotel_name": "Meribel le chalet d'eugénie",
+        "hotel_rating": 7.8,
+        "hotel_to_ski_distance": 0.8,
+        "hotel_cover_image": "cover/1002.jpg"
+    },
+    {
+        "hotel_id": 1003,
+        "hotel_name": "Chalet de 3 chambres a Les Allues",
+        "hotel_rating": 7.1,
+        "hotel_to_ski_distance": 3.2,
+        "hotel_cover_image": "cover/1003.jpg"
+    },
+    {
+        "hotel_id": 1004,
+        "hotel_name": "Résidence Premium L'Hévana",
+        "hotel_rating": 7.9,
+        "hotel_to_ski_distance": 3.8,
+        "hotel_cover_image": "cover/1004.jpg"
+    },
+    {
+        "hotel_id": 1005,
+        "hotel_name": "L'Hévana - maeva Home - Appartement",
+        "hotel_rating": 8.2,
+        "hotel_to_ski_distance": 3.8,
+        "hotel_cover_image": "cover/1005.jpg"
+    },
+    {
+        "hotel_id": 1006,
+        "hotel_name": "La Belette - Duplex au charme savoyard avec vue sur la montagne",
+        "hotel_rating": 6.7,
+        "hotel_to_ski_distance": 1.8,
+        "hotel_cover_image": "cover/1006.jpg"
+    },
+    {
+        "hotel_id": 1007,
+        "hotel_name": "Superbe Appartement au Plateau Rond",
+        "hotel_rating": 6.9,
+        "hotel_to_ski_distance": 3.7,
+        "hotel_cover_image": "cover/1007.jpg"
+    },
+    {
+        "hotel_id": 1008,
+        "hotel_name": "Appartement Méribel",
+        "hotel_rating": 9.0,
+        "hotel_to_ski_distance": 6.5,
+        "hotel_cover_image": "cover/1008.jpg"
+    },
+    {
+        "hotel_id": 1009,
+        "hotel_name": "L'Appart à Méribel",
+        "hotel_rating": 7.0,
+        "hotel_to_ski_distance": 6.2,
+        "hotel_cover_image": "cover/1009.jpg"
+    }
+]

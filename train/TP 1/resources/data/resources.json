@@ -1,0 +1,42 @@
+{
+  "maps": [
+    {
+      "resource_id": "MAP-MUM-001",
+      "file": "resources/maps/mumbai_base.png",
+      "description": "Mumbai city base map with district boundaries",
+      "bounds": {
+        "north": 19.2800,
+        "south": 18.9500,
+        "east": 73.0500,
+        "west": 72.7800
+      },
+      "width_px": 1200,
+      "height_px": 1600
+    },
+    {
+      "resource_id": "MAP-MUM-002",
+      "file": "resources/maps/mumbai_transit_overlay.png",
+      "description": "Transit network overlay (metro + bus + rapid lines)",
+      "bounds": {
+        "north": 19.2800,
+        "south": 18.9500,
+        "east": 73.0500,
+        "west": 72.7800
+      },
+      "width_px": 1200,
+      "height_px": 1600
+    }
+  ],
+  "stop_images": [
+    { "stop_id": "STP-001", "file": "resources/stops/andheri_bus_stand.jpg",     "caption": "Andheri Bus Stand" },
+    { "stop_id": "STP-005", "file": "resources/stops/bandra_station_east.jpg",    "caption": "Bandra Station East" },
+    { "stop_id": "STP-023", "file": "resources/stops/andheri_metro.jpg",           "caption": "Andheri Metro Station" },
+    { "stop_id": "STP-028", "file": "resources/stops/ghatkopar_metro.jpg",         "caption": "Ghatkopar Metro Station" }
+  ],
+  "app_assets": [
+    { "key": "app_icon",         "file": "resources/art_icon_citymove.png",       "description": "App launcher icon" },
+    { "key": "map_pin_bus",      "file": "resources/pin_bus.png",                 "description": "Bus stop map pin icon" },
+    { "key": "map_pin_metro",    "file": "resources/pin_metro.png",               "description": "Metro stop map pin icon" },
+    { "key": "map_pin_rapid",    "file": "resources/pin_rapid.png",               "description": "Rapid stop map pin icon" }
+  ]
+}

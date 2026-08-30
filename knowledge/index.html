@@ -72,6 +72,65 @@ linearLayout.addView(layout)
 var numberKm : Double = 0.0
         </pre>
     </div>
+    <button class="accordion">轉換日夜間模式</button>
+    <div class="panel">
+        <pre>
+val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+if(currentNightMode == Configuration.UI_MODE_NIGHT_YES){
+    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+}
+else{
+    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+}
+        </pre>
+    </div>
+    <button class="accordion">viewPager2因應內容大小而改變大小</button>
+    <div class="panel">
+        <pre>
+viewPager2.adapter = viewPager2_adatper(this)
+viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){      <span>//當 ViewPager2 的滾動狀態或選中頁面改變時觸發。</span>
+    override fun onPageSelected(position: Int) {
+        val root = supportFragmentManager.findFragmentByTag("f$position")?.view ?: return     <span>//依據系統為 ViewPager2 頁面產生的預設標籤（格式為 "f" + 索引）來查找目前位置所對應的 Fragment 實例。</span>
+        root.post {
+            val widthSpec = View.MeasureSpec.makeMeasureSpec(root.width, View.MeasureSpec.EXACTLY)    
+            val heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)     
+            <span>//View.measure() 這個方法決定了一個 View 要佔據多大空間。makeMeasureSpec(size, mode) size: 剛好給你這麼大的空間, mode: 精確、最大、未指定模式</span>
+            <span>//root 已經有實際寬度了。但高度没有，View 自己計算要有多高，愛多高多高，我完全不管！</span>
+            root.measure(widthSpec, heightSpec)      <span>系統會依據傳入的規格，重新計算這個 View 及其子 View 的尺寸。</span>
+            val h = root.measuredHeight     
+            if(h &gt; 0){
+                viewPager2.layoutParams.height = h    <span>//直接修改 ViewPager2 的佈局參數（LayoutParams）中的高度屬性。</span>
+                viewPager2.requestLayout()
+            }
+        }
+    }
+})
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
+    <button class="accordion">code</button>
+    <div class="panel">
+        <pre>
+
+        </pre>
+    </div>
     <button class="accordion">code</button>
     <div class="panel">
         <pre>

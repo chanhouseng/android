@@ -1,0 +1,25 @@
+{
+  "albums": [
+    {
+      "albumId": 1,
+      "name": "Sunset at the Beach",
+      "description": "Captivating city skyline at dusk",
+      "uploader": "Emma Taylor",
+      "uploadedAt": "2023-10-21"
+    },
+    {
+      "albumId": 2,
+      "name": "Serene Lake",
+      "description": "Dynamic city lights illuminating the night",
+      "uploader": "John Doe",
+      "uploadedAt": "2023-11-22"
+    },
+    {
+      "albumId": 3,
+      "name": "Music Festival",
+      "description": "Glorious golden sunrise over the horizon",
+      "uploader": "Daniel Wilson",
+      "uploadedAt": "2023-12-02"
+    }
+  ]
+}

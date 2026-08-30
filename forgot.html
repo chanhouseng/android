@@ -134,21 +134,72 @@ substring(1,2)   <span>//前面係你要攞第幾個字符(0,1,2) 後面係去�
     <div class="panel">
         <a href="homework/Note_Taking_App.html">參考呢到</a><br>
         <pre>
+photoUri = createImageUri()    <span>//就係喺圖片庫建立一個uri，之後拍照就將將相放入去得到uri再存入數組</span>
+takePhoto.launch(photoUri)     <span>//啟動相機 App，並將 photoUri 傳遞給相機，告訴它：「拍完照請直接將高解析度圖片存到這個路徑」。</span>
 
+lateinit var photoUri: Uri
+val takePhoto = registerForActivityResult(ActivityResultContracts.TakePicture()){result -&gt;    <span>//定義了「輸入」是 Uri（照片要存哪裡），「輸出」是 Boolean（拍照是否成功）。</span>
+    if(result){
+        pendNote.add(listNumber, ContentClass("image", photoUri.toString()))    <span>//因為佢有返回uri，就可以儲存底uri，之後再顯示</span>
+    }
+}
+
+fun createImageUri(): Uri {    <span>//在手機的「Pictures」資料夾中建立一個新的 JPEG 圖片檔案，並取得它的 Uri 路徑</span>
+    val contentValues = ContentValues().apply {   <span>//其實同儲存圖片差唔多，可以理解係我要set好啲相片的資料，之後再返回一個uri以表示將佢嘅資料</span>
+        put(MediaStore.Images.Media.DISPLAY_NAME, "photo_${System.currentTimeMillis()}.jpg")
+        put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+        put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+    }
+    return contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)!!
+}
         </pre>
     </div>
     <button class="accordion">消取內容的關聯性</button>
-    <a href="homework/Note_Taking_App.html">參考呢到</a><br>
     <div class="panel">
         <pre>
+        val noteContent = note.content.clone() as ArrayList&lt;ContentClass&gt;     <span>//.clone()復製新的一個東西</span>
+        val noteContent = ArrayList(note.content)    <span>//呢個都係複製一份嘅意思，但係佢呢個係淺層複製，淨係可以複製你現時呢一層，再落下嗰啲複製唔到</span>
+        val noteCloneList = noteClone.content.map { it.deepCopy() } as ArrayList&lt;ContentClass&gt;    <span>//完成真正複製</span>
+        <a href="homework/Note_Taking_App.html">參考呢到  saveHost()</a><br>
 
+
+class ContentClass(var type: String, var imageId: String ?= "", var text: String? ="",
+                   var children: ArrayList&lt;ContentClass&gt; ?= arrayListOf(), var isChecked: Boolean ?= false,
+                   var id : String ?= ""){
+    fun deepCopy(): ContentClass{     //.clone或者複製多一個arrayList，佢當中的arraylist都係有關聯性，呢個就可以令佢地嘅arrayList複製而冇關聯性
+        val newChild = children?.map { it.deepCopy() }?.toMutableList() as? ArrayList&lt;ContentClass&gt; ?: arrayListOf()
+        
+        return ContentClass(
+            type,imageId, text, newChild, isChecked, id
+        )
+
+        
+        <span>//代入一層可理解，先將佢啲children 所有項都deepCopy，即係不斷地令佢(ContentClass)的children都做同一樣野</span>
+        <span>//做啲咩?因為佢係.map，本身就係指緊children呢個項，就要將choldren複製arrayList&lt;ContentClass&gt;，不成功就變arrayList空數組</span>
+        <span>//成功複製之後就回傳返成個ContentClass，其他值不變，只變chilren</span>
+    
+    }
+}
+        
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">文字走馬燈效果</button>
     <div class="panel">
-    
         <pre>
+&lt;TextView
+android:id="@+id/textView17"
+android:layout_width="match_parent"
+android:textColor="#999"
+android:singleLine="true"     <span>//強制文字只能顯示在一行，絕對不換行。不能用maxLines</span>
+android:ellipsize="marquee"     <span>//設定當文字太長時，採用「跑馬燈」效果。</span>
+android:marqueeRepeatLimit="marquee_forever"    <span>//設定跑馬燈重複播放的次數。marquee_forever 是一個常數，代表「無限次循環」</span>
+android:focusable="true"    <span>//允許這個 TextView 可以透過遙控器或方向鍵獲得焦點</span>
+android:focusableInTouchMode="true"     <span>//允許這個 TextView 可以透過「觸摸（點擊）」獲得焦點。</span>
+android:textSize="16sp"
+android:layout_height="wrap_content"
+android:text="TextView" /&gt;
 
+findViewById&lt;TextView&gt;(R.id.textView17).isSelected = true    <span>//讓 TextView 進入「選中」狀態，這樣跑馬燈效果才會啟動。</span>
         </pre>
     </div>
 
