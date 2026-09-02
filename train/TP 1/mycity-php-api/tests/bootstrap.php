@@ -64,6 +64,61 @@ function removeDirectory(string $directory): void
     rmdir($directory);
 }
 
+/** @param array<int, array<string, mixed>>|null $users */
+function createFixtureData(?array $users = null): string
+{
+    $directory = createTemporaryDirectory('mycity-fixture');
+    mkdir($directory . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'maps', 0777, true);
+
+    $files = [
+        'users.json' => $users ?? [
+            [
+                'user_id' => 'USR-001',
+                'email' => 'ankit@example.com',
+                'password' => 'ankit123',
+                'auth_token' => 'TKN-ANKIT-A1B2C3D4E5F6G7H8',
+                'created_at' => '2025-01-10 09:00:00',
+            ],
+        ],
+        'routes.json' => [],
+        'weather.json' => [
+            'city' => 'Mumbai',
+            'temperature_c' => 32,
+            'condition' => 'Partly Cloudy',
+            'humidity_pct' => 78,
+            'wind_kmh' => 14,
+        ],
+        'alerts.json' => [],
+        'saved_routes.json' => [],
+    ];
+
+    foreach ($files as $file => $data) {
+        file_put_contents(
+            $directory . DIRECTORY_SEPARATOR . $file,
+            json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR) . PHP_EOL,
+        );
+    }
+
+    return $directory;
+}
+
+function fixtureApp(string $directory): App
+{
+    return new App(
+        new FileStore($directory),
+        $directory . DIRECTORY_SEPARATOR . 'resources',
+    );
+}
+
+/** @return array{msg: string, data: mixed} */
+function decodeResponse(Response $response): array
+{
+    $decoded = json_decode($response->body, true, 512, JSON_THROW_ON_ERROR);
+    assertTrue(is_array($decoded), 'Response body is not a JSON object.');
+
+    return $decoded;
+}
+
 function runTests(?string $selectedGroup = null): never
 {
     $passed = 0;
@@ -89,4 +144,3 @@ function runTests(?string $selectedGroup = null): never
     fwrite(STDOUT, "Tests: $passed passed, $failed failed" . PHP_EOL);
     exit($failed === 0 ? 0 : 1);
 }
-
