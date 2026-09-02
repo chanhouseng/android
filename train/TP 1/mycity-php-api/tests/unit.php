@@ -180,4 +180,104 @@ test('auth', 'signin endpoint rejects unsupported methods', static function (): 
     }
 });
 
+test('reads', 'route API exposes exact fields with ordered stop names and singular departure', static function (): void {
+    assertTrue(class_exists('App'), 'Read APIs are not implemented.');
+    $directory = createFixtureData();
+
+    try {
+        $response = fixtureApp($directory)->handle('GET', '/api/transit/routes', [], '');
+        $routes = decodeResponse($response)['data'];
+
+        assertSameValue(200, $response->status, 'Route status is incorrect.');
+        assertSameValue('Success', decodeResponse($response)['msg'], 'Route message is incorrect.');
+        assertSameValue(
+            ['route_id', 'route_name', 'route_type', 'status', 'next_departure', 'stops'],
+            array_keys($routes[0]),
+            'Route fields are not exact.',
+        );
+        assertSameValue(
+            ['Andheri Bus Stand', 'Vile Parle Station', 'Bandra Station East'],
+            $routes[0]['stops'],
+            'Stops are not ordered by sequence.',
+        );
+        assertSameValue('2025-04-14 09:45:00', $routes[0]['next_departure'], 'First departure was not selected.');
+        assertSameValue(null, $routes[1]['next_departure'], 'Empty departures did not become null.');
+    } finally {
+        removeDirectory($directory);
+    }
+});
+
+test('reads', 'route API returns an empty array when no routes exist', static function (): void {
+    assertTrue(class_exists('App'), 'Read APIs are not implemented.');
+    $directory = createFixtureData();
+
+    try {
+        (new FileStore($directory))->write('routes.json', []);
+        $response = fixtureApp($directory)->handle('GET', '/api/transit/routes', [], '');
+        assertSameValue([], decodeResponse($response)['data'], 'Empty route data is incorrect.');
+    } finally {
+        removeDirectory($directory);
+    }
+});
+
+test('reads', 'weather API exposes only the five documented fields with numeric values', static function (): void {
+    assertTrue(class_exists('App'), 'Read APIs are not implemented.');
+    $directory = createFixtureData();
+
+    try {
+        $response = fixtureApp($directory)->handle('GET', '/api/weather/current', [], '');
+        $weather = decodeResponse($response)['data'];
+
+        assertSameValue(200, $response->status, 'Weather status is incorrect.');
+        assertSameValue(
+            ['city', 'temperature_c', 'condition', 'humidity_pct', 'wind_kmh'],
+            array_keys($weather),
+            'Weather fields are not exact.',
+        );
+        assertTrue(is_int($weather['temperature_c']) || is_float($weather['temperature_c']), 'Temperature is not numeric.');
+        assertTrue(is_int($weather['humidity_pct']) || is_float($weather['humidity_pct']), 'Humidity is not numeric.');
+        assertTrue(is_int($weather['wind_kmh']) || is_float($weather['wind_kmh']), 'Wind speed is not numeric.');
+    } finally {
+        removeDirectory($directory);
+    }
+});
+
+test('reads', 'alert API orders severity then newest time and exposes exact fields', static function (): void {
+    assertTrue(class_exists('App'), 'Read APIs are not implemented.');
+    $directory = createFixtureData();
+
+    try {
+        $response = fixtureApp($directory)->handle('GET', '/api/alerts', [], '');
+        $alerts = decodeResponse($response)['data'];
+
+        assertSameValue(200, $response->status, 'Alert status is incorrect.');
+        assertSameValue(
+            ['ALT-HIGH-NEW', 'ALT-HIGH-OLD', 'ALT-MEDIUM', 'ALT-LOW'],
+            array_column($alerts, 'alert_id'),
+            'Alert ordering is incorrect.',
+        );
+        assertSameValue(
+            ['alert_id', 'title', 'affected_routes', 'status', 'severity', 'description', 'created_at'],
+            array_keys($alerts[0]),
+            'Alert fields are not exact.',
+        );
+    } finally {
+        removeDirectory($directory);
+    }
+});
+
+test('reads', 'read APIs reject unsupported methods', static function (): void {
+    assertTrue(class_exists('App'), 'Read APIs are not implemented.');
+    $directory = createFixtureData();
+
+    try {
+        $app = fixtureApp($directory);
+        foreach (['/api/transit/routes', '/api/weather/current', '/api/alerts'] as $path) {
+            assertSameValue(405, $app->handle('POST', $path, [], '')->status, 'Unsupported method accepted for ' . $path);
+        }
+    } finally {
+        removeDirectory($directory);
+    }
+});
+
 runTests($argv[1] ?? null);
