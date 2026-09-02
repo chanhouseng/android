@@ -181,7 +181,7 @@ function decodeResponse(Response $response): array
     return $decoded;
 }
 
-function runTests(?string $selectedGroup = null): never
+function runTests(?string $selectedGroup = null): void
 {
     $passed = 0;
     $failed = 0;

@@ -144,7 +144,7 @@ final class App
     private function getRoutes(): Response
     {
         $storedRoutes = $this->store->read('routes.json');
-        if (!is_array($storedRoutes) || !array_is_list($storedRoutes)) {
+        if (!is_array($storedRoutes) || !self::isList($storedRoutes)) {
             throw new RuntimeException('Route data is invalid.');
         }
 
@@ -231,7 +231,7 @@ final class App
     private function getAlerts(): Response
     {
         $storedAlerts = $this->store->read('alerts.json');
-        if (!is_array($storedAlerts) || !array_is_list($storedAlerts)) {
+        if (!is_array($storedAlerts) || !self::isList($storedAlerts)) {
             throw new RuntimeException('Alert data is invalid.');
         }
 
@@ -310,7 +310,7 @@ final class App
         $routeId = trim($routeId);
 
         $routes = $this->store->read('routes.json');
-        if (!is_array($routes) || !array_is_list($routes)) {
+        if (!is_array($routes) || !self::isList($routes)) {
             throw new RuntimeException('Route data is invalid.');
         }
 
@@ -333,7 +333,7 @@ final class App
 
         try {
             $this->store->update('saved_routes.json', static function (mixed $savedRoutes) use ($userId, $routeId, $savedAt): array {
-                if (!is_array($savedRoutes) || !array_is_list($savedRoutes)) {
+                if (!is_array($savedRoutes) || !self::isList($savedRoutes)) {
                     throw new RuntimeException('Saved route data is invalid.');
                 }
 
@@ -380,7 +380,7 @@ final class App
 
         $routes = $this->store->read('routes.json');
         $storedSavedRoutes = $this->store->read('saved_routes.json');
-        if (!is_array($routes) || !array_is_list($routes) || !is_array($storedSavedRoutes) || !array_is_list($storedSavedRoutes)) {
+        if (!is_array($routes) || !self::isList($routes) || !is_array($storedSavedRoutes) || !self::isList($storedSavedRoutes)) {
             throw new RuntimeException('Saved route data is invalid.');
         }
 
@@ -442,6 +442,19 @@ final class App
         }
 
         return $normalized;
+    }
+
+    private static function isList(array $values): bool
+    {
+        $expectedKey = 0;
+        foreach ($values as $key => $value) {
+            if ($key !== $expectedKey) {
+                return false;
+            }
+            ++$expectedKey;
+        }
+
+        return true;
     }
 
     private function privacyPolicy(): Response
