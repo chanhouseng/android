@@ -280,4 +280,121 @@ test('reads', 'read APIs reject unsupported methods', static function (): void {
     }
 });
 
+test('saved', 'save and saved-list APIs require a valid auth_token header', static function (): void {
+    assertTrue(class_exists('App'), 'Saved-route APIs are not implemented.');
+    $directory = createFixtureData();
+
+    try {
+        $app = fixtureApp($directory);
+        $body = json_encode(['route_id' => 'RTE-BUS-022'], JSON_THROW_ON_ERROR);
+        assertSameValue(401, $app->handle('PUT', '/api/routes/save', [], $body)->status, 'Save without token was accepted.');
+        assertSameValue(401, $app->handle('PUT', '/api/routes/save', ['auth_token' => 'invalid'], $body)->status, 'Save with invalid token was accepted.');
+        assertSameValue(401, $app->handle('GET', '/api/routes/saved', [], '')->status, 'Saved list without token was accepted.');
+        assertSameValue(401, $app->handle('GET', '/api/routes/saved', ['AUTH_TOKEN' => 'invalid'], '')->status, 'Saved list with invalid token was accepted.');
+    } finally {
+        removeDirectory($directory);
+    }
+});
+
+test('saved', 'save API validates JSON and route_id before writing', static function (): void {
+    assertTrue(class_exists('App'), 'Saved-route APIs are not implemented.');
+    $directory = createFixtureData();
+
+    try {
+        $app = fixtureApp($directory);
+        $headers = ['auth_token' => 'TKN-ANKIT-A1B2C3D4E5F6G7H8'];
+        assertSameValue(400, $app->handle('PUT', '/api/routes/save', $headers, '{')->status, 'Malformed JSON was accepted.');
+        assertSameValue(400, $app->handle('PUT', '/api/routes/save', $headers, '{}')->status, 'Missing route_id was accepted.');
+        assertSameValue(400, $app->handle('PUT', '/api/routes/save', $headers, json_encode(['route_id' => 22], JSON_THROW_ON_ERROR))->status, 'Non-string route_id was accepted.');
+        assertSameValue(404, $app->handle('PUT', '/api/routes/save', $headers, json_encode(['route_id' => 'MISSING'], JSON_THROW_ON_ERROR))->status, 'Unknown route was accepted.');
+        assertSameValue([], (new FileStore($directory))->read('saved_routes.json'), 'Invalid request changed saved data.');
+    } finally {
+        removeDirectory($directory);
+    }
+});
+
+test('saved', 'save API persists exactly one route and rejects a duplicate', static function (): void {
+    assertTrue(class_exists('App'), 'Saved-route APIs are not implemented.');
+    $directory = createFixtureData();
+
+    try {
+        $app = fixtureApp($directory);
+        $headers = ['Auth_Token' => 'TKN-ANKIT-A1B2C3D4E5F6G7H8'];
+        $body = json_encode(['route_id' => 'RTE-RAPID-003'], JSON_THROW_ON_ERROR);
+        $response = $app->handle('PUT', '/api/routes/save', $headers, $body);
+        $data = decodeResponse($response)['data'];
+
+        assertSameValue(200, $response->status, 'Save status is incorrect.');
+        assertSameValue('Success', decodeResponse($response)['msg'], 'Save message is incorrect.');
+        assertSameValue(['route_id', 'saved_at'], array_keys($data), 'Save response fields are not exact.');
+        assertSameValue('RTE-RAPID-003', $data['route_id'], 'Saved route identifier is incorrect.');
+        assertTrue(preg_match('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/', $data['saved_at']) === 1, 'saved_at format is incorrect.');
+
+        $stored = (new FileStore($directory))->read('saved_routes.json');
+        assertSameValue(
+            ['user_id' => 'USR-001', 'route_id' => 'RTE-RAPID-003', 'saved_at' => $data['saved_at']],
+            $stored[0],
+            'Persisted saved route is incorrect.',
+        );
+        assertSameValue(409, $app->handle('PUT', '/api/routes/save', $headers, $body)->status, 'Duplicate save was accepted.');
+        assertSameValue(1, count((new FileStore($directory))->read('saved_routes.json')), 'Duplicate changed saved data.');
+    } finally {
+        removeDirectory($directory);
+    }
+});
+
+test('saved', 'saved-list API returns only the current user with newest records first and exact fields', static function (): void {
+    assertTrue(class_exists('App'), 'Saved-route APIs are not implemented.');
+    $directory = createFixtureData([
+        [
+            'user_id' => 'USR-001',
+            'email' => 'ankit@example.com',
+            'password' => 'ankit123',
+            'auth_token' => 'TOKEN-ONE',
+            'created_at' => '2025-01-10 09:00:00',
+        ],
+        [
+            'user_id' => 'USR-002',
+            'email' => 'other@example.com',
+            'password' => 'other123',
+            'auth_token' => 'TOKEN-TWO',
+            'created_at' => '2025-01-11 09:00:00',
+        ],
+    ]);
+
+    try {
+        (new FileStore($directory))->write('saved_routes.json', [
+            ['user_id' => 'USR-001', 'route_id' => 'RTE-BUS-022', 'saved_at' => '2025-04-10 08:30:00'],
+            ['user_id' => 'USR-002', 'route_id' => 'RTE-RAPID-003', 'saved_at' => '2025-04-15 10:00:00'],
+            ['user_id' => 'USR-001', 'route_id' => 'RTE-RAPID-003', 'saved_at' => '2025-04-12 10:15:00'],
+        ]);
+
+        $response = fixtureApp($directory)->handle('GET', '/api/routes/saved', ['auth_token' => 'TOKEN-ONE'], '');
+        $savedRoutes = decodeResponse($response)['data'];
+        assertSameValue(200, $response->status, 'Saved-list status is incorrect.');
+        assertSameValue(['RTE-RAPID-003', 'RTE-BUS-022'], array_column($savedRoutes, 'route_id'), 'Saved-list filtering or ordering is incorrect.');
+        assertSameValue(
+            ['route_id', 'route_name', 'saved_at'],
+            array_keys($savedRoutes[0]),
+            'Saved-list fields are not exact.',
+        );
+        assertSameValue('BKC to Thane Rapid', $savedRoutes[0]['route_name'], 'Saved route name was not joined from routes data.');
+    } finally {
+        removeDirectory($directory);
+    }
+});
+
+test('saved', 'saved-route endpoints reject unsupported methods', static function (): void {
+    assertTrue(class_exists('App'), 'Saved-route APIs are not implemented.');
+    $directory = createFixtureData();
+
+    try {
+        $app = fixtureApp($directory);
+        assertSameValue(405, $app->handle('GET', '/api/routes/save', [], '')->status, 'Save endpoint accepted GET.');
+        assertSameValue(405, $app->handle('PUT', '/api/routes/saved', [], '')->status, 'Saved-list endpoint accepted PUT.');
+    } finally {
+        removeDirectory($directory);
+    }
+});
+
 runTests($argv[1] ?? null);

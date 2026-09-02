@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+final class DuplicateSavedRouteException extends RuntimeException
+{
+}
+
 final class App
 {
     private FileStore $store;
@@ -23,6 +27,7 @@ final class App
         $path = parse_url($uri, PHP_URL_PATH);
         $path = is_string($path) ? rawurldecode($path) : '/';
         $method = strtoupper($method);
+        $headers = $this->normalizeHeaders($headers);
 
         try {
             if ($path === '/api/users/signin') {
@@ -55,6 +60,22 @@ final class App
                 }
 
                 return $this->getAlerts();
+            }
+
+            if ($path === '/api/routes/save') {
+                if ($method !== 'PUT') {
+                    return Response::json(405, 'Method Not Allowed', null);
+                }
+
+                return $this->saveRoute($headers, $body);
+            }
+
+            if ($path === '/api/routes/saved') {
+                if ($method !== 'GET') {
+                    return Response::json(405, 'Method Not Allowed', null);
+                }
+
+                return $this->getSavedRoutes($headers);
             }
 
             return Response::json(404, 'Not Found', null);
@@ -245,5 +266,165 @@ final class App
         }
 
         return Response::json(200, 'Success', $alerts);
+    }
+
+    /** @param array<string, string> $headers */
+    private function saveRoute(array $headers, string $body): Response
+    {
+        $user = $this->authenticatedUser($headers);
+        if ($user === null) {
+            return Response::json(401, 'Unauthorized: missing or invalid auth_token', null);
+        }
+
+        try {
+            $decoded = json_decode($body, false, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $error) {
+            return Response::json(400, 'Bad Request: invalid JSON body', null);
+        }
+
+        if (!$decoded instanceof stdClass) {
+            return Response::json(400, 'Bad Request: JSON body must be an object', null);
+        }
+
+        $input = get_object_vars($decoded);
+        $routeId = $input['route_id'] ?? null;
+        if (!is_string($routeId) || trim($routeId) === '') {
+            return Response::json(400, 'Bad Request: route_id is required', null);
+        }
+        $routeId = trim($routeId);
+
+        $routes = $this->store->read('routes.json');
+        if (!is_array($routes) || !array_is_list($routes)) {
+            throw new RuntimeException('Route data is invalid.');
+        }
+
+        $routeExists = false;
+        foreach ($routes as $route) {
+            if (is_array($route) && ($route['route_id'] ?? null) === $routeId) {
+                $routeExists = true;
+                break;
+            }
+        }
+        if (!$routeExists) {
+            return Response::json(404, 'Not Found: route does not exist', null);
+        }
+
+        $userId = $user['user_id'] ?? null;
+        if (!is_string($userId) || $userId === '') {
+            throw new RuntimeException('User data is invalid.');
+        }
+        $savedAt = date('Y-m-d H:i:s');
+
+        try {
+            $this->store->update('saved_routes.json', static function (mixed $savedRoutes) use ($userId, $routeId, $savedAt): array {
+                if (!is_array($savedRoutes) || !array_is_list($savedRoutes)) {
+                    throw new RuntimeException('Saved route data is invalid.');
+                }
+
+                foreach ($savedRoutes as $savedRoute) {
+                    if (
+                        is_array($savedRoute)
+                        && ($savedRoute['user_id'] ?? null) === $userId
+                        && ($savedRoute['route_id'] ?? null) === $routeId
+                    ) {
+                        throw new DuplicateSavedRouteException('Route is already saved.');
+                    }
+                }
+
+                $savedRoutes[] = [
+                    'user_id' => $userId,
+                    'route_id' => $routeId,
+                    'saved_at' => $savedAt,
+                ];
+
+                return $savedRoutes;
+            });
+        } catch (DuplicateSavedRouteException $error) {
+            return Response::json(409, 'Conflict: route is already saved', null);
+        }
+
+        return Response::json(200, 'Success', [
+            'route_id' => $routeId,
+            'saved_at' => $savedAt,
+        ]);
+    }
+
+    /** @param array<string, string> $headers */
+    private function getSavedRoutes(array $headers): Response
+    {
+        $user = $this->authenticatedUser($headers);
+        if ($user === null) {
+            return Response::json(401, 'Unauthorized: missing or invalid auth_token', null);
+        }
+
+        $userId = $user['user_id'] ?? null;
+        if (!is_string($userId) || $userId === '') {
+            throw new RuntimeException('User data is invalid.');
+        }
+
+        $routes = $this->store->read('routes.json');
+        $storedSavedRoutes = $this->store->read('saved_routes.json');
+        if (!is_array($routes) || !array_is_list($routes) || !is_array($storedSavedRoutes) || !array_is_list($storedSavedRoutes)) {
+            throw new RuntimeException('Saved route data is invalid.');
+        }
+
+        $routeNames = [];
+        foreach ($routes as $route) {
+            if (
+                !is_array($route)
+                || !isset($route['route_id'], $route['route_name'])
+                || !is_string($route['route_id'])
+                || !is_string($route['route_name'])
+            ) {
+                throw new RuntimeException('Route data is invalid.');
+            }
+            $routeNames[$route['route_id']] = $route['route_name'];
+        }
+
+        $mine = [];
+        foreach ($storedSavedRoutes as $savedRoute) {
+            if (!is_array($savedRoute) || ($savedRoute['user_id'] ?? null) !== $userId) {
+                continue;
+            }
+
+            $routeId = $savedRoute['route_id'] ?? null;
+            $savedAt = $savedRoute['saved_at'] ?? null;
+            if (!is_string($routeId) || !is_string($savedAt) || !isset($routeNames[$routeId])) {
+                throw new RuntimeException('Saved route data is invalid.');
+            }
+
+            $mine[] = [
+                'route_id' => $routeId,
+                'route_name' => $routeNames[$routeId],
+                'saved_at' => $savedAt,
+            ];
+        }
+
+        usort($mine, static fn (array $left, array $right): int => strcmp($right['saved_at'], $left['saved_at']));
+
+        return Response::json(200, 'Success', $mine);
+    }
+
+    /** @param array<string, string> $headers
+     *  @return array<string, mixed>|null
+     */
+    private function authenticatedUser(array $headers): ?array
+    {
+        return $this->auth->userForToken($headers['auth_token'] ?? null);
+    }
+
+    /** @param array<string, mixed> $headers
+     *  @return array<string, string>
+     */
+    private function normalizeHeaders(array $headers): array
+    {
+        $normalized = [];
+        foreach ($headers as $name => $value) {
+            if (is_string($name) && (is_string($value) || is_numeric($value))) {
+                $normalized[strtolower($name)] = trim((string) $value);
+            }
+        }
+
+        return $normalized;
     }
 }
