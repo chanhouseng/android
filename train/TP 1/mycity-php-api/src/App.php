@@ -78,6 +78,22 @@ final class App
                 return $this->getSavedRoutes($headers);
             }
 
+            if ($path === '/api/privacy-policy') {
+                if ($method !== 'GET') {
+                    return Response::json(405, 'Method Not Allowed', null);
+                }
+
+                return $this->privacyPolicy();
+            }
+
+            if (str_starts_with($path, '/api/resources/')) {
+                if ($method !== 'GET') {
+                    return Response::json(405, 'Method Not Allowed', null);
+                }
+
+                return $this->serveResource(substr($path, strlen('/api/resources/')));
+            }
+
             return Response::json(404, 'Not Found', null);
         } catch (RuntimeException $error) {
             return Response::json(500, 'Internal Server Error', null);
@@ -426,5 +442,86 @@ final class App
         }
 
         return $normalized;
+    }
+
+    private function privacyPolicy(): Response
+    {
+        $html = <<<'HTML'
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Privacy Policy</title>
+</head>
+<body>
+    <main>
+        <h1>Privacy Policy</h1>
+        <p>MyCity Transit uses your sign-in information only to identify your account and keep your saved routes.</p>
+        <p>Transit, weather, and service alert information is provided for travel planning. This local practice server does not sell personal information.</p>
+        <p>You may stop using the service at any time. Keep your authentication token private.</p>
+        <button id="closeBtn" type="button" onclick="window.close()">Close</button>
+    </main>
+</body>
+</html>
+HTML;
+
+        return new Response(200, $html, ['Content-Type' => 'text/html; charset=utf-8']);
+    }
+
+    private function serveResource(string $relativePath): Response
+    {
+        if (
+            $relativePath === ''
+            || str_contains($relativePath, "\0")
+            || str_contains($relativePath, '\\')
+            || str_starts_with($relativePath, '/')
+            || preg_match('/^[A-Za-z]:/', $relativePath) === 1
+        ) {
+            return Response::json(404, 'Not Found', null);
+        }
+
+        $segments = explode('/', $relativePath);
+        foreach ($segments as $segment) {
+            if ($segment === '' || $segment === '.' || $segment === '..') {
+                return Response::json(404, 'Not Found', null);
+            }
+        }
+
+        $root = realpath($this->resourceDirectory);
+        if ($root === false) {
+            throw new RuntimeException('Resource directory is unavailable.');
+        }
+
+        $candidate = $root . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $segments);
+        $file = realpath($candidate);
+        if ($file === false || !is_file($file)) {
+            return Response::json(404, 'Not Found', null);
+        }
+
+        $rootPrefix = rtrim($root, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        if (strncasecmp($file, $rootPrefix, strlen($rootPrefix)) !== 0) {
+            return Response::json(404, 'Not Found', null);
+        }
+
+        $contents = file_get_contents($file);
+        if ($contents === false) {
+            throw new RuntimeException('Unable to read resource file.');
+        }
+
+        $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+        $mimeTypes = [
+            'png' => 'image/png',
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'gif' => 'image/gif',
+            'svg' => 'image/svg+xml',
+            'json' => 'application/json',
+            'mp3' => 'audio/mpeg',
+            'webp' => 'image/webp',
+            'txt' => 'text/plain; charset=utf-8',
+        ];
+
+        return new Response(200, $contents, ['Content-Type' => $mimeTypes[$extension] ?? 'application/octet-stream']);
     }
 }

@@ -397,4 +397,74 @@ test('saved', 'saved-route endpoints reject unsupported methods', static functio
     }
 });
 
+test('transport', 'privacy policy returns HTML with the required title and close button', static function (): void {
+    assertTrue(class_exists('App'), 'Privacy policy API is not implemented.');
+    $directory = createFixtureData();
+
+    try {
+        $response = fixtureApp($directory)->handle('GET', '/api/privacy-policy', [], '');
+        assertSameValue(200, $response->status, 'Privacy status is incorrect.');
+        assertSameValue('text/html; charset=utf-8', $response->headers['Content-Type'] ?? null, 'Privacy content type is incorrect.');
+        assertTrue(str_contains($response->body, 'Privacy Policy'), 'Privacy title is missing.');
+        assertTrue(str_contains($response->body, 'id="closeBtn"'), 'Privacy close button is missing.');
+    } finally {
+        removeDirectory($directory);
+    }
+});
+
+test('transport', 'static resource returns original PNG bytes and MIME type', static function (): void {
+    assertTrue(class_exists('App'), 'Static resource API is not implemented.');
+    $directory = createFixtureData();
+
+    try {
+        $png = "\x89PNG\r\n\x1a\nfixture";
+        file_put_contents($directory . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'maps' . DIRECTORY_SEPARATOR . 'mumbai_base.png', $png);
+        $response = fixtureApp($directory)->handle('GET', '/api/resources/maps/mumbai_base.png', [], '');
+        assertSameValue(200, $response->status, 'Static resource status is incorrect.');
+        assertSameValue('image/png', $response->headers['Content-Type'] ?? null, 'Static resource MIME type is incorrect.');
+        assertSameValue($png, $response->body, 'Static resource bytes changed.');
+    } finally {
+        removeDirectory($directory);
+    }
+});
+
+test('transport', 'static resource cannot escape the public resource directory', static function (): void {
+    assertTrue(class_exists('App'), 'Static resource API is not implemented.');
+    $directory = createFixtureData();
+
+    try {
+        $app = fixtureApp($directory);
+        $paths = [
+            '/api/resources/../users.json',
+            '/api/resources/%2e%2e/users.json',
+            '/api/resources/%252e%252e/users.json',
+            '/api/resources/C:%5CWindows%5Cwin.ini',
+            '/api/resources/%2Fetc%2Fpasswd',
+            '/api/resources/maps/missing.png',
+        ];
+
+        foreach ($paths as $path) {
+            $response = $app->handle('GET', $path, [], '');
+            assertSameValue(404, $response->status, 'Unsafe or missing path did not return 404: ' . $path);
+            assertSameValue(['msg' => 'Not Found', 'data' => null], decodeResponse($response), '404 response differs for ' . $path);
+        }
+    } finally {
+        removeDirectory($directory);
+    }
+});
+
+test('transport', 'privacy and static paths reject unsupported methods and unknown APIs return 404', static function (): void {
+    assertTrue(class_exists('App'), 'Final routing is not implemented.');
+    $directory = createFixtureData();
+
+    try {
+        $app = fixtureApp($directory);
+        assertSameValue(405, $app->handle('POST', '/api/privacy-policy', [], '')->status, 'Privacy endpoint accepted POST.');
+        assertSameValue(405, $app->handle('POST', '/api/resources/maps/mumbai_base.png', [], '')->status, 'Resource endpoint accepted POST.');
+        assertSameValue(404, $app->handle('GET', '/api/unknown', [], '')->status, 'Unknown API did not return 404.');
+    } finally {
+        removeDirectory($directory);
+    }
+});
+
 runTests($argv[1] ?? null);
