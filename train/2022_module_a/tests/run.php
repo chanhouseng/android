@@ -284,4 +284,47 @@ test('unknown skill ID returns a 404 instead of fabricated data', function (): v
     ], responseJson($response));
 });
 
+test('video endpoint returns all expanded records with the documented first video', function (): void {
+    $response = testApp()->handle('GET', '/api/video');
+    $videos = responseJson($response)['data'];
+
+    assertSameValue(200, $response->status());
+    assertSameValue(20, count($videos));
+    assertSameValue([
+        'uuid' => '2D6A33E7-AE3C-FCFA-5AF1-249C71C1AC57',
+        'name' => 'Welcome to WorldSkills 2022 in Shanghai',
+        'url' => 'http://192.168.0.199:8080/apivideo/ws_welcome.mp4',
+        'length' => 134468,
+    ], $videos[0]);
+
+    $ids = [];
+    foreach ($videos as $video) {
+        assertSameValue(['uuid', 'name', 'url', 'length'], array_keys($video));
+        $ids[] = $video['uuid'];
+    }
+    assertSameValue(20, count(array_unique($ids)));
+});
+
+test('corrupt storage returns a generic 500 without exposing its path', function (): void {
+    $root = temporaryDirectory();
+    $previousErrorLog = (string) ini_get('error_log');
+    ini_set('error_log', $root . '/php-error.log');
+
+    try {
+        file_put_contents($root . '/videos.json', '{broken');
+        $response = testApp($root)->handle('GET', '/api/video');
+
+        assertSameValue(500, $response->status());
+        assertSameValue([
+            'code' => 500,
+            'msg' => 'Internal Server Error',
+            'data' => null,
+        ], responseJson($response));
+        assertTrueValue(!str_contains($response->body(), $root));
+    } finally {
+        ini_set('error_log', $previousErrorLog);
+        removeDirectory($root);
+    }
+});
+
 runRegisteredTests();

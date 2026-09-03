@@ -55,6 +55,10 @@ final class App
                 return $this->skillImage($matches[1]);
             }
 
+            if ($path === '/api/video') {
+                return $this->success($this->store->read('videos.json'));
+            }
+
             return $this->error(404, 'Not Found');
         } catch (Throwable $error) {
             error_log('WS-MAD request failed: ' . $error->getMessage());
