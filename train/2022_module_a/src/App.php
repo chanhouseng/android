@@ -59,6 +59,12 @@ final class App
                 return $this->success($this->store->read('videos.json'));
             }
 
+            if ($path === '/api/video/comment') {
+                return $method === 'GET'
+                    ? $this->success($this->store->read('comments.json'))
+                    : $this->createComment($rawBody, $server);
+            }
+
             return $this->error(404, 'Not Found');
         } catch (Throwable $error) {
             error_log('WS-MAD request failed: ' . $error->getMessage());
@@ -174,6 +180,69 @@ final class App
         }
 
         return $this->jpeg($path);
+    }
+
+    private function createComment(string $rawBody, array $server): Response
+    {
+        try {
+            $payload = json_decode($rawBody, true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException) {
+            return $this->error(400, 'Invalid request body.');
+        }
+
+        if (!is_array($payload) || $this->isList($payload)) {
+            return $this->error(400, 'Invalid request body.');
+        }
+
+        $commentText = $payload['commentText'] ?? null;
+        $videoUuid = $payload['videoUUID'] ?? null;
+        if (
+            !is_string($commentText)
+            || trim($commentText) === ''
+            || !is_string($videoUuid)
+            || $videoUuid === ''
+        ) {
+            return $this->error(400, 'Invalid comment data.');
+        }
+
+        $knownVideo = false;
+        foreach ($this->store->read('videos.json') as $video) {
+            if (($video['uuid'] ?? null) === $videoUuid) {
+                $knownVideo = true;
+                break;
+            }
+        }
+
+        if (!$knownVideo) {
+            return $this->error(400, 'No video of this UUID can be found.');
+        }
+
+        $remoteAddress = $server['REMOTE_ADDR'] ?? null;
+        $comment = [
+            'uuid' => $this->uuidV4(),
+            'ipAddress' => is_string($remoteAddress) && $remoteAddress !== '' ? $remoteAddress : '127.0.0.1',
+            'commentText' => $commentText,
+            'commentTime' => (int) floor(microtime(true) * 1000),
+            'videoUUID' => $videoUuid,
+        ];
+
+        $this->store->append('comments.json', $comment);
+
+        return $this->success($comment);
+    }
+
+    private function isList(array $value): bool
+    {
+        return $value === [] || array_keys($value) === range(0, count($value) - 1);
+    }
+
+    private function uuidV4(): string
+    {
+        $bytes = random_bytes(16);
+        $bytes[6] = chr((ord($bytes[6]) & 0x0f) | 0x40);
+        $bytes[8] = chr((ord($bytes[8]) & 0x3f) | 0x80);
+
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($bytes), 4));
     }
 
     private function jpeg(string $path): Response

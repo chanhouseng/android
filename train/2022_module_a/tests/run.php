@@ -327,4 +327,111 @@ test('corrupt storage returns a generic 500 without exposing its path', function
     }
 });
 
+test('comment endpoint lists the twenty expanded initial comments', function (): void {
+    $response = testApp()->handle('GET', '/api/video/comment');
+    $comments = responseJson($response)['data'];
+
+    assertSameValue(200, $response->status());
+    assertSameValue(20, count($comments));
+    assertSameValue('2D6A33E7-AE3C-FCFA-5AF1-249C71C1AC57', $comments[0]['videoUUID']);
+});
+
+test('valid video comment is generated, persisted, and visible to a new app instance', function () use ($projectRoot): void {
+    $root = temporaryDirectory();
+
+    try {
+        copy($projectRoot . '/storage/videos.json', $root . '/videos.json');
+        copy($projectRoot . '/storage/comments.json', $root . '/comments.json');
+        $text = '  Nice video that make me happy.  ';
+        $before = (int) floor(microtime(true) * 1000);
+        $response = testApp($root)->handle(
+            'POST',
+            '/api/video/comment',
+            ['Content-Type' => 'application/json'],
+            [],
+            json_encode([
+                'commentText' => $text,
+                'videoUUID' => '2D6A33E7-AE3C-FCFA-5AF1-249C71C1AC57',
+            ], JSON_THROW_ON_ERROR),
+            ['REMOTE_ADDR' => '192.168.1.25']
+        );
+        $after = (int) floor(microtime(true) * 1000);
+        $comment = responseJson($response)['data'];
+
+        assertSameValue(200, $response->status());
+        assertSameValue(1, preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $comment['uuid']));
+        assertSameValue('192.168.1.25', $comment['ipAddress']);
+        assertSameValue($text, $comment['commentText']);
+        assertTrueValue($comment['commentTime'] >= $before && $comment['commentTime'] <= $after);
+        assertSameValue('2D6A33E7-AE3C-FCFA-5AF1-249C71C1AC57', $comment['videoUUID']);
+
+        assertSameValue(21, count(loadJsonFixture($root . '/comments.json')));
+        $freshComments = responseJson(testApp($root)->handle('GET', '/api/video/comment'))['data'];
+        assertSameValue($comment, $freshComments[20]);
+    } finally {
+        removeDirectory($root);
+    }
+});
+
+test('invalid video comment bodies return 400 without writing', function () use ($projectRoot): void {
+    $root = temporaryDirectory();
+
+    try {
+        copy($projectRoot . '/storage/videos.json', $root . '/videos.json');
+        copy($projectRoot . '/storage/comments.json', $root . '/comments.json');
+        $cases = [
+            '{broken',
+            '"scalar"',
+            '{}',
+            '{"videoUUID":"2D6A33E7-AE3C-FCFA-5AF1-249C71C1AC57"}',
+            '{"commentText":"hello"}',
+            '{"commentText":[],"videoUUID":"2D6A33E7-AE3C-FCFA-5AF1-249C71C1AC57"}',
+            '{"commentText":"hello","videoUUID":[]}',
+            '{"commentText":"   ","videoUUID":"2D6A33E7-AE3C-FCFA-5AF1-249C71C1AC57"}',
+        ];
+
+        foreach ($cases as $rawBody) {
+            $response = testApp($root)->handle(
+                'POST',
+                '/api/video/comment',
+                ['Content-Type' => 'application/json'],
+                [],
+                $rawBody
+            );
+            assertSameValue(400, $response->status(), 'Expected 400 for ' . $rawBody);
+            assertSameValue(null, responseJson($response)['data']);
+        }
+
+        assertSameValue(20, count(loadJsonFixture($root . '/comments.json')));
+    } finally {
+        removeDirectory($root);
+    }
+});
+
+test('comment for an unknown video returns the documented error without writing', function () use ($projectRoot): void {
+    $root = temporaryDirectory();
+
+    try {
+        copy($projectRoot . '/storage/videos.json', $root . '/videos.json');
+        copy($projectRoot . '/storage/comments.json', $root . '/comments.json');
+        $response = testApp($root)->handle(
+            'POST',
+            '/api/video/comment',
+            ['Content-Type' => 'application/json'],
+            [],
+            '{"commentText":"hello","videoUUID":"C80137E8-4FAE-980C-A222-BB5F1A71CE2B"}'
+        );
+
+        assertSameValue(400, $response->status());
+        assertSameValue([
+            'code' => 400,
+            'msg' => 'No video of this UUID can be found.',
+            'data' => null,
+        ], responseJson($response));
+        assertSameValue(20, count(loadJsonFixture($root . '/comments.json')));
+    } finally {
+        removeDirectory($root);
+    }
+});
+
 runRegisteredTests();
