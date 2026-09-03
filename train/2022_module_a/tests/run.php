@@ -66,5 +66,33 @@ test('every seeded image filename has a local JPEG', function () use ($projectRo
     }
 });
 
-runRegisteredTests();
+test('JSON response preserves Unicode and slashes', function (): void {
+    $response = Response::json(200, ['url' => 'http://host/路徑']);
 
+    assertSameValue(200, $response->status());
+    assertSameValue('application/json;charset=UTF-8', $response->headers()['Content-Type']);
+    assertSameValue('{"url":"http://host/路徑"}', $response->body());
+});
+
+test('unknown route returns the standard 404 envelope', function (): void {
+    $response = testApp()->handle('GET', '/api/missing');
+
+    assertSameValue(404, $response->status());
+    assertSameValue(
+        ['code' => 404, 'msg' => 'Not Found', 'data' => null],
+        json_decode($response->body(), true, 512, JSON_THROW_ON_ERROR)
+    );
+});
+
+test('known route rejects an unsupported method', function (): void {
+    $response = testApp()->handle('DELETE', '/api/video');
+
+    assertSameValue(405, $response->status());
+    assertSameValue('GET', $response->headers()['Allow']);
+    assertSameValue(
+        ['code' => 405, 'msg' => 'Method Not Allowed', 'data' => null],
+        json_decode($response->body(), true, 512, JSON_THROW_ON_ERROR)
+    );
+});
+
+runRegisteredTests();

@@ -84,6 +84,20 @@ function loadJsonFixture(string $path): array
     return $data;
 }
 
+function testApp(?string $storageRoot = null, ?string $mediaRoot = null): App
+{
+    $projectRoot = dirname(__DIR__);
+    $storageRoot ??= $projectRoot . DIRECTORY_SEPARATOR . 'storage';
+    $mediaRoot ??= $projectRoot . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'media';
+
+    return new App(
+        new FileStore($storageRoot),
+        class_exists('Media') ? new Media() : null,
+        $mediaRoot . DIRECTORY_SEPARATOR . 'photos',
+        $mediaRoot . DIRECTORY_SEPARATOR . 'skills_images'
+    );
+}
+
 function runRegisteredTests(): void
 {
     global $tests;
