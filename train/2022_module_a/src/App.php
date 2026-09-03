@@ -43,6 +43,18 @@ final class App
                 return $this->photoFile($matches[1]);
             }
 
+            if ($path === '/api/skills-types') {
+                return $this->success($this->store->read('skill-types.json'));
+            }
+
+            if (preg_match('#^/api/skills/([^/]+)$#', $path, $matches) === 1) {
+                return $this->skill(rawurldecode($matches[1]), $headers, $server);
+            }
+
+            if (preg_match('#^/api/image/skills_images/([^/]+)$#', $path, $matches) === 1) {
+                return $this->skillImage($matches[1]);
+            }
+
             return $this->error(404, 'Not Found');
         } catch (Throwable $error) {
             error_log('WS-MAD request failed: ' . $error->getMessage());
@@ -117,6 +129,41 @@ final class App
             $this->store->read('photos.json')
         );
         $path = $this->media->resolve($this->photoRoot, $encodedFilename, $allowed);
+
+        if ($path === null) {
+            return $this->error(404, 'Not Found');
+        }
+
+        return $this->jpeg($path);
+    }
+
+    private function skill(string $id, array $headers, array $server): Response
+    {
+        foreach ($this->store->read('skills.json') as $skill) {
+            if (($skill['id'] ?? null) !== $id) {
+                continue;
+            }
+
+            return $this->success([
+                'id' => (string) $skill['id'],
+                'name' => (string) $skill['name'],
+                'introduction' => (string) $skill['introduction'],
+                'img' => $this->baseUrl($headers, $server)
+                    . '/api/image/skills_images/'
+                    . rawurlencode((string) $skill['image']),
+            ]);
+        }
+
+        return $this->error(404, 'Skill not found.');
+    }
+
+    private function skillImage(string $encodedFilename): Response
+    {
+        $allowed = array_map(
+            static fn (array $skill): string => (string) $skill['image'],
+            $this->store->read('skills.json')
+        );
+        $path = $this->media->resolve($this->skillImageRoot, $encodedFilename, $allowed);
 
         if ($path === null) {
             return $this->error(404, 'Not Found');

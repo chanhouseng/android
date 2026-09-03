@@ -209,4 +209,79 @@ test('media resolver blocks a symlink that escapes its root when symlinks are av
     }
 });
 
+test('skill types endpoint returns the exact documented groups', function (): void {
+    $response = testApp()->handle('GET', '/api/skills-types');
+
+    assertSameValue(200, $response->status());
+    assertSameValue([
+        [
+            'skillTypeId' => 0,
+            'name' => 'Manufacturing and Engineering Technology',
+            'skills' => [
+                '0000' => 'Industrial Mechanics',
+                '0001' => 'Manufacturing Team Challenge',
+                '0002' => 'Mechatronics',
+                '0003' => 'Mechanical Engineering CAD',
+                '0004' => 'CNC Turning',
+                '0005' => 'CNC Milling',
+            ],
+        ],
+        [
+            'skillTypeId' => 1,
+            'name' => 'Information and Communication Technology',
+            'skills' => [
+                '1000' => 'Information Network Cabling',
+                '1001' => 'IT Software Solutions for Business',
+            ],
+        ],
+    ], responseJson($response)['data']);
+});
+
+test('skill 1000 endpoint matches the documented example with a dynamic URL', function (): void {
+    $response = testApp()->handle('GET', '/api/skills/1000', ['Host' => '10.0.0.8:3000']);
+
+    assertSameValue(200, $response->status());
+    assertSameValue([
+        'id' => '1000',
+        'name' => 'Information Network Cabling',
+        'introduction' => 'The occupations related to “Information Network Cabling” are deeply related to the technology that supports modern information societies in which lives can be more comfortable and sustainable.',
+        'img' => 'http://10.0.0.8:3000/api/image/skills_images/1000.jpg',
+    ], responseJson($response)['data']);
+});
+
+test('all eight listed skill IDs have details and a JPEG resource', function (): void {
+    $expectedNames = [
+        '0000' => 'Industrial Mechanics',
+        '0001' => 'Manufacturing Team Challenge',
+        '0002' => 'Mechatronics',
+        '0003' => 'Mechanical Engineering CAD',
+        '0004' => 'CNC Turning',
+        '0005' => 'CNC Milling',
+        '1000' => 'Information Network Cabling',
+        '1001' => 'IT Software Solutions for Business',
+    ];
+
+    foreach ($expectedNames as $id => $name) {
+        $detail = testApp()->handle('GET', '/api/skills/' . $id);
+        assertSameValue(200, $detail->status());
+        assertSameValue($name, responseJson($detail)['data']['name']);
+
+        $image = testApp()->handle('GET', '/api/image/skills_images/' . $id . '.jpg');
+        assertSameValue(200, $image->status());
+        assertSameValue('image/jpeg', $image->headers()['Content-Type']);
+        assertTrueValue(strlen($image->body()) > 0);
+    }
+});
+
+test('unknown skill ID returns a 404 instead of fabricated data', function (): void {
+    $response = testApp()->handle('GET', '/api/skills/9999');
+
+    assertSameValue(404, $response->status());
+    assertSameValue([
+        'code' => 404,
+        'msg' => 'Skill not found.',
+        'data' => null,
+    ], responseJson($response));
+});
+
 runRegisteredTests();
