@@ -1,0 +1,23 @@
+[
+    {
+        "skillTypeId": 0,
+        "name": "Manufacturing and Engineering Technology",
+        "skills": {
+            "0000": "Industrial Mechanics",
+            "0001": "Manufacturing Team Challenge",
+            "0002": "Mechatronics",
+            "0003": "Mechanical Engineering CAD",
+            "0004": "CNC Turning",
+            "0005": "CNC Milling"
+        }
+    },
+    {
+        "skillTypeId": 1,
+        "name": "Information and Communication Technology",
+        "skills": {
+            "1000": "Information Network Cabling",
+            "1001": "IT Software Solutions for Business"
+        }
+    }
+]
+

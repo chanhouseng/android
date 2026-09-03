@@ -1,0 +1,51 @@
+[
+    {
+        "id": "0000",
+        "name": "Industrial Mechanics",
+        "introduction": "This field focuses on designing, installing, and maintaining complex mechanical and automated manufacturing systems.",
+        "image": "0000.jpg"
+    },
+    {
+        "id": "0001",
+        "name": "Manufacturing Team Challenge",
+        "introduction": "This field focuses on designing, installing, and maintaining complex mechanical and automated manufacturing systems.",
+        "image": "0001.jpg"
+    },
+    {
+        "id": "0002",
+        "name": "Mechatronics",
+        "introduction": "The occupations related to this skill are deeply related to the technology that supports modern information societies.",
+        "image": "0002.jpg"
+    },
+    {
+        "id": "0003",
+        "name": "Mechanical Engineering CAD",
+        "introduction": "Engineers in this domain solve complex technical challenges using modern computer-aided design software.",
+        "image": "0003.jpg"
+    },
+    {
+        "id": "0004",
+        "name": "CNC Turning",
+        "introduction": "This field focuses on designing, installing, and maintaining complex mechanical and automated manufacturing systems.",
+        "image": "0004.jpg"
+    },
+    {
+        "id": "0005",
+        "name": "CNC Milling",
+        "introduction": "This field focuses on designing, installing, and maintaining complex mechanical and automated manufacturing systems.",
+        "image": "0005.jpg"
+    },
+    {
+        "id": "1000",
+        "name": "Information Network Cabling",
+        "introduction": "The occupations related to “Information Network Cabling” are deeply related to the technology that supports modern information societies in which lives can be more comfortable and sustainable.",
+        "image": "1000.jpg"
+    },
+    {
+        "id": "1001",
+        "name": "IT Software Solutions for Business",
+        "introduction": "Software solutions in this area power enterprise operations and modern business infrastructure.",
+        "image": "1001.jpg"
+    }
+]
+
