@@ -34,4 +34,3 @@ final class Media
         return $insideRoot ? $resolvedTarget : null;
     }
 }
-

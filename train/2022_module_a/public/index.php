@@ -42,4 +42,3 @@ $response = $app->handle(
     $_SERVER
 );
 $response->send();
-

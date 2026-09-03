@@ -157,4 +157,3 @@ A LAN test from another physical device cannot be automated in this workspace. R
 ## Documentation and delivery
 
 `README.md` documents requirements, startup, LAN access, firewall configuration, project structure, all routes, representative requests and responses, error statuses, JSON persistence, reset instructions, assumptions, and repeatable test commands. The final delivery lists created files, fresh verification results, and the manual LAN test limitation.
-
