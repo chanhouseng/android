@@ -84,6 +84,16 @@ function loadJsonFixture(string $path): array
     return $data;
 }
 
+function responseJson(Response $response): array
+{
+    $data = json_decode($response->body(), true, 512, JSON_THROW_ON_ERROR);
+    if (!is_array($data)) {
+        throw new RuntimeException('Response body is not a JSON object.');
+    }
+
+    return $data;
+}
+
 function testApp(?string $storageRoot = null, ?string $mediaRoot = null): App
 {
     $projectRoot = dirname(__DIR__);
