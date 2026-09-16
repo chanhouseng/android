@@ -1,0 +1,25 @@
+# Include these locations inside the server block whose root points at the website root.
+
+location = /training {
+    return 308 /training/;
+}
+
+# Training is a client-side folder browser. Real app assets are served first;
+# every folder-shaped route falls back to the browser entry document.
+location ^~ /training/ {
+    try_files $uri $uri/ /training/index.html;
+}
+
+# Only legacy URLs that resolve to a real directory are redirected.
+# A trailing slash keeps this rule separate from physical file downloads.
+location ~ ^/train/(.+)/$ {
+    if (-d $request_filename) {
+        return 301 /training/$1/;
+    }
+    return 404;
+}
+
+# Files continue to be served from the physical train/ directory.
+location /train/ {
+    try_files $uri =404;
+}

@@ -1,0 +1,93 @@
+:root {
+  color-scheme: light;
+
+  --color-canvas: #F7F8F6;
+  --color-surface: #FFFFFF;
+  --color-subtle: #EEF1EE;
+  --color-text-primary: #18211D;
+  --color-text-secondary: #6C7872;
+  --color-border: #DCE3DF;
+  --color-brand: #2E7D5B;
+  --color-brand-hover: #236047;
+  --color-brand-soft: #E9F7F0;
+  --color-accent: #6550B8;
+  --color-accent-soft: #F0EDFF;
+  --color-warning: #C47D17;
+  --color-danger: #C44747;
+  --color-transparent: transparent;
+  --color-warning-soft: color-mix(in srgb, var(--color-warning) 12%, var(--color-surface));
+  --color-danger-soft: color-mix(in srgb, var(--color-danger) 12%, var(--color-surface));
+  --color-focus-ring: color-mix(in srgb, var(--color-brand) 24%, var(--color-surface));
+  --color-dialog-backdrop: rgb(24 33 29 / 62%);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --radius-1: 6px;
+  --radius-2: 10px;
+  --radius-3: 14px;
+  --radius-4: 20px;
+  --radius-none: 0;
+  --radius-pill: 999px;
+  --radius-full: 50%;
+
+  --font-ui: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --font-data: "IBM Plex Sans", "Segoe UI", Arial, system-ui, sans-serif;
+  --font-code: "IBM Plex Mono", "Cascadia Mono", Consolas, "Courier New", monospace;
+  --font-size-1: 11px;
+  --font-size-2: 12px;
+  --font-size-3: 13px;
+  --font-size-4: 14px;
+  --font-size-5: 15px;
+  --font-size-6: 16px;
+  --font-size-7: 17px;
+  --font-size-8: 18px;
+  --font-size-9: 20px;
+  --font-size-10: 24px;
+  --font-size-11: 28px;
+  --font-size-12: 36px;
+  --font-size-13: 48px;
+  --font-size-hidden: 0;
+  --font-size-home-title: clamp(var(--font-size-11), 4vw, var(--font-size-13));
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-tight: 1.2;
+  --line-height-copy: 1.65;
+  --letter-spacing-tight: -0.04em;
+  --letter-spacing-label: 0.04em;
+
+  --border-width: 1px;
+  --focus-width: 3px;
+  --rail-width: 2px;
+  --control-size: 44px;
+  --logo-size: 44px;
+  --icon-size: 20px;
+  --route-dot: 10px;
+  --route-dot-current: 18px;
+  --sidebar-width: 240px;
+  --mobile-nav-height: 78px;
+  --content-max: 1120px;
+  --search-max: 640px;
+  --card-min: 240px;
+  --viewport-min: 320px;
+
+  --shadow-card: 0 12px 32px -8px rgb(24 33 29 / 8%);
+  --shadow-raised: 0 18px 44px -18px rgb(24 33 29 / 18%);
+  --shadow-nav: 0 -8px 28px -18px rgb(24 33 29 / 28%);
+  --shadow-focus: 0 0 0 var(--space-1) var(--color-focus-ring);
+  --shadow-none: none;
+  --opacity-disabled: 0.48;
+  --duration-fast: 160ms;
+  --duration-base: 240ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}

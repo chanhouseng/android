@@ -1,16 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-Hant" data-site-root="../">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>exercise1｜World Skill 練習</title>
+  <link rel="stylesheet" href="../assets/css/foundation.css">
+  <link rel="stylesheet" href="../assets/css/app-shell.css">
+  <link rel="stylesheet" href="../assets/css/accordion.css">
+  <link rel="stylesheet" href="../assets/css/detail-page.css">
 </head>
 <body>
-    <button class="accordion">Date, Time Picker</button>
-    <div class="panel">
-        <pre>
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="../index.html" aria-label="返回首頁"><span class="brand-mark" aria-hidden="true">AL</span><span class="brand-copy"><strong>Android Learning</strong><span>WORKSPACE</span></span></a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+  <main class="app-main" id="main-content" tabindex="-1">
+    <div class="container detail-page">
+      <nav aria-label="Breadcrumb">
+        <ol class="detail-breadcrumb">
+          <li><a href="../index.html">首頁</a></li>
+          <li><a href="index.html">World Skill 練習</a></li>
+          <li><span aria-current="page">exercise1</span></li>
+        </ol>
+      </nav>
+      <header class="detail-header">
+        <a class="button button--ghost detail-header__back" href="index.html">返回 World Skill 練習</a>
+        <p class="detail-eyebrow">WORLD SKILL · DETAIL</p>
+        <h1>exercise1</h1>
+      </header>
+      <div class="detail-content" data-accordion-root data-original-content>
+    <article class="accordion-item card" data-accordion-item data-title="Date, Time Picker">
+          <h2><button class="accordion-trigger" id="exercise1-trigger-1" type="button" aria-expanded="true" aria-controls="exercise1-panel-1" data-accordion-trigger>Date, Time Picker</button></h2>
+          <div class="accordion-panel" id="exercise1-panel-1" role="region" aria-labelledby="exercise1-trigger-1" data-accordion-panel>
+        <pre class="code-block"><code>
 val timeButton : EditText = findViewById(R.id.timeButton)
 val timePickerDialog  = TimePickerDialog(this,{ _, hour, minute -&gt;
     val timeString = String.format("%02d:%02d", hour, minute)
@@ -33,11 +57,13 @@ dataButton.setOnFocusChangeListener{_, hasFocus -&gt;
         }
     }
 }
-        </pre>
+        </code></pre>
     </div>
-    <button class="accordion">list 定義spinner內容</button>
-    <div class="panel">
-        <pre>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="list 定義spinner內容">
+          <h2><button class="accordion-trigger" id="exercise1-trigger-2" type="button" aria-expanded="true" aria-controls="exercise1-panel-2" data-accordion-trigger>list 定義spinner內容</button></h2>
+          <div class="accordion-panel" id="exercise1-panel-2" role="region" aria-labelledby="exercise1-trigger-2" data-accordion-panel>
+        <pre class="code-block"><code>
 val spinner: Spinner = findViewById(R.id.spinner)
 val region = listOf("HK", "Macau", "China")
 val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, region)
@@ -115,11 +141,13 @@ spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
     }
 }
 
-        </pre>
+        </code></pre>
     </div>
-    <button class="accordion">countDownTimer, 粗體</button>
-    <div class="panel">
-        <pre>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="countDownTimer, 粗體">
+          <h2><button class="accordion-trigger" id="exercise1-trigger-3" type="button" aria-expanded="true" aria-controls="exercise1-panel-3" data-accordion-trigger>countDownTimer, 粗體</button></h2>
+          <div class="accordion-panel" id="exercise1-panel-3" role="region" aria-labelledby="exercise1-trigger-3" data-accordion-panel>
+        <pre class="code-block"><code>
 val color : TextView = findViewById(R.id.Color)
 color.setTextColor(Color.parseColor("#10ab1c"))
 var number = 0
@@ -138,11 +166,13 @@ val countDownTimer = object : CountDownTimer(3000, 1000){
 }
 countDownTimer.start()
 
-        </pre>
+        </code></pre>
     </div>
-    <button class="accordion">自定義spinner內容</button>
-    <div class="panel">
-        <pre>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="自定義spinner內容">
+          <h2><button class="accordion-trigger" id="exercise1-trigger-4" type="button" aria-expanded="true" aria-controls="exercise1-panel-4" data-accordion-trigger>自定義spinner內容</button></h2>
+          <div class="accordion-panel" id="exercise1-panel-4" role="region" aria-labelledby="exercise1-trigger-4" data-accordion-panel>
+        <pre class="code-block"><code>
 val spinner5: Spinner = findViewById(R.id.spinner5)
 val spinnerList = listOf(
     prodcutClass("cupcake", R.drawable.cupcake),
@@ -166,7 +196,7 @@ spinner5.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
 
 }
 
-<span>//spinnerAdapter 的內容</span>
+<span class="code-comment">//spinnerAdapter 的內容</span>
 class spinnerAdapter(context: Context, list: List&lt;prodcutClass&gt;): ArrayAdapter&lt;prodcutClass&gt;(context, 0, list) {  
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return initView(position, convertView, parent)
@@ -184,22 +214,37 @@ class spinnerAdapter(context: Context, list: List&lt;prodcutClass&gt;): ArrayAda
     }
 
 }
-        </pre>
+        </code></pre>
     </div>
-    <button class="accordion">文字提取</button>
-    <div class="panel">
-        <pre>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="文字提取">
+          <h2><button class="accordion-trigger" id="exercise1-trigger-5" type="button" aria-expanded="true" aria-controls="exercise1-panel-5" data-accordion-trigger>文字提取</button></h2>
+          <div class="accordion-panel" id="exercise1-panel-5" role="region" aria-labelledby="exercise1-trigger-5" data-accordion-panel>
+        <pre class="code-block"><code>
 findViewById&lt;TextView&gt;(R.id.textView2).text = findViewById&lt;TextView&gt;(R.id.textView).text.substring(0, 3) + " " + findViewById&lt;TextView&gt;(R.id.textView7).text.take(4)
-        </pre>
+        </code></pre>
     </div>
-    <button class="accordion">scrollView上滑</button>
-    <div class="panel">
-        <pre>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="scrollView上滑">
+          <h2><button class="accordion-trigger" id="exercise1-trigger-6" type="button" aria-expanded="true" aria-controls="exercise1-panel-6" data-accordion-trigger>scrollView上滑</button></h2>
+          <div class="accordion-panel" id="exercise1-panel-6" role="region" aria-labelledby="exercise1-trigger-6" data-accordion-panel>
+        <pre class="code-block"><code>
 findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
     <mark>findViewById&lt;ScrollView&gt;(R.id.main).fullScroll(View.FOCUS_UP)</mark>
 }
-        </pre>
+        </code></pre>
     </div>
-<script src="js.js"></script>
+        </article>
+
+
+      </div>
+      <footer class="detail-footer">
+        <a class="button button--secondary" href="index.html">返回 World Skill 練習</a>
+      </footer>
+    </div>
+  </main>
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+  <script src="../assets/js/site-navigation.js" defer></script>
+  <script src="../assets/js/accordion.js" defer></script>
 </body>
 </html>

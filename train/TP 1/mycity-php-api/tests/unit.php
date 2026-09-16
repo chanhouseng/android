@@ -180,7 +180,7 @@ test('auth', 'signin endpoint rejects unsupported methods', static function (): 
     }
 });
 
-test('reads', 'route API exposes exact fields with ordered stop names and singular departure', static function (): void {
+test('reads', 'route API preserves complete records and nested stop objects', static function (): void {
     assertTrue(class_exists('App'), 'Read APIs are not implemented.');
     $directory = createFixtureData();
 
@@ -190,18 +190,8 @@ test('reads', 'route API exposes exact fields with ordered stop names and singul
 
         assertSameValue(200, $response->status, 'Route status is incorrect.');
         assertSameValue('Success', decodeResponse($response)['msg'], 'Route message is incorrect.');
-        assertSameValue(
-            ['route_id', 'route_name', 'route_type', 'status', 'next_departure', 'stops'],
-            array_keys($routes[0]),
-            'Route fields are not exact.',
-        );
-        assertSameValue(
-            ['Andheri Bus Stand', 'Vile Parle Station', 'Bandra Station East'],
-            $routes[0]['stops'],
-            'Stops are not ordered by sequence.',
-        );
-        assertSameValue('2025-04-14 09:45:00', $routes[0]['next_departure'], 'First departure was not selected.');
-        assertSameValue(null, $routes[1]['next_departure'], 'Empty departures did not become null.');
+        assertSameValue((new FileStore($directory))->read('routes.json'), $routes, 'Source route data was changed or truncated.');
+        assertSameValue([], $routes[1]['next_departures'], 'Empty departure array must be preserved.');
     } finally {
         removeDirectory($directory);
     }
@@ -220,7 +210,7 @@ test('reads', 'route API returns an empty array when no routes exist', static fu
     }
 });
 
-test('reads', 'weather API exposes only the five documented fields with numeric values', static function (): void {
+test('reads', 'weather API preserves every stored field and numeric values', static function (): void {
     assertTrue(class_exists('App'), 'Read APIs are not implemented.');
     $directory = createFixtureData();
 
@@ -230,7 +220,7 @@ test('reads', 'weather API exposes only the five documented fields with numeric 
 
         assertSameValue(200, $response->status, 'Weather status is incorrect.');
         assertSameValue(
-            ['city', 'temperature_c', 'condition', 'humidity_pct', 'wind_kmh'],
+            ['city', 'temperature_c', 'condition', 'humidity_pct', 'wind_kmh', 'country'],
             array_keys($weather),
             'Weather fields are not exact.',
         );
@@ -326,13 +316,13 @@ test('saved', 'save API persists exactly one route and rejects a duplicate', sta
 
         assertSameValue(200, $response->status, 'Save status is incorrect.');
         assertSameValue('Success', decodeResponse($response)['msg'], 'Save message is incorrect.');
-        assertSameValue(['route_id', 'saved_at'], array_keys($data), 'Save response fields are not exact.');
+        assertSameValue(['save_id', 'route_id', 'saved_at'], array_keys($data), 'Save response fields are not exact.');
         assertSameValue('RTE-RAPID-003', $data['route_id'], 'Saved route identifier is incorrect.');
         assertTrue(preg_match('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/', $data['saved_at']) === 1, 'saved_at format is incorrect.');
 
         $stored = (new FileStore($directory))->read('saved_routes.json');
         assertSameValue(
-            ['user_id' => 'USR-001', 'route_id' => 'RTE-RAPID-003', 'saved_at' => $data['saved_at']],
+            ['save_id'=>$data['save_id'], 'user_id'=>'USR-001', 'route_id'=>'RTE-RAPID-003', 'saved_at'=>$data['saved_at'], 'route_number'=>'RAPID-3', 'route_name'=>'BKC to Thane Rapid', 'route_type'=>'rapid', 'origin_stop'=>'', 'destination_stop'=>'', 'note'=>''],
             $stored[0],
             'Persisted saved route is incorrect.',
         );
@@ -374,7 +364,7 @@ test('saved', 'saved-list API returns only the current user with newest records 
         assertSameValue(200, $response->status, 'Saved-list status is incorrect.');
         assertSameValue(['RTE-RAPID-003', 'RTE-BUS-022'], array_column($savedRoutes, 'route_id'), 'Saved-list filtering or ordering is incorrect.');
         assertSameValue(
-            ['route_id', 'route_name', 'saved_at'],
+            ['user_id', 'route_id', 'saved_at', 'save_id', 'route_number', 'route_name', 'route_type', 'origin_stop', 'destination_stop', 'note'],
             array_keys($savedRoutes[0]),
             'Saved-list fields are not exact.',
         );

@@ -1,0 +1,9 @@
+{
+  "name": "IS2025 MyCity Transit - LAN",
+  "values": [
+    { "key": "BASE_URL", "value": "172.21.122.235", "type": "default", "enabled": true },
+    { "key": "SERVICE_PORT", "value": "3000", "type": "default", "enabled": true },
+    { "key": "auth_token", "value": "", "type": "secret", "enabled": true }
+  ],
+  "_postman_variable_scope": "environment"
+}

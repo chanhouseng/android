@@ -1,0 +1,369 @@
+[
+  {
+    "id": "homework1",
+    "title": "homework1",
+    "description": "顏色選擇遊戲",
+    "image": "img/homework1.png",
+    "imageAlt": "homework1 成果畫面",
+    "resultPage": "homework1.html",
+    "trainingFolder": "Stroop Challenge",
+    "status": "published",
+    "order": 1
+  },
+  {
+    "id": "homework2",
+    "title": "homework2",
+    "description": "測試",
+    "image": "img/homework2.png",
+    "imageAlt": "homework2 成果畫面",
+    "resultPage": "homework2.html",
+    "trainingFolder": "2024_module7",
+    "status": "published",
+    "order": 2
+  },
+  {
+    "id": "homework4",
+    "title": "homework4",
+    "description": "樣題題目(爛尾)",
+    "image": "img/homework4.png",
+    "imageAlt": "homework4 成果畫面",
+    "resultPage": "homework4.html",
+    "trainingFolder": "moduleB",
+    "status": "published",
+    "order": 3
+  },
+  {
+    "id": "homework5",
+    "title": "homework5",
+    "description": "學校報名系統(自動有格式、三秒停止輸入才顯示資料)",
+    "image": "img/homework5.png",
+    "imageAlt": "homework5 成果畫面",
+    "resultPage": "homework5.html",
+    "trainingFolder": "tp_module02",
+    "status": "published",
+    "order": 4
+  },
+  {
+    "id": "homework6",
+    "title": "homework6",
+    "description": "各種動畫(重覆上下移動、放大、橫向ScrollView的各種設定)",
+    "image": "img/homework6.png",
+    "imageAlt": "homework6 成果畫面",
+    "resultPage": "homework6.html",
+    "trainingFolder": "2022",
+    "status": "published",
+    "order": 5
+  },
+  {
+    "id": "homework7",
+    "title": "homework7",
+    "description": "餐廳訂餐(爛尾，要重新做過，分得太多層)",
+    "image": "img/homework7.png",
+    "imageAlt": "homework7 成果畫面",
+    "resultPage": null,
+    "trainingFolder": "Module_C",
+    "status": "published",
+    "order": 6
+  },
+  {
+    "id": "03-module-c-pm",
+    "title": "03_Module_C_PM",
+    "description": "各種動畫(scrollView自動向上、下移，按比例放大)",
+    "image": "img/03_Module_C_PM.png",
+    "additionalImages": [
+      "img/03_Module_C_PM2.png"
+    ],
+    "imageAlt": "03_Module_C_PM 成果畫面 1",
+    "additionalImageAlts": [
+      "03_Module_C_PM 成果畫面 2"
+    ],
+    "resultPage": "03_Module_C_PM.html",
+    "trainingFolder": "moduleC",
+    "status": "published",
+    "order": 7
+  },
+  {
+    "id": "03-module-a-pm",
+    "title": "03_Module_A_PM",
+    "description": "配對遊戲",
+    "image": "img/03_Module_A_PM.png",
+    "imageAlt": "03_Module_A_PM 成果畫面",
+    "resultPage": "03_Module_A_PM.html",
+    "trainingFolder": "Module 4 PM phone Singapore",
+    "status": "published",
+    "order": 8
+  },
+  {
+    "id": "moudle3-2",
+    "title": "Moudle3_2(壞左，要重啟項目加入返啲內容)",
+    "description": "",
+    "image": null,
+    "resultPage": null,
+    "trainingFolder": null,
+    "status": "published",
+    "order": 9
+  },
+  {
+    "id": "moudle3",
+    "title": "Moudle3(壞左，要重啟項目加入返啲內容)",
+    "description": "",
+    "image": null,
+    "resultPage": null,
+    "trainingFolder": null,
+    "status": "published",
+    "order": 10
+  },
+  {
+    "id": "02-module-a-pm",
+    "title": "02_Module_A_PM",
+    "description": "攞http資料、畫畫、下載圖片、recyclerView制出現Fragment的內容顯示",
+    "image": "img/02_Module_A_PM.png",
+    "imageAlt": "02_Module_A_PM 成果畫面",
+    "resultPage": "02_Module_A_PM.html",
+    "trainingFolder": "module_a_pm",
+    "status": "published",
+    "order": 11
+  },
+  {
+    "id": "03-module-a-am",
+    "title": "03_Module_A_AM",
+    "description": "跌落食物遊戲",
+    "image": "img/03_Module_A_AM.png",
+    "imageAlt": "03_Module_A_AM 成果畫面",
+    "resultPage": "../world skill/03_Module_A_AM.html",
+    "trainingFolder": null,
+    "status": "published",
+    "order": 12
+  },
+  {
+    "id": "jp24july",
+    "title": "jp24july",
+    "description": "邏輯(播放音樂問題、各種動畫(寬度放大、三個layout有同一動畫問題)、拖放)",
+    "image": "img/jp24july.png",
+    "imageAlt": "jp24july 成果畫面",
+    "resultPage": null,
+    "trainingFolder": "Module_6_HK_ModC",
+    "status": "published",
+    "order": 13
+  },
+  {
+    "id": "module-d",
+    "title": "ModuleD",
+    "description": "測試、同一層處理所有顯示",
+    "image": "img/ModuleD.png",
+    "imageAlt": "ModuleD 成果畫面",
+    "resultPage": "ModuleD.html",
+    "trainingFolder": "moduled0619",
+    "status": "published",
+    "order": 14
+  },
+  {
+    "id": "2022-module-a-am",
+    "title": "2022_Module_A_AM",
+    "description": "2022MduleA(chip、下載、選取圖片並存入data) 欄尾(最後錄音嗰part)",
+    "image": "img/2022_Module_A_AM.png",
+    "imageAlt": "2022_Module_A_AM 成果畫面",
+    "resultPage": "2022_Module_A_AM.html",
+    "trainingFolder": "2022ModuleA_AM",
+    "status": "published",
+    "order": 15
+  },
+  {
+    "id": "03-module-c-am",
+    "title": "03_Module_C_AM",
+    "description": "2024ModuleC(動畫、旋轉嘅動畫)",
+    "image": "img/03_Module_C_AM.png",
+    "imageAlt": "03_Module_C_AM 成果畫面",
+    "resultPage": "03_Module_C_AM.html",
+    "trainingFolder": "2024_module_c_am",
+    "status": "published",
+    "order": 16
+  },
+  {
+    "id": "2024-module-c-pm",
+    "title": "2024_ModuleC_PM",
+    "description": "餐廳訂餐",
+    "image": "img/2024_ModuleC_PM.png",
+    "imageAlt": "2024_ModuleC_PM 成果畫面",
+    "resultPage": "2024_ModuleC_PM.html",
+    "trainingFolder": "Module_C",
+    "status": "published",
+    "order": 17
+  },
+  {
+    "id": "password-manager",
+    "title": "passwordManager",
+    "description": "自定按條件生成密碼(練邏輯) --(有啲未做曬，如自定排序同navigation)",
+    "image": "img/passwordManager.png",
+    "imageAlt": "passwordManager 成果畫面",
+    "resultPage": "passwordManager.html",
+    "trainingFolder": "Module01",
+    "status": "published",
+    "order": 18
+  },
+  {
+    "id": "myhealth-data",
+    "title": "MYHealthDATA",
+    "description": "2024交流題目，內容較雜(alertDialog)",
+    "image": "img/MYHealthDATA.png",
+    "imageAlt": "MYHealthDATA 成果畫面",
+    "resultPage": "MYHealthDATA.html",
+    "trainingFolder": "My Health data",
+    "status": "published",
+    "order": 19
+  },
+  {
+    "id": "06-module-kr-am",
+    "title": "06_Module_KR_AM",
+    "description": "好多都要自己定data(佢要動畫去滑動下一版比較難)",
+    "image": "img/06_Module_KR_AM.png",
+    "imageAlt": "06_Module_KR_AM 成果畫面",
+    "resultPage": "06_Module_KR_AM.html",
+    "trainingFolder": "SS_MAD_TP_KR",
+    "status": "published",
+    "order": 20
+  },
+  {
+    "id": "einstein-cup",
+    "title": "einsteinCup",
+    "description": "一個好好嘅ModuleA題目 (揀座位，要顯示返bottomNavigationView顏色)",
+    "image": "img/einsteinCup.png",
+    "imageAlt": "einsteinCup 成果畫面",
+    "resultPage": "einsteinCup.html",
+    "trainingFolder": "Session 1",
+    "status": "published",
+    "order": 21
+  },
+  {
+    "id": "note-taking-app",
+    "title": "Note-Taking App",
+    "description": "類似word的功能，大量邏輯要處理，也有好多數據的處理",
+    "image": "img/Note_Taking_App.png",
+    "imageAlt": "Note-Taking App 成果畫面",
+    "resultPage": "Note_Taking_App.html",
+    "trainingFolder": "Note-Taking App",
+    "status": "published",
+    "order": 22
+  },
+  {
+    "id": "3-module-c",
+    "title": "3ModuleC",
+    "description": "普通的鍛練題目",
+    "image": "img/3ModuleC.png",
+    "imageAlt": "3ModuleC 成果畫面",
+    "resultPage": "3ModuleC.html",
+    "trainingFolder": "3. Module C",
+    "status": "published",
+    "order": 23
+  },
+  {
+    "id": "03-module-b",
+    "title": "03_Module_B",
+    "description": "香港交流賽題目，最全面的凙輯處理、影相、選影等等相關的操作",
+    "image": "img/03_Module_B.png",
+    "imageAlt": "03_Module_B 成果畫面",
+    "resultPage": "03_Module_B.html",
+    "trainingFolder": "Hong Kong-Macau Friendship Challenge Module B",
+    "status": "published",
+    "order": 24
+  },
+  {
+    "id": "hk-module-c",
+    "title": "hkModuleC",
+    "description": "2022 ModuleC 舊題",
+    "image": "img/hkModuleC.png",
+    "imageAlt": "hkModuleC 成果畫面",
+    "resultPage": "hkModuleC.html",
+    "trainingFolder": "2022ModuoleC_AM",
+    "status": "published",
+    "order": 25
+  },
+  {
+    "id": "in-module2026-2-5",
+    "title": "IN_Module2026(未做完，只係2.5小時成品)",
+    "description": "日本線上賽題目(多而煩，如加clipGroup)",
+    "image": "img/IN_Module2026.png",
+    "imageAlt": "IN_Module2026 成果畫面",
+    "resultPage": "IN_Module2026.html",
+    "trainingFolder": "ModuleB_Phone_IN",
+    "status": "published",
+    "order": 26
+  },
+  {
+    "id": "skill08-timer-2-5",
+    "title": "Skill08_Timer (2.5小時版本)",
+    "description": "日本線上題目(計時、加項目)",
+    "image": "img/Skill08_Timer.png",
+    "imageAlt": "Skill08_Timer 成果畫面",
+    "resultPage": "Skill08_Timer.html",
+    "trainingFolder": "ModuleC_Tablet_HK",
+    "status": "published",
+    "order": 27
+  },
+  {
+    "id": "neubranden-book-fans",
+    "title": "NeubrandenBookFans",
+    "description": "印度愛因斯坦盃(多、要複製設計、reviews功能)",
+    "image": "img/NeubrandenBookFans.png",
+    "imageAlt": "NeubrandenBookFans 成果畫面",
+    "resultPage": "NeubrandenBookFans.html",
+    "trainingFolder": "Module C （DE Session 3）",
+    "status": "published",
+    "order": 28
+  },
+  {
+    "id": "203-module-a-am",
+    "title": "203_Module_A_AM",
+    "description": "2022年moduleA，滑雪(兩小時版)",
+    "image": "img/203_Module_A_AM.png",
+    "imageAlt": "203_Module_A_AM 成果畫面",
+    "resultPage": "203_Module_A_AM.html",
+    "trainingFolder": "module5/module_a_am",
+    "status": "published",
+    "order": 29
+  },
+  {
+    "id": "203-module-a-pm",
+    "title": "203_Module_A_PM",
+    "description": "2022年moduleA，網上load影片",
+    "image": "img/203_Module_A_PM.png",
+    "imageAlt": "203_Module_A_PM 成果畫面",
+    "resultPage": "203_Module_A_PM.html",
+    "trainingFolder": "2022_module_a",
+    "status": "published",
+    "order": 30
+  },
+  {
+    "id": "203-module-c-am",
+    "title": "203_Module_C_AM",
+    "description": "2024年moduleC舊題重做，改善左個第一版，之後會喺呢到做埋最後嗰版",
+    "image": "img/203_Module_C_AM.png",
+    "imageAlt": "203_Module_C_AM 成果畫面",
+    "resultPage": "203_Module_C_AM.html",
+    "trainingFolder": "2024_module_c_am",
+    "status": "published",
+    "order": 31
+  },
+  {
+    "id": "module1",
+    "title": "module1",
+    "description": "大小標的轉換做不到，加入刪除都要有動畫(做唔到)",
+    "image": "img/module1.png",
+    "imageAlt": "module1 成果畫面",
+    "resultPage": "module1.html",
+    "trainingFolder": "module1",
+    "status": "published",
+    "order": 32
+  },
+  {
+    "id": "module-e",
+    "title": "moduleE",
+    "description": "就好簡單的包剪揼遊戲，用when判斷",
+    "image": "img/moduleE.png",
+    "imageAlt": "moduleE 成果畫面",
+    "resultPage": "moduleE.html",
+    "trainingFolder": "Module E",
+    "status": "published",
+    "order": 33
+  }
+]

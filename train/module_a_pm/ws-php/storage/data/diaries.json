@@ -1,0 +1,122 @@
+[
+    {
+        "diary_id": "BA23617D-42DA-8C4A-F569-C1915B9B55B1",
+        "diary_title": "Brushstrokes of Time",
+        "diary_main_text": "resources/Musee d Orsay/d1.json",
+        "diary_upload_datetime": "2023-03-01 12:30:30",
+        "diary_image": "resources/Musee d Orsay/1.jpg",
+        "diary_upload_username": "Zachary Butler"
+    },
+    {
+        "diary_id": "17B9C94E-F829-6088-FA92-9A07EEA00A8E",
+        "diary_title": "Journey Through the Splendor of French Art",
+        "diary_main_text": "resources/Musee d Orsay/d2.json",
+        "diary_upload_datetime": "2023-04-25 09:50:30",
+        "diary_image": "resources/Musee d Orsay/3.jpg",
+        "diary_upload_username": "Jake Clarke"
+    },
+    {
+        "diary_id": "5D502A3E-6AF2-4D5F-9D8D-B6351F42C901",
+        "diary_title": "Echoes Beneath the Marble Sky",
+        "diary_main_text": "resources/Musee d Orsay/d3.json",
+        "diary_upload_datetime": "2023-07-11 18:05:22",
+        "diary_image": "resources/Musee d Orsay/5.jpg",
+        "diary_upload_username": "Amelia Hayes"
+    },
+    {
+        "diary_id": "A1F8D3C9-7E44-4E8E-9A31-8E9D1F2A1001",
+        "diary_title": "Morning Notes in Blue",
+        "diary_main_text": "resources/demo/d4.json",
+        "diary_upload_datetime": "2023-08-02 08:15:10",
+        "diary_image": "resources/demo/4.jpg",
+        "diary_upload_username": "Noah Bennett"
+    },
+    {
+        "diary_id": "C7B2E0A1-0B4D-4D7A-8A1A-9F4D6E3B1002",
+        "diary_title": "The Quiet Museum Hall",
+        "diary_main_text": "resources/demo/d5.json",
+        "diary_upload_datetime": "2023-08-18 14:40:55",
+        "diary_image": "resources/demo/5.jpg",
+        "diary_upload_username": "Sophia Clarke"
+    },
+    {
+        "diary_id": "D3E91F6A-5C22-4F9A-9C0A-2B7E4F910003",
+        "diary_title": "Sunday at the Gallery",
+        "diary_main_text": "resources/demo/d6.json",
+        "diary_upload_datetime": "2023-09-01 10:05:30",
+        "diary_image": "resources/demo/6.jpg",
+        "diary_upload_username": "Ethan Walker"
+    },
+    {
+        "diary_id": "E5A7B0D2-8F13-4A4D-90B7-1D3E7A920004",
+        "diary_title": "Ink, Light, and Silence",
+        "diary_main_text": "resources/demo/d7.json",
+        "diary_upload_datetime": "2023-09-12 19:22:08",
+        "diary_image": "resources/demo/7.jpg",
+        "diary_upload_username": "Mia Johnson"
+    },
+    {
+        "diary_id": "F8C12A4B-3D5E-4C9D-88B7-6A2F8A930005",
+        "diary_title": "Late Autumn Sketches",
+        "diary_main_text": "resources/demo/d8.json",
+        "diary_upload_datetime": "2023-10-03 16:12:41",
+        "diary_image": "resources/demo/8.jpg",
+        "diary_upload_username": "Liam Turner"
+    },
+    {
+        "diary_id": "0B7D8E19-2F4A-4B7A-9F6C-4A1B9B940006",
+        "diary_title": "Fragments of a Rainy Day",
+        "diary_main_text": "resources/demo/d9.json",
+        "diary_upload_datetime": "2023-10-21 11:50:20",
+        "diary_image": "resources/demo/9.jpg",
+        "diary_upload_username": "Olivia Harris"
+    },
+    {
+        "diary_id": "1C9A2E7F-6B4D-4E2F-A1C9-7D8E9C950007",
+        "diary_title": "Sketchbook of Shadows",
+        "diary_main_text": "resources/demo/d10.json",
+        "diary_upload_datetime": "2023-11-05 09:33:12",
+        "diary_image": "resources/demo/10.jpg",
+        "diary_upload_username": "Lucas Martin"
+    },
+    {
+        "diary_id": "2D1F3C8A-9E5B-4A21-B8D7-5C9E1D960008",
+        "diary_title": "Walking Past Old Frames",
+        "diary_main_text": "resources/demo/d11.json",
+        "diary_upload_datetime": "2023-11-19 13:08:44",
+        "diary_image": "resources/demo/11.jpg",
+        "diary_upload_username": "Emma Wilson"
+    },
+    {
+        "diary_id": "3E2A4B9C-1F6D-4C3B-8A5E-8B1F2E970009",
+        "diary_title": "A Small Room of Color",
+        "diary_main_text": "resources/demo/d12.json",
+        "diary_upload_datetime": "2023-12-02 17:25:36",
+        "diary_image": "resources/demo/12.jpg",
+        "diary_upload_username": "James Brown"
+    },
+    {
+        "diary_id": "4F3B5C0D-2A7E-4D4C-9B6F-9C2A3F980010",
+        "diary_title": "Notes from the Quiet Wing",
+        "diary_main_text": "resources/demo/d13.json",
+        "diary_upload_datetime": "2024-01-14 08:48:19",
+        "diary_image": "resources/demo/13.jpg",
+        "diary_upload_username": "Charlotte Lee"
+    },
+    {
+        "diary_id": "5A4C6D1E-3B8F-4E5D-AC70-AD3B4F990011",
+        "diary_title": "After Hours in the Archive",
+        "diary_main_text": "resources/demo/d14.json",
+        "diary_upload_datetime": "2024-02-06 21:10:03",
+        "diary_image": "resources/demo/14.jpg",
+        "diary_upload_username": "Benjamin Scott"
+    },
+    {
+        "diary_id": "6B5D7E2F-4C90-4F6E-BD81-BE4C5A9A0012",
+        "diary_title": "Fifteen Minutes Before Closing",
+        "diary_main_text": "resources/demo/d15.json",
+        "diary_upload_datetime": "2024-03-09 18:55:27",
+        "diary_image": "resources/demo/15.jpg",
+        "diary_upload_username": "Ava King"
+    }
+]

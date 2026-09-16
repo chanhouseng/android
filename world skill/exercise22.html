@@ -1,62 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-Hant" data-site-root="../">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>exercise22｜World Skill 練習</title>
+  <link rel="stylesheet" href="../assets/css/foundation.css">
+  <link rel="stylesheet" href="../assets/css/app-shell.css">
+  <link rel="stylesheet" href="../assets/css/accordion.css">
+  <link rel="stylesheet" href="../assets/css/detail-page.css">
 </head>
 <body>
-<pre>
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="../index.html" aria-label="返回首頁"><span class="brand-mark" aria-hidden="true">AL</span><span class="brand-copy"><strong>Android Learning</strong><span>WORKSPACE</span></span></a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+  <main class="app-main" id="main-content" tabindex="-1">
+    <div class="container detail-page">
+      <nav aria-label="Breadcrumb">
+        <ol class="detail-breadcrumb">
+          <li><a href="../index.html">首頁</a></li>
+          <li><a href="index.html">World Skill 練習</a></li>
+          <li><span aria-current="page">exercise22</span></li>
+        </ol>
+      </nav>
+      <header class="detail-header">
+        <a class="button button--ghost detail-header__back" href="index.html">返回 World Skill 練習</a>
+        <p class="detail-eyebrow">WORLD SKILL · DETAIL</p>
+        <h1>exercise22</h1>
+      </header>
+      <div class="detail-content" data-accordion-root data-original-content>
+<pre class="code-block"><code>
 <mark>喺張圖加返個linearLayout會好啲</mark>
 val main : LinearLayout = findViewById(R.id.main)
 val imageView : ImageView = findViewById(R.id.imageView)
-</pre>
-    <button class="accordion">放大</button>
-    <div class="panel">
-        <pre>
+</code></pre>
+          <article class="accordion-item card" data-accordion-item data-title="放大">
+            <h2><button class="accordion-trigger" id="exercise22-trigger-1" type="button" aria-expanded="true" aria-controls="exercise22-panel-1" data-accordion-trigger>放大</button></h2>
+            <div class="accordion-panel" id="exercise22-panel-1" role="region" aria-labelledby="exercise22-trigger-1" data-accordion-panel>
+              <pre class="code-block"><code>
 var scaleFactor = 1f
-val scaleDetector = ScaleGestureDetector(this, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {    <span>//建立一個「縮放偵測器」</span>
+val scaleDetector = ScaleGestureDetector(this, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {    <span class="code-comment">//建立一個「縮放偵測器」</span>
     override fun onScale(detector: ScaleGestureDetector): Boolean {
-        val scale = detector.scaleFactor    <span>//取得這一瞬間兩指的縮放比例</span>
+        val scale = detector.scaleFactor    <span class="code-comment">//取得這一瞬間兩指的縮放比例</span>
         val nextScale = scale * scaleFactor
         if(nextScale in (1f..5f)){
             scaleFactor = nextScale
-            imageView.scaleX = nextScale    <span>//把圖片的寬度和高度都縮放到新的倍數</span>
+            imageView.scaleX = nextScale    <span class="code-comment">//把圖片的寬度和高度都縮放到新的倍數</span>
             imageView.scaleY = nextScale
-            imageView.pivotX = detector.focusX    <span>//把縮放的中心點設成兩根手指的中間位置。</span>
+            imageView.pivotX = detector.focusX    <span class="code-comment">//把縮放的中心點設成兩根手指的中間位置。</span>
             imageView.pivotY = detector.focusY
         }
         return true
     }
 })
-        </pre>
-    </div>
-    <button class="accordion">移勳</button>
-    <div class="panel">
-        <pre>
-val gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener(){    <span>//建立一個「手勢偵測器」</span>
+        </code></pre>
+            </div>
+          </article>
+          <article class="accordion-item card" data-accordion-item data-title="移勳">
+            <h2><button class="accordion-trigger" id="exercise22-trigger-2" type="button" aria-expanded="true" aria-controls="exercise22-panel-2" data-accordion-trigger>移勳</button></h2>
+            <div class="accordion-panel" id="exercise22-panel-2" role="region" aria-labelledby="exercise22-trigger-2" data-accordion-panel>
+              <pre class="code-block"><code>
+val gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener(){    <span class="code-comment">//建立一個「手勢偵測器」</span>
     override fun onScroll(
         e1: MotionEvent?,
         e2: MotionEvent,
         distanceX: Float,
         distanceY: Float
     ): Boolean {
-        imageView.translationX -= distanceX    <span>//distanceX / distanceY 是這一瞬間手指移動的距離</span>
+        imageView.translationX -= distanceX    <span class="code-comment">//distanceX / distanceY 是這一瞬間手指移動的距離</span>
         imageView.translationY -= distanceY
         return true
     }
 })
-        </pre>
-    </div>
-<pre>
+        </code></pre>
+            </div>
+          </article>
+<pre class="code-block"><code>
 main.setOnTouchListener { v, event -&gt;
-    scaleDetector.onTouchEvent(event)    <span>//把所有的觸控事件同時交給兩個偵測器處理。</span>
+    scaleDetector.onTouchEvent(event)    <span class="code-comment">//把所有的觸控事件同時交給兩個偵測器處理。</span>
     gestureDetector.onTouchEvent(event)
     true
 }
-</pre>
-<script src="js.js"></script>
+</code></pre>
+      </div>
+      <footer class="detail-footer">
+        <a class="button button--secondary" href="index.html">返回 World Skill 練習</a>
+      </footer>
+    </div>
+  </main>
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+  <script src="../assets/js/site-navigation.js" defer></script>
+  <script src="../assets/js/accordion.js" defer></script>
 </body>
 </html>

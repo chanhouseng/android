@@ -3,8 +3,9 @@ import {
   buildFileUrl,
   buildFolderUrl,
   getImmediateChildren,
-  resolveCurrentFolder,
+  resolveTrainingRoute,
   searchEntries,
+  updateTrainingHistory,
 } from './browser-core.js';
 
 const elements = {
@@ -26,6 +27,8 @@ const elements = {
 
 let entries = [];
 let currentPath = '';
+let requestedPath = '';
+let routeStatus = 'loading';
 let query = '';
 let stateActionHandler = null;
 
@@ -80,7 +83,7 @@ function hideState() {
 }
 
 function renderBreadcrumbs() {
-  const breadcrumbData = buildBreadcrumbs(currentPath);
+  const breadcrumbData = buildBreadcrumbs(routeStatus === 'not-found' ? requestedPath : currentPath);
   const list = document.createElement('ol');
   list.className = 'breadcrumb-list';
 
@@ -106,7 +109,7 @@ function renderBreadcrumbs() {
     } else {
       const link = document.createElement('a');
       link.className = 'breadcrumb-link';
-      link.href = buildFolderUrl(breadcrumb.path);
+      link.href = breadcrumb.href;
       link.textContent = breadcrumb.name;
       link.addEventListener('click', (event) => {
         event.preventDefault();
@@ -130,14 +133,16 @@ function createEntry(entry, isSearchResult) {
   const item = document.createElement('li');
   item.className = 'entry';
 
-  const control = entry.type === 'folder'
-    ? document.createElement('button')
-    : document.createElement('a');
+  const control = document.createElement('a');
   control.className = `entry-control entry-${entry.type}`;
 
   if (entry.type === 'folder') {
-    control.type = 'button';
-    control.addEventListener('click', () => navigateToFolder(entry.path));
+    control.href = buildFolderUrl(entry.path);
+    control.addEventListener('click', (event) => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      navigateToFolder(entry.path);
+    });
   } else {
     control.href = buildFileUrl(entry.path);
     control.download = entry.name;
@@ -171,6 +176,26 @@ function animateResults() {
 
 function render() {
   renderBreadcrumbs();
+
+  if (routeStatus === 'not-found') {
+    elements.fileList.replaceChildren();
+    elements.fileList.setAttribute('aria-busy', 'false');
+    elements.contentTitle.textContent = '找不到資料夾';
+    elements.itemCount.textContent = '';
+    elements.searchSummary.textContent = '';
+    elements.clearSearch.hidden = true;
+    showState({
+      title: '找不到這個訓練資料夾。',
+      message: requestedPath
+        ? `train/ 中沒有「${requestedPath}」這個資料夾。`
+        : '網址包含無法辨識或不安全的資料夾路徑。',
+      actionLabel: '返回訓練題目根目錄',
+      onAction: () => navigateToFolder(''),
+    });
+    announce('找不到這個訓練資料夾。');
+    return;
+  }
+
   const isSearching = Boolean(query.trim());
   const visibleEntries = isSearching
     ? searchEntries(entries, query)
@@ -222,30 +247,33 @@ function clearSearch() {
 
 function navigateToFolder(folderPath, { replace = false } = {}) {
   currentPath = folderPath;
+  requestedPath = folderPath;
+  routeStatus = 'ready';
   query = '';
   elements.searchInput.value = '';
+  elements.searchInput.disabled = false;
   setRouteNotice();
 
-  const method = replace ? 'replaceState' : 'pushState';
-  window.history[method]({ path: folderPath }, '', buildFolderUrl(folderPath));
+  updateTrainingHistory(window.history, folderPath, { replace });
   render();
 }
 
-function syncPathFromLocation({ showInvalidNotice = false } = {}) {
-  const requestedPath = new URL(window.location.href).searchParams.get('path') || '';
-  const resolvedPath = resolveCurrentFolder(entries, requestedPath);
-  const isInvalid = requestedPath !== resolvedPath;
-  currentPath = resolvedPath;
+function syncPathFromLocation() {
+  const route = resolveTrainingRoute(entries, window.location.pathname, window.location.search);
+  currentPath = route.path ?? '';
+  requestedPath = route.requestedPath ?? '';
+  routeStatus = route.status;
+  elements.searchInput.disabled = routeStatus === 'not-found';
+  setRouteNotice();
 
-  if (isInvalid) {
-    window.history.replaceState({ path: '' }, '', buildFolderUrl(''));
-    if (showInvalidNotice) {
-      setRouteNotice('找不到要求的資料夾，已返回 train/ 根目錄。');
-      announce('找不到要求的資料夾，已返回根目錄。');
+  if (route.isLegacy && route.canonicalUrl) {
+    updateTrainingHistory(window.history, requestedPath, { replace: true });
+  } else if (route.status === 'ready') {
+    if (`${window.location.pathname}${window.location.search}` !== route.canonicalUrl) {
+      updateTrainingHistory(window.history, currentPath, { replace: true });
+    } else {
+      window.history.replaceState({ path: currentPath }, '', route.canonicalUrl);
     }
-  } else {
-    window.history.replaceState({ path: currentPath }, '', window.location.href);
-    setRouteNotice();
   }
 }
 
@@ -255,7 +283,7 @@ async function loadManifest() {
   showState({ title: '正在載入檔案…' });
 
   try {
-    const response = await fetch('./files.json', { cache: 'no-store' });
+    const response = await fetch('/training/files.json', { cache: 'no-store' });
     if (!response.ok) throw new Error(`Manifest request failed: ${response.status}`);
 
     const manifest = await response.json();
@@ -263,7 +291,7 @@ async function loadManifest() {
 
     entries = manifest;
     elements.searchInput.disabled = false;
-    syncPathFromLocation({ showInvalidNotice: true });
+    syncPathFromLocation();
     render();
   } catch (error) {
     console.error('Unable to load training index', error);
@@ -291,7 +319,7 @@ elements.stateAction.addEventListener('click', () => stateActionHandler?.());
 window.addEventListener('popstate', () => {
   query = '';
   elements.searchInput.value = '';
-  syncPathFromLocation({ showInvalidNotice: true });
+  syncPathFromLocation();
   render();
 });
 

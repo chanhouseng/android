@@ -1,0 +1,242 @@
+.app-sidebar {
+  position: fixed;
+  z-index: 20;
+  inset-block: 0;
+  inset-inline-start: 0;
+  display: flex;
+  width: var(--sidebar-width);
+  padding: var(--space-8) var(--space-6);
+  flex-direction: column;
+  background: var(--color-surface);
+  border-inline-end: var(--border-width) solid var(--color-border);
+}
+
+.brand-lockup {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: var(--logo-size);
+  height: var(--logo-size);
+  flex: 0 0 auto;
+  place-items: center;
+  color: var(--color-surface);
+  background: var(--color-brand);
+  border-radius: var(--radius-3);
+  font-family: var(--font-data);
+  font-size: var(--font-size-5);
+  font-weight: var(--font-weight-semibold);
+}
+
+.brand-copy {
+  display: grid;
+  line-height: var(--line-height-tight);
+}
+
+.brand-copy strong {
+  font-size: var(--font-size-5);
+}
+
+.brand-copy span {
+  color: var(--color-text-secondary);
+  font-family: var(--font-code);
+  font-size: var(--font-size-1);
+}
+
+.desktop-navigation {
+  position: relative;
+  margin-block-start: var(--space-10);
+}
+
+.site-navigation {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.desktop-navigation .site-navigation::before {
+  position: absolute;
+  z-index: -1;
+  inset-block: var(--space-6);
+  inset-inline-start: calc(var(--space-5) - var(--rail-width));
+  width: var(--rail-width);
+  content: "";
+  background: var(--color-border);
+}
+
+.site-navigation__link {
+  display: flex;
+  min-height: var(--control-size);
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-2);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  transition:
+    color var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard);
+}
+
+.site-navigation__link:hover {
+  color: var(--color-brand-hover);
+  background: var(--color-subtle);
+}
+
+.site-navigation__link[aria-current="page"] {
+  color: var(--color-brand-hover);
+  background: var(--color-brand-soft);
+  font-weight: var(--font-weight-semibold);
+}
+
+.site-navigation__marker {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: var(--space-4);
+  height: var(--space-4);
+  flex: 0 0 auto;
+  place-items: center;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  border: var(--rail-width) solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-family: var(--font-code);
+  font-size: var(--font-size-1);
+}
+
+.site-navigation__link[aria-current="page"] .site-navigation__marker {
+  color: var(--color-surface);
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+}
+
+.sidebar-note {
+  margin-block: auto 0;
+  padding-block-start: var(--space-6);
+  color: var(--color-text-secondary);
+  border-block-start: var(--border-width) solid var(--color-border);
+  font-family: var(--font-code);
+  font-size: var(--font-size-1);
+}
+
+.app-main {
+  min-height: 100vh;
+  margin-inline-start: var(--sidebar-width);
+}
+
+.mobile-navigation {
+  display: none;
+}
+
+@media (max-width: 56rem) {
+  .app-sidebar {
+    display: none;
+  }
+
+  .app-main {
+    margin-inline-start: 0;
+    padding-block-end: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom));
+  }
+
+  .mobile-navigation {
+    position: fixed;
+    z-index: 30;
+    inset-inline: 0;
+    inset-block-end: 0;
+    display: block;
+    min-height: var(--mobile-nav-height);
+    padding: var(--space-2) var(--space-2) max(var(--space-2), env(safe-area-inset-bottom));
+    background: var(--color-surface);
+    border-block-start: var(--border-width) solid var(--color-border);
+    box-shadow: var(--shadow-nav);
+  }
+
+  .mobile-navigation .site-navigation {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-1);
+  }
+
+  .mobile-navigation .site-navigation__link {
+    min-width: 0;
+    min-height: calc(var(--mobile-nav-height) - var(--space-4));
+    gap: var(--space-1);
+    padding: var(--space-1);
+    flex-direction: column;
+    justify-content: center;
+    font-size: var(--font-size-2);
+    text-align: center;
+  }
+
+  .mobile-navigation .site-navigation__marker {
+    width: var(--space-3);
+    height: var(--space-3);
+    font-size: var(--font-size-hidden);
+  }
+
+  .mobile-navigation__more-toggle {
+    width: 100%;
+    min-height: var(--control-size);
+    appearance: none;
+    background: var(--color-transparent);
+    border: var(--border-width) solid var(--color-transparent);
+    cursor: pointer;
+    font: inherit;
+  }
+
+  .mobile-navigation__more-toggle[aria-expanded="true"],
+  .mobile-navigation__more-toggle[data-current="true"] {
+    color: var(--color-brand-hover);
+    background: var(--color-brand-soft);
+  }
+
+  .mobile-navigation__more-menu {
+    position: absolute;
+    inset-inline: var(--space-2);
+    inset-block-end: calc(100% + var(--space-2));
+    padding: var(--space-3);
+    background: var(--color-surface);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-3);
+    box-shadow: var(--shadow-raised);
+  }
+
+  .mobile-navigation__more-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .mobile-navigation__more-link {
+    display: flex;
+    min-width: 0;
+    min-height: var(--control-size);
+    gap: var(--space-2);
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
+    color: var(--color-text-secondary);
+    background: var(--color-subtle);
+    border-radius: var(--radius-2);
+    font-size: var(--font-size-3);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+  }
+
+  .mobile-navigation__more-link:hover,
+  .mobile-navigation__more-link:focus-visible,
+  .mobile-navigation__more-link[aria-current="page"] {
+    color: var(--color-brand-hover);
+    background: var(--color-brand-soft);
+  }
+}

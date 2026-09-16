@@ -1,16 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-Hant" data-site-root="../">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>class4_2｜World Skill 練習</title>
+  <link rel="stylesheet" href="../assets/css/foundation.css">
+  <link rel="stylesheet" href="../assets/css/app-shell.css">
+  <link rel="stylesheet" href="../assets/css/accordion.css">
+  <link rel="stylesheet" href="../assets/css/detail-page.css">
 </head>
 <body>
-    <button class="accordion">code</button>
-<div class="panel">
-    <pre>
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="../index.html" aria-label="返回首頁"><span class="brand-mark" aria-hidden="true">AL</span><span class="brand-copy"><strong>Android Learning</strong><span>WORKSPACE</span></span></a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+  <main class="app-main" id="main-content" tabindex="-1">
+    <div class="container detail-page">
+      <nav aria-label="Breadcrumb">
+        <ol class="detail-breadcrumb">
+          <li><a href="../index.html">首頁</a></li>
+          <li><a href="index.html">World Skill 練習</a></li>
+          <li><span aria-current="page">class4_2</span></li>
+        </ol>
+      </nav>
+      <header class="detail-header">
+        <a class="button button--ghost detail-header__back" href="index.html">返回 World Skill 練習</a>
+        <p class="detail-eyebrow">WORLD SKILL · DETAIL</p>
+        <h1>class4_2</h1>
+      </header>
+      <div class="detail-content" data-accordion-root data-original-content>
+    <article class="accordion-item card" data-accordion-item data-title="code">
+          <h2><button class="accordion-trigger" id="class4_2-trigger-1" type="button" aria-expanded="true" aria-controls="class4_2-panel-1" data-accordion-trigger>code</button></h2>
+          <div class="accordion-panel" id="class4_2-panel-1" role="region" aria-labelledby="class4_2-trigger-1" data-accordion-panel>
+    <pre class="code-block"><code>
 <h3>login page</h3>
 findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
     <mark>val requestBody = FormBody.Builder()
@@ -28,7 +52,7 @@ findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
 
         override fun onResponse(call: Call, response: Response) {
             val resultString = response.body?.string()
-            val results = Gson().fromJson(resultString, GetToken::class.java)  <span>//GetToken Class 要睇返佢return 咩值返嚟
+            val results = Gson().fromJson(resultString, GetToken::class.java)  <span class="code-comment">//GetToken Class 要睇返佢return 咩值返嚟
             </span>
             Data.token = results.token
             runOnUiThread {
@@ -47,7 +71,7 @@ findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
 
 }
 
-<span>/////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
+<span class="code-comment">/////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
 <h3>data page</h3>
 var token = Data.token ?: intent.getStringExtra("token")
 val req = okhttp3.Request.Builder().url("https://www.cpttm.org.mo/ws/posts/index.php")
@@ -81,19 +105,19 @@ OkHttpClient().newCall(req).enqueue(object : Callback{
                 else{
                     layout.findViewById&lt;ImageView&gt;(R.id.isLike).setImageResource(R.drawable.unlike)
                 }
-                layout.findViewById&lt;ImageView&gt;(R.id.isLike).setOnClickListener {         <span>//like 判斷和記錄</span>
+                layout.findViewById&lt;ImageView&gt;(R.id.isLike).setOnClickListener {         <span class="code-comment">//like 判斷和記錄</span>
                     result.is_like = !result.is_like
-                    val requestBody = FormBody.Builder()             <span>//一定要俾個requestBody 即使唔add任何野</span>
+                    val requestBody = FormBody.Builder()             <span class="code-comment">//一定要俾個requestBody 即使唔add任何野</span>
                         .build()
                     val req = Request.Builder().url("https://www.cpttm.org.mo/ws/posts/${result.id}/likes")
-                        <mark>.addHeader("Authorization", "Bearer ${token}")</mark>       <span>攞token先可以入到去攞數據</span>
+                        <mark>.addHeader("Authorization", "Bearer ${token}")</mark>       <span class="code-comment">攞token先可以入到去攞數據</span>
                     if(result.is_like){
                         layout.findViewById&lt;ImageView&gt;(R.id.isLike).setImageResource(R.drawable.like)
                         req.post(requestBody)
                     }
                     else{
                         layout.findViewById&lt;ImageView&gt;(R.id.isLike).setImageResource(R.drawable.unlike)
-                        req.delete(requestBody)          <span>true to false</span>
+                        req.delete(requestBody)          <span class="code-comment">true to false</span>
                     }
                     OkHttpClient().newCall(req.build()).enqueue(object : Callback{
                         override fun onFailure(call: Call, e: IOException) {
@@ -119,7 +143,7 @@ OkHttpClient().newCall(req).enqueue(object : Callback{
 
 })
 
-<span>////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
+<span class="code-comment">////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
 <h3>add page</h3>
 <mark>getId()</mark>
 button.setOnClickListener {
@@ -129,7 +153,7 @@ button.setOnClickListener {
     val time = findViewById&lt;EditText&gt;(R.id.time).text.toString()
     is_like = checkBox.isChecked
 
-    val jsonString = """      <span>//先俾個jsonString俾佢 之後入落個okhttp3到</span>
+    val jsonString = """      <span class="code-comment">//先俾個jsonString俾佢 之後入落個okhttp3到</span>
     {
         "title" : "title: $title",
         "content" : "$content",
@@ -139,10 +163,10 @@ button.setOnClickListener {
         }
     }
     """.trimIndent()
-    <mark>val mediaType = "application/json; charset=utf-8".toMediaType()</mark>     <span>//設定格式JSON</span>
+    <mark>val mediaType = "application/json; charset=utf-8".toMediaType()</mark>     <span class="code-comment">//設定格式JSON</span>
     val req = Request.Builder().url("https://www.cpttm.org.mo/ws/posts/index.php")
         .addHeader("Authorization", "Bearer ${token}")
-        <mark>.post(jsonString.toRequestBody(mediaType))</mark>     <span>//把內容加入去, 以JSON格式</span>
+        <mark>.post(jsonString.toRequestBody(mediaType))</mark>     <span class="code-comment">//把內容加入去, 以JSON格式</span>
         .build()
     OkHttpClient().newCall(req).enqueue(object : Callback{
         override fun onFailure(call: Call, e: IOException) {
@@ -154,14 +178,14 @@ button.setOnClickListener {
             runOnUiThread {
                 //Toast.makeText(this@MainActivity3, result, Toast.LENGTH_SHORT).show()
 
-                <mark>goLike(is_like)</mark>          <span>程式唔一定由上至下運行 有唔同速度 所以要先getid再golike</span>
+                <mark>goLike(is_like)</mark>          <span class="code-comment">程式唔一定由上至下運行 有唔同速度 所以要先getid再golike</span>
             }
         }
 
     })
 }
 
-<span>function</span>
+<span class="code-comment">function</span>
         fun getId() {
             val req1 = Request.Builder().url("https://www.cpttm.org.mo/ws/posts/index.php")
                 .addHeader("Authorization", "Bearer ${token}").build()
@@ -172,12 +196,12 @@ button.setOnClickListener {
                 override fun onResponse(call: Call, response: Response) {
                     val resultString = response.body?.string()
                     val results = Gson().fromJson(resultString, Array&lt;ContentClass&gt;::class.java)
-                    newId = results.last().id + 1         <span>設置最新ID 即使冇加到 都唔會有跳ID的情況</span>
+                    newId = results.last().id + 1         <span class="code-comment">設置最新ID 即使冇加到 都唔會有跳ID的情況</span>
                 }
             })
         }
 
-        <span>就data page 的like 差唔多</span>
+        <span class="code-comment">就data page 的like 差唔多</span>
         fun goLike(is_like: Boolean){
             val requestBody = FormBody.Builder().build()
         
@@ -212,8 +236,19 @@ button.setOnClickListener {
 
 
 
-    </pre>
+    </code></pre>
 </div>
-<script src="js.js"></script>
+        </article>
+
+
+      </div>
+      <footer class="detail-footer">
+        <a class="button button--secondary" href="index.html">返回 World Skill 練習</a>
+      </footer>
+    </div>
+  </main>
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+  <script src="../assets/js/site-navigation.js" defer></script>
+  <script src="../assets/js/accordion.js" defer></script>
 </body>
 </html>

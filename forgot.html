@@ -1,17 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant" data-site-root="./">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>經常忘記大全｜Android Learning</title>
+  <link rel="stylesheet" href="assets/css/foundation.css">
+  <link rel="stylesheet" href="assets/css/app-shell.css">
+  <link rel="stylesheet" href="assets/css/accordion.css">
+  <link rel="stylesheet" href="assets/css/forgot.css">
 </head>
+
 <body>
-    <button class="accordion">try catch 多用在日期不是這個格式就去轉試另一個格式</button>
-    <div class="panel">
-        <pre>
-val timeOut : LocalDate? = try {
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="index.html" aria-label="返回首頁">
+      <span class="brand-mark" aria-hidden="true">AL</span>
+      <span class="brand-copy">
+        <strong>Android Learning</strong>
+        <span>WORKSPACE</span>
+      </span>
+    </a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+
+  <main class="app-main" id="main-content">
+    <div class="container forgot-page" data-accordion-root data-accordion-search-scope="title">
+      <header class="forgot-page-header">
+        <h1>經常忘記大全</h1>
+        <p>集中整理現有 Android／Kotlin 程式片段，方便按條目標題快速查找。</p>
+      </header>
+
+      <div class="accordion-toolbar">
+        <form class="accordion-filter" role="search" data-accordion-filter>
+          <label class="accordion-filter__label" for="forgot-search">條目標題搜尋</label>
+          <div class="accordion-filter__controls">
+            <div class="search-field">
+              <span class="search-field__marker" aria-hidden="true">⌕</span>
+              <input id="forgot-search" type="search" autocomplete="off" placeholder="搜尋條目標題"
+                aria-controls="forgot-accordion" aria-describedby="forgot-search-help" data-accordion-search>
+            </div>
+            <button class="button button--ghost" type="button" data-accordion-clear>清除搜尋</button>
+          </div>
+          <p class="sr-only" id="forgot-search-help">只搜尋本頁現有條目的標題。</p>
+          <p class="accordion-count" aria-live="polite" data-accordion-announcement></p>
+        </form>
+
+        <div class="accordion-actions" aria-label="條目顯示控制">
+          <button class="button button--secondary" type="button" data-accordion-expand-all>全部展開</button>
+          <button class="button button--ghost" type="button" data-accordion-collapse-all>全部收合</button>
+        </div>
+      </div>
+
+      <div class="accordion-list" id="forgot-accordion">
+        <article class="card accordion-item" data-accordion-item data-title="try catch 多用在日期不是這個格式就去轉試另一個格式">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-01" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-01" data-accordion-trigger>try catch 多用在日期不是這個格式就去轉試另一個格式</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-01" role="region" aria-labelledby="forgot-trigger-01"
+            data-accordion-panel>
+            <pre class="code-block"><code>val timeOut : LocalDate? = try {
     LocalDate.parse(text, formatterList[0])
 }catch (e: Exception){
     try {
@@ -23,144 +74,216 @@ val timeOut : LocalDate? = try {
             null
         }
     }
-}
-        </pre>
-    </div>
-    <button class="accordion">Bottom sheet Dialog 的背景設為透明</button>
-    <div class="panel">
-        <pre>
-bottomSheetDialog.window?.setDimAmount(0f)   <span>//除了bottomSheetDialog之外 alertDialog也可以用</span>
-alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))     <span>//上面的是alertDialog外的背景透明，但layout即使没有背景也不會透明。而這個就是只將有內容的東西顯示，完全没有背景(除已設背景)</span>
-        </pre>
-    </div>
-    <button class="accordion">把 AlertDialog 變成全螢幕</button>
-    <div class="panel">
-        <pre>
-alertDialog.window?.setClipToOutline(false)    <span>//有没有都差不多</span>
+}</code></pre>
+          </div>
+        </article>
 
-alertDialog.window.apply {         <span>這個才是重點，將alertDialog setLayout都變成match_parent</span>
+        <article class="card accordion-item" data-accordion-item data-title="Bottom sheet Dialog 的背景設為透明">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-02" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-02" data-accordion-trigger>Bottom sheet Dialog 的背景設為透明</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-02" role="region" aria-labelledby="forgot-trigger-02"
+            data-accordion-panel>
+            <pre
+              class="code-block"><code>bottomSheetDialog.window?.setDimAmount(0f)   <span class="code-comment">//除了bottomSheetDialog之外 alertDialog也可以用</span>
+alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))     <span class="code-comment">//上面的是alertDialog外的背景透明，但layout即使没有背景也不會透明。而這個就是只將有內容的東西顯示，完全没有背景(除已設背景)</span></code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="把 AlertDialog 變成全螢幕">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-03" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-03" data-accordion-trigger>把 AlertDialog 變成全螢幕</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-03" role="region" aria-labelledby="forgot-trigger-03"
+            data-accordion-panel>
+            <pre class="code-block"><code>alertDialog.window?.setClipToOutline(false)    <span class="code-comment">//有没有都差不多</span>
+
+alertDialog.window.apply {         <span class="code-comment">這個才是重點，將alertDialog setLayout都變成match_parent</span>
     this!!.setLayout(
         WindowManager.LayoutParams.MATCH_PARENT,
         WindowManager.LayoutParams.MATCH_PARENT
     )
-}
-        </pre>
-    </div>
-    <button class="accordion">多行文字的輸入框</button>
-    <div class="panel">
-        <pre>
-android:inputType="textMultiLine"     <span>//允許使用者輸入多行文字，並自動支援換行</span>
-android:scrollbars="vertical"         <span>//當文字超過可見範圍時，自動顯示垂直捲動條</span>
-android:minLines="3"                  <span>//預設最低高度為 3 行</span>
-        </pre>
-    </div>
-    <button class="accordion">取消之前的待辦事項，然後安排 3 秒後執行某件事</button>
-    <div class="panel">
-        <p style="color: blue;">在homework5中，輸入框改變後等三秒再顯示。如果用Thread.sleep就會不斷重覆等三秒，導致上一佪三秒完後顥示但我還在更改輸入</p>
-        <pre>
-private var searchHandler = Handler(Looper.getMainLooper() )    <span>//建立「排程器」</span>
-searchHandler.removeCallbacksAndMessages(null)                  <span>//清除這個 Handler 之前所有排定的任務和訊息，避免重複執行</span>
-searchHandler.postDelayed({}, 3000)                             <span>//在3 秒後，執行括號內的程式碼。</span>
-        </pre>
-    </div>
-    <button class="accordion">重覆地做相向動作</button>
-    <div class="panel">
-    <p style="color: blue;">(如向上行就會向上加向下重覆做)</p>
-        <pre>
-downAnim.repeatMode = Animation.REVERSE
-        </pre>
-    </div>
-    <button class="accordion">底線、刪除線</button>
-    <div class="panel">
-        <pre>
-view.findViewById&lt;TextView&gt;(R.id.textView2).paintFlags = Paint.UNDERLINE_TEXT_FLAG    <span>//底線</span>
+}</code></pre>
+          </div>
+        </article>
 
-view.findViewById&lt;TextView&gt;(R.id.textView2).paintFlags = Paint.STRIKE_THRU_TEXT_FLAG      <span>//刪除線</span>
-        </pre>
-    </div>
-    <button class="accordion">ValueAnimator setDelay</button>
-    <div class="panel">
-        <pre>
-valueAnimator.startDelay = 2600 
-        </pre>
-    </div>
-    <button class="accordion">editText passwordText 可見不可見</button>
-    <div class="panel">
-        <pre>
-editTextText2.transformationMethod = PasswordTransformationMethod()    <span>//密碼不可見</span>
-editTextText2.transformationMethod = null     <span>//密碼可見</span>
-        </pre>
-    </div>
-    <button class="accordion">bottomNavigationView當點擊時才顯示文字，否則只顯示圖標</button>
-    <div class="panel">
-        <pre>
-&lt;com.google.android.material.bottomnavigation.BottomNavigationView
+        <article class="card accordion-item" data-accordion-item data-title="多行文字的輸入框">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-04" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-04" data-accordion-trigger>多行文字的輸入框</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-04" role="region" aria-labelledby="forgot-trigger-04"
+            data-accordion-panel>
+            <pre class="code-block"><code>android:inputType="textMultiLine"     <span class="code-comment">//允許使用者輸入多行文字，並自動支援換行</span>
+android:scrollbars="vertical"         <span class="code-comment">//當文字超過可見範圍時，自動顯示垂直捲動條</span>
+android:minLines="3"                  <span class="code-comment">//預設最低高度為 3 行</span></code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="取消之前的待辦事項，然後安排 3 秒後執行某件事">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-05" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-05" data-accordion-trigger>取消之前的待辦事項，然後安排 3 秒後執行某件事</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-05" role="region" aria-labelledby="forgot-trigger-05"
+            data-accordion-panel>
+            <p class="forgot-note">在homework5中，輸入框改變後等三秒再顯示。如果用Thread.sleep就會不斷重覆等三秒，導致上一佪三秒完後顥示但我還在更改輸入</p>
+            <pre
+              class="code-block"><code>private var searchHandler = Handler(Looper.getMainLooper() )    <span class="code-comment">//建立「排程器」</span>
+searchHandler.removeCallbacksAndMessages(null)                  <span class="code-comment">//清除這個 Handler 之前所有排定的任務和訊息，避免重複執行</span>
+searchHandler.postDelayed({}, 3000)                             <span class="code-comment">//在3 秒後，執行括號內的程式碼。</span></code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="重覆地做相向動作">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-06" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-06" data-accordion-trigger>重覆地做相向動作</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-06" role="region" aria-labelledby="forgot-trigger-06"
+            data-accordion-panel>
+            <p class="forgot-note">(如向上行就會向上加向下重覆做)</p>
+            <pre class="code-block"><code>downAnim.repeatMode = Animation.REVERSE</code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="底線、刪除線">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-07" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-07" data-accordion-trigger>底線、刪除線</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-07" role="region" aria-labelledby="forgot-trigger-07"
+            data-accordion-panel>
+            <pre
+              class="code-block"><code>view.findViewById&lt;TextView&gt;(R.id.textView2).paintFlags = Paint.UNDERLINE_TEXT_FLAG    <span class="code-comment">//底線</span>
+
+view.findViewById&lt;TextView&gt;(R.id.textView2).paintFlags = Paint.STRIKE_THRU_TEXT_FLAG      <span class="code-comment">//刪除線</span></code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="ValueAnimator setDelay">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-08" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-08" data-accordion-trigger>ValueAnimator setDelay</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-08" role="region" aria-labelledby="forgot-trigger-08"
+            data-accordion-panel>
+            <pre class="code-block"><code>valueAnimator.startDelay = 2600 </code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="editText passwordText 可見不可見">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-09" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-09" data-accordion-trigger>editText passwordText 可見不可見</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-09" role="region" aria-labelledby="forgot-trigger-09"
+            data-accordion-panel>
+            <pre class="code-block"><code>editTextText2.transformationMethod = PasswordTransformationMethod()    <span class="code-comment">//密碼不可見</span>
+editTextText2.transformationMethod = null     <span class="code-comment">//密碼可見</span></code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="bottomNavigationView當點擊時才顯示文字，否則只顯示圖標">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-10" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-10" data-accordion-trigger>bottomNavigationView當點擊時才顯示文字，否則只顯示圖標</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-10" role="region" aria-labelledby="forgot-trigger-10"
+            data-accordion-panel>
+            <pre class="code-block"><code>&lt;com.google.android.material.bottomnavigation.BottomNavigationView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/bottom"
-    app:labelVisibilityMode="selected"    <span>//解釋:文字何時出現, 有三個輸入內容：1. selected: 只有「目前被選中的」那個按鈕會顯示文字，其他按鈕只顯示小圖示。
-                                                                                  2. labeled : 不管有沒有被選中，所有按鈕永遠都顯示文字。
-                                                                                  3. unlabeled : 全部不顯示文字，只顯示小圖示
+    app:labelVisibilityMode="selected"    <span class="code-comment">//解釋:文字何時出現, 有三個輸入內容：1. selected: 只有「目前被選中的」那個按鈕會顯示文字，其他按鈕只顯示小圖示。
+                                                                                   2. labeled : 不管有沒有被選中，所有按鈕永遠都顯示文字。
+                                                                                   3. unlabeled : 全部不顯示文字，只顯示小圖示
     </span>
     app:menu="@menu/menu"/&gt;
 
 MainActivity.kt
 val bottom: BottomNavigationView = findViewById(R.id.bottom)
-bottom.selectedItemId = R.id.home    <span>//表示要選擇那一個</span>
+bottom.selectedItemId = R.id.home    <span class="code-comment">//表示要選擇那一個</span></code></pre>
+          </div>
+        </article>
 
-        </pre>
-    </div>
-    <button class="accordion">bottomNavigationView不可向下拉</button>
-    <div class="panel">
-        <pre>
-bottomSheetDialog.behavior.isDraggable = false
-        </pre>
-    </div>
+        <article class="card accordion-item" data-accordion-item data-title="bottomNavigationView不可向下拉">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-11" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-11" data-accordion-trigger>bottomNavigationView不可向下拉</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-11" role="region" aria-labelledby="forgot-trigger-11"
+            data-accordion-panel>
+            <pre class="code-block"><code>bottomSheetDialog.behavior.isDraggable = false</code></pre>
+          </div>
+        </article>
 
-        <button class="accordion">progress 顏色設定</button>
-    <div class="panel">
-        <pre>
-android:progressTint="#18abc8"    <span>//progress的顏色</span>
-android:progressBackgroundTint="#fff"    <span>//没有progress的顏色</span>
-        </pre>
-    </div>
-    <button class="accordion">substring的使用</button>
-    <div class="panel">
-        <pre>
-substring(1,2)   <span>//前面係你要攞第幾個字符(0,1,2) 後面係去到目標位置再加1，即使只攞一個都要加1</span>
-        </pre>
-    </div>
-    <button class="accordion">拍照可以儲存uri</button>
-    <div class="panel">
-        <a href="homework/Note_Taking_App.html">參考呢到</a><br>
-        <pre>
-photoUri = createImageUri()    <span>//就係喺圖片庫建立一個uri，之後拍照就將將相放入去得到uri再存入數組</span>
-takePhoto.launch(photoUri)     <span>//啟動相機 App，並將 photoUri 傳遞給相機，告訴它：「拍完照請直接將高解析度圖片存到這個路徑」。</span>
+        <article class="card accordion-item" data-accordion-item data-title="progress 顏色設定">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-12" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-12" data-accordion-trigger>progress 顏色設定</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-12" role="region" aria-labelledby="forgot-trigger-12"
+            data-accordion-panel>
+            <pre class="code-block"><code>android:progressTint="#18abc8"    <span class="code-comment">//progress的顏色</span>
+android:progressBackgroundTint="#fff"    <span class="code-comment">//没有progress的顏色</span></code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="substring的使用">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-13" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-13" data-accordion-trigger>substring的使用</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-13" role="region" aria-labelledby="forgot-trigger-13"
+            data-accordion-panel>
+            <pre
+              class="code-block"><code>substring(1,2)   <span class="code-comment">//前面係你要攞第幾個字符(0,1,2) 後面係去到目標位置再加1，即使只攞一個都要加1</span></code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="拍照可以儲存uri">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-14" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-14" data-accordion-trigger>拍照可以儲存uri</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-14" role="region" aria-labelledby="forgot-trigger-14"
+            data-accordion-panel>
+            <a class="accordion-reference" href="homework/Note_Taking_App.html">參考呢到</a>
+            <pre class="code-block"><code>photoUri = createImageUri()    <span class="code-comment">//就係喺圖片庫建立一個uri，之後拍照就將將相放入去得到uri再存入數組</span>
+takePhoto.launch(photoUri)     <span class="code-comment">//啟動相機 App，並將 photoUri 傳遞給相機，告訴它：「拍完照請直接將高解析度圖片存到這個路徑」。</span>
 
 lateinit var photoUri: Uri
-val takePhoto = registerForActivityResult(ActivityResultContracts.TakePicture()){result -&gt;    <span>//定義了「輸入」是 Uri（照片要存哪裡），「輸出」是 Boolean（拍照是否成功）。</span>
+val takePhoto = registerForActivityResult(ActivityResultContracts.TakePicture()){result -&gt;    <span class="code-comment">//定義了「輸入」是 Uri（照片要存哪裡），「輸出」是 Boolean（拍照是否成功）。</span>
     if(result){
-        pendNote.add(listNumber, ContentClass("image", photoUri.toString()))    <span>//因為佢有返回uri，就可以儲存底uri，之後再顯示</span>
+        pendNote.add(listNumber, ContentClass("image", photoUri.toString()))    <span class="code-comment">//因為佢有返回uri，就可以儲存底uri，之後再顯示</span>
     }
 }
 
-fun createImageUri(): Uri {    <span>//在手機的「Pictures」資料夾中建立一個新的 JPEG 圖片檔案，並取得它的 Uri 路徑</span>
-    val contentValues = ContentValues().apply {   <span>//其實同儲存圖片差唔多，可以理解係我要set好啲相片的資料，之後再返回一個uri以表示將佢嘅資料</span>
+fun createImageUri(): Uri {    <span class="code-comment">//在手機的「Pictures」資料夾中建立一個新的 JPEG 圖片檔案，並取得它的 Uri 路徑</span>
+    val contentValues = ContentValues().apply {   <span class="code-comment">//其實同儲存圖片差唔多，可以理解係我要set好啲相片的資料，之後再返回一個uri以表示將佢嘅資料</span>
         put(MediaStore.Images.Media.DISPLAY_NAME, "photo_${System.currentTimeMillis()}.jpg")
         put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
         put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
     }
     return contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)!!
-}
-        </pre>
-    </div>
-    <button class="accordion">消取內容的關聯性</button>
-    <div class="panel">
-        <pre>
-        val noteContent = note.content.clone() as ArrayList&lt;ContentClass&gt;     <span>//.clone()復製新的一個東西</span>
-        val noteContent = ArrayList(note.content)    <span>//呢個都係複製一份嘅意思，但係佢呢個係淺層複製，淨係可以複製你現時呢一層，再落下嗰啲複製唔到</span>
-        val noteCloneList = noteClone.content.map { it.deepCopy() } as ArrayList&lt;ContentClass&gt;    <span>//完成真正複製</span>
-        <a href="homework/Note_Taking_App.html">參考呢到  saveHost()</a><br>
+}</code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="消取內容的關聯性">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-15" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-15" data-accordion-trigger>消取內容的關聯性</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-15" role="region" aria-labelledby="forgot-trigger-15"
+            data-accordion-panel>
+            <a class="accordion-reference" href="homework/Note_Taking_App.html">參考呢到 saveHost()</a>
+            <pre class="code-block"><code>        val noteContent = note.content.clone() as ArrayList&lt;ContentClass&gt;     <span class="code-comment">//.clone()復製新的一個東西</span>
+        val noteContent = ArrayList(note.content)    <span class="code-comment">//呢個都係複製一份嘅意思，但係佢呢個係淺層複製，淨係可以複製你現時呢一層，再落下嗰啲複製唔到</span>
+        val noteCloneList = noteClone.content.map { it.deepCopy() } as ArrayList&lt;ContentClass&gt;    <span class="code-comment">//完成真正複製</span>
 
 
 class ContentClass(var type: String, var imageId: String ?= "", var text: String? ="",
@@ -174,35 +297,67 @@ class ContentClass(var type: String, var imageId: String ?= "", var text: String
         )
 
         
-        <span>//代入一層可理解，先將佢啲children 所有項都deepCopy，即係不斷地令佢(ContentClass)的children都做同一樣野</span>
-        <span>//做啲咩?因為佢係.map，本身就係指緊children呢個項，就要將choldren複製arrayList&lt;ContentClass&gt;，不成功就變arrayList空數組</span>
-        <span>//成功複製之後就回傳返成個ContentClass，其他值不變，只變chilren</span>
+        <span class="code-comment">//代入一層可理解，先將佢啲children 所有項都deepCopy，即係不斷地令佢(ContentClass)的children都做同一樣野</span>
+        <span class="code-comment">//做啲咩?因為佢係.map，本身就係指緊children呢個項，就要將choldren複製arrayList&lt;ContentClass&gt;，不成功就變arrayList空數組</span>
+        <span class="code-comment">//成功複製之後就回傳返成個ContentClass，其他值不變，只變chilren</span>
     
     }
-}
-        
-        </pre>
-    </div>
-    <button class="accordion">文字走馬燈效果</button>
-    <div class="panel">
-        <pre>
-&lt;TextView
+}</code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="文字走馬燈效果">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-16" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-16" data-accordion-trigger>文字走馬燈效果</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-16" role="region" aria-labelledby="forgot-trigger-16"
+            data-accordion-panel>
+            <pre
+              class="code-block"><code>&lt;TextView
 android:id="@+id/textView17"
 android:layout_width="match_parent"
 android:textColor="#999"
-android:singleLine="true"     <span>//強制文字只能顯示在一行，絕對不換行。不能用maxLines</span>
-android:ellipsize="marquee"     <span>//設定當文字太長時，採用「跑馬燈」效果。</span>
-android:marqueeRepeatLimit="marquee_forever"    <span>//設定跑馬燈重複播放的次數。marquee_forever 是一個常數，代表「無限次循環」</span>
-android:focusable="true"    <span>//允許這個 TextView 可以透過遙控器或方向鍵獲得焦點</span>
-android:focusableInTouchMode="true"     <span>//允許這個 TextView 可以透過「觸摸（點擊）」獲得焦點。</span>
+android:singleLine="true"     <span class="code-comment">//強制文字只能顯示在一行，絕對不換行。不能用maxLines</span>
+android:ellipsize="marquee"     <span class="code-comment">//設定當文字太長時，採用「跑馬燈」效果。</span>
+android:marqueeRepeatLimit="marquee_forever"    <span class="code-comment">//設定跑馬燈重複播放的次數。marquee_forever 是一個常數，代表「無限次循環」</span>
+android:focusable="true"    <span class="code-comment">//允許這個 TextView 可以透過遙控器或方向鍵獲得焦點</span>
+android:focusableInTouchMode="true"     <span class="code-comment">//允許這個 TextView 可以透過「觸摸（點擊）」獲得焦點。</span>
 android:textSize="16sp"
 android:layout_height="wrap_content"
 android:text="TextView" /&gt;
 
-findViewById&lt;TextView&gt;(R.id.textView17).isSelected = true    <span>//讓 TextView 進入「選中」狀態，這樣跑馬燈效果才會啟動。</span>
-        </pre>
-    </div>
+findViewById&lt;TextView&gt;(R.id.textView17).isSelected = true    <span class="code-comment">//讓 TextView 進入「選中」狀態，這樣跑馬燈效果才會啟動。</span></code></pre>
+          </div>
+        </article>
 
-<script src="js.js"></script>
+        <article class="card accordion-item" data-accordion-item data-title="Map轉list可以以index顯示key, value">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-17" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-17" data-accordion-trigger>Map轉list可以以index顯示key, value</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-17" role="region" aria-labelledby="forgot-trigger-17"
+            data-accordion-panel>
+            <a class="accordion-reference" href="homework/203_Module_A_PM.html">參考呢到 loadAlert 顯示放大內容</a>
+            <pre class="code-block"><code>        val list = skils.entries.toList()          <span class="code-comment">//將Map轉換為List，可以以lilst[i].value去引用</span>
+        var Ki = i + 1  
+        val keyNew = list[Ki].key
+        loadAlert(skils, Ki, keyNew)      <span class="code-comment">//按鍵值、skills Map, 第幾個值去loadAlert</span></code></pre>
+          </div>
+        </article>
+      </div>
+
+      <div class="state state--empty accordion-empty" data-accordion-empty hidden>
+        <strong>找不到相符的條目</strong>
+        <span>請改用其他條目標題，或清除搜尋。</span>
+      </div>
+    </div>
+  </main>
+
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+
+  <script src="assets/js/site-navigation.js" defer></script>
+  <script src="assets/js/accordion.js" defer></script>
 </body>
+
 </html>

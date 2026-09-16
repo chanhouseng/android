@@ -1,0 +1,33 @@
+{
+  "city": "Mumbai",
+  "state": "Maharashtra",
+  "country": "India",
+  "latitude": 19.0760,
+  "longitude": 72.8777,
+  "temperature_c": 32,
+  "feels_like_c": 36,
+  "condition": "Partly Cloudy",
+  "condition_code": "partly_cloudy",
+  "humidity_pct": 78,
+  "wind_kmh": 14,
+  "wind_direction": "SW",
+  "visibility_km": 6,
+  "uv_index": 7,
+  "air_quality_index": 142,
+  "air_quality_label": "Unhealthy for Sensitive Groups",
+  "sunrise": "06:17 AM",
+  "sunset": "07:04 PM",
+  "last_updated": "2025-04-14 09:30:00",
+  "hourly_forecast": [
+    { "time": "10:00", "temp_c": 32, "condition": "Partly Cloudy", "rain_chance_pct": 10 },
+    { "time": "11:00", "temp_c": 33, "condition": "Partly Cloudy", "rain_chance_pct": 15 },
+    { "time": "12:00", "temp_c": 34, "condition": "Sunny",         "rain_chance_pct": 5  },
+    { "time": "13:00", "temp_c": 35, "condition": "Sunny",         "rain_chance_pct": 5  },
+    { "time": "14:00", "temp_c": 34, "condition": "Hazy",          "rain_chance_pct": 20 },
+    { "time": "15:00", "temp_c": 33, "condition": "Cloudy",        "rain_chance_pct": 35 },
+    { "time": "16:00", "temp_c": 32, "condition": "Light Rain",    "rain_chance_pct": 60 },
+    { "time": "17:00", "temp_c": 30, "condition": "Light Rain",    "rain_chance_pct": 65 },
+    { "time": "18:00", "temp_c": 29, "condition": "Cloudy",        "rain_chance_pct": 40 },
+    { "time": "19:00", "temp_c": 28, "condition": "Partly Cloudy", "rain_chance_pct": 20 }
+  ]
+}

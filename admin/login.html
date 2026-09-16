@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>作業管理登入</title>
+  <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+  <main class="admin-auth-layout" aria-labelledby="login-title">
+    <section class="card admin-auth-card">
+      <header class="admin-auth-card__header">
+        <p class="admin-auth-card__eyebrow">作業管理</p>
+        <h1 id="login-title">登入</h1>
+        <p>請輸入管理密碼以繼續。</p>
+      </header>
+      <form id="login-form" class="admin-auth-form" method="post" action="./api/login">
+        <div class="admin-auth-field">
+          <label for="password">管理密碼</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <p id="login-error" class="admin-auth-error" aria-live="polite" hidden></p>
+        <button id="login-submit" class="button" type="submit" data-loading-label="登入中…">登入</button>
+      </form>
+      <a class="admin-auth-public-link" href="/" target="_blank" rel="noopener noreferrer">返回公開網站</a>
+    </section>
+  </main>
+  <script type="module" src="./login.js"></script>
+</body>
+</html>

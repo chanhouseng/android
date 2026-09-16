@@ -1,16 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-Hant" data-site-root="../">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>class3_1｜World Skill 練習</title>
+  <link rel="stylesheet" href="../assets/css/foundation.css">
+  <link rel="stylesheet" href="../assets/css/app-shell.css">
+  <link rel="stylesheet" href="../assets/css/accordion.css">
+  <link rel="stylesheet" href="../assets/css/detail-page.css">
 </head>
 <body>
-    <button class="accordion">code</button>
-<div class="panel">
-    <pre>
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="../index.html" aria-label="返回首頁"><span class="brand-mark" aria-hidden="true">AL</span><span class="brand-copy"><strong>Android Learning</strong><span>WORKSPACE</span></span></a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+  <main class="app-main" id="main-content" tabindex="-1">
+    <div class="container detail-page">
+      <nav aria-label="Breadcrumb">
+        <ol class="detail-breadcrumb">
+          <li><a href="../index.html">首頁</a></li>
+          <li><a href="index.html">World Skill 練習</a></li>
+          <li><span aria-current="page">class3_1</span></li>
+        </ol>
+      </nav>
+      <header class="detail-header">
+        <a class="button button--ghost detail-header__back" href="index.html">返回 World Skill 練習</a>
+        <p class="detail-eyebrow">WORLD SKILL · DETAIL</p>
+        <h1>class3_1</h1>
+      </header>
+      <div class="detail-content" data-accordion-root data-original-content>
+    <article class="accordion-item card" data-accordion-item data-title="code">
+          <h2><button class="accordion-trigger" id="class3_1-trigger-1" type="button" aria-expanded="true" aria-controls="class3_1-panel-1" data-accordion-trigger>code</button></h2>
+          <div class="accordion-panel" id="class3_1-panel-1" role="region" aria-labelledby="class3_1-trigger-1" data-accordion-panel>
+    <pre class="code-block"><code>
 <h3>以layout模版自製spinner </h3>
 val foodList: List&lt;Array&gt; = listOf(
     Array("one", R.drawable.cupcake),
@@ -20,7 +44,7 @@ val foodList: List&lt;Array&gt; = listOf(
 val spinner: Spinner = findViewById(R.id.spinner)
 spinner.adapter = adapter(this, foodList)
 
-<span><h5>Class- adapter</h5></span>
+<span class="code-comment"><h5>Class- adapter</h5></span>
 class adapter(context: Context, list: List&lt;Array&gt;): ArrayAdapter&lt;Array&gt;(context, 0, list) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return initView(position, convertView, parent)
@@ -38,7 +62,7 @@ class adapter(context: Context, list: List&lt;Array&gt;): ArrayAdapter&lt;Array&
     }
 }
 
-<span>////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
+<span class="code-comment">////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
 <mark>spinner監察獲得所選項目的文字</mark>
 spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
     override fun onItemSelected(
@@ -55,7 +79,7 @@ spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
     }
 }
 
-<span>///////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
+<span class="code-comment">///////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
 <mark>進度條</mark>
 &lt;ProgressBar
     android:id="@+id/progressBar"
@@ -73,8 +97,19 @@ findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
 }
 
 
-    </pre>
+    </code></pre>
 </div>
-<script src="js.js"></script>
+        </article>
+
+
+      </div>
+      <footer class="detail-footer">
+        <a class="button button--secondary" href="index.html">返回 World Skill 練習</a>
+      </footer>
+    </div>
+  </main>
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+  <script src="../assets/js/site-navigation.js" defer></script>
+  <script src="../assets/js/accordion.js" defer></script>
 </body>
 </html>

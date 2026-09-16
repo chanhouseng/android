@@ -1,0 +1,319 @@
+[
+  {
+    "route_id": "RTE-BUS-022",
+    "route_name": "Andheri to Bandra",
+    "route_number": "BUS-22",
+    "route_type": "bus",
+    "status": "on_time",
+    "color": "#F57C00",
+    "frequency_minutes": 12,
+    "operating_hours": { "start": "05:30", "end": "23:00" },
+    "next_departures": [
+      "2025-04-14 09:45:00",
+      "2025-04-14 09:57:00",
+      "2025-04-14 10:09:00"
+    ],
+    "stops": [
+      {
+        "stop_id": "STP-001",
+        "stop_name": "Andheri Bus Stand",
+        "sequence": 1,
+        "latitude": 19.1197,
+        "longitude": 72.8468,
+        "distance_from_user_m": 320,
+        "arrival_time": "09:45",
+        "map_x_percent": 12,
+        "map_y_percent": 18
+      },
+      {
+        "stop_id": "STP-002",
+        "stop_name": "Vile Parle Station",
+        "sequence": 2,
+        "latitude": 19.1009,
+        "longitude": 72.8490,
+        "distance_from_user_m": 1100,
+        "arrival_time": "09:52",
+        "map_x_percent": 22,
+        "map_y_percent": 30
+      },
+      {
+        "stop_id": "STP-003",
+        "stop_name": "Santacruz Depot",
+        "sequence": 3,
+        "latitude": 19.0820,
+        "longitude": 72.8490,
+        "distance_from_user_m": 2400,
+        "arrival_time": "09:59",
+        "map_x_percent": 35,
+        "map_y_percent": 44
+      },
+      {
+        "stop_id": "STP-004",
+        "stop_name": "Khar Road Junction",
+        "sequence": 4,
+        "latitude": 19.0720,
+        "longitude": 72.8385,
+        "distance_from_user_m": 3700,
+        "arrival_time": "10:06",
+        "map_x_percent": 50,
+        "map_y_percent": 57
+      },
+      {
+        "stop_id": "STP-005",
+        "stop_name": "Bandra Station East",
+        "sequence": 5,
+        "latitude": 19.0544,
+        "longitude": 72.8405,
+        "distance_from_user_m": 5200,
+        "arrival_time": "10:14",
+        "map_x_percent": 65,
+        "map_y_percent": 72
+      }
+    ]
+  },
+  {
+    "route_id": "RTE-BUS-045",
+    "route_name": "Borivali to Dadar",
+    "route_number": "BUS-45",
+    "route_type": "bus",
+    "status": "delayed",
+    "color": "#F57C00",
+    "frequency_minutes": 18,
+    "operating_hours": { "start": "06:00", "end": "22:30" },
+    "next_departures": [
+      "2025-04-14 10:05:00",
+      "2025-04-14 10:23:00",
+      "2025-04-14 10:41:00"
+    ],
+    "stops": [
+      {
+        "stop_id": "STP-011",
+        "stop_name": "Borivali Station West",
+        "sequence": 1,
+        "latitude": 19.2307,
+        "longitude": 72.8567,
+        "distance_from_user_m": 8900,
+        "arrival_time": "10:05",
+        "map_x_percent": 10,
+        "map_y_percent": 10
+      },
+      {
+        "stop_id": "STP-012",
+        "stop_name": "Kandivali East",
+        "sequence": 2,
+        "latitude": 19.2041,
+        "longitude": 72.8590,
+        "distance_from_user_m": 7200,
+        "arrival_time": "10:14",
+        "map_x_percent": 18,
+        "map_y_percent": 22
+      },
+      {
+        "stop_id": "STP-013",
+        "stop_name": "Malad Market",
+        "sequence": 3,
+        "latitude": 19.1867,
+        "longitude": 72.8484,
+        "distance_from_user_m": 5800,
+        "arrival_time": "10:22",
+        "map_x_percent": 28,
+        "map_y_percent": 35
+      },
+      {
+        "stop_id": "STP-014",
+        "stop_name": "Goregaon Station",
+        "sequence": 4,
+        "latitude": 19.1663,
+        "longitude": 72.8494,
+        "distance_from_user_m": 4300,
+        "arrival_time": "10:31",
+        "map_x_percent": 40,
+        "map_y_percent": 48
+      },
+      {
+        "stop_id": "STP-015",
+        "stop_name": "Jogeshwari Caves",
+        "sequence": 5,
+        "latitude": 19.1427,
+        "longitude": 72.8484,
+        "distance_from_user_m": 2900,
+        "arrival_time": "10:40",
+        "map_x_percent": 52,
+        "map_y_percent": 60
+      },
+      {
+        "stop_id": "STP-016",
+        "stop_name": "Dadar TT Circle",
+        "sequence": 6,
+        "latitude": 19.0178,
+        "longitude": 72.8478,
+        "distance_from_user_m": 980,
+        "arrival_time": "10:55",
+        "map_x_percent": 68,
+        "map_y_percent": 78
+      }
+    ]
+  },
+  {
+    "route_id": "RTE-METRO-001",
+    "route_name": "Versova to Ghatkopar",
+    "route_number": "METRO-1",
+    "route_type": "metro",
+    "status": "on_time",
+    "color": "#1E5FA8",
+    "frequency_minutes": 6,
+    "operating_hours": { "start": "05:30", "end": "23:30" },
+    "next_departures": [
+      "2025-04-14 09:48:00",
+      "2025-04-14 09:54:00",
+      "2025-04-14 10:00:00"
+    ],
+    "stops": [
+      {
+        "stop_id": "STP-021",
+        "stop_name": "Versova Metro Station",
+        "sequence": 1,
+        "latitude": 19.1313,
+        "longitude": 72.8113,
+        "distance_from_user_m": 3400,
+        "arrival_time": "09:48",
+        "map_x_percent": 8,
+        "map_y_percent": 25
+      },
+      {
+        "stop_id": "STP-022",
+        "stop_name": "DN Nagar Metro",
+        "sequence": 2,
+        "latitude": 19.1232,
+        "longitude": 72.8274,
+        "distance_from_user_m": 2100,
+        "arrival_time": "09:51",
+        "map_x_percent": 20,
+        "map_y_percent": 33
+      },
+      {
+        "stop_id": "STP-023",
+        "stop_name": "Andheri Metro Station",
+        "sequence": 3,
+        "latitude": 19.1197,
+        "longitude": 72.8468,
+        "distance_from_user_m": 320,
+        "arrival_time": "09:54",
+        "map_x_percent": 34,
+        "map_y_percent": 38
+      },
+      {
+        "stop_id": "STP-024",
+        "stop_name": "Western Express Highway",
+        "sequence": 4,
+        "latitude": 19.1108,
+        "longitude": 72.8636,
+        "distance_from_user_m": 1900,
+        "arrival_time": "09:57",
+        "map_x_percent": 48,
+        "map_y_percent": 44
+      },
+      {
+        "stop_id": "STP-025",
+        "stop_name": "Chakala — JVLR",
+        "sequence": 5,
+        "latitude": 19.1016,
+        "longitude": 72.8688,
+        "distance_from_user_m": 2800,
+        "arrival_time": "10:00",
+        "map_x_percent": 60,
+        "map_y_percent": 52
+      },
+      {
+        "stop_id": "STP-026",
+        "stop_name": "Airport Road Metro",
+        "sequence": 6,
+        "latitude": 19.0962,
+        "longitude": 72.8748,
+        "distance_from_user_m": 3600,
+        "arrival_time": "10:03",
+        "map_x_percent": 70,
+        "map_y_percent": 60
+      },
+      {
+        "stop_id": "STP-027",
+        "stop_name": "Marol Naka",
+        "sequence": 7,
+        "latitude": 19.0897,
+        "longitude": 72.8814,
+        "distance_from_user_m": 4500,
+        "arrival_time": "10:06",
+        "map_x_percent": 78,
+        "map_y_percent": 68
+      },
+      {
+        "stop_id": "STP-028",
+        "stop_name": "Ghatkopar Metro Station",
+        "sequence": 8,
+        "latitude": 19.0858,
+        "longitude": 72.9081,
+        "distance_from_user_m": 6200,
+        "arrival_time": "10:12",
+        "map_x_percent": 88,
+        "map_y_percent": 78
+      }
+    ]
+  },
+  {
+    "route_id": "RTE-RAPID-003",
+    "route_name": "BKC to Thane Rapid",
+    "route_number": "RAPID-3",
+    "route_type": "rapid",
+    "status": "cancelled",
+    "color": "#0E7C86",
+    "frequency_minutes": 20,
+    "operating_hours": { "start": "07:00", "end": "21:00" },
+    "next_departures": [],
+    "stops": [
+      {
+        "stop_id": "STP-031",
+        "stop_name": "BKC Bus Terminal",
+        "sequence": 1,
+        "latitude": 19.0645,
+        "longitude": 72.8648,
+        "distance_from_user_m": 5100,
+        "arrival_time": "--",
+        "map_x_percent": 15,
+        "map_y_percent": 65
+      },
+      {
+        "stop_id": "STP-032",
+        "stop_name": "Kurla Station",
+        "sequence": 2,
+        "latitude": 19.0726,
+        "longitude": 72.8793,
+        "distance_from_user_m": 4600,
+        "arrival_time": "--",
+        "map_x_percent": 30,
+        "map_y_percent": 72
+      },
+      {
+        "stop_id": "STP-033",
+        "stop_name": "Vikhroli Checkpoint",
+        "sequence": 3,
+        "latitude": 19.1042,
+        "longitude": 72.9232,
+        "distance_from_user_m": 7800,
+        "arrival_time": "--",
+        "map_x_percent": 55,
+        "map_y_percent": 80
+      },
+      {
+        "stop_id": "STP-034",
+        "stop_name": "Thane Station",
+        "sequence": 4,
+        "latitude": 19.1863,
+        "longitude": 72.9706,
+        "distance_from_user_m": 14200,
+        "arrival_time": "--",
+        "map_x_percent": 82,
+        "map_y_percent": 88
+      }
+    ]
+  }
+]

@@ -1,0 +1,46 @@
+[
+    {
+        "id": "07379EAD-48A7-0EF1-8FB7-6A0E06768FCB",
+        "email": "username@email.com",
+        "password_hash": "$2y$10$s8jxAumsiQHYj627AiXUsOMr60L6KllB2gT6cVeCp/JoQ6csHCiwi",
+        "auth_token": "836309A12950527169489D916",
+        "created_at": "2026-08-10 16:20:29",
+        "last_signin_at": "2026-09-01 03:38:08"
+    },
+    {
+        "id": "E382C748-D0BD-985E-3F67-0B3DB2751A81",
+        "email": "Kathryne_Langworth@yahoo.com",
+        "password_hash": "$2y$12$HRyIVJuuVWKzv.NUrzzyeugOY53oU1/vZV2oSdZag1iIpZO05KQ8u",
+        "auth_token": "64BE3EC89FF2A7D565D529B1A",
+        "created_at": "2026-09-06 08:05:40"
+    },
+    {
+        "id": "FA6F6978-F700-AB8B-449C-A26BB216F274",
+        "email": "Jany.Beer@yahoo.com",
+        "password_hash": "$2y$12$uT7O/37mH8wDEO9.IFqnq.BksKpbzCegYJ/frU4XAQuL8VOaRt83u",
+        "auth_token": "F195610083A569BD1668A957E",
+        "created_at": "2026-09-06 08:30:05"
+    },
+    {
+        "id": "48AA77D2-FA0F-1558-B804-4B67A63B84C7",
+        "email": "Clementine27@yahoo.com",
+        "password_hash": "$2y$12$Ckc/VpwtB42xn.leQxYxN.l4drtjkOIuR/FLSZ88onz6OCMJ3YyHC",
+        "auth_token": "CA28A527B3300220804F36380",
+        "created_at": "2026-09-06 08:30:31"
+    },
+    {
+        "id": "41428296-3EEA-9826-4BBE-124E5D11976F",
+        "email": "user@email.com",
+        "password_hash": "$2y$12$ZRO478xlxFntwlufRPXky.t.y1PAHCPejwOBHcxNvr.kyk2uTlZ06",
+        "auth_token": "5AE9D28D8EE85513659867D67",
+        "created_at": "2026-09-06 09:07:10",
+        "last_signin_at": "2026-09-06 14:11:40"
+    },
+    {
+        "id": "A950D6E2-43E0-EF29-67DE-33E05FCCD709",
+        "email": "Bonnie.Oberbrunner92@yahoo.com",
+        "password_hash": "$2y$12$c56dB9tD9eE/coKnQCUu9.RD0RsFiGpqa0m8LLZsYqqs0zsmTqYf2",
+        "auth_token": "CD1542DD2277FC18022A120BE",
+        "created_at": "2026-09-06 13:03:55"
+    }
+]

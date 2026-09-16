@@ -1,16 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-Hant" data-site-root="../">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>03_Module_A_AM｜World Skill 練習</title>
+  <link rel="stylesheet" href="../assets/css/foundation.css">
+  <link rel="stylesheet" href="../assets/css/app-shell.css">
+  <link rel="stylesheet" href="../assets/css/accordion.css">
+  <link rel="stylesheet" href="../assets/css/detail-page.css">
 </head>
 <body>
-    <button class="accordion">Data.kt</button>
-    <div class="panel">
-        <pre>
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="../index.html" aria-label="返回首頁"><span class="brand-mark" aria-hidden="true">AL</span><span class="brand-copy"><strong>Android Learning</strong><span>WORKSPACE</span></span></a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+  <main class="app-main" id="main-content" tabindex="-1">
+    <div class="container detail-page">
+      <nav aria-label="Breadcrumb">
+        <ol class="detail-breadcrumb">
+          <li><a href="../index.html">首頁</a></li>
+          <li><a href="index.html">World Skill 練習</a></li>
+          <li><span aria-current="page">03_Module_A_AM</span></li>
+        </ol>
+      </nav>
+      <header class="detail-header">
+        <a class="button button--ghost detail-header__back" href="index.html">返回 World Skill 練習</a>
+        <p class="detail-eyebrow">WORLD SKILL · DETAIL</p>
+        <h1>03_Module_A_AM</h1>
+      </header>
+      <div class="detail-content" data-accordion-root data-original-content>
+<article class="accordion-item card" data-accordion-item data-title="Data.kt">
+            <h2><button class="accordion-trigger" id="03_Module_A_AM-trigger-1" type="button" aria-expanded="true" aria-controls="03_Module_A_AM-panel-1" data-accordion-trigger>Data.kt</button></h2>
+            <div class="accordion-panel" id="03_Module_A_AM-panel-1" role="region" aria-labelledby="03_Module_A_AM-trigger-1" data-accordion-panel>
+              <pre class="code-block"><code>
 class Data {
     companion object{
         var baguette = 0
@@ -24,11 +48,13 @@ class Data {
         var health = 3
     }
 }
-        </pre>
-    </div>
-    <button class="accordion">GameOverActivity.kt</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+            </div>
+          </article>
+          <article class="accordion-item card" data-accordion-item data-title="GameOverActivity.kt">
+            <h2><button class="accordion-trigger" id="03_Module_A_AM-trigger-2" type="button" aria-expanded="true" aria-controls="03_Module_A_AM-panel-2" data-accordion-trigger>GameOverActivity.kt</button></h2>
+            <div class="accordion-panel" id="03_Module_A_AM-panel-2" role="region" aria-labelledby="03_Module_A_AM-trigger-2" data-accordion-panel>
+              <pre class="code-block"><code>
 class GameOverActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +66,7 @@ class GameOverActivity : AppCompatActivity() {
             insets
         }
         
-        <span>//這裡開始</span>
+        <span class="code-comment">//這裡開始</span>
         findViewById&lt;TextView&gt;(R.id.baguetteCountTextView).text = "x${Data.baguette}"
         findViewById&lt;TextView&gt;(R.id.baguetteScoreTextView).text = (Data.baguette* 10).toString()
         findViewById&lt;TextView&gt;(R.id.macaronCountTextView).text = "x${Data.macaron}"
@@ -56,15 +82,17 @@ class GameOverActivity : AppCompatActivity() {
     }
 }
 
-        </pre>
-    </div>
-    <button class="accordion">MainActivity.kt</button>
-    <div class="panel">
-        <pre>
-class MainActivity : AppCompatActivity(), SensorEventListener {    <span>//接收手機感測器的資料</span>
+        </code></pre>
+            </div>
+          </article>
+          <article class="accordion-item card" data-accordion-item data-title="MainActivity.kt">
+            <h2><button class="accordion-trigger" id="03_Module_A_AM-trigger-3" type="button" aria-expanded="true" aria-controls="03_Module_A_AM-panel-3" data-accordion-trigger>MainActivity.kt</button></h2>
+            <div class="accordion-panel" id="03_Module_A_AM-panel-3" role="region" aria-labelledby="03_Module_A_AM-trigger-3" data-accordion-panel>
+              <pre class="code-block"><code>
+class MainActivity : AppCompatActivity(), SensorEventListener {    <span class="code-comment">//接收手機感測器的資料</span>
 
-    private lateinit var sensorManager: SensorManager         <span>//管理所有感測器</span>
-    private lateinit var accelerometer: Sensor                <span>//加速度感測器。</span>
+    private lateinit var sensorManager: SensorManager         <span class="code-comment">//管理所有感測器</span>
+    private lateinit var accelerometer: Sensor                <span class="code-comment">//加速度感測器。</span>
 
     private lateinit var mainFrameLayout: FrameLayout
     private lateinit var pauseLinearLayout: LinearLayout
@@ -82,12 +110,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {    <span>//接�
 
     private lateinit var scoreTextView: TextView
     private lateinit var heartTextView: TextView
-    private var currentDirection: Direction = Direction.STAY    <span>//記錄目前要移動的方向</span>
+    private var currentDirection: Direction = Direction.STAY    <span class="code-comment">//記錄目前要移動的方向</span>
 
     private var screenWidth = 800
     private var isGamePausing = false
  
-    private val fallingFoodAnimatorList = mutableListOf&lt;ValueAnimator&gt;()   <span>//儲存所有正在掉落的食物的valueAnimator</span>
+    private val fallingFoodAnimatorList = mutableListOf&lt;ValueAnimator&gt;()   <span class="code-comment">//儲存所有正在掉落的食物的valueAnimator</span>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,8 +127,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {    <span>//接�
             insets
         }
 
-        <span>//這裡開始</span>
-        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager              <span>//取得系統感測器服務與加速度計</span>
+        <span class="code-comment">//這裡開始</span>
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager              <span class="code-comment">//取得系統感測器服務與加速度計</span>
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)!!
 
         mainFrameLayout = findViewById(R.id.mainFrameLayout)
@@ -113,7 +141,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {    <span>//接�
         scoreTextView = findViewById(R.id.scoreTextView)
         heartTextView = findViewById(R.id.heartTextView)
 
-        screenWidth = Resources.getSystem().displayMetrics.widthPixels     <span>//動態取得螢幕寬度</span>
+        screenWidth = Resources.getSystem().displayMetrics.widthPixels     <span class="code-comment">//動態取得螢幕寬度</span>
 
         foodCountDownTimer = object : CountDownTimer(60000, 1000) {
             override fun onFinish() {
@@ -135,15 +163,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {    <span>//接�
             override fun onTick(p0: Long) {
                 if(currentDirection == Direction.LEFT) {
                     
-                    val originalLeft = playerImageView.left    <span>// 獲得.xml一開始的左邊界位置</span>
+                    val originalLeft = playerImageView.left    <span class="code-comment">// 獲得.xml一開始的左邊界位置</span>
 
                     
-                    val actualScreenPosition = originalLeft + playerImageView.translationX     <span>//因為之後會有translationX 改變，所以這個是獲得實時的位置</span>
+                    val actualScreenPosition = originalLeft + playerImageView.translationX     <span class="code-comment">//因為之後會有translationX 改變，所以這個是獲得實時的位置</span>
 
                     if(actualScreenPosition &gt; 0f) {
-                        playerImageView.translationX = playerImageView.translationX - 10       <span>//左移</span>
+                        playerImageView.translationX = playerImageView.translationX - 10       <span class="code-comment">//左移</span>
                     } else {
-                        cancel()      <span>不要再有這個判斷</span>
+                        cancel()      <span class="code-comment">不要再有這個判斷</span>
                     }
                 } else if(currentDirection == Direction.RIGHT) {
                     
@@ -188,7 +216,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {    <span>//接�
     private fun moveRight() {
         if(!isGamePausing) {
             currentDirection = Direction.RIGHT 
-            playerImageView.scaleX = -1f       <span>//-1f: 水平鏡像翻轉（角色面向右邊）</span>
+            playerImageView.scaleX = -1f       <span class="code-comment">//-1f: 水平鏡像翻轉（角色面向右邊）</span>
             moveCountDownTimer.cancel()
             moveCountDownTimer.start()
         }
@@ -198,7 +226,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {    <span>//接�
         val foodNameArray = arrayOf("puff", "macaron", "baguette", "fishbone", "bone")
 
         val foodImageView = ImageView(this)
-        foodImageView.tag = foodNameArray.random()     <span>//自訂資料，之後會用來判斷</span>
+        foodImageView.tag = foodNameArray.random()     <span class="code-comment">//自訂資料，之後會用來判斷</span>
 
         val drawable = when(foodImageView.tag) {
             "puff" -&gt; R.drawable.puff
@@ -217,7 +245,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {    <span>//接�
 
         foodImageView.translationX = (0..1000).random().toFloat()
         val animator = ValueAnimator.ofFloat(0f, 1500f) 
-        animator.interpolator = LinearInterpolator()      <span>//讓動畫速度均勻</span>
+        animator.interpolator = LinearInterpolator()      <span class="code-comment">//讓動畫速度均勻</span>
         animator.duration = 4000
 
         animator.addUpdateListener {
@@ -252,7 +280,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {    <span>//接�
         timeTextView.setTextColor(Color.WHITE)
 
         for(foodAnimator in fallingFoodAnimatorList) { 
-            foodAnimator.pause()          <span>//暫停Animator</span>
+            foodAnimator.pause()          <span class="code-comment">//暫停Animator</span>
         }
     }
 
@@ -265,29 +293,29 @@ class MainActivity : AppCompatActivity(), SensorEventListener {    <span>//接�
         timeTextView.setTextColor(Color.BLACK)
 
         for (foodAnimator in fallingFoodAnimatorList) {
-            foodAnimator.resume()          <span>//暫停的那一刻繼續往下執行Animator</span>
+            foodAnimator.resume()          <span class="code-comment">//暫停的那一刻繼續往下執行Animator</span>
         }
     }
 
     fun getViewRect(view: View): Rect {
-        val location = IntArray(2)          <span>//建立一個長度為 2 的整數陣列，用來存放 View 的螢幕座標</span>
-        view.getLocationOnScreen(location)  <span>//把 View 在整個螢幕上的左上角座標，存放到 location 陣列中。</span>
+        val location = IntArray(2)          <span class="code-comment">//建立一個長度為 2 的整數陣列，用來存放 View 的螢幕座標</span>
+        view.getLocationOnScreen(location)  <span class="code-comment">//把 View 在整個螢幕上的左上角座標，存放到 location 陣列中。</span>
         return Rect(
             location[0],
             location[1],
             location[0] + view.width,
-            location[1] + view.height    <span>//建立一個矩形（Rect）物件。左上角同右下角</span>
+            location[1] + view.height    <span class="code-comment">//建立一個矩形（Rect）物件。左上角同右下角</span>
         )
     }
 
     fun isCatching(food: View): Boolean {
         val personRect = getViewRect(playerImageView)
         val foodRect = getViewRect(food)
-        return Rect.intersects(personRect, foodRect)    <span>//檢查兩個矩形是否有重疊</span>
+        return Rect.intersects(personRect, foodRect)    <span class="code-comment">//檢查兩個矩形是否有重疊</span>
     }
 
     fun catchFoodHandle(foodImageView: ImageView) {
-        when(foodImageView.tag) {    <span>//檢測碰到甚麼食物</span>
+        when(foodImageView.tag) {    <span class="code-comment">//檢測碰到甚麼食物</span>
             "puff" -&gt; {
                 Data.puff++
                 Data.score += 30
@@ -311,8 +339,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {    <span>//接�
                 Data.score -= 10
             }
         }
-        updateUI()      <span>//更新生命和分數</span>
-        checkGameOver() <span>//判斷生命是否少於0</span>
+        updateUI()      <span class="code-comment">//更新生命和分數</span>
+        checkGameOver() <span class="code-comment">//判斷生命是否少於0</span>
     } 
 
     private fun updateUI() {
@@ -329,13 +357,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {    <span>//接�
         }
     }
 
-    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {    <span>//處理感測器精準度變化</span>
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {    <span class="code-comment">//處理感測器精準度變化</span>
 
     }
  
-    override fun onSensorChanged(event: SensorEvent) {      <span>//感測器數值改變時</span>
-        if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {   <span>//確認這次變化是來自加速度感測器</span>
-            val x = event.values[0]     <span>//// 左右傾斜（-10 到 10）</span>
+    override fun onSensorChanged(event: SensorEvent) {      <span class="code-comment">//感測器數值改變時</span>
+        if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {   <span class="code-comment">//確認這次變化是來自加速度感測器</span>
+            val x = event.values[0]     <span class="code-comment">//// 左右傾斜（-10 到 10）</span>
 
             // 判斷方向（根據 X 軸數值）
              when {
@@ -348,25 +376,27 @@ class MainActivity : AppCompatActivity(), SensorEventListener {    <span>//接�
 
     override fun onResume() {
         super.onResume()
-        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI)  <span>//開啟感測器監聽</span>
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI)  <span class="code-comment">//開啟感測器監聽</span>
     }
 
     override fun onPause() {
         super.onPause()
-        sensorManager.unregisterListener(this)  <span>//關閉感測器監聽。</span>
+        sensorManager.unregisterListener(this)  <span class="code-comment">//關閉感測器監聽。</span>
     }
 }
 
 enum class Direction {
-    LEFT, STAY, RIGHT;    <span>//建立一種有不同狀態的類型(類似變數，可用作判斷)</span>
+    LEFT, STAY, RIGHT;    <span class="code-comment">//建立一種有不同狀態的類型(類似變數，可用作判斷)</span>
 }
 
 
-        </pre>
-    </div>
-    <button class="accordion">activity_game_over.xml</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+            </div>
+          </article>
+          <article class="accordion-item card" data-accordion-item data-title="activity_game_over.xml">
+            <h2><button class="accordion-trigger" id="03_Module_A_AM-trigger-4" type="button" aria-expanded="true" aria-controls="03_Module_A_AM-panel-4" data-accordion-trigger>activity_game_over.xml</button></h2>
+            <div class="accordion-panel" id="03_Module_A_AM-panel-4" role="region" aria-labelledby="03_Module_A_AM-trigger-4" data-accordion-panel>
+              <pre class="code-block"><code>
 &lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -570,11 +600,13 @@ enum class Direction {
 
 &lt;/LinearLayout&gt;
 
-        </pre>
-    </div>
-    <button class="accordion">activity_main.xml</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+            </div>
+          </article>
+          <article class="accordion-item card" data-accordion-item data-title="activity_main.xml">
+            <h2><button class="accordion-trigger" id="03_Module_A_AM-trigger-5" type="button" aria-expanded="true" aria-controls="03_Module_A_AM-panel-5" data-accordion-trigger>activity_main.xml</button></h2>
+            <div class="accordion-panel" id="03_Module_A_AM-panel-5" role="region" aria-labelledby="03_Module_A_AM-trigger-5" data-accordion-panel>
+              <pre class="code-block"><code>
 &lt;FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainFrameLayout"
@@ -756,8 +788,17 @@ enum class Direction {
 &lt;/FrameLayout&gt;
 
 
-        </pre>
+        </code></pre>
+            </div>
+          </article>
+      </div>
+      <footer class="detail-footer">
+        <a class="button button--secondary" href="index.html">返回 World Skill 練習</a>
+      </footer>
     </div>
-<script src="js.js"></script>
+  </main>
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+  <script src="../assets/js/site-navigation.js" defer></script>
+  <script src="../assets/js/accordion.js" defer></script>
 </body>
 </html>

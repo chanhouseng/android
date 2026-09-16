@@ -1,129 +1,288 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant" data-site-root="./">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body{
-            background-color: #efefef;
-            margin: 0;
-            padding: 0;
-        }
-
-        img{
-            width: 200px;
-        }
-
-        div{
-            margin: 10px;
-            box-shadow: 2px 2px 2px 2px #333;
-            float: left;
-            padding: 20px;
-            background-color: #fff;
-            height: 660px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>堂上練習｜Class Learning</title>
+  <link rel="stylesheet" href="assets/css/foundation.css">
+  <link rel="stylesheet" href="assets/css/app-shell.css">
+  <link rel="stylesheet" href="assets/css/class-learning.css">
 </head>
 <body>
-    <div>
-        <h1>class2</h1>
-        <img src="img/class2.png" alt="">
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="index.html" aria-label="返回首頁">
+      <span class="brand-mark" aria-hidden="true">AL</span>
+      <span class="brand-copy">
+        <strong>Android Learning</strong>
+        <span>WORKSPACE</span>
+      </span>
+    </a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+
+  <main class="app-main" id="main-content">
+    <div class="container class-learning-page">
+      <header class="class-learning-header">
+        <div class="class-learning-heading">
+          <h1>堂上練習</h1>
+          <p>整理現有堂上練習項目、說明及畫面，方便按名稱查找。</p>
+        </div>
+        <nav class="page-switcher" aria-label="Class Learning 頁面">
+          <a class="page-switcher__link" href="page1.html" aria-current="page">堂上練習</a>
+          <a class="page-switcher__link" href="page2.html">自己練習</a>
+        </nav>
+      </header>
+
+      <div class="class-learning-toolbar">
+        <form class="class-learning-filter" role="search" data-class-learning-filter>
+          <label class="class-learning-filter__label" for="class-learning-search">搜尋本頁練習</label>
+          <div class="class-learning-filter__controls">
+            <div class="search-field">
+              <span class="search-field__marker" aria-hidden="true">⌕</span>
+              <input
+                id="class-learning-search"
+                type="search"
+                autocomplete="off"
+                placeholder="搜尋項目名稱或原有說明"
+                aria-controls="class-learning-items"
+                aria-describedby="class-learning-search-help"
+                data-class-learning-search
+              >
+            </div>
+            <button class="button button--ghost" type="button" data-class-learning-clear>清除搜尋</button>
+          </div>
+          <p class="sr-only" id="class-learning-search-help">只會過濾本頁現有練習的名稱及說明。</p>
+        </form>
+        <p class="class-learning-result-count" aria-live="polite" data-class-learning-result-count>顯示全部 24 個項目</p>
+      </div>
+
+      <div class="learning-grid" id="class-learning-items">
+        <article class="card learning-card" data-class-learning-item data-title="class2" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class2" data-preview-button data-preview-src="img/class2.png" data-preview-alt="class2 練習圖片" data-preview-title="class2">
+              <img src="img/class2.png" alt="class2 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class2</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class2_2" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class2_2" data-preview-button data-preview-src="img/class2_2.png" data-preview-alt="class2_2 練習圖片" data-preview-title="class2_2">
+              <img src="img/class2_2.png" alt="class2_2 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class2_2</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class2_exersive" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class2_exersive" data-preview-button data-preview-src="img/class2_exersive (2).png" data-preview-alt="class2_exersive 練習圖片" data-preview-title="class2_exersive">
+              <img src="img/class2_exersive (2).png" alt="class2_exersive 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class2_exersive</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="Class2_exersive" data-search-text="完成所有功能">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 Class2_exersive" data-preview-button data-preview-src="img/Class2_exersive.png" data-preview-alt="Class2_exersive 練習圖片" data-preview-title="Class2_exersive">
+              <img src="img/Class2_exersive.png" alt="Class2_exersive 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>Class2_exersive</h3><p>完成所有功能</p></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class3" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class3" data-preview-button data-preview-src="img/class3.png" data-preview-alt="class3 練習圖片" data-preview-title="class3">
+              <img src="img/class3.png" alt="class3 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class3</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class3_1" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class3_1" data-preview-button data-preview-src="img/class3_1.png" data-preview-alt="class3_1 練習圖片" data-preview-title="class3_1">
+              <img src="img/class3_1.png" alt="class3_1 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class3_1</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class3_exersive2" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class3_exersive2" data-preview-button data-preview-src="img/class3_exersive2.png" data-preview-alt="class3_exersive2 練習圖片" data-preview-title="class3_exersive2">
+              <img src="img/class3_exersive2.png" alt="class3_exersive2 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class3_exersive2</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class3Exersive" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class3Exersive" data-preview-button data-preview-src="img/class3Exersive.png" data-preview-alt="class3Exersive 練習圖片" data-preview-title="class3Exersive">
+              <img src="img/class3Exersive.png" alt="class3Exersive 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class3Exersive</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class4" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class4" data-preview-button data-preview-src="img/class4.png" data-preview-alt="class4 練習圖片" data-preview-title="class4">
+              <img src="img/class4.png" alt="class4 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class4</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class7" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class7" data-preview-button data-preview-src="img/class7.png" data-preview-alt="class7 練習圖片" data-preview-title="class7">
+              <img src="img/class7.png" alt="class7 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class7</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class7_exersive" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class7_exersive" data-preview-button data-preview-src="img/class7_exersive.png" data-preview-alt="class7_exersive 練習圖片" data-preview-title="class7_exersive">
+              <img src="img/class7_exersive.png" alt="class7_exersive 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class7_exersive</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class8_exersive" data-search-text="" data-missing-image>
+          <div class="learning-card__media"><div class="state state--empty learning-card__missing" data-missing-image><span>圖片暫缺</span></div></div>
+          <div class="learning-card__body"><h3>class8_exersive</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class10" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class10" data-preview-button data-preview-src="img/class10.png" data-preview-alt="class10 練習圖片" data-preview-title="class10">
+              <img src="img/class10.png" alt="class10 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class10</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class10_exerise" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class10_exerise" data-preview-button data-preview-src="img/class10_exerise.png" data-preview-alt="class10_exerise 練習圖片" data-preview-title="class10_exerise">
+              <img src="img/class10_exerise.png" alt="class10_exerise 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class10_exerise</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class11" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class11 圖片 1" data-preview-button data-preview-src="img/class11.png" data-preview-alt="class11 練習圖片 1" data-preview-title="class11">
+              <img src="img/class11.png" alt="class11 練習圖片 1" loading="lazy">
+            </button>
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class11 圖片 2" data-preview-button data-preview-src="img/class11 (2).png" data-preview-alt="class11 練習圖片 2" data-preview-title="class11">
+              <img src="img/class11 (2).png" alt="class11 練習圖片 2" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class11</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class11_exerise" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class11_exerise" data-preview-button data-preview-src="img/class11_exerise.png" data-preview-alt="class11_exerise 練習圖片" data-preview-title="class11_exerise">
+              <img src="img/class11_exerise.png" alt="class11_exerise 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class11_exerise</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="class32" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class32 圖片 1" data-preview-button data-preview-src="img/class32(1).png" data-preview-alt="class32 練習圖片 1" data-preview-title="class32">
+              <img src="img/class32(1).png" alt="class32 練習圖片 1" loading="lazy">
+            </button>
+            <button class="image-preview-button" type="button" aria-label="放大預覽 class32 圖片 2" data-preview-button data-preview-src="img/class32(2).png" data-preview-alt="class32 練習圖片 2" data-preview-title="class32">
+              <img src="img/class32(2).png" alt="class32 練習圖片 2" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>class32</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="methood_post" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 methood_post" data-preview-button data-preview-src="img/methood_post.png" data-preview-alt="methood_post 練習圖片" data-preview-title="methood_post">
+              <img src="img/methood_post.png" alt="methood_post 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>methood_post</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="MyApplication" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 MyApplication" data-preview-button data-preview-src="img/MyApplication.png" data-preview-alt="MyApplication 練習圖片" data-preview-title="MyApplication">
+              <img src="img/MyApplication.png" alt="MyApplication 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>MyApplication</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="MyPlayground.playground" data-search-text="" data-missing-image>
+          <div class="learning-card__media"><div class="state state--empty learning-card__missing" data-missing-image><span>圖片暫缺</span></div></div>
+          <div class="learning-card__body"><h3>MyPlayground.playground</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="Notification" data-search-text="">
+          <div class="learning-card__media">
+            <button class="image-preview-button" type="button" aria-label="放大預覽 Notification" data-preview-button data-preview-src="img/Notification.png" data-preview-alt="Notification 練習圖片" data-preview-title="Notification">
+              <img src="img/Notification.png" alt="Notification 練習圖片" loading="lazy">
+            </button>
+          </div>
+          <div class="learning-card__body"><h3>Notification</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="OnlineImage_GetingData" data-search-text="" data-missing-image>
+          <div class="learning-card__media"><div class="state state--empty learning-card__missing" data-missing-image><span>圖片暫缺</span></div></div>
+          <div class="learning-card__body"><h3>OnlineImage_GetingData</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="RecyclerActivity" data-search-text="" data-missing-image>
+          <div class="learning-card__media"><div class="state state--empty learning-card__missing" data-missing-image><span>圖片暫缺</span></div></div>
+          <div class="learning-card__body"><h3>RecyclerActivity</h3></div>
+        </article>
+
+        <article class="card learning-card" data-class-learning-item data-title="testing" data-search-text="" data-missing-image>
+          <div class="learning-card__media"><div class="state state--empty learning-card__missing" data-missing-image><span>圖片暫缺</span></div></div>
+          <div class="learning-card__body"><h3>testing</h3></div>
+        </article>
+      </div>
+
+      <div class="state state--empty class-learning-empty" data-class-learning-empty hidden>
+        <strong>找不到相符的練習項目</strong>
+        <span>請改用其他名稱或說明文字，或清除搜尋。</span>
+      </div>
     </div>
-    <div>
-        <h1>class2_2</h1>
-        <img src="img/class2_2.png" alt="">
+  </main>
+
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+
+  <dialog class="image-dialog" aria-labelledby="class-preview-title" data-image-preview>
+    <div class="image-dialog__header">
+      <h2 id="class-preview-title" data-preview-title>圖片預覽</h2>
+      <button class="button button--ghost" type="button" data-preview-close>關閉</button>
     </div>
-    <div>
-        <h1>class2_exersive</h1>
-        <img src="img/class2_exersive (2).png" alt="">
-    </div>
-    <div>
-        <h1>Class2_exersive</h1>
-        <p>完成所有功能</p>
-        <img src="img/Class2_exersive.png" alt="">
-    </div>
-    <div>
-        <h1>class3</h1>
-        <img src="img/class3.png" alt="">
-    </div>
-    <div>
-        <h1>class3_1</h1>
-        <img src="img/class3_1.png" alt="">
-    </div>
-    <div>
-        <h1>class3_exersive2</h1>
-        <img src="img/class3_exersive2.png" alt="">
-    </div>
-    <div>
-        <h1>class3Exersive</h1>
-        <img src="img/class3Exersive.png" alt="">
-    </div>
-    <div>
-        <h1>class4</h1>
-        <img src="img/class4.png" alt="">
-    </div>
-    <div>
-        <h1>class7</h1>
-        <img src="img/class7.png" alt="">
-    </div>
-    <div>
-        <h1>class7_exersive</h1>
-        <img src="img/class7_exersive.png" alt="">
-    </div>
-    <div>
-        <h1>class8_exersive</h1>
-        <img src="img/螢幕擷取畫面 2026-03-05 154346.png" alt="">
-    </div>
-    <div>
-        <h1>class10</h1>
-        <img src="img/class10.png" alt="">
-    </div>
-    <div>
-        <h1>class10_exerise</h1>
-        <img src="img/class10_exerise.png" alt="">
-    </div>
-    <div>
-        <h1>class11</h1>
-        <img src="img/class11.png" alt="">
-        <img src="img/class11 (2).png" alt="">
-    </div>
-    <div>
-        <h1>class11_exerise</h1>
-        <img src="img/class11_exerise.png" alt="">
-    </div>
-    <div>
-        <h1>class32</h1>
-        <img src="img/class32(1).png" alt="">
-        <img src="img/class32(2).png" alt="">
-    </div>
-    <div>
-        <h1>methood_post</h1>
-        <img src="img/methood_post.png" alt="">
-    </div>
-    <div>
-        <h1>MyApplication</h1>
-        <img src="img/MyApplication.png" alt="">
-    </div>
-    <div>
-        <h1>MyPlayground.playground</h1>
-        <img src="img/螢幕擷" alt="没有">
-    </div>
-    <div>
-        <h1>Notification</h1>
-        <img src="img/Notification.png" alt="">
-    </div>
-    <div>
-        <h1>OnlineImage_GetingData</h1>
-        <img src="img/螢幕擷取g" alt="没有">
-    </div>
-    <div>
-        <h1>RecyclerActivity</h1>
-        <img src="img/螢幕擷取畫面 2026-03-05 154346.png" alt="">
-    </div>
-    <div>
-        <h1>testing</h1>
-        <img src="img/螢幕擷ng" alt="没有">
-    </div>
+    <figure class="image-dialog__figure">
+      <img class="image-dialog__image" alt="" data-preview-image hidden>
+    </figure>
+  </dialog>
+
+  <script src="assets/js/site-navigation.js" defer></script>
+  <script src="assets/js/class-learning.js" defer></script>
 </body>
 </html>

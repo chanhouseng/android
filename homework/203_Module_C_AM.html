@@ -8,89 +8,124 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button class="accordion">code</button>
+    <button class="accordion">activity_main.xml (漸層部分)</button>
     <div class="panel">
         <pre>
+&lt;FrameLayout
+    android:id="@+id/frameLayout"
+    android:layout_width="316dp"
+    android:layout_height="540dp"
+    android:layout_marginTop="28dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.495"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/imageView"&gt;
 
+    &lt;ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="287dp"
+        android:layout_height="444dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/back1"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
+        android:translationY="30dp"
+        app:srcCompat="@drawable/louvre" /&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"&gt;
+        &lt;View
+            android:layout_width="match_parent"     <span>//透明部分</span>
+            android:id="@+id/view1"
+            android:layout_weight="1"
+            android:layout_height="0dp"/&gt;
+        &lt;View
+            android:id="@+id/view2"             <span>//漸層部分</span>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/blackback" /&gt;
+
+        &lt;View
+            android:id="@+id/view3"             <span>//全黑</span>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#1A1A1A" /&gt;
+    &lt;/LinearLayout&gt;
+&lt;/FrameLayout&gt;
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">MainActivity.kt (漸層效果)</button>
     <div class="panel">
         <pre>
-
+val value1 = ValueAnimator.ofInt(0, (resources.displayMetrics.density * 100).toInt())    <span>//先變漸層效果</span>
+value1.duration = 600
+value1.interpolator = LinearInterpolator()
+value1.addUpdateListener {
+    view2.layoutParams.height = it.animatedValue as Int
+    view2.requestLayout()
+}
+value1.start()
+val value2 = ValueAnimator.ofInt((444*resources.displayMetrics.density).toInt(), (90*resources.displayMetrics.density).toInt())     <span>//再將全黑拉低，透明嗰個就會自動補位</span>
+value2.interpolator = LinearInterpolator()
+value2.duration = 3000
+value2.addUpdateListener {
+    view3.layoutParams.height = it.animatedValue as Int
+    view3.requestLayout()
+}
+value1.addListener(object : AnimatorListenerAdapter(){
+    override fun onAnimationEnd(animation: Animator) {
+        super.onAnimationEnd(animation)
+        value2.start()
+    }
+})
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">MainActivity.kt (文字動畫)</button>
     <div class="panel">
         <pre>
-
-        </pre>
-    </div>
-
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
+val text1 = "Experience Art"
+val text2 = "We are thrilled to invite you to join us for an extraordinary event that will immerse you in the world of art."
+val linear: LinearLayout = findViewById(R.id.linear)
+val textView2: TextView = findViewById(R.id.textView2)
+val value4 = ValueAnimator.ofInt(0, text2.length)
+value4.duration = 1800
+value4.addUpdateListener {
+    textView2.text = text2.take(it.animatedValue as Int)
+}
+val button: Button  = findViewById(R.id.button)
+button.alpha = 0f
+value4.addListener(object : AnimatorListenerAdapter(){
+    override fun onAnimationEnd(animation: Animator) {
+        super.onAnimationEnd(animation)
+        button.animate().alpha(1f).translationY(0*resources.displayMetrics.density).setDuration(1000).start()
+    }
+})
+val textView: TextView = findViewById(R.id.textView)
+val value3 = ValueAnimator.ofInt(0, text1.length)
+value3.duration = 700
+value3.addUpdateListener {
+    textView.text = text1.take(it.animatedValue as Int)
+}
+value3.addListener(object : AnimatorListenerAdapter(){
+    override fun onAnimationEnd(animation: Animator) {
+        super.onAnimationEnd(animation)
+        value4.start()
+    }
+})
+value2.addListener(object : AnimatorListenerAdapter(){
+    override fun onAnimationEnd(animation: Animator) {
+        super.onAnimationEnd(animation)
+        linear.visibility = View.VISIBLE
+        value3.start()
+    }
+})
+button.setOnClickListener {
+    val intent = Intent(this, MainActivity2::class.java)
+    startActivity(intent)
+}
         </pre>
     </div>
 <script src="js.js"></script>

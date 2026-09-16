@@ -1,13 +1,16 @@
 import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { request } from 'node:http';
 import os from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
+import { pathToFileURL } from 'node:url';
 import test from 'node:test';
 
 const execFileAsync = promisify(execFile);
 const generatorPath = path.resolve('scripts/generate-training-index.mjs');
+const serverPath = path.resolve('scripts/serve-site.mjs');
 
 async function createFixture(t, files) {
   const root = await mkdtemp(path.join(os.tmpdir(), 'training-index-'));
@@ -135,4 +138,96 @@ test('writes byte-for-byte identical JSON when the input tree is unchanged', asy
 
   assert.equal(second, first);
   assert.equal(first, `${JSON.stringify(JSON.parse(first), null, 2)}\n`);
+});
+
+async function startSiteServer(t) {
+  const { createSiteServer } = await import(`${pathToFileURL(serverPath).href}?test=${Date.now()}`);
+  const server = createSiteServer({ root: process.cwd() });
+  await new Promise((resolve, reject) => {
+    server.once('error', reject);
+    server.listen(0, '127.0.0.1', resolve);
+  });
+  t.after(() => new Promise((resolve) => server.close(resolve)));
+  const { port } = server.address();
+  return `http://127.0.0.1:${port}`;
+}
+
+function requestRawPath(origin, requestPath) {
+  return new Promise((resolve, reject) => {
+    const target = new URL(origin);
+    const clientRequest = request({
+      host: target.hostname,
+      method: 'GET',
+      path: requestPath,
+      port: target.port,
+    }, (response) => {
+      const chunks = [];
+      response.on('data', (chunk) => chunks.push(chunk));
+      response.on('end', () => resolve({
+        body: Buffer.concat(chunks).toString('utf8'),
+        headers: response.headers,
+        status: response.statusCode,
+      }));
+    });
+    clientRequest.on('error', reject);
+    clientRequest.end();
+  });
+}
+
+test('site server serves canonical Training routes and keeps deep assets typed correctly', async (t) => {
+  const origin = await startSiteServer(t);
+  for (const pathname of ['/training/', '/training/Stroop%20Challenge/', '/training/Module%20A/nested/']) {
+    const response = await fetch(`${origin}${pathname}`);
+    assert.equal(response.status, 200, pathname);
+    assert.match(response.headers.get('content-type') ?? '', /^text\/html/);
+    assert.match(await response.text(), /id=["']training-browser["']/);
+  }
+
+  for (const [pathname, contentType] of [
+    ['/training/styles.css', /^text\/css/],
+    ['/training/app.js', /javascript/],
+    ['/training/files.json', /^application\/json/],
+  ]) {
+    const response = await fetch(`${origin}${pathname}`);
+    const body = await response.text();
+    assert.equal(response.status, 200, pathname);
+    assert.match(response.headers.get('content-type') ?? '', contentType);
+    assert.doesNotMatch(body, /<!doctype html>/i);
+  }
+});
+
+test('Training app normalizes valid legacy query paths even when the folder is missing', async () => {
+  const appSource = await readFile(path.resolve('training', 'app.js'), 'utf8');
+
+  assert.match(appSource, /route\.isLegacy\s*&&\s*route\.canonicalUrl/);
+  assert.match(appSource, /updateTrainingHistory\(window\.history,\s*requestedPath,\s*\{\s*replace:\s*true\s*\}\)/);
+});
+
+test('site server redirects legacy folders without intercepting train files', async (t) => {
+  const origin = await startSiteServer(t);
+  const legacy = await fetch(`${origin}/train/Stroop%20Challenge/`, { redirect: 'manual' });
+  assert.equal(legacy.status, 301);
+  assert.equal(legacy.headers.get('location'), '/training/Stroop%20Challenge/');
+
+  const redirected = await fetch(`${origin}${legacy.headers.get('location')}`);
+  assert.equal(redirected.status, 200);
+  assert.match(await redirected.text(), /id=["']training-browser["']/);
+
+  const file = await fetch(`${origin}/train/Stroop%20Challenge/Module%20Stroop%20Challenge(CO).pdf`, { redirect: 'manual' });
+  assert.equal(file.status, 200);
+  assert.match(file.headers.get('content-type') ?? '', /^application\/pdf/);
+  assert.equal(file.headers.has('location'), false);
+
+  const missingFile = await fetch(`${origin}/train/Stroop%20Challenge/example.pdf`, { redirect: 'manual' });
+  assert.equal(missingFile.status, 404);
+  assert.equal(missingFile.headers.has('location'), false);
+});
+
+test('site server rejects traversal and never lists arbitrary directories', async (t) => {
+  const origin = await startSiteServer(t);
+  for (const pathname of ['/train/%2E%2E/homework/index.html', '/train/..%2Fhomework%2Findex.html', '/train/']) {
+    const response = await requestRawPath(origin, pathname);
+    assert.ok([400, 404].includes(response.status), `${pathname}: ${response.status}`);
+    assert.doesNotMatch(response.body, /<title>Index of \/train/i);
+  }
 });

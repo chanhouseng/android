@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>新增 Homework｜作業管理</title>
+  <link rel="stylesheet" href="./admin.css">
+</head>
+<body class="admin-editor-page">
+  <main class="admin-editor" aria-labelledby="admin-title">
+    <header class="admin-editor__header">
+      <div class="admin-editor__heading">
+        <p class="admin-editor__eyebrow">HOMEWORK EDITOR</p>
+        <h1 id="admin-title">新增 Homework</h1>
+        <p>填寫內容、確認圖片預覽，再完成一次性的正式發佈。</p>
+      </div>
+      <nav class="admin-public-links" aria-label="公開網站快捷入口">
+        <a class="button button--secondary admin-public-link" href="/"
+          target="_blank" rel="noopener noreferrer">查看網站首頁</a>
+        <a class="button button--secondary admin-public-link" href="/homework/"
+          target="_blank" rel="noopener noreferrer">查看 Homework</a>
+      </nav>
+    </header>
+
+    <div class="admin-workspace">
+      <section class="card editor-panel" aria-labelledby="editor-form-title">
+        <header class="panel-heading">
+          <div>
+            <p class="panel-heading__eyebrow">CONTENT</p>
+            <h2 id="editor-form-title">Homework 資料</h2>
+          </div>
+        </header>
+
+        <form id="homework-form" class="editor-form" autocomplete="off" novalidate>
+          <div class="editor-field">
+            <label for="homework-id">Homework ID</label>
+            <input id="homework-id" name="id" type="text" required maxlength="80"
+              pattern="[a-z0-9]+(?:-[a-z0-9]+)*" aria-describedby="homework-id-help id-error">
+            <p id="homework-id-help" class="field-help">將來會建立 /homework/&lt;id&gt;.html</p>
+            <p class="future-url">未來網址：<span id="future-url-value">/homework/&lt;id&gt;.html</span></p>
+            <p id="id-error" class="field-error" aria-live="polite" hidden></p>
+          </div>
+
+          <div class="editor-field">
+            <label for="homework-title">顯示名稱</label>
+            <input id="homework-title" name="title" type="text" required maxlength="120"
+              aria-describedby="title-error">
+            <p id="title-error" class="field-error" aria-live="polite" hidden></p>
+          </div>
+
+          <div class="editor-field">
+            <div class="field-label-row">
+              <label for="homework-description">簡介</label>
+              <output id="description-count" for="homework-description">0 / 500</output>
+            </div>
+            <textarea id="homework-description" name="description" required maxlength="500" rows="4"
+              aria-describedby="description-help description-error"></textarea>
+            <p id="description-help" class="field-help">普通文字，不接受 HTML。</p>
+            <p id="description-error" class="field-error" aria-live="polite" hidden></p>
+          </div>
+
+          <fieldset class="editor-field image-fieldset">
+            <legend>封面圖片</legend>
+            <label for="homework-cover-image">封面檔案</label>
+            <input id="homework-cover-image" name="coverImage" type="file" required
+              accept="image/png,image/jpeg,image/webp" aria-describedby="cover-image-help coverImage-error">
+            <p id="cover-image-help" class="field-help">必填。PNG、JPEG 或 WebP，最多 5 MiB。</p>
+            <p id="coverImage-error" class="field-error" aria-live="polite" hidden></p>
+
+            <label for="homework-cover-alt">封面替代文字</label>
+            <input id="homework-cover-alt" name="coverAlt" type="text" required maxlength="160"
+              aria-describedby="cover-alt-help coverAlt-error">
+            <p id="cover-alt-help" class="field-help">描述圖片中的重要成果，最多 160 個字元。</p>
+            <p id="coverAlt-error" class="field-error" aria-live="polite" hidden></p>
+          </fieldset>
+
+          <fieldset class="editor-field image-fieldset">
+            <legend>內容圖片</legend>
+            <label for="homework-content-images">內容圖片檔案</label>
+            <input id="homework-content-images" name="contentImages" type="file" multiple
+              accept="image/png,image/jpeg,image/webp" aria-describedby="content-images-help contentImages-error">
+            <p id="content-images-help" class="field-help">選填，最多 10 張；每張最多 5 MiB，合計最多 30 MiB。檔名只可使用小寫英文字母、數字、-、_ 和 .png、.jpg、.webp；cover.png、cover.jpg、cover.webp 保留給封面。伺服器會拒絕超過 4,000 萬像素的圖片。</p>
+            <p id="contentImages-error" class="field-error" aria-live="polite" hidden></p>
+            <div id="content-image-list" class="content-image-list" aria-live="polite">
+              <p class="state state--empty">尚未選擇內容圖片。</p>
+            </div>
+          </fieldset>
+
+          <div class="editor-field editor-field--code">
+            <label for="homework-content-html">主要內容 HTML</label>
+            <textarea id="homework-content-html" name="contentHtml" required rows="18" wrap="off"
+              spellcheck="false" aria-describedby="content-example content-help contentHtml-error"></textarea>
+            <div id="content-example" class="content-example">
+              <span>範例</span>
+              <pre class="code-block"><code>&lt;section&gt;
+  &lt;h2&gt;功能說明&lt;/h2&gt;
+  &lt;p&gt;這裡是 Homework 的內容。&lt;/p&gt;
+
+  &lt;h2&gt;Kotlin&lt;/h2&gt;
+  &lt;pre class=&quot;code-block&quot;&gt;&lt;code&gt;val message = &amp;quot;Hello&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/section&gt;</code></pre>
+            </div>
+            <p id="content-help" class="field-help">程式碼內的 &lt;、&gt;、&amp; 請使用 &amp;lt;、&amp;gt;、&amp;amp;。</p>
+            <p id="contentHtml-error" class="field-error" aria-live="polite" hidden></p>
+          </div>
+
+          <div id="form-error-summary" class="state state--error form-error-summary" role="alert" tabindex="-1" hidden></div>
+          <div class="editor-actions">
+            <button id="preview-button" class="button editor-form__action" type="submit" disabled>更新預覽</button>
+            <button id="publish-button" class="button button--secondary editor-form__action" type="button" disabled>正式發佈</button>
+          </div>
+          <p id="publish-readiness" class="publication-note" role="status">完成有效預覽後才可正式發佈。</p>
+        </form>
+      </section>
+
+      <section class="card preview-panel" aria-labelledby="preview-title">
+        <header class="panel-heading preview-heading">
+          <div>
+            <p class="panel-heading__eyebrow">PREVIEW</p>
+            <h2 id="preview-title">預覽</h2>
+          </div>
+          <p class="preview-label">預覽標籤 <span class="status-badge status-badge--warning">尚未發佈</span></p>
+        </header>
+
+        <article id="cover-card-preview" class="cover-card-preview" aria-labelledby="cover-preview-title">
+          <div class="cover-card-preview__media">
+            <img id="cover-preview-image" alt="" hidden>
+            <span id="cover-preview-empty">尚未選擇封面</span>
+          </div>
+          <div class="cover-card-preview__body">
+            <div class="cluster"><h3 id="cover-preview-title">尚未命名</h3><span class="status-badge status-badge--warning">尚未發佈</span></div>
+            <p id="cover-preview-description">填寫簡介後會顯示在此。</p>
+            <p class="future-url">成果頁：<span id="cover-preview-url">/homework/&lt;id&gt;.html</span></p>
+          </div>
+        </article>
+
+        <div class="preview-stage">
+          <div id="preview-empty" class="state state--empty"><strong>尚未產生預覽</strong><span>填寫左側內容後按「預覽」</span></div>
+          <div id="preview-loading" class="state state--loading" role="status" hidden><strong>正在建立預覽</strong><span>請稍候。</span></div>
+          <div id="preview-error" class="state state--error" role="alert" hidden></div>
+          <div id="session-expired" class="state state--error" role="alert" hidden>
+            <strong id="session-expired-message">登入已失效，請重新登入</strong>
+            <a class="button button--secondary" href="./">返回登入</a>
+          </div>
+          <iframe id="preview-frame" title="Homework 預覽" sandbox hidden></iframe>
+        </div>
+        <div id="publish-error" class="state state--error publish-result" role="alert" hidden></div>
+        <div id="publish-success" class="state state--success publish-result" role="status" tabindex="-1" hidden>
+          <strong>Homework 已正式發佈</strong>
+          <span><a id="published-result-link" href="/homework/">開啟成果頁</a> · <a id="published-index-link" href="/homework/">查看 Homework</a></span>
+        </div>
+      </section>
+    </div>
+
+    <section id="published-homework-panel" class="card published-homework-panel"
+      aria-labelledby="published-homework-title">
+      <header class="panel-heading published-homework-heading">
+        <div>
+          <p class="panel-heading__eyebrow">PUBLISHED</p>
+          <h2 id="published-homework-title">已發佈 Homework<span id="published-homework-count"></span></h2>
+        </div>
+        <p>清單只顯示正式發佈內容；安全的管理頁格式可以編輯基本資料與主要內容。</p>
+      </header>
+
+      <div id="published-homework-state" class="state state--loading published-homework-state"
+        role="status" aria-live="polite" aria-atomic="true">
+        <span id="published-homework-state-message">正在載入已發佈 Homework…</span>
+        <button id="published-homework-retry" class="button button--secondary" type="button" hidden>重新載入</button>
+      </div>
+
+      <div id="published-homework-list-header" class="published-homework-list__header" aria-hidden="true" hidden>
+        <span>標題</span>
+        <span>Homework ID</span>
+        <span>發佈日期</span>
+        <span>狀態</span>
+        <span>公開網址</span>
+        <span>操作</span>
+      </div>
+      <ul id="published-homework-list" class="published-homework-list" aria-label="已發佈 Homework 清單" hidden></ul>
+      <p id="published-homework-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+    </section>
+
+    <p id="homework-edit-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+
+    <div class="admin-editor__logout">
+      <p id="logout-error" class="admin-auth-error" aria-live="polite" hidden></p>
+      <button id="logout-button" class="button button--secondary" type="button" disabled>登出</button>
+    </div>
+  </main>
+
+  <dialog id="publish-dialog" class="publish-dialog" aria-labelledby="publish-dialog-title">
+    <form method="dialog">
+      <header>
+        <p class="panel-heading__eyebrow">FINAL CHECK</p>
+        <h2 id="publish-dialog-title">確認正式發佈</h2>
+      </header>
+      <dl class="publish-summary">
+        <div><dt>Homework ID</dt><dd id="publish-summary-id"></dd></div>
+        <div><dt>顯示名稱</dt><dd id="publish-summary-title"></dd></div>
+        <div><dt>成果頁網址</dt><dd id="publish-summary-url"></dd></div>
+        <div><dt>封面路徑</dt><dd id="publish-summary-cover"></dd></div>
+        <div><dt>內容圖片數量</dt><dd id="publish-summary-image-count"></dd></div>
+        <div><dt>Training</dt><dd>Training：本批未加入</dd></div>
+      </dl>
+      <p>此操作會立即建立正式頁面並更新 Homework 入口。</p>
+      <div class="dialog-actions">
+        <button class="button button--ghost" type="submit" value="cancel">返回檢查</button>
+        <button id="publish-confirm-button" class="button" type="button">確認正式發佈</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="homework-edit-dialog" class="publish-dialog homework-edit-dialog"
+    aria-labelledby="homework-edit-dialog-title">
+    <form id="homework-edit-form" autocomplete="off" novalidate>
+      <div id="homework-edit-view">
+        <header>
+          <p class="panel-heading__eyebrow">METADATA</p>
+          <h2 id="homework-edit-dialog-title">編輯 Homework 基本資料</h2>
+          <p>只會更新顯示名稱與簡介。</p>
+        </header>
+
+        <div class="editor-field">
+          <label for="homework-edit-id">Homework ID</label>
+          <input id="homework-edit-id" type="text" readonly>
+        </div>
+        <div class="editor-field">
+          <label for="homework-edit-title">顯示名稱</label>
+          <input id="homework-edit-title" type="text" required maxlength="120"
+            aria-describedby="homework-edit-title-error">
+          <p id="homework-edit-title-error" class="field-error" aria-live="polite" hidden></p>
+        </div>
+        <div class="editor-field">
+          <div class="field-label-row">
+            <label for="homework-edit-description">簡介</label>
+            <output id="homework-edit-description-count" for="homework-edit-description"
+              aria-live="polite">0 / 500</output>
+          </div>
+          <textarea id="homework-edit-description" required maxlength="500" rows="5"
+            aria-describedby="homework-edit-description-help homework-edit-description-error"></textarea>
+          <p id="homework-edit-description-help" class="field-help">普通文字，不接受 HTML。</p>
+          <p id="homework-edit-description-error" class="field-error" aria-live="polite" hidden></p>
+        </div>
+        <p class="future-url">公開網址：<span id="homework-edit-url"></span></p>
+        <div id="homework-edit-error" class="state state--error" role="alert" tabindex="-1" hidden></div>
+        <div class="dialog-actions">
+          <button id="homework-edit-cancel" class="button button--ghost" type="button">取消</button>
+          <button id="homework-edit-save" class="button" type="submit" disabled>儲存變更</button>
+        </div>
+      </div>
+
+      <div id="homework-edit-confirm-view" hidden>
+        <header>
+          <p class="panel-heading__eyebrow">CONFIRM CHANGE</p>
+          <h2>確認基本資料變更</h2>
+        </header>
+        <dl class="publish-summary">
+          <div><dt>Homework ID</dt><dd id="homework-edit-summary-id"></dd></div>
+          <div><dt>顯示名稱</dt><dd id="homework-edit-summary-title"></dd></div>
+          <div><dt>簡介</dt><dd id="homework-edit-summary-description"></dd></div>
+        </dl>
+        <p>儲存後會同步更新公開清單及 Homework 詳細頁。</p>
+        <div class="dialog-actions">
+          <button id="homework-edit-back" class="button button--ghost" type="button">返回修改</button>
+          <button id="homework-edit-confirm" class="button" type="button">確認儲存</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="homework-content-edit-dialog" class="publish-dialog homework-content-edit-dialog"
+    aria-labelledby="homework-content-edit-title">
+    <div class="homework-content-edit-dialog__body">
+      <header>
+        <p class="panel-heading__eyebrow">CONTENT HTML</p>
+        <h2 id="homework-content-edit-title">編輯 Homework 主要內容</h2>
+        <p>只會更新公開詳細頁的主要內容 HTML。</p>
+      </header>
+
+      <div id="homework-content-edit-loading" class="state state--loading" role="status" aria-live="polite">
+        正在載入主要內容…
+      </div>
+
+      <div id="homework-content-edit-main" hidden>
+        <div class="homework-content-edit-meta">
+          <div class="editor-field">
+            <label for="homework-content-edit-id">Homework ID</label>
+            <input id="homework-content-edit-id" type="text" readonly>
+          </div>
+          <div class="editor-field">
+            <label for="homework-content-edit-name">Homework 標題</label>
+            <input id="homework-content-edit-name" type="text" readonly>
+          </div>
+          <p class="future-url">公開網址：<a id="homework-content-edit-url" href="/homework/"
+            target="_blank" rel="noopener noreferrer"></a></p>
+        </div>
+
+        <div class="homework-content-edit-workspace">
+          <section class="homework-content-edit-source" aria-labelledby="homework-content-edit-source-title">
+            <div class="field-label-row">
+              <label id="homework-content-edit-source-title" for="homework-content-edit-html">主要內容 HTML</label>
+              <output id="homework-content-edit-size" for="homework-content-edit-html"
+                aria-live="polite">0.0 KiB / 400 KiB</output>
+            </div>
+            <textarea id="homework-content-edit-html" rows="20" wrap="off" spellcheck="false"
+              aria-describedby="homework-content-edit-size homework-content-edit-help"></textarea>
+            <p id="homework-content-edit-help" class="field-help">修改後必須重新更新預覽，才可儲存。</p>
+          </section>
+
+          <section class="homework-content-edit-preview-panel" aria-labelledby="homework-content-edit-preview-title">
+            <h3 id="homework-content-edit-preview-title">安全預覽</h3>
+            <div class="preview-stage homework-content-edit-preview-stage">
+              <div id="homework-content-edit-preview-empty" class="state state--empty">
+                <strong>預覽尚未更新</strong><span>按「更新預覽」檢查目前 HTML。</span>
+              </div>
+              <div id="homework-content-edit-preview-loading" class="state state--loading"
+                role="status" aria-live="polite" hidden>正在更新安全預覽…</div>
+              <div id="homework-content-edit-preview-error" class="state state--error"
+                role="alert" tabindex="-1" hidden></div>
+              <iframe id="homework-content-edit-frame" title="Homework 主要內容預覽" sandbox hidden></iframe>
+            </div>
+          </section>
+        </div>
+
+        <div id="homework-content-edit-error" class="state state--error" role="alert" tabindex="-1" hidden></div>
+        <div class="dialog-actions homework-content-edit-actions">
+          <button id="homework-content-edit-cancel" class="button button--ghost" type="button">取消</button>
+          <button id="homework-content-edit-preview" class="button button--secondary" type="button">更新預覽</button>
+          <button id="homework-content-edit-save" class="button" type="button" disabled>儲存變更</button>
+        </div>
+      </div>
+
+      <div id="homework-content-edit-success" class="state state--success" role="status" tabindex="-1" hidden>
+        <strong>Homework 主要內容已更新</strong>
+        <span><a id="homework-content-edit-result-link" href="/homework/" target="_blank"
+          rel="noopener noreferrer">開啟公開 Homework</a></span>
+        <button id="homework-content-edit-close" class="button button--secondary" type="button">關閉</button>
+      </div>
+    </div>
+  </dialog>
+  <p id="homework-content-edit-announcement" class="sr-only" role="status"
+    aria-live="polite" aria-atomic="true"></p>
+  <script type="module" src="./admin.js"></script>
+</body>
+</html>

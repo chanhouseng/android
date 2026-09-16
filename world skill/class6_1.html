@@ -1,76 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-Hant" data-site-root="../">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>class6_1｜World Skill 練習</title>
+  <link rel="stylesheet" href="../assets/css/foundation.css">
+  <link rel="stylesheet" href="../assets/css/app-shell.css">
+  <link rel="stylesheet" href="../assets/css/accordion.css">
+  <link rel="stylesheet" href="../assets/css/detail-page.css">
 </head>
 <body>
-    <button class="accordion">code</button>
-<div class="panel">
-    <pre>
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="../index.html" aria-label="返回首頁"><span class="brand-mark" aria-hidden="true">AL</span><span class="brand-copy"><strong>Android Learning</strong><span>WORKSPACE</span></span></a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+  <main class="app-main" id="main-content" tabindex="-1">
+    <div class="container detail-page">
+      <nav aria-label="Breadcrumb">
+        <ol class="detail-breadcrumb">
+          <li><a href="../index.html">首頁</a></li>
+          <li><a href="index.html">World Skill 練習</a></li>
+          <li><span aria-current="page">class6_1</span></li>
+        </ol>
+      </nav>
+      <header class="detail-header">
+        <a class="button button--ghost detail-header__back" href="index.html">返回 World Skill 練習</a>
+        <p class="detail-eyebrow">WORLD SKILL · DETAIL</p>
+        <h1>class6_1</h1>
+      </header>
+      <div class="detail-content" data-accordion-root data-original-content>
+    <article class="accordion-item card" data-accordion-item data-title="code">
+          <h2><button class="accordion-trigger" id="class6_1-trigger-1" type="button" aria-expanded="true" aria-controls="class6_1-panel-1" data-accordion-trigger>code</button></h2>
+          <div class="accordion-panel" id="class6_1-panel-1" role="region" aria-labelledby="class6_1-trigger-1" data-accordion-panel>
+    <pre class="code-block"><code>
         <h3>NumberPicker</h3>
-        <mark>val numberPicker: NumberPicker = findViewById(R.id.numberPicker)</mark>  <span>//喺xml要自己打NumberPicker</span>
-        numberPicker.minValue = 100   <span>//好似冇用</span>
+        <mark>val numberPicker: NumberPicker = findViewById(R.id.numberPicker)</mark>  <span class="code-comment">//喺xml要自己打NumberPicker</span>
+        numberPicker.minValue = 100   <span class="code-comment">//好似冇用</span>
         numberPicker.maxValue = 200
         numberPicker.value = 140
 
         val numberPicker2: NumberPicker = findViewById(R.id.numberPicker2)
-        numberPicker2.maxValue = 1  <span>//第二項</span>
-        numberPicker.minValue = 0   <span>//第一項</span>
+        numberPicker2.maxValue = 1  <span class="code-comment">//第二項</span>
+        numberPicker.minValue = 0   <span class="code-comment">//第一項</span>
         <mark>numberPicker2.displayedValues = arrayOf("AM", "PM")</mark>
 
-<span>-------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="code-comment">-------------------------------------------------------------------------------------------------------------------------------</span>
 
         <h3>載入website</h3>
         val webView : WebView = findViewById(R.id.webView)
-        <mark>webView.settings.javaScriptEnabled = true</mark>    <span>//可以load javaScript</span>
+        <mark>webView.settings.javaScriptEnabled = true</mark>    <span class="code-comment">//可以load javaScript</span>
         <mark>webView.loadUrl("https://www.library.gov.mo/zh-hant/")</mark>
 
-<span>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="code-comment">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
 
         <h3>數組處理</h3>
         val intArray = intArrayOf(3, 5, 1, 2, 10, 7, 8, 9, 9, 1)
-        var intArray2 = intArray.filter { it &gt;= 5 }.toIntArray()  <span>//filter之後會變list</span>
-        val random = intArray2.random()        <span>//隨便攞一個數字</span>
-        intArray.shuffle()                     <span>//打亂數組</span>
-        intArray.reverse()                     <span>//倒轉數組</span>
-        intArray2.sort()                       <span>//排序 小-&gt;大</span>
-        intArray2.sortDescending()             <span>// 大 -&gt; 小</span>
+        var intArray2 = intArray.filter { it &gt;= 5 }.toIntArray()  <span class="code-comment">//filter之後會變list</span>
+        val random = intArray2.random()        <span class="code-comment">//隨便攞一個數字</span>
+        intArray.shuffle()                     <span class="code-comment">//打亂數組</span>
+        intArray.reverse()                     <span class="code-comment">//倒轉數組</span>
+        intArray2.sort()                       <span class="code-comment">//排序 小-&gt;大</span>
+        intArray2.sortDescending()             <span class="code-comment">// 大 -&gt; 小</span>
         val array = arrayOf("aaas", "bs", "dzz", "c")
-        array.sort()                           <span>//先大寫排序、再字串排</span>
-        array.sortBy { it.length }             <span>//按字的長度排</span>
-        val arrayNew = intArray.take(2)        <span>//攞幾個元素</span>
-        val disArray = intArray.distinct()     <span>//刪去重復的</span>
-        val add10Array = intArray.map {        <span>//將成個數值整體處理</span>
+        array.sort()                           <span class="code-comment">//先大寫排序、再字串排</span>
+        array.sortBy { it.length }             <span class="code-comment">//按字的長度排</span>
+        val arrayNew = intArray.take(2)        <span class="code-comment">//攞幾個元素</span>
+        val disArray = intArray.distinct()     <span class="code-comment">//刪去重復的</span>
+        val add10Array = intArray.map {        <span class="code-comment">//將成個數值整體處理</span>
             it + 10
         }
-        findViewById&lt;TextView&gt;(R.id.textView).text = add10Array.joinToString { it.toString() } <span>//IntArray必用, 將每個元素toString()</span>
+        findViewById&lt;TextView&gt;(R.id.textView).text = add10Array.joinToString { it.toString() } <span class="code-comment">//IntArray必用, 將每個元素toString()</span>
 
         val nameArray = arrayOf("Daniel", "Jason", "Andy", "Joe")
-        val nameNew = nameArray.filter { it.length &gt;= 5 }.map {    <span>//用filter篩選名字length&gt;=5的, 再將佢地整體加*</span>
+        val nameNew = nameArray.filter { it.length &gt;= 5 }.map {    <span class="code-comment">//用filter篩選名字length&gt;=5的, 再將佢地整體加*</span>
             it + "*"
         }
-        val nameNew = nameArray.map {      <span>//如果唔夠5個長度, 就喺後面加*直到5 (padStart前面)</span>
+        val nameNew = nameArray.map {      <span class="code-comment">//如果唔夠5個長度, 就喺後面加*直到5 (padStart前面)</span>
             it.padEnd(5, '*')
         }
         Toast.makeText(this, nameNew.joinToString(), Toast.LENGTH_SHORT).show()
 
-<span>-------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="code-comment">-------------------------------------------------------------------------------------------------------------------------------</span>
 
         <h3>ValueAnimator</h3>
-        val valueAnnotation = ValueAnimator.ofInt(0, 100)                <span>//// 建立從 0 到 100 的整數動畫</span>
-        valueAnnotation.duration = 2000                                  <span>// 動畫持續2秒</span>
-        valueAnnotation.interpolator = DecelerateInterpolator()          <span>// 減速插值器（越到後面越慢）</span>
+        val valueAnnotation = ValueAnimator.ofInt(0, 100)                <span class="code-comment">//// 建立從 0 到 100 的整數動畫</span>
+        valueAnnotation.duration = 2000                                  <span class="code-comment">// 動畫持續2秒</span>
+        valueAnnotation.interpolator = DecelerateInterpolator()          <span class="code-comment">// 減速插值器（越到後面越慢）</span>
         var value = 0
         <mark>valueAnnotation.addUpdateListener {</mark>
-            value = it.animatedValue as Int                              <span>animatedValue 的值會從 0 平滑地變化到 100, 就將其俾值俾value, 再show到textView</span>
+            value = it.animatedValue as Int                              <span class="code-comment">animatedValue 的值會從 0 平滑地變化到 100, 就將其俾值俾value, 再show到textView</span>
             findViewById&lt;TextView&gt;(R.id.textView2).text = value.toString()
         }
         findViewById&lt;TextView&gt;(R.id.textView).setOnClickListener {
-            valueAnnotation.start()                                      <span>開始動畫</span>
+            valueAnnotation.start()                                      <span class="code-comment">開始動畫</span>
         }
 
         val valueAnim = ValueAnimator.ofInt(0, 300)
@@ -78,45 +102,45 @@
         var value = 0
         valueAnim.addUpdateListener {
             value = it.animatedValue as Int
-            findViewById&lt;LinearLayout&gt;(R.id.linearLayout).layoutParams.height = value    <span>//把 LinearLayout 的高度動態改成 value 的數值</span>
-            findViewById&lt;LinearLayout&gt;(R.id.linearLayout).requestLayout()                <span>//通知 Android View 系統：「我的尺寸變了，請重新計算佈局並重繪。」</span>
+            findViewById&lt;LinearLayout&gt;(R.id.linearLayout).layoutParams.height = value    <span class="code-comment">//把 LinearLayout 的高度動態改成 value 的數值</span>
+            findViewById&lt;LinearLayout&gt;(R.id.linearLayout).requestLayout()                <span class="code-comment">//通知 Android View 系統：「我的尺寸變了，請重新計算佈局並重繪。」</span>
         }
         findViewById&lt;TextView&gt;(R.id.textView).setOnClickListener {
             valueAnim.start()
         }
 
-<span>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="code-comment">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
 
         <h3>Copy 文字</h3>
         findViewById&lt;TextView&gt;(R.id.textView3).setOnClickListener {
             val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager                                   
-            <span>// 取得系統的剪貼簿管理器</span>
+            <span class="code-comment">// 取得系統的剪貼簿管理器</span>
             val clip = ClipData.newPlainText("label",findViewById&lt;TextView&gt;(R.id.textView3).text.toString())
-            <span>// 建立一個純文字的 ClipData，準備要複製的內容</span>
-            <span>// 第一個參數 "label" 是標籤（給系統看的，通常不重要）</span>
+            <span class="code-comment">// 建立一個純文字的 ClipData，準備要複製的內容</span>
+            <span class="code-comment">// 第一個參數 "label" 是標籤（給系統看的，通常不重要）</span>
             clipboard.setPrimaryClip(clip)
-            <span>// 把剛建立的內容設定為目前主要的剪貼簿內容</span>
+            <span class="code-comment">// 把剛建立的內容設定為目前主要的剪貼簿內容</span>
 
             Toast.makeText(this, "copied", Toast.LENGTH_SHORT).show()
         }
 
-<span>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="code-comment">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
 
         <h3>MediaPlayer 播音樂</h3>     
 
         <mark>要先放音樂檔 res-> new -> folder -> raw resources folder 建立完就拉啲檔入去</mark>
 
         <mark>val mediaButton : MediaPlayer = MediaPlayer.create(this, R.raw.coin)</mark>
-        mediaPlayer = MediaPlayer.create(this, R.raw.bgm)    <span>//選音樂路徑</span>
-        mediaPlayer.isLooping = true              <span>//設置會否重複播放</span>
+        mediaPlayer = MediaPlayer.create(this, R.raw.bgm)    <span class="code-comment">//選音樂路徑</span>
+        mediaPlayer.isLooping = true              <span class="code-comment">//設置會否重複播放</span>
         mediaPlayer.start()
         mediaPlayer.setVolume(0.2f, 0.2f)
         findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
             mediaButton.start()
-            mediaButton.setVolume(2f, 2f)          <span>//設置大細聲</span>
+            mediaButton.setVolume(2f, 2f)          <span class="code-comment">//設置大細聲</span>
         }
 
-<span>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="code-comment">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
 
         <h3>滑動方向偵測</h3>
         var startX = 0f
@@ -157,44 +181,55 @@
             true
         }
 
-<span>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="code-comment">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
 
-        <h3>VideoView 影片播放器</h3>  <span>//影片唔可以太大</span>
+        <h3>VideoView 影片播放器</h3>  <span class="code-comment">//影片唔可以太大</span>
         val videoView = findViewById&lt;VideoView&gt;(R.id.videoView)
-       <mark> val uri = Uri.parse("android.resource://$packageName/${R.raw.home}")</mark>  <span>//影片路徑</span>
-        videoView.setVideoURI(uri)         <span>// 設定影片來源</span>
-        videoView.requestFocus()           <span>// 請求焦點 讓 VideoView 能接收按鍵控制?</span>
+       <mark> val uri = Uri.parse("android.resource://$packageName/${R.raw.home}")</mark>  <span class="code-comment">//影片路徑</span>
+        videoView.setVideoURI(uri)         <span class="code-comment">// 設定影片來源</span>
+        videoView.requestFocus()           <span class="code-comment">// 請求焦點 讓 VideoView 能接收按鍵控制?</span>
         videoView.start()
 
 
     override fun onResume() {
         super.onResume()
-        mediaPlayer.start()   <span>// 回到畫面 → 繼續播放</span>
+        mediaPlayer.start()   <span class="code-comment">// 回到畫面 → 繼續播放</span>
     }
     override fun onPause() {
         super.onPause()
-        mediaPlayer.pause()   <span>// 畫面離開前景（被遮住、切到其他 App）→ 暫停播放</span>
+        mediaPlayer.pause()   <span class="code-comment">// 畫面離開前景（被遮住、切到其他 App）→ 暫停播放</span>
     }
 
     override fun onStop() {
         super.onStop()
-        mediaPlayer.stop()    <span>// 畫面完全不可見 → 停止播放</span>
+        mediaPlayer.stop()    <span class="code-comment">// 畫面完全不可見 → 停止播放</span>
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer.release() <span>// Activity 即將被銷毀 → 釋放資源</span>
+        mediaPlayer.release() <span class="code-comment">// Activity 即將被銷毀 → 釋放資源</span>
     }
 
-<span>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="code-comment">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
 
     <h3>設置文字字型</h3>     
 
         <mark>要先放字型檔 res-> new -> folder -> font folder 建立完就拉啲檔入去</mark>
 
         <mark>android:fontFamily="@font/playfair_display_regular"</mark>
-    </pre>
+    </code></pre>
 </div>
-<script src="js.js"></script>
+        </article>
+
+
+      </div>
+      <footer class="detail-footer">
+        <a class="button button--secondary" href="index.html">返回 World Skill 練習</a>
+      </footer>
+    </div>
+  </main>
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+  <script src="../assets/js/site-navigation.js" defer></script>
+  <script src="../assets/js/accordion.js" defer></script>
 </body>
 </html>

@@ -1,27 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-Hant" data-site-root="../">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>exercise4｜World Skill 練習</title>
+  <link rel="stylesheet" href="../assets/css/foundation.css">
+  <link rel="stylesheet" href="../assets/css/app-shell.css">
+  <link rel="stylesheet" href="../assets/css/accordion.css">
+  <link rel="stylesheet" href="../assets/css/detail-page.css">
 </head>
 <body>
-    <button class="accordion">Switch 按鈕</button>
-    <div class="panel">
-        <pre>
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="../index.html" aria-label="返回首頁"><span class="brand-mark" aria-hidden="true">AL</span><span class="brand-copy"><strong>Android Learning</strong><span>WORKSPACE</span></span></a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+  <main class="app-main" id="main-content" tabindex="-1">
+    <div class="container detail-page">
+      <nav aria-label="Breadcrumb">
+        <ol class="detail-breadcrumb">
+          <li><a href="../index.html">首頁</a></li>
+          <li><a href="index.html">World Skill 練習</a></li>
+          <li><span aria-current="page">exercise4</span></li>
+        </ol>
+      </nav>
+      <header class="detail-header">
+        <a class="button button--ghost detail-header__back" href="index.html">返回 World Skill 練習</a>
+        <p class="detail-eyebrow">WORLD SKILL · DETAIL</p>
+        <h1>exercise4</h1>
+      </header>
+      <div class="detail-content" data-accordion-root data-original-content>
+<article class="accordion-item card" data-accordion-item data-title="Switch 按鈕">
+            <h2><button class="accordion-trigger" id="exercise4-trigger-1" type="button" aria-expanded="true" aria-controls="exercise4-panel-1" data-accordion-trigger>Switch 按鈕</button></h2>
+            <div class="accordion-panel" id="exercise4-panel-1" role="region" aria-labelledby="exercise4-trigger-1" data-accordion-panel>
+              <pre class="code-block"><code>
 val switch: Switch = findViewById(R.id.switch1)
 switch.setOnCheckedChangeListener { _, isChecked -&gt;
     if(isChecked){
         Toast.makeText(this, "switch true", Toast.LENGTH_SHORT).show()
     }
-}        </pre>
-
-    </div>
-    <button class="accordion">SeekBar 滑動條</button>
-    <div class="panel">
-        <pre>
+}        </code></pre>
+            </div>
+          </article>
+          <article class="accordion-item card" data-accordion-item data-title="SeekBar 滑動條">
+            <h2><button class="accordion-trigger" id="exercise4-trigger-2" type="button" aria-expanded="true" aria-controls="exercise4-panel-2" data-accordion-trigger>SeekBar 滑動條</button></h2>
+            <div class="accordion-panel" id="exercise4-panel-2" role="region" aria-labelledby="exercise4-trigger-2" data-accordion-panel>
+              <pre class="code-block"><code>
 val seekBar: SeekBar = findViewById(R.id.seekBar)
 val seekText : TextView = findViewById(R.id.textView)
 seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
@@ -41,11 +66,13 @@ seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
 
 })
 
-        </pre>
-    </div>
-    <button class="accordion">BottomSheetDialog</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+            </div>
+          </article>
+          <article class="accordion-item card" data-accordion-item data-title="BottomSheetDialog">
+            <h2><button class="accordion-trigger" id="exercise4-trigger-3" type="button" aria-expanded="true" aria-controls="exercise4-panel-3" data-accordion-trigger>BottomSheetDialog</button></h2>
+            <div class="accordion-panel" id="exercise4-panel-3" role="region" aria-labelledby="exercise4-trigger-3" data-accordion-panel>
+              <pre class="code-block"><code>
 val button: Button = findViewById(R.id.button)
 button.setOnClickListener {
     val bottomSheetDialog = BottomSheetDialog(this)
@@ -54,14 +81,16 @@ button.setOnClickListener {
     custom.findViewById&lt;TextView&gt;(R.id.textView2).text = "參觀大三巴"
     custom.findViewById&lt;TextView&gt;(R.id.textView4).text = "大三巴導賞"
     custom.findViewById&lt;TextView&gt;(R.id.textView5).text = "大三巴"
-    <mark>bottomSheetDialog.window?.setDimAmount(0f)</mark>   <span>//set bottomSheetDialog 冇灰色背景</span>
+    <mark>bottomSheetDialog.window?.setDimAmount(0f)</mark>   <span class="code-comment">//set bottomSheetDialog 冇灰色背景</span>
     bottomSheetDialog.show()
 }
-        </pre>
-    </div>
-    <button class="accordion">PopupMenu</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+            </div>
+          </article>
+          <article class="accordion-item card" data-accordion-item data-title="PopupMenu">
+            <h2><button class="accordion-trigger" id="exercise4-trigger-4" type="button" aria-expanded="true" aria-controls="exercise4-panel-4" data-accordion-trigger>PopupMenu</button></h2>
+            <div class="accordion-panel" id="exercise4-panel-4" role="region" aria-labelledby="exercise4-trigger-4" data-accordion-panel>
+              <pre class="code-block"><code>
 findViewById&lt;TextView&gt;(R.id.textView6).setOnClickListener {
     val popupMenu = PopupMenu(this, it)
     popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
@@ -75,11 +104,13 @@ findViewById&lt;TextView&gt;(R.id.textView6).setOnClickListener {
     popupMenu.show()
 }
 
-        </pre>
-    </div>
-    <button class="accordion">numberPicker 顯示</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+            </div>
+          </article>
+          <article class="accordion-item card" data-accordion-item data-title="numberPicker 顯示">
+            <h2><button class="accordion-trigger" id="exercise4-trigger-5" type="button" aria-expanded="true" aria-controls="exercise4-panel-5" data-accordion-trigger>numberPicker 顯示</button></h2>
+            <div class="accordion-panel" id="exercise4-panel-5" role="region" aria-labelledby="exercise4-trigger-5" data-accordion-panel>
+              <pre class="code-block"><code>
 val numberPicker1 : NumberPicker = findViewById(R.id.numberPicker1)
 val numberPicker2 : NumberPicker = findViewById(R.id.numberPicker2)
 numberPicker1.maxValue = 12
@@ -93,20 +124,23 @@ findViewById&lt;Button&gt;(R.id.button2).setOnClickListener {
     Toast.makeText(this, numberPicker1.value.toString() + numberPicker2List[numberPicker2.value], Toast.LENGTH_SHORT).show()
 }
 
-        </pre>
-    </div>
-
-    <button class="accordion">WebView</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+            </div>
+          </article>
+          <article class="accordion-item card" data-accordion-item data-title="WebView">
+            <h2><button class="accordion-trigger" id="exercise4-trigger-6" type="button" aria-expanded="true" aria-controls="exercise4-panel-6" data-accordion-trigger>WebView</button></h2>
+            <div class="accordion-panel" id="exercise4-panel-6" role="region" aria-labelledby="exercise4-trigger-6" data-accordion-panel>
+              <pre class="code-block"><code>
 val webView : WebView = findViewById(R.id.webView)
 webView.settings.javaScriptEnabled = true
 webView.loadUrl("https://www.library.gov.mo/zh-hant/")
-        </pre>
-    </div>
-    <button class="accordion">ValueAnimator</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+            </div>
+          </article>
+          <article class="accordion-item card" data-accordion-item data-title="ValueAnimator">
+            <h2><button class="accordion-trigger" id="exercise4-trigger-7" type="button" aria-expanded="true" aria-controls="exercise4-panel-7" data-accordion-trigger>ValueAnimator</button></h2>
+            <div class="accordion-panel" id="exercise4-panel-7" role="region" aria-labelledby="exercise4-trigger-7" data-accordion-panel>
+              <pre class="code-block"><code>
 val linearLayout: LinearLayout = findViewById(R.id.linearLayout)
 val valueAnimator = ValueAnimator.ofInt(3, 300)
 valueAnimator.duration = 3000
@@ -120,11 +154,13 @@ valueAnimator.addUpdateListener {
 linearLayout.setOnClickListener {
     valueAnimator.start()
 }
-        </pre>
-    </div>
-    <button class="accordion">Copy text</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+            </div>
+          </article>
+          <article class="accordion-item card" data-accordion-item data-title="Copy text">
+            <h2><button class="accordion-trigger" id="exercise4-trigger-8" type="button" aria-expanded="true" aria-controls="exercise4-panel-8" data-accordion-trigger>Copy text</button></h2>
+            <div class="accordion-panel" id="exercise4-panel-8" role="region" aria-labelledby="exercise4-trigger-8" data-accordion-panel>
+              <pre class="code-block"><code>
 val button3: Button = findViewById(R.id.button3)
 button3.setOnClickListener {
     val clipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
@@ -132,29 +168,42 @@ button3.setOnClickListener {
     clipboardManager.setPrimaryClip(clip)
 }
 
-        </pre>
-    </div>
-    <button class="accordion">放音槳</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+            </div>
+          </article>
+          <article class="accordion-item card" data-accordion-item data-title="放音槳">
+            <h2><button class="accordion-trigger" id="exercise4-trigger-9" type="button" aria-expanded="true" aria-controls="exercise4-panel-9" data-accordion-trigger>放音槳</button></h2>
+            <div class="accordion-panel" id="exercise4-panel-9" role="region" aria-labelledby="exercise4-trigger-9" data-accordion-panel>
+              <pre class="code-block"><code>
 val mediaPlayer = MediaPlayer.create(this, R.raw.bgm)
 mediaPlayer.isLooping = true
 mediaPlayer.setVolume(0.2f, 0.2f)
 mediaPlayer.start()
 
-        </pre>
-    </div>
-    <button class="accordion">播影片</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+            </div>
+          </article>
+          <article class="accordion-item card" data-accordion-item data-title="播影片">
+            <h2><button class="accordion-trigger" id="exercise4-trigger-10" type="button" aria-expanded="true" aria-controls="exercise4-panel-10" data-accordion-trigger>播影片</button></h2>
+            <div class="accordion-panel" id="exercise4-panel-10" role="region" aria-labelledby="exercise4-trigger-10" data-accordion-panel>
+              <pre class="code-block"><code>
 val videoView : VideoView = findViewById(R.id.videoView)
 val uri = Uri.parse("android.resource://$packageName/${R.raw.demo}")
 videoView.setVideoURI(uri)
 videoView.requestFocus()
 videoView.start()
 
-        </pre>
+        </code></pre>
+            </div>
+          </article>
+      </div>
+      <footer class="detail-footer">
+        <a class="button button--secondary" href="index.html">返回 World Skill 練習</a>
+      </footer>
     </div>
-<script src="js.js"></script>
+  </main>
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+  <script src="../assets/js/site-navigation.js" defer></script>
+  <script src="../assets/js/accordion.js" defer></script>
 </body>
 </html>

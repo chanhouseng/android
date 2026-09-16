@@ -1,271 +1,265 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant" data-site-root="../">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body{
-            background-color: #efefef;
-            margin: 0;
-            padding: 0;
-        }
-
-        img{
-            width: 200px;
-        }
-
-        div{
-            margin: 10px;
-            box-shadow: 2px 2px 2px 2px #333;
-            float: left;
-            padding: 20px;
-            background-color: #fff;
-            height: 660px;
-        }
-        a{
-            display: block;
-        }
-        span{
-  color: green;
-}
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>World Skill 練習｜Android Learning</title>
+  <link rel="stylesheet" href="../assets/css/foundation.css">
+  <link rel="stylesheet" href="../assets/css/app-shell.css">
+  <link rel="stylesheet" href="../assets/css/world-skills.css">
 </head>
 <body>
-    <a href="../index.html" style="display: block;color: black;text-decoration: none;"><h1>back to Home</h1></a>
-    <div>
-        <h1>class1_1</h1>
-        <ul>
-            <li>android:drawableStart=""</li>
-            <li>android:backgroundTint="#cecece"</li>
-            <li>androidx.constraintlayout.widget.ConstraintLayout</li>
-        </ul>
-        <img src="img/class1_1.png" alt="">
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="../index.html" aria-label="返回首頁">
+      <span class="brand-mark" aria-hidden="true">AL</span>
+      <span class="brand-copy">
+        <strong>Android Learning</strong>
+        <span>WORKSPACE</span>
+      </span>
+    </a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+
+  <main class="app-main" id="main-content">
+    <div class="container world-skills-page">
+      <header class="content-page-header">
+        <h1>World Skill 練習</h1>
+        <p>整理現有 Class、Exercise、Homework 及 Module 練習內容，方便按名稱尋找。</p>
+      </header>
+
+      <form class="content-filter" role="search" data-world-skill-filter>
+        <label class="content-filter__label" for="world-skill-search">本頁內容搜尋</label>
+        <div class="content-filter__controls">
+          <div class="search-field">
+            <span class="search-field__marker" aria-hidden="true">⌕</span>
+            <input
+              id="world-skill-search"
+              type="search"
+              autocomplete="off"
+              placeholder="搜尋標題或原有說明"
+              aria-controls="world-skills-content"
+              aria-describedby="world-skill-search-help"
+              data-world-skill-search
+            >
+          </div>
+          <button class="button button--ghost" type="button" data-world-skill-clear>清除搜尋</button>
+        </div>
+        <p class="sr-only" id="world-skill-search-help">只會過濾本頁現有練習項目的標題及說明。</p>
+        <p class="sr-only" aria-live="polite" data-world-skill-announcement></p>
+      </form>
+
+      <div id="world-skills-content">
+        <!-- GENERATED WORLD SKILLS START -->
+        <section class="world-skills-section" aria-labelledby="class-practice-title" data-world-skill-section>
+          <div class="world-skills-section__header">
+            <h2 id="class-practice-title">Class 練習</h2>
+            <span>30 項</span>
+          </div>
+          <div class="world-skills-grid">
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class1-1" data-title="class1_1" data-search-text="android:drawableStart android:backgroundTint androidx.constraintlayout.widget.ConstraintLayout">
+              <div class="world-skill-card__image"><img src="img/class1_1.png" alt="class1_1 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class1_1</h3><ul class="world-skill-card__hint"><li>android:drawableStart=""</li><li>android:backgroundTint="#cecece"</li><li>androidx.constraintlayout.widget.ConstraintLayout</li></ul></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class1-2" data-title="class1_2" data-search-text="日期、時間、粗體、顏色">
+              <div class="world-skill-card__image"><img src="img/class1_2.png" alt="class1_2 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class1_2</h3><a class="world-skill-card__link" data-item-link href="class1_2.html">日期、時間、粗體、顏色</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class1-3" data-title="class1_3" data-search-text="即時計total">
+              <div class="world-skill-card__image"><img src="img/class1_3.png" alt="class1_3 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class1_3</h3><p>即時計total</p></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class1-4" data-title="class1_4" data-search-text="spinner監察">
+              <div class="world-skill-card__image"><img src="img/class1_4.png" alt="class1_4 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class1_4</h3><a class="world-skill-card__link" data-item-link href="class1_4.html">spinner監察</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class1-5" data-title="class1_5" data-search-text="以大spinner換小spinner內容">
+              <div class="world-skill-card__image"><img src="img/class1_5.png" alt="class1_5 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class1_5</h3><a class="world-skill-card__link" data-item-link href="class1_5.html">以大spinner換小spinner內容</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class2-1-practise" data-title="class2_1_ practise.png" data-search-text="ios堂上練習">
+              <div class="world-skill-card__image"><img src="img/class2_1_ practise.png" alt="class2_1 practise 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class2_1_ practise.png</h3><p>ios堂上練習</p></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class2-again" data-title="class2_again" data-search-text="改善版">
+              <div class="world-skill-card__image"><img src="img/class2_again.png" alt="class2_again 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class2_again</h3><a class="world-skill-card__link" data-item-link href="class2_again.html">改善版</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class3-1" data-title="class3_1" data-search-text="自製spinner、進度條">
+              <div class="world-skill-card__image"><img src="img/class3_1.png" alt="class3_1 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class3_1</h3><a class="world-skill-card__link" data-item-link href="class3_1.html">自製spinner、進度條</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class3-2" data-title="class3_2" data-search-text="scrollView向上、下移">
+              <div class="world-skill-card__image"><img src="img/class3_2.png" alt="class3_2 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class3_2</h3><a class="world-skill-card__link" data-item-link href="class3_2.html">scrollView向上、下移</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class3-3" data-title="class3_3" data-search-text="當未登入時就入name 在另一版顯示name。如果已登入就不用打字 直接登入">
+              <div class="world-skill-card__image"><img src="img/class3_3.png" alt="class3_3 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class3_3</h3><p>當未登入時就入name 在另一版顯示name。如果已登入就不用打字 直接登入</p></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class3-4" data-title="class3_4" data-search-text="本地存hashset數組(無序性、不可重覆)">
+              <div class="world-skill-card__image"><img src="img/class3_4.png" alt="class3_4 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class3_4</h3><a class="world-skill-card__link" data-item-link href="class3_4.html">本地存hashset數組(無序性、不可重覆)</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class3-5" data-title="class3_5" data-search-text="fragment之間即時互通數據(data), 即時刷新">
+              <div class="world-skill-card__image"><img src="img/class3_5.png" alt="class3_5 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class3_5</h3><a class="world-skill-card__link" data-item-link href="class3_5.html">fragment之間即時互通數據(data), 即時刷新</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class4-1" data-title="class4_1" data-search-text="文字處理、背景">
+              <div class="world-skill-card__image"><img src="img/class4_1.png" alt="class4_1 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class4_1</h3><a class="world-skill-card__link" data-item-link href="class4_1.html">文字處理、背景</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class4-2" data-title="class4_2" data-search-text="先login攞token, 再addHear token攞資料">
+              <div class="world-skill-card__image"><img src="img/class4_2.png" alt="class4_2 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class4_2</h3><a class="world-skill-card__link" data-item-link href="class4_2.html">先login攞token, 再addHear token攞資料</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class4-3" data-title="class4_3.png" data-search-text="results.address.street class userClass class address">
+              <div class="world-skill-card__image"><img src="img/class4_3.png" alt="class4_3 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class4_3.png</h3><div class="world-skill-card__hint"><p>results.address.street</p><p>class userClass(var id:Int , var name:String, var address: address) {}</p><p>class address(var street:String, var city:String)</p></div></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class4-4" data-title="class4_4.png" data-search-text="imageView.load(result.link){}">
+              <div class="world-skill-card__image"><img src="img/class4_4.png" alt="class4_4 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class4_4.png</h3><p class="world-skill-card__hint">imageView.load(result.link){}</p></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class4-5" data-title="class4_5" data-search-text="存json到本機 formJson 字串轉JSON toJson JSON轉字串">
+              <div class="world-skill-card__image"><img src="img/class4_5.png" alt="class4_5 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class4_5</h3><p>存json到本機</p><ul><li>formJson -&gt; 字串轉JSON</li><li>toJson -&gt; JSON轉字串</li></ul></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class5-1" data-title="class5_1" data-search-text="http網上攞資料、class name有空格時">
+              <div class="world-skill-card__image"><img src="img/class5_1.png" alt="class5_1 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class5_1</h3><a class="world-skill-card__link" data-item-link href="class5_1.html">http網上攞資料、class name有空格時</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class5-2" data-title="class5_2" data-search-text="ScaleAnimation 放大方向">
+              <div class="world-skill-card__image"><img src="img/class5_2.png" alt="class5_2 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class5_2</h3><div class="world-skill-card__hint"><p>val anim4 = ScaleAnimation(1f, 2f, 1f, 2f,</p><p> Animation.RELATIVE_TO_SELF, 0f,</p><p> Animation.RELATIVE_TO_SELF, 0f)</p><p class="world-skill-card__comment">//1f,1f左上, 1f, 0f, 左下, 0f,1f 右上 放大方向</p></div></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class5-3" data-title="class5_3" data-search-text="swith, seekBar, bottomSheetDialog, popupMenu">
+              <div class="world-skill-card__image"><img src="img/class5_3.png" alt="class5_3 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class5_3</h3><a class="world-skill-card__link" data-item-link href="class5_3.html">swith, seekBar, bottomSheetDialog, popupMenu</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class5-4" data-title="class5_4" data-search-text="containsAll">
+              <div class="world-skill-card__image"><img src="img/class5_4.png" alt="class5_4 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class5_4</h3><a class="world-skill-card__link" data-item-link href="class5_4.html">containsAll</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class5-5" data-title="class5_5" data-search-text="本地chip新儲存">
+              <div class="world-skill-card__image"><img src="img/class5_5.png" alt="class5_5 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class5_5</h3><a class="world-skill-card__link" data-item-link href="class5_5.html">本地chip新儲存</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class6-1" data-title="class6_1" data-search-text="NumberPicker, WebView, 數組處理, ValueAnimator, Copy string, MediaPlayer, 滑動方向偵測, VideoView, 設置文字字型">
+              <div class="world-skill-card__image"><img src="img/class6_1.png" alt="class6_1 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class6_1</h3><a class="world-skill-card__link" data-item-link href="class6_1.html">NumberPicker, WebView, 數組處理, ValueAnimator,<br>Copy string, MediaPlayer, 滑動方向偵測, VideoView, 設置文字字型</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class6-2" data-title="class6_2" data-search-text="滑動方向偵測遊戲">
+              <div class="world-skill-card__image"><img src="img/class6_2.png" alt="class6_2 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class6_2</h3><a class="world-skill-card__link" data-item-link href="class6_2.html">滑動方向偵測遊戲</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class7-1" data-title="class7_1" data-search-text="圖片移動放大、拖拉 (*舊題)">
+              <div class="world-skill-card__image"><img src="img/class7_1.png" alt="class7_1 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class7_1</h3><a class="world-skill-card__link" data-item-link href="class7_1.html">圖片移動放大、拖拉 (*舊題)</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class7-2" data-title="class7_2" data-search-text="日期處理">
+              <div class="world-skill-card__image"><img src="img/class7_2.png" alt="class7_2 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class7_2</h3><a class="world-skill-card__link" data-item-link href="class7_2.html">日期處理</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class8-1" data-title="class8_1" data-search-text="自定義視窗(Table)">
+              <div class="world-skill-card__image"><img src="img/class8_1.png" alt="class8_1 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class8_1</h3><a class="world-skill-card__link" data-item-link href="class8_1.html">自定義視窗(Table)</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class8-2" data-title="class8_2" data-search-text="類似桌球嗰個，但係簡單版(Table)">
+              <div class="world-skill-card__image"><img src="img/class8_2.png" alt="class8_2 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class8_2</h3><a class="world-skill-card__link" data-item-link href="class8_2.html">類似桌球嗰個，但係簡單版(Table)</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class9-1" data-title="class9_1" data-search-text="select textView的文字、選圖片、拍照片、畫畫(可以清除所有畫筆和儲存畫後的圖片)">
+              <div class="world-skill-card__image"><img src="img/class9_1.png" alt="class9_1 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class9_1</h3><a class="world-skill-card__link" data-item-link href="class9_1.html">select textView的文字、選圖片、拍照片、畫畫(可以清除所有畫筆和儲存畫後的圖片)</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="class9-2" data-title="class9_2" data-search-text="選圖片、旋轉圖片、儲存圖片一體">
+              <div class="world-skill-card__image"><img src="img/class9_2.png" alt="class9_2 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>class9_2</h3><a class="world-skill-card__link" data-item-link href="class9_2.html">選圖片、旋轉圖片、儲存圖片一體</a></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="world-skills-section" aria-labelledby="exercise-practice-title" data-world-skill-section>
+          <div class="world-skills-section__header">
+            <h2 id="exercise-practice-title">Exercise 練習</h2>
+            <span>10 項</span>
+          </div>
+          <div class="world-skills-grid">
+            <article class="card world-skill-card" data-world-skill-item data-content-id="exercise1" data-title="exercise1" data-search-text="exercise1">
+              <div class="world-skill-card__image"><img src="img/exercise1.png" alt="exercise1 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>exercise1</h3><a class="world-skill-card__link" data-item-link href="exercise1.html">exercise1</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="exercise2" data-title="exercise2" data-search-text="點擊心心後在第二個fragment能顯示所有被讚的項目">
+              <div class="world-skill-card__image"><img src="img/exercise2.png" alt="exercise2 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>exercise2</h3><a class="world-skill-card__link" data-item-link href="exercise2.html">點擊心心後在第二個fragment能顯示所有被讚的項目</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="exercise3" data-title="exercise3" data-search-text="動畫">
+              <div class="world-skill-card__image"><img src="img/exercise3.png" alt="exercise3 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>exercise3</h3><a class="world-skill-card__link" data-item-link href="exercise3.html">動畫</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="exercise4" data-title="exercise4" data-search-text="exercise4">
+              <div class="world-skill-card__image"><img src="img/exercise4.png" alt="exercise4 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>exercise4</h3><a class="world-skill-card__link" data-item-link href="exercise4.html">exercise4</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="exercise6" data-title="exercise6" data-search-text="textView 特別背景">
+              <div class="world-skill-card__image"><img src="img/exercise6.png" alt="exercise6 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>exercise6</h3><a class="world-skill-card__link" data-item-link href="exercise6.html">textView 特別背景</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="exercise7" data-title="exercise7" data-search-text="bottomNavigationView顏色、bottomSheetDialog無灰色背景">
+              <div class="world-skill-card__image"><img src="img/exercise7.png" alt="exercise7 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>exercise7</h3><a class="world-skill-card__link" data-item-link href="exercise7.html">bottomNavigationView顏色、bottomSheetDialog無灰色背景</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="exercise12" data-title="exercise12" data-search-text="拖放">
+              <div class="world-skill-card__image"><img src="img/exercise12.png" alt="exercise12 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>exercise12</h3><a class="world-skill-card__link" data-item-link href="exercise12.html">拖放</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="exercise22" data-title="exercise22" data-search-text="放大、移動">
+              <div class="world-skill-card__image"><img src="img/exercise22.png" alt="exercise22 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>exercise22</h3><a class="world-skill-card__link" data-item-link href="exercise22.html">放大、移動</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="exercise21" data-title="exercise21" data-search-text="progress">
+              <div class="world-skill-card__image"><img src="img/exercise21.png" alt="exercise21 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>exercise21</h3><a class="world-skill-card__link" data-item-link href="exercise21.html">progress</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="exercise24" data-title="exercise24" data-search-text="scrollView setOnscrollChangeListener">
+              <div class="world-skill-card__image"><img src="img/exercise24.png" alt="exercise24 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>exercise24</h3><a class="world-skill-card__link" data-item-link href="exercise24.html">scrollView setOnscrollChangeListener</a></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="world-skills-section" aria-labelledby="homework-module-title" data-world-skill-section>
+          <div class="world-skills-section__header">
+            <h2 id="homework-module-title">Homework／Module</h2>
+            <span>2 項</span>
+          </div>
+          <div class="world-skills-grid">
+            <article class="card world-skill-card" data-world-skill-item data-content-id="homework2" data-title="homework2" data-search-text="test, tab和viewPager的連結">
+              <div class="world-skill-card__image"><img src="img/homework2.png" alt="homework2 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>homework2</h3><a class="world-skill-card__link" data-item-link href="homework2.html">test, tab和viewPager的連結</a></div>
+            </article>
+            <article class="card world-skill-card" data-world-skill-item data-content-id="03-module-a-am" data-title="03_Module_A_AM" data-search-text="食物跌遊戲">
+              <div class="world-skill-card__image"><img src="img/03_Module_A_AM.png" alt="03 Module A AM 練習畫面"></div>
+              <div class="world-skill-card__body"><h3>03_Module_A_AM</h3><a class="world-skill-card__link" data-item-link href="03_Module_A_AM.html">食物跌遊戲</a></div>
+            </article>
+          </div>
+        </section>
+<!-- GENERATED WORLD SKILLS END -->
+      </div>
+
+      <div class="state state--empty world-skills-empty" data-world-skill-empty hidden>
+        <strong>找不到相符的練習項目</strong>
+        <span>請改用其他標題或說明文字，或清除搜尋。</span>
+      </div>
     </div>
-    <div>
-        <h1>class1_2</h1>
-        <a href="class1_2.html">日期、時間、粗體、顏色</a>
-        <img src="img/class1_2.png" alt="">
-    </div>
-    <div>
-        <h1>class1_3</h1>
-        <p>即時計total</p>
-        <img src="img/class1_3.png" alt="">
-    </div>
-    <div>
-        <h1>class1_4</h1>
-        <a href="class1_4.html">spinner監察</a>
-        <img src="img/class1_4.png" alt="">
-    </div>
-    <div>
-        <h1>class1_5</h1>
-        <a href="class1_5.html">以大spinner換小spinner內容</a>
-        <img src="img/class1_5.png" alt="">
-    </div>
-    <div>
-        <h1>class2_1_ practise.png</h1>
-        <p>ios堂上練習</p>
-        <img src="img/class2_1_ practise.png" alt="">
-    </div>
-    <div>
-        <h1>class2_again</h1>
-        <a href="class2_again.html">改善版</a>
-        <img src="img/class2_again.png" alt="">
-    </div>
-    <div>
-        <h1>class3_1</h1>
-        <a href="class3_1.html">自製spinner、進度條</a>
-        <img src="img/class3_1.png" alt="">
-    </div>
-    <div>
-        <h1>class3_2</h1>
-        <a href="class3_2.html">scrollView向上、下移</a>
-        <img src="img/class3_2.png" alt="">
-    </div>
-    <div>
-        <h1>class3_3</h1>
-        <p>當未登入時就入name 在另一版顯示name。如果已登入就不用打字 直接登入</p>
-        <img src="img/class3_3.png" alt="">
-    </div>
-    <div>
-        <h1>class3_4</h1>
-        <a href="class3_4.html">本地存hashset數組(無序性、不可重覆)</a>
-        <img src="img/class3_4.png" alt="">
-    </div>
-    <div>
-        <h1>class3_5</h1>
-        <a href="class3_5.html">fragment之間即時互通數據(data), 即時刷新</a>
-        <img src="img/class3_5.png" alt="">
-    </div>
-    <div>
-        <h1>class4_1</h1>
-        <a href="class4_1.html">文字處理、背景</a>
-        <img src="img/class4_1.png" alt="">
-    </div>
-    <div>
-        <h1>class4_2</h1>
-        <a href="class4_2.html">先login攞token, 再addHear token攞資料</a>
-        <img src="img/class4_2.png" alt="">
-    </div>
-    <div>
-        <h1>class4_3.png</h1>
-        <p>results.address.street</p>
-        <p>class userClass(var id:Int , var name:String, var address: address) {}</p>
-        <p>class address(var street:String, var city:String)</p>
-        <img src="img/class4_3.png" alt="">
-    </div>
-    <div>
-        <h1>class4_4.png</h1>
-        <p>imageView.load(result.link){}</p>
-        <img src="img/class4_4.png" alt="">
-    </div>
-    <div>
-        <h1>class4_5</h1>
-        <p>存json到本機</p>
-        <ul>
-            <li>formJson -> 字串轉JSON</li>
-            <li>toJson -> JSON轉字串</li>
-        </ul>
-        <img src="img/class4_5.png" alt="">
-    </div>
-    <div>
-        <h1>class5_1</h1>
-        <a href="class5_1.html">http網上攞資料、class name有空格時</a>
-        <img src="img/class5_1.png" alt="">
-    </div>
-    <div>
-        <h1>class5_2</h1>
-        <p>val anim4 = ScaleAnimation(1f, 2f, 1f, 2f,</p> 
-        <p> Animation.RELATIVE_TO_SELF, 0f,</p>
-        <p> Animation.RELATIVE_TO_SELF, 0f)</p>
-        <p> <span>//1f,1f左上, 1f, 0f, 左下, 0f,1f 右上 放大方向</span></p>
-        <img src="img/class5_2.png" alt="">
-    </div>
-    <div>
-        <h1>class5_3</h1>
-        <a href="class5_3.html">swith, seekBar, bottomSheetDialog, popupMenu</a>
-        <img src="img/class5_3.png" alt="">
-    </div>
-    <div>
-        <h1>class5_4</h1>
-        <a href="class5_4.html">containsAll</a>
-        <img src="img/class5_4.png" alt="">
-    </div>
-    <div>
-        <h1>class5_5</h1>
-        <a href="class5_5.html">本地chip新儲存</a>
-        <img src="img/class5_5.png" alt="">
-    </div>
-    <div>
-        <h1>class6_1</h1>
-        <a href="class6_1.html"><p>NumberPicker, WebView, 數組處理, ValueAnimator, </p>
-        <p>Copy string, MediaPlayer, 滑動方向偵測, VideoView, 設置文字字型</p></a>
-        <img src="img/class6_1.png" alt="">
-    </div>
-    <div>
-        <h1>class6_2</h1>
-        <a href="class6_2.html">滑動方向偵測遊戲</a>
-        <img src="img/class6_2.png" alt="">
-    </div>
-    <div>
-        <h1>class7_1</h1>
-        <a href="class7_1.html">圖片移動放大、拖拉 (*舊題)</a>
-        <img src="img/class7_1.png" alt="">
-    </div>
-    <div>
-        <h1>class7_2</h1>
-        <a href="class7_2.html">日期處理</a>
-        <img src="img/class7_2.png" alt="">
-    </div>
-    <div>
-        <h1>exercise1</h1>
-        <a href="exercise1.html">exercise1</a>
-        <img src="img/exercise1.png" alt="冇相">
-    </div>
-    <div>
-        <h1>exercise2</h1>
-        <a href="exercise2.html">點擊心心後在第二個fragment能顯示所有被讚的項目</a>
-        <img src="img/exercise2.png" alt="冇相">
-    </div>
-    <div>
-        <h1>exercise3</h1>
-        <a href="exercise3.html">動畫</a>
-        <img src="img/exercise3.png" alt="冇相">
-    </div>
-    <div>
-        <h1>exercise4</h1>
-        <a href="exercise4.html">exercise4</a>
-        <img src="img/exercise4.png" alt="冇相">
-    </div>
-    <div>
-        <h1>exercise6</h1>
-        <a href="exercise6.html">textView 特別背景</a>
-        <img src="img/exercise6.png" alt="冇相">
-    </div>
-    <div>
-        <h1>exercise7</h1>
-        <a href="exercise7.html">bottomNavigationView顏色、bottomSheetDialog無灰色背景</a>
-        <img src="img/exercise7.png" alt="冇相">
-    </div>
-    <div>
-        <h1>homework2</h1>
-        <a href="homework2.html">test, tab和viewPager的連結</a>
-        <img src="img/homework2.png" alt="冇相">
-    </div>
-    <div>
-        <h1>exercise12</h1>
-        <a href="exercise12.html">拖放</a>
-        <img src="img/exercise12.png" alt="冇相">
-    </div>
-    <div>
-        <h1>exercise22</h1>
-        <a href="exercise21.html">放大、移動</a>
-        <img src="img/exercise22.png" alt="冇相">
-    </div>
-    <div>
-        <h1>03_Module_A_AM</h1>
-        <a href="03_Module_A_AM.html">食物跌遊戲</a>
-        <img src="img/03_Module_A_AM.png" alt="冇相">
-    </div>
-    <div>
-        <h1>class8_1</h1>
-        <a href="class8_1.html">自定義視窗(Table)</a>
-        <img src="img/class8_1.png" alt="冇相">
-    </div>
-    <div>
-        <h1>class8_2</h1>
-        <a href="class8_2.html">類似桌球嗰個，但係簡單版(Table)</a>
-        <img src="img/class8_2.png" alt="冇相">
-    </div>
-    <div>
-        <h1>class9_1</h1>
-        <a href="class9_1.html">select textView的文字、選圖片、拍照片、畫畫(可以清除所有畫筆和儲存畫後的圖片)</a>
-        <img src="img/class9_1.png" alt="冇相">
-    </div>
-    <div>
-        <h1>class9_2</h1>
-        <a href="class9_2.html">選圖片、旋轉圖片、儲存圖片一體</a>
-        <img src="img/class9_2.png" alt="冇相">
-    </div>
-    <div>
-        <h1>exercise21</h1>
-        <a href="exercise21.html">progress</a>
-        <img src="img/exercise21.png" alt="冇相">
-    </div>
-    <div>
-        <h1>exercise24</h1>
-        <a href="exercise24.html">scrollView setOnscrollChangeListener</a>
-        <img src="img/exercise24.png" alt="冇相">
-    </div>
-    <div>
-        <h1></h1>
-        <a href=".html"></a>
-        <img src="img/.png" alt="冇相">
-    </div>
-    <div>
-        <h1></h1>
-        <a href=".html"></a>
-        <img src="img/.png" alt="冇相">
-    </div>
+  </main>
+
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+
+  <script src="../assets/js/site-navigation.js" defer></script>
+  <script src="../assets/js/world-skills-filter.js" defer></script>
 </body>
 </html>

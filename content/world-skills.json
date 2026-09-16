@@ -1,0 +1,565 @@
+[
+  {
+    "id": "class1-1",
+    "title": "class1_1",
+    "description": "android:drawableStart android:backgroundTint androidx.constraintlayout.widget.ConstraintLayout",
+    "image": "img/class1_1.png",
+    "imageAlt": "class1_1 練習畫面",
+    "detailPage": null,
+    "group": "class",
+    "searchText": "android:drawableStart android:backgroundTint androidx.constraintlayout.widget.ConstraintLayout",
+    "status": "published",
+    "order": 1,
+    "presentation": {
+      "type": "list",
+      "variant": "hint",
+      "items": [
+        "android:drawableStart=\"\"",
+        "android:backgroundTint=\"#cecece\"",
+        "androidx.constraintlayout.widget.ConstraintLayout"
+      ]
+    }
+  },
+  {
+    "id": "class1-2",
+    "title": "class1_2",
+    "description": "日期、時間、粗體、顏色",
+    "image": "img/class1_2.png",
+    "imageAlt": "class1_2 練習畫面",
+    "detailPage": "class1_2.html",
+    "group": "class",
+    "searchText": "日期、時間、粗體、顏色",
+    "status": "published",
+    "order": 2
+  },
+  {
+    "id": "class1-3",
+    "title": "class1_3",
+    "description": "即時計total",
+    "image": "img/class1_3.png",
+    "imageAlt": "class1_3 練習畫面",
+    "detailPage": null,
+    "group": "class",
+    "searchText": "即時計total",
+    "status": "published",
+    "order": 3
+  },
+  {
+    "id": "class1-4",
+    "title": "class1_4",
+    "description": "spinner監察",
+    "image": "img/class1_4.png",
+    "imageAlt": "class1_4 練習畫面",
+    "detailPage": "class1_4.html",
+    "group": "class",
+    "searchText": "spinner監察",
+    "status": "published",
+    "order": 4
+  },
+  {
+    "id": "class1-5",
+    "title": "class1_5",
+    "description": "以大spinner換小spinner內容",
+    "image": "img/class1_5.png",
+    "imageAlt": "class1_5 練習畫面",
+    "detailPage": "class1_5.html",
+    "group": "class",
+    "searchText": "以大spinner換小spinner內容",
+    "status": "published",
+    "order": 5
+  },
+  {
+    "id": "class2-1-practise",
+    "title": "class2_1_ practise.png",
+    "description": "ios堂上練習",
+    "image": "img/class2_1_ practise.png",
+    "imageAlt": "class2_1 practise 練習畫面",
+    "detailPage": null,
+    "group": "class",
+    "searchText": "ios堂上練習",
+    "status": "published",
+    "order": 6
+  },
+  {
+    "id": "class2-again",
+    "title": "class2_again",
+    "description": "改善版",
+    "image": "img/class2_again.png",
+    "imageAlt": "class2_again 練習畫面",
+    "detailPage": "class2_again.html",
+    "group": "class",
+    "searchText": "改善版",
+    "status": "published",
+    "order": 7
+  },
+  {
+    "id": "class3-1",
+    "title": "class3_1",
+    "description": "自製spinner、進度條",
+    "image": "img/class3_1.png",
+    "imageAlt": "class3_1 練習畫面",
+    "detailPage": "class3_1.html",
+    "group": "class",
+    "searchText": "自製spinner、進度條",
+    "status": "published",
+    "order": 8
+  },
+  {
+    "id": "class3-2",
+    "title": "class3_2",
+    "description": "scrollView向上、下移",
+    "image": "img/class3_2.png",
+    "imageAlt": "class3_2 練習畫面",
+    "detailPage": "class3_2.html",
+    "group": "class",
+    "searchText": "scrollView向上、下移",
+    "status": "published",
+    "order": 9
+  },
+  {
+    "id": "class3-3",
+    "title": "class3_3",
+    "description": "當未登入時就入name 在另一版顯示name。如果已登入就不用打字 直接登入",
+    "image": "img/class3_3.png",
+    "imageAlt": "class3_3 練習畫面",
+    "detailPage": null,
+    "group": "class",
+    "searchText": "當未登入時就入name 在另一版顯示name。如果已登入就不用打字 直接登入",
+    "status": "published",
+    "order": 10
+  },
+  {
+    "id": "class3-4",
+    "title": "class3_4",
+    "description": "本地存hashset數組(無序性、不可重覆)",
+    "image": "img/class3_4.png",
+    "imageAlt": "class3_4 練習畫面",
+    "detailPage": "class3_4.html",
+    "group": "class",
+    "searchText": "本地存hashset數組(無序性、不可重覆)",
+    "status": "published",
+    "order": 11
+  },
+  {
+    "id": "class3-5",
+    "title": "class3_5",
+    "description": "fragment之間即時互通數據(data), 即時刷新",
+    "image": "img/class3_5.png",
+    "imageAlt": "class3_5 練習畫面",
+    "detailPage": "class3_5.html",
+    "group": "class",
+    "searchText": "fragment之間即時互通數據(data), 即時刷新",
+    "status": "published",
+    "order": 12
+  },
+  {
+    "id": "class4-1",
+    "title": "class4_1",
+    "description": "文字處理、背景",
+    "image": "img/class4_1.png",
+    "imageAlt": "class4_1 練習畫面",
+    "detailPage": "class4_1.html",
+    "group": "class",
+    "searchText": "文字處理、背景",
+    "status": "published",
+    "order": 13
+  },
+  {
+    "id": "class4-2",
+    "title": "class4_2",
+    "description": "先login攞token, 再addHear token攞資料",
+    "image": "img/class4_2.png",
+    "imageAlt": "class4_2 練習畫面",
+    "detailPage": "class4_2.html",
+    "group": "class",
+    "searchText": "先login攞token, 再addHear token攞資料",
+    "status": "published",
+    "order": 14
+  },
+  {
+    "id": "class4-3",
+    "title": "class4_3.png",
+    "description": "results.address.street class userClass class address",
+    "image": "img/class4_3.png",
+    "imageAlt": "class4_3 練習畫面",
+    "detailPage": null,
+    "group": "class",
+    "searchText": "results.address.street class userClass class address",
+    "status": "published",
+    "order": 15,
+    "presentation": {
+      "type": "paragraphs",
+      "variant": "hint",
+      "items": [
+        {
+          "text": "results.address.street"
+        },
+        {
+          "text": "class userClass(var id:Int , var name:String, var address: address) {}"
+        },
+        {
+          "text": "class address(var street:String, var city:String)"
+        }
+      ]
+    }
+  },
+  {
+    "id": "class4-4",
+    "title": "class4_4.png",
+    "description": "imageView.load(result.link){}",
+    "image": "img/class4_4.png",
+    "imageAlt": "class4_4 練習畫面",
+    "detailPage": null,
+    "group": "class",
+    "searchText": "imageView.load(result.link){}",
+    "status": "published",
+    "order": 16,
+    "presentation": {
+      "type": "paragraph",
+      "variant": "hint"
+    }
+  },
+  {
+    "id": "class4-5",
+    "title": "class4_5",
+    "description": "存json到本機 formJson 字串轉JSON toJson JSON轉字串",
+    "image": "img/class4_5.png",
+    "imageAlt": "class4_5 練習畫面",
+    "detailPage": null,
+    "group": "class",
+    "searchText": "存json到本機 formJson 字串轉JSON toJson JSON轉字串",
+    "status": "published",
+    "order": 17,
+    "presentation": {
+      "type": "lead-list",
+      "lead": "存json到本機",
+      "items": [
+        "formJson -> 字串轉JSON",
+        "toJson -> JSON轉字串"
+      ]
+    }
+  },
+  {
+    "id": "class5-1",
+    "title": "class5_1",
+    "description": "http網上攞資料、class name有空格時",
+    "image": "img/class5_1.png",
+    "imageAlt": "class5_1 練習畫面",
+    "detailPage": "class5_1.html",
+    "group": "class",
+    "searchText": "http網上攞資料、class name有空格時",
+    "status": "published",
+    "order": 18
+  },
+  {
+    "id": "class5-2",
+    "title": "class5_2",
+    "description": "ScaleAnimation 放大方向",
+    "image": "img/class5_2.png",
+    "imageAlt": "class5_2 練習畫面",
+    "detailPage": null,
+    "group": "class",
+    "searchText": "ScaleAnimation 放大方向",
+    "status": "published",
+    "order": 19,
+    "presentation": {
+      "type": "paragraphs",
+      "variant": "hint",
+      "items": [
+        {
+          "text": "val anim4 = ScaleAnimation(1f, 2f, 1f, 2f,"
+        },
+        {
+          "text": " Animation.RELATIVE_TO_SELF, 0f,"
+        },
+        {
+          "text": " Animation.RELATIVE_TO_SELF, 0f)"
+        },
+        {
+          "text": "//1f,1f左上, 1f, 0f, 左下, 0f,1f 右上 放大方向",
+          "tone": "comment"
+        }
+      ]
+    }
+  },
+  {
+    "id": "class5-3",
+    "title": "class5_3",
+    "description": "swith, seekBar, bottomSheetDialog, popupMenu",
+    "image": "img/class5_3.png",
+    "imageAlt": "class5_3 練習畫面",
+    "detailPage": "class5_3.html",
+    "group": "class",
+    "searchText": "swith, seekBar, bottomSheetDialog, popupMenu",
+    "status": "published",
+    "order": 20
+  },
+  {
+    "id": "class5-4",
+    "title": "class5_4",
+    "description": "containsAll",
+    "image": "img/class5_4.png",
+    "imageAlt": "class5_4 練習畫面",
+    "detailPage": "class5_4.html",
+    "group": "class",
+    "searchText": "containsAll",
+    "status": "published",
+    "order": 21
+  },
+  {
+    "id": "class5-5",
+    "title": "class5_5",
+    "description": "本地chip新儲存",
+    "image": "img/class5_5.png",
+    "imageAlt": "class5_5 練習畫面",
+    "detailPage": "class5_5.html",
+    "group": "class",
+    "searchText": "本地chip新儲存",
+    "status": "published",
+    "order": 22
+  },
+  {
+    "id": "class6-1",
+    "title": "class6_1",
+    "description": "NumberPicker, WebView, 數組處理, ValueAnimator, Copy string, MediaPlayer, 滑動方向偵測, VideoView, 設置文字字型",
+    "image": "img/class6_1.png",
+    "imageAlt": "class6_1 練習畫面",
+    "detailPage": "class6_1.html",
+    "group": "class",
+    "searchText": "NumberPicker, WebView, 數組處理, ValueAnimator, Copy string, MediaPlayer, 滑動方向偵測, VideoView, 設置文字字型",
+    "status": "published",
+    "order": 23,
+    "descriptionLines": [
+      "NumberPicker, WebView, 數組處理, ValueAnimator,",
+      "Copy string, MediaPlayer, 滑動方向偵測, VideoView, 設置文字字型"
+    ]
+  },
+  {
+    "id": "class6-2",
+    "title": "class6_2",
+    "description": "滑動方向偵測遊戲",
+    "image": "img/class6_2.png",
+    "imageAlt": "class6_2 練習畫面",
+    "detailPage": "class6_2.html",
+    "group": "class",
+    "searchText": "滑動方向偵測遊戲",
+    "status": "published",
+    "order": 24
+  },
+  {
+    "id": "class7-1",
+    "title": "class7_1",
+    "description": "圖片移動放大、拖拉 (*舊題)",
+    "image": "img/class7_1.png",
+    "imageAlt": "class7_1 練習畫面",
+    "detailPage": "class7_1.html",
+    "group": "class",
+    "searchText": "圖片移動放大、拖拉 (*舊題)",
+    "status": "published",
+    "order": 25
+  },
+  {
+    "id": "class7-2",
+    "title": "class7_2",
+    "description": "日期處理",
+    "image": "img/class7_2.png",
+    "imageAlt": "class7_2 練習畫面",
+    "detailPage": "class7_2.html",
+    "group": "class",
+    "searchText": "日期處理",
+    "status": "published",
+    "order": 26
+  },
+  {
+    "id": "class8-1",
+    "title": "class8_1",
+    "description": "自定義視窗(Table)",
+    "image": "img/class8_1.png",
+    "imageAlt": "class8_1 練習畫面",
+    "detailPage": "class8_1.html",
+    "group": "class",
+    "searchText": "自定義視窗(Table)",
+    "status": "published",
+    "order": 27
+  },
+  {
+    "id": "class8-2",
+    "title": "class8_2",
+    "description": "類似桌球嗰個，但係簡單版(Table)",
+    "image": "img/class8_2.png",
+    "imageAlt": "class8_2 練習畫面",
+    "detailPage": "class8_2.html",
+    "group": "class",
+    "searchText": "類似桌球嗰個，但係簡單版(Table)",
+    "status": "published",
+    "order": 28
+  },
+  {
+    "id": "class9-1",
+    "title": "class9_1",
+    "description": "select textView的文字、選圖片、拍照片、畫畫(可以清除所有畫筆和儲存畫後的圖片)",
+    "image": "img/class9_1.png",
+    "imageAlt": "class9_1 練習畫面",
+    "detailPage": "class9_1.html",
+    "group": "class",
+    "searchText": "select textView的文字、選圖片、拍照片、畫畫(可以清除所有畫筆和儲存畫後的圖片)",
+    "status": "published",
+    "order": 29
+  },
+  {
+    "id": "class9-2",
+    "title": "class9_2",
+    "description": "選圖片、旋轉圖片、儲存圖片一體",
+    "image": "img/class9_2.png",
+    "imageAlt": "class9_2 練習畫面",
+    "detailPage": "class9_2.html",
+    "group": "class",
+    "searchText": "選圖片、旋轉圖片、儲存圖片一體",
+    "status": "published",
+    "order": 30
+  },
+  {
+    "id": "exercise1",
+    "title": "exercise1",
+    "description": "exercise1",
+    "image": "img/exercise1.png",
+    "imageAlt": "exercise1 練習畫面",
+    "detailPage": "exercise1.html",
+    "group": "exercise",
+    "searchText": "exercise1",
+    "status": "published",
+    "order": 31
+  },
+  {
+    "id": "exercise2",
+    "title": "exercise2",
+    "description": "點擊心心後在第二個fragment能顯示所有被讚的項目",
+    "image": "img/exercise2.png",
+    "imageAlt": "exercise2 練習畫面",
+    "detailPage": "exercise2.html",
+    "group": "exercise",
+    "searchText": "點擊心心後在第二個fragment能顯示所有被讚的項目",
+    "status": "published",
+    "order": 32
+  },
+  {
+    "id": "exercise3",
+    "title": "exercise3",
+    "description": "動畫",
+    "image": "img/exercise3.png",
+    "imageAlt": "exercise3 練習畫面",
+    "detailPage": "exercise3.html",
+    "group": "exercise",
+    "searchText": "動畫",
+    "status": "published",
+    "order": 33
+  },
+  {
+    "id": "exercise4",
+    "title": "exercise4",
+    "description": "exercise4",
+    "image": "img/exercise4.png",
+    "imageAlt": "exercise4 練習畫面",
+    "detailPage": "exercise4.html",
+    "group": "exercise",
+    "searchText": "exercise4",
+    "status": "published",
+    "order": 34
+  },
+  {
+    "id": "exercise6",
+    "title": "exercise6",
+    "description": "textView 特別背景",
+    "image": "img/exercise6.png",
+    "imageAlt": "exercise6 練習畫面",
+    "detailPage": "exercise6.html",
+    "group": "exercise",
+    "searchText": "textView 特別背景",
+    "status": "published",
+    "order": 35
+  },
+  {
+    "id": "exercise7",
+    "title": "exercise7",
+    "description": "bottomNavigationView顏色、bottomSheetDialog無灰色背景",
+    "image": "img/exercise7.png",
+    "imageAlt": "exercise7 練習畫面",
+    "detailPage": "exercise7.html",
+    "group": "exercise",
+    "searchText": "bottomNavigationView顏色、bottomSheetDialog無灰色背景",
+    "status": "published",
+    "order": 36
+  },
+  {
+    "id": "exercise12",
+    "title": "exercise12",
+    "description": "拖放",
+    "image": "img/exercise12.png",
+    "imageAlt": "exercise12 練習畫面",
+    "detailPage": "exercise12.html",
+    "group": "exercise",
+    "searchText": "拖放",
+    "status": "published",
+    "order": 37
+  },
+  {
+    "id": "exercise22",
+    "title": "exercise22",
+    "description": "放大、移動",
+    "image": "img/exercise22.png",
+    "imageAlt": "exercise22 練習畫面",
+    "detailPage": "exercise22.html",
+    "group": "exercise",
+    "searchText": "放大、移動",
+    "status": "published",
+    "order": 38
+  },
+  {
+    "id": "exercise21",
+    "title": "exercise21",
+    "description": "progress",
+    "image": "img/exercise21.png",
+    "imageAlt": "exercise21 練習畫面",
+    "detailPage": "exercise21.html",
+    "group": "exercise",
+    "searchText": "progress",
+    "status": "published",
+    "order": 39
+  },
+  {
+    "id": "exercise24",
+    "title": "exercise24",
+    "description": "scrollView setOnscrollChangeListener",
+    "image": "img/exercise24.png",
+    "imageAlt": "exercise24 練習畫面",
+    "detailPage": "exercise24.html",
+    "group": "exercise",
+    "searchText": "scrollView setOnscrollChangeListener",
+    "status": "published",
+    "order": 40
+  },
+  {
+    "id": "homework2",
+    "title": "homework2",
+    "description": "test, tab和viewPager的連結",
+    "image": "img/homework2.png",
+    "imageAlt": "homework2 練習畫面",
+    "detailPage": "homework2.html",
+    "group": "homework-module",
+    "searchText": "test, tab和viewPager的連結",
+    "status": "published",
+    "order": 41
+  },
+  {
+    "id": "03-module-a-am",
+    "title": "03_Module_A_AM",
+    "description": "食物跌遊戲",
+    "image": "img/03_Module_A_AM.png",
+    "imageAlt": "03 Module A AM 練習畫面",
+    "detailPage": "03_Module_A_AM.html",
+    "group": "homework-module",
+    "searchText": "食物跌遊戲",
+    "status": "published",
+    "order": 42
+  }
+]

@@ -1,80 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant" data-site-root="../">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>知識庫｜Android Learning</title>
+  <link rel="stylesheet" href="../assets/css/foundation.css">
+  <link rel="stylesheet" href="../assets/css/app-shell.css">
+  <link rel="stylesheet" href="../assets/css/accordion.css">
+  <link rel="stylesheet" href="../assets/css/knowledge.css">
 </head>
 <body>
-    <button class="accordion">文字輸入驗證(常見的字元檢查方法)</button>
-    <div class="panel">
-        <img src="img/table1.png" alt="">
-    </div>
-    <button class="accordion">獲得他的第幾個元素(0,1,...R)</button>
-    <div class="panel">
-        <pre>
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="../index.html" aria-label="返回首頁">
+      <span class="brand-mark" aria-hidden="true">AL</span>
+      <span class="brand-copy"><strong>Android Learning</strong><span>WORKSPACE</span></span>
+    </a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+
+  <main class="app-main" id="main-content" tabindex="-1">
+    <div class="container knowledge-page" data-accordion-root data-accordion-search-scope="all">
+      <header class="knowledge-header">
+        <h1>知識庫</h1>
+        <p>查找現有 Android／Kotlin 程式片段、說明及參考資料。</p>
+      </header>
+
+      <div class="accordion-toolbar">
+        <form class="accordion-filter" role="search" data-accordion-filter>
+          <label class="accordion-filter__label" for="knowledge-search">搜尋知識條目</label>
+          <div class="accordion-filter__controls">
+            <div class="search-field">
+              <span class="search-field__marker" aria-hidden="true">⌕</span>
+              <input id="knowledge-search" type="search" autocomplete="off" placeholder="搜尋標題、說明或程式碼"
+                aria-controls="knowledge-accordion" aria-describedby="knowledge-search-help" data-accordion-search>
+            </div>
+            <button class="button button--ghost" type="button" data-accordion-clear>清除搜尋</button>
+          </div>
+          <p class="sr-only" id="knowledge-search-help">只搜尋本頁條目的標題、解釋及程式碼內容。</p>
+          <p class="accordion-count" aria-live="polite" data-accordion-announcement></p>
+        </form>
+        <div class="accordion-actions" aria-label="條目顯示控制">
+          <button class="button button--secondary" type="button" data-accordion-expand-all>全部展開</button>
+          <button class="button button--ghost" type="button" data-accordion-collapse-all>全部收合</button>
+        </div>
+      </div>
+
+      <div class="accordion-list" id="knowledge-accordion">
+        <article class="card accordion-item" data-accordion-item data-title="文字輸入驗證(常見的字元檢查方法)">
+          <h2>
+            <button class="accordion-trigger" id="knowledge-trigger-01" type="button" aria-expanded="true"
+              aria-controls="knowledge-panel-01" data-accordion-trigger>文字輸入驗證(常見的字元檢查方法)</button>
+          </h2>
+          <div class="accordion-panel" id="knowledge-panel-01" role="region" aria-labelledby="knowledge-trigger-01" data-accordion-panel>
+            <img class="knowledge-image" src="img/table1.png" alt="文字輸入驗證：常見字元檢查方法對照表">
+            <a class="accordion-reference" href="img/table1.png">開啟原圖</a>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="獲得他的第幾個元素(0,1,...R)">
+          <h2>
+            <button class="accordion-trigger" id="knowledge-trigger-02" type="button" aria-expanded="true"
+              aria-controls="knowledge-panel-02" data-accordion-trigger>獲得他的第幾個元素(0,1,...R)</button>
+          </h2>
+          <div class="accordion-panel" id="knowledge-panel-02" role="region" aria-labelledby="knowledge-trigger-02" data-accordion-panel>
+            <pre class="code-block" tabindex="0" aria-label="獲得他的第幾個元素(0,1,...R)程式碼"><code>
             <mark>linearLayout.getChildAt</mark>
+
+        </code></pre>
             <p>homework6常用</p>
-        </pre>
-    </div>
-    <button class="accordion">設定ScollView滑到那裏</button>
-    <div class="panel">
-        <pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="設定ScollView滑到那裏">
+          <h2>
+            <button class="accordion-trigger" id="knowledge-trigger-03" type="button" aria-expanded="true"
+              aria-controls="knowledge-panel-03" data-accordion-trigger>設定ScollView滑到那裏</button>
+          </h2>
+          <div class="accordion-panel" id="knowledge-panel-03" role="region" aria-labelledby="knowledge-trigger-03" data-accordion-panel>
+            <pre class="code-block" tabindex="0" aria-label="設定ScollView滑到那裏程式碼"><code>
             <mark>scrollView.scrollX, scrollY</mark>
+
+        </code></pre>
             <p>homework6常用</p>
-        </pre>
-    </div>
-    <button class="accordion">打開google map</button>
-    <div class="panel">
-        <pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="打開google map">
+          <h2>
+            <button class="accordion-trigger" id="knowledge-trigger-04" type="button" aria-expanded="true"
+              aria-controls="knowledge-panel-04" data-accordion-trigger>打開google map</button>
+          </h2>
+          <div class="accordion-panel" id="knowledge-panel-04" role="region" aria-labelledby="knowledge-trigger-04" data-accordion-panel>
+            <pre class="code-block" tabindex="0" aria-label="打開google map程式碼"><code>
         layout.findViewById&lt;TextView&gt;(R.id.textView23).setOnClickListener {
             val intent = Intent()
             intent.action = Intent.ACTION_VIEW
-            intent.setPackage("com.google.android.apps.maps")    <span>//打開google map</span>
+            intent.setPackage("com.google.android.apps.maps")    <span class="code-comment">//打開google map</span>
             startActivity(intent)
         }
-            <a href="../homework/02_Module_A_PM.html">02_Module_A_PM有</a>
-        </pre>
-    </div>
-    <button class="accordion">打開apps</button>
-    <div class="panel">
-        <pre>
-val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0"))   <span>//打開地圖</span>
-val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"))    <span>//打開google</span>
-val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:0912345678"))    <span>//打開電話</span>
 
-val intent = Intent(Intent.ACTION_SENDTO).apply {    <span>//打開郵件</span>
-    data = Uri.parse("mailto:")    <span>// 顯示郵件應用</span>
-    putExtra(Intent.EXTRA_EMAIL, arrayOf("recipient@example.com"))    <span>//支援多位收件人</span>
+        </code></pre>
+            <a class="accordion-reference" href="../homework/02_Module_A_PM.html">02_Module_A_PM有</a>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="打開apps">
+          <h2>
+            <button class="accordion-trigger" id="knowledge-trigger-05" type="button" aria-expanded="true"
+              aria-controls="knowledge-panel-05" data-accordion-trigger>打開apps</button>
+          </h2>
+          <div class="accordion-panel" id="knowledge-panel-05" role="region" aria-labelledby="knowledge-trigger-05" data-accordion-panel>
+            <pre class="code-block" tabindex="0" aria-label="打開apps程式碼"><code>
+val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0"))   <span class="code-comment">//打開地圖</span>
+val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"))    <span class="code-comment">//打開google</span>
+val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:0912345678"))    <span class="code-comment">//打開電話</span>
+
+val intent = Intent(Intent.ACTION_SENDTO).apply {    <span class="code-comment">//打開郵件</span>
+    data = Uri.parse("mailto:")    <span class="code-comment">// 顯示郵件應用</span>
+    putExtra(Intent.EXTRA_EMAIL, arrayOf("recipient@example.com"))    <span class="code-comment">//支援多位收件人</span>
     putExtra(Intent.EXTRA_SUBJECT, "郵件主旨")
     putExtra(Intent.EXTRA_TEXT, "郵件內容")
 }
-        </pre>
-    </div>
-    <button class="accordion">動態加入多行layout</button>
-    <div class="panel">
-        <pre>
-val linearLayout = timeLayout.getChildAt(l%7) as LinearLayout   <span>//有幾就i%幾，每次i+1就係下一行加layout，就唔使recyclerView。用getChildAt又唔使再分情況。</span>
+        </code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="動態加入多行layout">
+          <h2>
+            <button class="accordion-trigger" id="knowledge-trigger-06" type="button" aria-expanded="true"
+              aria-controls="knowledge-panel-06" data-accordion-trigger>動態加入多行layout</button>
+          </h2>
+          <div class="accordion-panel" id="knowledge-panel-06" role="region" aria-labelledby="knowledge-trigger-06" data-accordion-panel>
+            <pre class="code-block" tabindex="0" aria-label="動態加入多行layout程式碼"><code>
+val linearLayout = timeLayout.getChildAt(l%7) as LinearLayout   <span class="code-comment">//有幾就i%幾，每次i+1就係下一行加layout，就唔使recyclerView。用getChildAt又唔使再分情況。</span>
 linearLayout.addView(layout)
-        </pre>
-    </div>
-    <button class="accordion">日期選擇器最小可選日期設為「今天」</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="日期選擇器最小可選日期設為「今天」">
+          <h2>
+            <button class="accordion-trigger" id="knowledge-trigger-07" type="button" aria-expanded="true"
+              aria-controls="knowledge-panel-07" data-accordion-trigger>日期選擇器最小可選日期設為「今天」</button>
+          </h2>
+          <div class="accordion-panel" id="knowledge-panel-07" role="region" aria-labelledby="knowledge-trigger-07" data-accordion-panel>
+            <pre class="code-block" tabindex="0" aria-label="日期選擇器最小可選日期設為「今天」程式碼"><code>
             datePickerDialog.datePicker.minDate = System.currentTimeMillis()
-        </pre>
-    </div>
-    <button class="accordion">Double</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="Double">
+          <h2>
+            <button class="accordion-trigger" id="knowledge-trigger-08" type="button" aria-expanded="true"
+              aria-controls="knowledge-panel-08" data-accordion-trigger>Double</button>
+          </h2>
+          <div class="accordion-panel" id="knowledge-panel-08" role="region" aria-labelledby="knowledge-trigger-08" data-accordion-panel>
+            <pre class="code-block" tabindex="0" aria-label="Double程式碼"><code>
 var numberKm : Double = 0.0
-        </pre>
-    </div>
-    <button class="accordion">轉換日夜間模式</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="轉換日夜間模式">
+          <h2>
+            <button class="accordion-trigger" id="knowledge-trigger-09" type="button" aria-expanded="true"
+              aria-controls="knowledge-panel-09" data-accordion-trigger>轉換日夜間模式</button>
+          </h2>
+          <div class="accordion-panel" id="knowledge-panel-09" role="region" aria-labelledby="knowledge-trigger-09" data-accordion-panel>
+            <pre class="code-block" tabindex="0" aria-label="轉換日夜間模式程式碼"><code>
 val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 if(currentNightMode == Configuration.UI_MODE_NIGHT_YES){
     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -82,61 +178,52 @@ if(currentNightMode == Configuration.UI_MODE_NIGHT_YES){
 else{
     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 }
-        </pre>
-    </div>
-    <button class="accordion">viewPager2因應內容大小而改變大小</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="viewPager2因應內容大小而改變大小">
+          <h2>
+            <button class="accordion-trigger" id="knowledge-trigger-10" type="button" aria-expanded="true"
+              aria-controls="knowledge-panel-10" data-accordion-trigger>viewPager2因應內容大小而改變大小</button>
+          </h2>
+          <div class="accordion-panel" id="knowledge-panel-10" role="region" aria-labelledby="knowledge-trigger-10" data-accordion-panel>
+            <pre class="code-block" tabindex="0" aria-label="viewPager2因應內容大小而改變大小程式碼"><code>
 viewPager2.adapter = viewPager2_adatper(this)
-viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){      <span>//當 ViewPager2 的滾動狀態或選中頁面改變時觸發。</span>
+viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){      <span class="code-comment">//當 ViewPager2 的滾動狀態或選中頁面改變時觸發。</span>
     override fun onPageSelected(position: Int) {
-        val root = supportFragmentManager.findFragmentByTag("f$position")?.view ?: return     <span>//依據系統為 ViewPager2 頁面產生的預設標籤（格式為 "f" + 索引）來查找目前位置所對應的 Fragment 實例。</span>
+        val root = supportFragmentManager.findFragmentByTag("f$position")?.view ?: return     <span class="code-comment">//依據系統為 ViewPager2 頁面產生的預設標籤（格式為 "f" + 索引）來查找目前位置所對應的 Fragment 實例。</span>
         root.post {
             val widthSpec = View.MeasureSpec.makeMeasureSpec(root.width, View.MeasureSpec.EXACTLY)    
             val heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)     
-            <span>//View.measure() 這個方法決定了一個 View 要佔據多大空間。makeMeasureSpec(size, mode) size: 剛好給你這麼大的空間, mode: 精確、最大、未指定模式</span>
-            <span>//root 已經有實際寬度了。但高度没有，View 自己計算要有多高，愛多高多高，我完全不管！</span>
-            root.measure(widthSpec, heightSpec)      <span>系統會依據傳入的規格，重新計算這個 View 及其子 View 的尺寸。</span>
+            <span class="code-comment">//View.measure() 這個方法決定了一個 View 要佔據多大空間。makeMeasureSpec(size, mode) size: 剛好給你這麼大的空間, mode: 精確、最大、未指定模式</span>
+            <span class="code-comment">//root 已經有實際寬度了。但高度没有，View 自己計算要有多高，愛多高多高，我完全不管！</span>
+            root.measure(widthSpec, heightSpec)      <span class="code-comment">系統會依據傳入的規格，重新計算這個 View 及其子 View 的尺寸。</span>
             val h = root.measuredHeight     
             if(h &gt; 0){
-                viewPager2.layoutParams.height = h    <span>//直接修改 ViewPager2 的佈局參數（LayoutParams）中的高度屬性。</span>
+                viewPager2.layoutParams.height = h    <span class="code-comment">//直接修改 ViewPager2 的佈局參數（LayoutParams）中的高度屬性。</span>
                 viewPager2.requestLayout()
             }
         }
     }
 })
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
+        </code></pre>
+          </div>
+        </article>
+      </div>
 
-        </pre>
+      <div class="state state--empty accordion-empty" data-accordion-empty hidden>
+        <strong>找不到相符的知識條目</strong>
+        <span>請改用其他關鍵字，或清除搜尋。</span>
+      </div>
+      <div class="knowledge-related">
+        <a class="button button--secondary" href="../forgot.html">前往經常忘記大全</a>
+      </div>
     </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
+  </main>
 
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-<script src="js.js"></script>
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+  <script src="../assets/js/site-navigation.js" defer></script>
+  <script src="../assets/js/accordion.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="accordion">MainActivity.kt (判斷勝利)</button>
+    <div class="panel">
+        <pre>
+countDownTimer = object : CountDownTimer(2000, 100){
+    override fun onFinish() {
+        val random = (0..2).random()
+        imageView.setImageResource(list[random])
+        Thread{
+            Thread.sleep(1000)
+            runOnUiThread {
+                if(random == number){
+                    val intent = Intent(this@MainActivity, MainActivity2::class.java)
+                    Data.myRank.add(MyRank(number, random, "Draw" ))
+                    startActivity(intent)
+                }
+                when(random){
+                    0 -&gt; when(number){
+                        1 -&gt; {
+                            Data.myRank.add(MyRank(number, random, "You win" ))
+                            val intent = Intent(this@MainActivity, MainActivity3::class.java)
+                            startActivity(intent)
+                        }
+                        2 -&gt; {
+                            Data.myRank.add(MyRank(number, random, "You lose" ))
+                            val intent = Intent(this@MainActivity, MainActivity4::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                    1 -&gt; when(number){
+                        0 -&gt; {
+                            Data.myRank.add(MyRank(number, random, "You lose" ))
+                            val intent = Intent(this@MainActivity, MainActivity4::class.java)
+                            startActivity(intent)
+                        }
+                        2 -&gt; {
+                            Data.myRank.add(MyRank(number, random, "You win" ))
+                            val intent = Intent(this@MainActivity, MainActivity3::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                    2 -&gt; when(number){
+                        0 -&gt; {
+                            Data.myRank.add(MyRank(number, random, "You win" ))
+                            val intent = Intent(this@MainActivity, MainActivity3::class.java)
+                            startActivity(intent)
+                        }
+                        1 -&gt; {
+                            Data.myRank.add(MyRank(number, random, "You lose" ))
+                            val intent = Intent(this@MainActivity, MainActivity4::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                }
+                isStart = false
+            }
+        }.start()
+    }
+
+    override fun onTick(millisUntilFinished: Long) {
+        imageView.setImageResource(list[i%3])     <span>//換圖片</span>
+        i++
+    }
+
+}
+        </pre>
+    </div>
+    <button class="accordion">MainActivity.kt (揀包剪揼)</button>
+    <div class="panel">
+        <pre>
+imageView4.setOnClickListener {
+    if(!isStart){
+        isStart = true
+        number = 2
+        linearLayout.visibility = View.GONE
+        imageView10.visibility = View.VISIBLE
+        when(number){
+            2 -&gt; imageView10.setImageResource(R.drawable.a3)
+            1 -&gt; imageView10.setImageResource(R.drawable.a2)
+            0 -&gt; imageView10.setImageResource(R.drawable.a1)
+        }
+        countDownTimer.start()
+    }
+}
+        </pre>
+    </div>
+<script src="js.js"></script>
+</body>
+</html>

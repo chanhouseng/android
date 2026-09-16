@@ -8,89 +8,464 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button class="accordion">code</button>
+    <h3>運用webView去load online video，又有控制台嗰啲野，又唔使整到好複雜</h3>
+    <button class="accordion">MainActivity.kt (輸播圖)</button>
     <div class="panel">
         <pre>
+view1 = findViewById(R.id.view1)
+view2 = findViewById(R.id.view2)
+view3 = findViewById(R.id.view3)
+viewList.add(view1)
+viewList.add(view2)
+viewList.add(view3)
+val countDownTimer = object : CountDownTimer(3000, 3000){
+    override fun onFinish() {
+        if(numberNow &lt; drawableList.size-1){
+            numberNow ++
+        }
+        else{
+            numberNow = 0
+        }
+        start()
+    }
 
+    override fun onTick(millisUntilFinished: Long) {
+        imageView7.setImageResource(drawableList[numberNow])
+        viewList[0].setBackgroundColor(Color.parseColor("#A8A8A8"))
+        viewList[1].setBackgroundColor(Color.parseColor("#A8A8A8"))
+        viewList[2].setBackgroundColor(Color.parseColor("#A8A8A8"))
+        viewList[numberNow].setBackgroundColor(Color.parseColor("#ffffff"))
+    }
+
+}
+countDownTimer.start()
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">skills_MainActivity2.kt (顯示三列chip)</button>
     <div class="panel">
         <pre>
+linearLayout = findViewById(R.id.linearLayout)
+val req = Request.Builder().url("http://10.0.2.2:8080/api/skills-types").build()
+OkHttpClient().newCall(req).enqueue(object : Callback{
+    override fun onFailure(call: Call, e: IOException) {
+    }
 
+    override fun onResponse(call: Call, response: Response) {
+        val resultString = response.body?.string()  
+        val results = Gson().fromJson(resultString, SkillsClass::class.java)  
+        runOnUiThread {
+            println(456)
+            for(result in results.data){
+                val layout = layoutInflater.inflate(R.layout.skills_type_pro, null)     <span>//標題都放喺pro到可以隨時加，同埋佢攞資料最好都係咁做</span>
+                layout.findViewById&lt;TextView&gt;(R.id.textView5).text = result.name
+                var i = 0
+                result.skills.forEach { (key, value) -&gt;
+                    val custom = layoutInflater.inflate(R.layout.skill_pro, null)
+                    custom.findViewById&lt;TextView&gt;(R.id.textView6).text = value
+                    var kI = i       <span>//用來記錄當前技能的位置</span>
+                    custom.setOnClickListener {
+                        loadAlert(result.skills,kI, key)
+                    }
+                    val linear2  = layout.findViewById&lt;LinearLayout&gt;(R.id.linear).getChildAt(i%3) as LinearLayout
+                    linear2.addView(custom)
+                    i++
+                }
+                linearLayout.addView(layout)
+            }
+        }
+    }
+
+})
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">Data.kt</button>
     <div class="panel">
         <pre>
+<mark>//Map係因為佢下面唔係[]，而係{}，唔係正常係要用 Array&lt;Map&lt;String, String&gt;&gt;</mark>
+class DataClass(var skillTypeId: Int, var name: String, var skills: Map&lt;String, String&gt;)
 
+{
+  "code": 200,
+  "msg": "Success",
+  "data": [
+    {
+      "skillTypeId": 0,
+      "name": "Manufacturing and Engineering Technology",
+      "skills": {
+        "0000": "Industrial Mechanics",
+        "0001": "Manufacturing Team Challenge",
+        "0002": "Mechatronics",
+        "0003": "Mechanical Engineering CAD",
+        "0004": "CNC Turning",
+        "0005": "CNC Milling"
+      }
+    },
+    {
+      "skillTypeId": 1,
+      "name": "Information and Communication Technology",
+      "skills": {
+        "1000": "Information Network Cabling",
+        "1001": "IT Software Solutions for Business"
+      }
+    }
+  ]
+}
         </pre>
     </div>
 
-    <button class="accordion">code</button>
+    <button class="accordion">skills_MainActivity2.kt (loadAlert 顯示放大內容)</button>
     <div class="panel">
         <pre>
+fun loadAlert(skils:Map&lt;String, String&gt;,i: Int, key: String){
+    val alert = layoutInflater.inflate(R.layout.alert, null)
+    val alertDialog = AlertDialog.Builder(this@skills_MainActivity2).setView(alert).show()
+    val req2 = Request.Builder().url("http://10.0.2.2:8080/api/skills/${key}").build()
+    OkHttpClient().newCall(req2).enqueue(object : Callback{
+        override fun onFailure(call: Call, e: IOException) {
+        }
 
+        override fun onResponse(
+            call: Call,
+            response: Response
+        ) {
+            val resultString2 = response.body?.string()
+            val results2 = Gson().fromJson(resultString2, SkillItemClass::class.java)
+            runOnUiThread {
+                alert.findViewById&lt;ImageView&gt;(R.id.imageView8).load(results2.data.img){
+                    placeholder(R.drawable.d)
+                    crossfade(true)
+                }
+                println(results2.data.img)
+                alert.findViewById&lt;TextView&gt;(R.id.textView16).text = results2.data.name
+                alert.findViewById&lt;TextView&gt;(R.id.textView17).text = results2.data.introduction
+
+            }
+        }
+
+    })
+
+    alert.findViewById&lt;Button&gt;(R.id.button).setOnClickListener {      <span>換下一張相</span>
+        alertDialog.dismiss()
+        val list = skils.entries.toList()          <span>//將Map轉換為List，可以以lilst[i].value去引用</span>
+        var Ki = i + 1  
+        val keyNew = list[Ki].key
+        loadAlert(skils, Ki, keyNew)      <span>//按鍵值、skills Map, 第幾個值去loadAlert</span>
+    } 
+    val list2 = skils.entries.toList()
+    var Ki2 = i
+    if(Ki2 &gt;= list2.size-1){       <span>//如果佢係最後一個</span>
+        alert.findViewById&lt;Button&gt;(R.id.button).visibility = View.GONE
+    }
+
+}
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">photos_MainActivity2.kt (點擊事件)</button>
     <div class="panel">
         <pre>
+<mark>//可以假設有9頁再去揾方法</mark>
+<span>//佢淨係可能會有以下可能
+    1(now),2, ..., 9
+    1, 2(now), 3, ..., 9
+    1, 2, 3(now), 4, ..., 9
+    1, ... 3, 4(now), 5, ..., 9
+    ...
+    1, ..., 6, 7(now), 8, 9
+    1, ..., 7, 8(now), 9
+    1, ..., 8, 9(now)</span>
+<mark>//不難地發現最多都係只需要7個text就可以裝曬，所以當少於7個時，其他就gone曬，最按佢點擊的字去顯示相應的內容</mark>
 
+textView9.setOnClickListener {clickFunction(it as TextView)} 
+textView10.setOnClickListener {clickFunction(it as TextView)}
+textView11.setOnClickListener {clickFunction(it as TextView)}
+textView12.setOnClickListener {clickFunction(it as TextView)}
+textView13.setOnClickListener {clickFunction(it as TextView)}
+textView14.setOnClickListener {clickFunction(it as TextView)}
+textView15.setOnClickListener {clickFunction(it as TextView)}
+    
+
+fun clickFunction(textView: TextView){
+    if(textView.text != "" && textView.text != "..."){     <span>//懶得gone就text = ""</span>
+        load(textView.text.toString().toInt())      <span>//排除係數字先可以按再load啲相</span>
+    }
+}
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">photos_MainActivity2.kt (load相)</button>
     <div class="panel">
         <pre>
+fun load(number: Int){    <span>//number係點擊的數字，但都係由0開始，所以要減1</span>
+    val number1 = number - 1
+    val number2 = number
+    textView12.setBackgroundColor(Color.WHITE)
+    textView9.setBackgroundColor(Color.WHITE)
+    textView15.setBackgroundColor(Color.WHITE)
+    textView10.text = ""    <span>//除頭尾必然有字，其他有機會無字</span>
+    textView11.text = ""
+    textView12.text = ""
+    textView13.text = ""
+    textView14.text = ""
+    textView13.visibility = View.VISIBLE
+    textView14.visibility = View.VISIBLE
+    textView11.visibility = View.VISIBLE
+    textView10.visibility = View.VISIBLE
+    if(number1 != 0 && number1 != totalPage-1){         <span>//如果唔係頭尾</span>
+        textView12.text = number.toString()     <span>//喺中間位置顯示當前頁碼</span>
+        textView12.setBackgroundColor(Color.parseColor("#C5C5C5"))
 
+        if(number1 - 2 != 0 ) {         <span>//如果前兩個位置不是頭部，即係要有'...'</span>
+            textView10.visibility = View.VISIBLE
+            textView10.text = "..."     <span>//呢個textView只係負責顯示...，唔係...就gone，而textView11就顯示中間數前面嗰個</span>
+        }
+        else{
+            textView10.visibility = View.GONE       <span>//如果前兩個係頭尾，即係要顯示前一個數字，而無省略號</span>
+        }
+        if(number1 + 2 != totalPage-1 ) {      <span>//如果後兩個位置不是頭部，即係要有'...'</span>
+            textView14.visibility = View.VISIBLE
+            textView14.text = "..."
+        }
+        else{
+            textView14.visibility = View.GONE       <span>//唔顯示係因為要令中間數字同頭尾數字只有一個數，就喺之後去判斷</span>
+        }
+        if(number1 -1 != 0){        
+            textView11.text = (number2 - 1).toString()      <span>//前面唔係頭尾就可以顯示，係頭尾就會重覆</span>
+        }
+        else{
+            textView11.visibility = View.GONE
+            textView10.visibility = View.GONE
+        }
+        if(number1 + 1 != totalPage-1){
+            textView13.text = (number2 + 1).toString()
+        }
+        else{
+            textView13.visibility = View.GONE
+            textView14.visibility = View.GONE
+        }
+    }
+    else{
+        if(number1 == 0){           <span>//頭尾嘅處理，只有一種情況就容易好多</span>
+            textView10.text = (number2 + 1).toString()
+            textView11.text = (number2 + 2).toString()
+            textView12.text = "..."
+            textView13.visibility = View.GONE
+            textView9.setBackgroundColor(Color.parseColor("#C5C5C5"))
+            textView14.visibility = View.GONE
+        }
+        else if(number1 == totalPage-1){
+            println("case3")
+            println(123)
+            textView14.text = (number2 - 1).toString()
+            textView13.text = (number2 - 2).toString()
+            textView15.setBackgroundColor(Color.parseColor("#C5C5C5"))
+            textView12.text = "..."
+            textView11.visibility = View.GONE
+            textView10.visibility = View.GONE
+        }
+    }
+
+    <span>//顯示圖片部分</span>
+    val l0 = linearLayout.getChildAt(0) as LinearLayout
+    val l1 = linearLayout.getChildAt(1) as LinearLayout
+    val l2 = linearLayout.getChildAt(2) as LinearLayout
+    l0.removeAllViews()
+    l1.removeAllViews()
+    l2.removeAllViews()
+    var i = 0
+    val requestBody = FormBody.Builder()
+        .add("pageNumber", number1.toString())
+        .build()    
+    val req = Request.Builder().url("http://10.0.2.2:8080/api/image/photos").post(requestBody).build()
+    OkHttpClient().newCall(req).enqueue(object : Callback{
+        override fun onFailure(call: Call, e: IOException) {
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            val resultString = response.body?.string()
+            val results = Gson().fromJson(resultString, PhotosDataClass2::class.java)
+            runOnUiThread {
+                for(result in results.data){
+                    val layout = layoutInflater.inflate(R.layout.photo_pro, null)
+                    layout.findViewById&lt;ImageView&gt;(R.id.imageView).load(result.url){
+                        placeholder(R.drawable.s)
+                        crossfade(true)
+                    }
+                    layout.findViewById&lt;ImageView&gt;(R.id.imageView).setOnLongClickListener {
+                        val popupMenu = PopupMenu(this@photos_MainActivity2, it)
+                        popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
+                        popupMenu.setOnMenuItemClickListener {
+                            when(it.itemId){
+                                R.id.share -&gt; {
+
+                                }
+                            }
+                            true
+                        }
+                        popupMenu.show()
+                        true
+                    }
+                    layout.findViewById&lt;TextView&gt;(R.id.textView7).text = "Popularity: ${result.heat}"
+                    layout.findViewById&lt;ImageView&gt;(R.id.imageView).setOnClickListener {
+                        val alert2 = layoutInflater.inflate(R.layout.image_alert, null)
+                        val alertDialog2 = AlertDialog.Builder(this@photos_MainActivity2).setView(alert2).show()
+                        alertDialog2.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT)
+                        val imageView = alert2.findViewById&lt;ImageView&gt;(R.id.imageView9)
+                        imageView.load(result.url) {
+                            placeholder(R.drawable.s)
+                            crossfade(true)
+                            alertDialog2.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                        }
+                        var scaleFactor = 1f
+                        val scaleDetector = ScaleGestureDetector(this@photos_MainActivity2, object :
+                            ScaleGestureDetector.SimpleOnScaleGestureListener(){
+                            override fun onScale(detector: ScaleGestureDetector): Boolean {
+                                val scale =  detector.scaleFactor
+                                val next = scale * scaleFactor
+                                if(next in (1f..10f)){
+                                    scaleFactor = next
+                                    imageView.scaleY = next
+                                    imageView.scaleX = next
+                                    imageView.pivotX = detector.focusX
+                                    imageView.pivotY = detector.focusY
+                                }
+                                return true
+                            }
+                            })
+                        val gestureDetector = GestureDetector(this@photos_MainActivity2, object : GestureDetector.SimpleOnGestureListener(){
+                            override fun onScroll(
+                                e1: MotionEvent?,
+                                e2: MotionEvent,
+                                distanceX: Float,
+                                distanceY: Float
+                            ): Boolean {
+                                imageView.translationX -= distanceX
+                                imageView.translationY -= distanceY
+                                return true
+                            }
+                        })
+
+                        alert2.setOnTouchListener { v, event -&gt;
+                            scaleDetector.onTouchEvent(event)
+                            gestureDetector.onTouchEvent(event)
+                            true
+                        }
+
+                    }
+                    layout.findViewById&lt;TextView&gt;(R.id.textView8).text = "Visit: ${result.visit_count}"
+                    val linear = linearLayout.getChildAt(i%3) as LinearLayout
+                    linear.addView(layout)
+                    i++
+                }
+            }
+        }
+
+    })
+
+}
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">vidoes_MainActivity2.kt (基礎設定)</button>
+    </button>
     <div class="panel">
         <pre>
+loadComment()     <span>//顯示討論</span>
 
+val textView18: TextView = findViewById(R.id.textView18)
+val editTextText: EditText = findViewById(R.id.editTextText)
+textView18.setOnClickListener {       <span>//上傳留這</span>
+    val json = """
+        {
+            "commentText": "${editTextText.text}",
+            "videoUUID": "${nowVideo}"
+        }
+    """.trimIndent()
+    val mediaType = "application/json; charset=utf-8".toMediaType()
+    val req3 = Request.Builder().url("http://10.0.2.2:8080/api/video/comment").post(json.toRequestBody(mediaType)).build()
+    OkHttpClient().newCall(req3).enqueue(object : Callback{
+        override fun onFailure(call: Call, e: IOException) {
+
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            runOnUiThread {
+                Toast.makeText(this@vidoes_MainActivity2, "Success", Toast.LENGTH_LONG).show()
+                loadComment()   
+            }
+        }
+
+    })
+}
+
+val req2 = Request.Builder().url("http://10.0.2.2:8080/api/video").build()
+OkHttpClient().newCall(req2).enqueue(object : Callback{
+    override fun onFailure(call: Call, e: IOException) {
+        println("123123123123123123123")
+    }
+
+    override fun onResponse(call: Call, response: Response) {
+        val resultString = response.body?.string()
+        println(resultString)
+        resultList = Gson().fromJson(resultString, VideoDataClass::class.java)     <span>//記低啲影片就唔使每次都上網攞</span>
+        runOnUiThread {
+            loadVideo()
+        }
+    }
+
+})
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">vidoes_MainActivity2.kt (loadComment)</button>
     <div class="panel">
         <pre>
+fun loadComment(){
+    val req = Request.Builder().url("http://10.0.2.2:8080/api/video/comment").build()
+    OkHttpClient().newCall(req).enqueue(object : Callback{
+        override fun onFailure(call: Call, e: IOException) {
+            println(e.message)
+        }
 
+        override fun onResponse(call: Call, response: Response) {
+            val resultString = response.body?.string()
+            val results = Gson().fromJson(resultString, videoDataCommentClass::class.java)
+            runOnUiThread {
+                commitLayout.removeAllViews()
+                for(result in results.data.filter { it.videoUUID == nowVideo }){
+                    val layout = layoutInflater.inflate(R.layout.commit_pro, null)
+                    layout.findViewById&lt;TextView&gt;(R.id.textView20).text = "${result.commentTime}"
+                    layout.findViewById&lt;TextView&gt;(R.id.textView21).text = "From ${result.ipAddress}"
+                    layout.findViewById&lt;TextView&gt;(R.id.textView19).text = result.commentText
+                    commitLayout.addView(layout)
+                }
+            }
+        }
+
+    })
+}
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">vidoes_MainActivity2.kt (loadVideo)</button>
     <div class="panel">
         <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
+fun loadVideo(){
+    videoLayout.removeAllViews()
+    videoList = resultList.data
+    for(result in videoList.filter { it.url != nowVideo }){      <span>//排除播緊嘅嗰個</span>
+        val layout = layoutInflater.inflate(R.layout.video_pro, null)
+        val hour = result.length/3600      <span>//顯示時長</span>
+        val minute = (result.length%3600)/60
+        val seconds = (result.length%3600)%60
+        layout.setOnClickListener {
+            nowVideo = result.uuid
+            loadVideo()
+            loadComment()
+        }
+        layout.findViewById&lt;TextView&gt;(R.id.text).text = "${if(hour == 0) "" else hour.toString().padStart(2,'0')+" : "}${minute.toString().padStart(2,'0')} : ${seconds.toString().padStart(2,'0')}"
+            videoLayout.addView(layout)
+    }
+    val video = videoList.find { it.uuid == nowVideo }!!    <span>//大幕要播的video</span>
+    findViewById&lt;TextView&gt;(R.id.textView33).text = video.name
+    videoView.settings.javaScriptEnabled = true
+    videoView.loadUrl(video.url)
+}
         </pre>
     </div>
 <script src="js.js"></script>

@@ -1,83 +1,82 @@
 <?php
-
 declare(strict_types=1);
+require __DIR__ . '/bootstrap.php';
 
-$projectDirectory = dirname(__DIR__);
-$usersFile = $projectDirectory . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'users.json';
-$savedRoutesFile = $projectDirectory . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'saved_routes.json';
-$usersBackup = file_get_contents($usersFile);
-$savedRoutesBackup = file_get_contents($savedRoutesFile);
-if ($usersBackup === false || $savedRoutesBackup === false) {
-    fwrite(STDERR, 'Unable to back up mutable test data.' . PHP_EOL);
-    exit(1);
+function copyTestTree(string $source, string $target): void
+{
+    if (is_link($source)) { return; }
+    if (is_file($source)) {
+        if (!is_dir(dirname($target))) { mkdir(dirname($target), 0777, true); }
+        if (!copy($source, $target)) { throw new RuntimeException('Unable to copy test fixture'); }
+        return;
+    }
+    if (!is_dir($target)) { mkdir($target, 0777, true); }
+    foreach (new DirectoryIterator($source) as $entry) {
+        if (!$entry->isDot()) { copyTestTree($entry->getPathname(), $target . '/' . $entry->getFilename()); }
+    }
 }
 
-$process = null;
-$pipes = [];
-$exitCode = 1;
-
-try {
-    passthru(escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg(__DIR__ . DIRECTORY_SEPARATOR . 'unit.php'), $unitExitCode);
-    if ($unitExitCode !== 0) {
-        throw new RuntimeException('Unit tests failed.');
-    }
-
-    $command = [PHP_BINARY, '-S', '127.0.0.1:39081', 'server.php'];
-    $process = proc_open(
-        $command,
-        [
-            0 => ['pipe', 'r'],
-            1 => ['pipe', 'w'],
-            2 => ['pipe', 'w'],
-        ],
-        $pipes,
-        $projectDirectory,
-    );
-    if (!is_resource($process)) {
-        throw new RuntimeException('Unable to start the PHP server.');
-    }
-
-    $ready = false;
+function startTestServer(string $directory, int $port)
+{
+    $process = proc_open([PHP_BINARY, '-S', '0.0.0.0:' . $port, 'server.php'], [
+        0=>['pipe','r'], 1=>['file',$directory . '/server.log','a'], 2=>['file',$directory . '/server.log','a'],
+    ], $pipes, $directory);
+    if (!is_resource($process)) { throw new RuntimeException('Unable to start test server'); }
+    fclose($pipes[0]);
     for ($attempt = 0; $attempt < 50; ++$attempt) {
-        $socket = @fsockopen('127.0.0.1', 39081, $errorCode, $errorMessage, 0.1);
-        if (is_resource($socket)) {
-            fclose($socket);
-            $ready = true;
-            break;
-        }
+        if (!proc_get_status($process)['running']) { proc_close($process); throw new RuntimeException('Test server exited'); }
+        $socket = @fsockopen('127.0.0.1', $port, $errno, $message, 0.1);
+        if ($socket) { fclose($socket); return $process; }
         usleep(100000);
     }
-    if (!$ready) {
-        throw new RuntimeException('PHP test server did not become ready.');
-    }
+    stopTestServer($process);
+    throw new RuntimeException('Test server did not become ready');
+}
 
-    passthru(
-        escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg(__DIR__ . DIRECTORY_SEPARATOR . 'http.php') . ' http://127.0.0.1:39081',
-        $httpExitCode,
-    );
-    if ($httpExitCode !== 0) {
-        throw new RuntimeException('HTTP tests failed.');
-    }
+function stopTestServer($process): void
+{
+    if (is_resource($process)) { proc_terminate($process); proc_close($process); }
+}
 
+function checkedCommand(string $command): void
+{
+    passthru($command, $code);
+    if ($code !== 0) { throw new RuntimeException('Test command failed with exit code ' . $code); }
+}
+
+$directory = createTemporaryDirectory('mycity-http');
+$process = null;
+$exitCode = 1;
+try {
+    foreach (['unit.php','postman-contract.php'] as $testFile) {
+        checkedCommand(escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg(__DIR__ . '/' . $testFile));
+    }
+    $project = dirname(__DIR__);
+    foreach (['server.php','src','public','data'] as $entry) { copyTestTree($project . '/' . $entry, $directory . '/' . $entry); }
+    foreach (['users.json','saved_routes.json'] as $file) { copy(__DIR__ . '/fixtures/' . $file, $directory . '/data/' . $file); }
+    $socket = stream_socket_server('tcp://127.0.0.1:0', $errno, $message);
+    if (!$socket) { throw new RuntimeException('Unable to select a free test port'); }
+    $address = stream_socket_get_name($socket, false);
+    $port = (int) substr(strrchr($address, ':'), 1);
+    fclose($socket);
+    $process = startTestServer($directory, $port);
+    $http = escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg(__DIR__ . '/http.php') . ' http://127.0.0.1:' . $port;
+    checkedCommand($http);
+    stopTestServer($process);
+    $process = startTestServer($directory, $port);
+    checkedCommand($http . ' --persistence');
+    if (in_array('--newman', $argv, true)) {
+        checkedCommand('npm exec --offline --yes --package=newman -- newman run '
+            . escapeshellarg(__DIR__ . '/IS2025_MyCity_Transit.postman_collection.json')
+            . ' --env-var BASE_URL=127.0.0.1 --env-var SERVICE_PORT=' . $port
+            . ' --reporter-cli-no-console --color off');
+    }
     $exitCode = 0;
 } catch (Throwable $error) {
     fwrite(STDERR, $error->getMessage() . PHP_EOL);
 } finally {
-    if (is_resource($process)) {
-        proc_terminate($process);
-    }
-    foreach ($pipes as $pipe) {
-        if (is_resource($pipe)) {
-            fclose($pipe);
-        }
-    }
-    if (is_resource($process)) {
-        proc_close($process);
-    }
-
-    file_put_contents($usersFile, $usersBackup, LOCK_EX);
-    file_put_contents($savedRoutesFile, $savedRoutesBackup, LOCK_EX);
+    stopTestServer($process);
+    // Only the uniquely created temporary test tree is removed.
+    removeDirectory($directory);
 }
-
 exit($exitCode);
-

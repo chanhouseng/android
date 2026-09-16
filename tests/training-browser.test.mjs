@@ -170,24 +170,28 @@ test('searchEntries returns an empty array for a whitespace-only query', async (
   assert.deepEqual(searchEntries(searchableEntries, '  \t\n  '), []);
 });
 
-test('buildBreadcrumbs creates cumulative paths from the training root', async () => {
+test('buildBreadcrumbs creates cumulative canonical URLs from the training root', async () => {
   const { buildBreadcrumbs } = await loadCore('buildBreadcrumbs');
 
   assert.deepEqual(buildBreadcrumbs('Module A/資料 子'), [
-    { name: 'train', path: '' },
-    { name: 'Module A', path: 'Module A' },
-    { name: '資料 子', path: 'Module A/資料 子' },
+    { name: 'training', path: '', href: '/training/' },
+    { name: 'Module A', path: 'Module A', href: '/training/Module%20A/' },
+    {
+      name: '資料 子',
+      path: 'Module A/資料 子',
+      href: '/training/Module%20A/%E8%B3%87%E6%96%99%20%E5%AD%90/',
+    },
   ]);
-  assert.deepEqual(buildBreadcrumbs(''), [{ name: 'train', path: '' }]);
+  assert.deepEqual(buildBreadcrumbs(''), [{ name: 'training', path: '', href: '/training/' }]);
 });
 
-test('resolveCurrentFolder keeps existing folders and falls back to root for invalid paths', async () => {
+test('resolveCurrentFolder distinguishes missing folders from the root folder', async () => {
   const { resolveCurrentFolder } = await loadCore('resolveCurrentFolder');
 
   assert.equal(resolveCurrentFolder(entries, 'Module 2'), 'Module 2');
   assert.equal(resolveCurrentFolder(entries, ''), '');
-  assert.equal(resolveCurrentFolder(entries, 'root.txt'), '');
-  assert.equal(resolveCurrentFolder(entries, 'missing/folder'), '');
+  assert.equal(resolveCurrentFolder(entries, 'root.txt'), null);
+  assert.equal(resolveCurrentFolder(entries, 'missing/folder'), null);
 });
 
 test('encodePathSegments encodes each segment while preserving path separators', async () => {
@@ -199,14 +203,104 @@ test('encodePathSegments encodes each segment while preserving path separators',
   );
 });
 
-test('buildFolderUrl creates a training URL with an encoded path query', async () => {
+test('buildFolderUrl creates canonical path URLs with independently encoded segments', async () => {
   const { buildFolderUrl } = await loadCore('buildFolderUrl');
 
   assert.equal(
     buildFolderUrl('Module A/資料 #1'),
-    '/training/?path=Module%20A%2F%E8%B3%87%E6%96%99%20%231',
+    '/training/Module%20A/%E8%B3%87%E6%96%99%20%231/',
   );
+  assert.equal(buildFolderUrl('Round (1)/A&B'), '/training/Round%20(1)/A%26B/');
   assert.equal(buildFolderUrl(''), '/training/');
+});
+
+test('parseTrainingPathname decodes each path segment and preserves nested folders', async () => {
+  const { parseTrainingPathname } = await loadCore('parseTrainingPathname');
+
+  assert.equal(parseTrainingPathname('/training/'), '');
+  assert.equal(parseTrainingPathname('/training/Module%20A/media/images/'), 'Module A/media/images');
+  assert.equal(
+    parseTrainingPathname('/training/%E8%B3%87%E6%96%99/%E9%A1%8C%E7%9B%AE%20(1)/'),
+    '資料/題目 (1)',
+  );
+});
+
+test('parseTrainingPathname rejects unsafe, empty and malformed segments without throwing', async () => {
+  const { parseTrainingPathname } = await loadCore('parseTrainingPathname');
+
+  for (const pathname of [
+    '/training/Module%20A',
+    '/training/Module%20A//images/',
+    '/training/./images/',
+    '/training/%2E%2E/images/',
+    '/training/%20/images/',
+    '/training/Module%2FA/images/',
+    '/training/Module%5CA/images/',
+    '/training/%E0%A4%A/',
+    '/knowledge/Module%20A/',
+  ]) {
+    assert.doesNotThrow(() => parseTrainingPathname(pathname));
+    assert.equal(parseTrainingPathname(pathname), null, pathname);
+  }
+});
+
+test('parseTrainingRoute supports legacy query URLs and returns a canonical replacement', async () => {
+  const { parseTrainingRoute } = await loadCore('parseTrainingRoute');
+
+  assert.deepEqual(parseTrainingRoute('/training/', '?path=Module%20A'), {
+    path: 'Module A',
+    isLegacy: true,
+    isValid: true,
+    canonicalUrl: '/training/Module%20A/',
+  });
+  assert.deepEqual(parseTrainingRoute('/training/', '?path=Module%20A%2Fmedia'), {
+    path: 'Module A/media',
+    isLegacy: true,
+    isValid: true,
+    canonicalUrl: '/training/Module%20A/media/',
+  });
+  assert.deepEqual(parseTrainingRoute('/training/', '?path=%E0%A4%A'), {
+    path: null,
+    isLegacy: true,
+    isValid: false,
+    canonicalUrl: null,
+  });
+});
+
+test('resolveTrainingRoute preserves missing and malformed paths as Not Found states', async () => {
+  const { resolveTrainingRoute } = await loadCore('resolveTrainingRoute');
+
+  assert.deepEqual(resolveTrainingRoute(entries, '/training/Module%202/', ''), {
+    status: 'ready',
+    path: 'Module 2',
+    requestedPath: 'Module 2',
+    isLegacy: false,
+    canonicalUrl: '/training/Module%202/',
+  });
+  assert.deepEqual(resolveTrainingRoute(entries, '/training/missing/folder/', ''), {
+    status: 'not-found',
+    path: null,
+    requestedPath: 'missing/folder',
+    isLegacy: false,
+    canonicalUrl: '/training/missing/folder/',
+  });
+  assert.equal(resolveTrainingRoute(entries, '/training/%2E%2E/private/', '').status, 'not-found');
+});
+
+test('updateTrainingHistory uses canonical folder URLs for push and replace navigation', async () => {
+  const { updateTrainingHistory } = await loadCore('updateTrainingHistory');
+  const calls = [];
+  const history = {
+    pushState: (...args) => calls.push(['pushState', ...args]),
+    replaceState: (...args) => calls.push(['replaceState', ...args]),
+  };
+
+  assert.equal(updateTrainingHistory(history, 'Module A'), '/training/Module%20A/');
+  assert.equal(updateTrainingHistory(history, 'Module A/media', { replace: true }), '/training/Module%20A/media/');
+  assert.deepEqual(calls, [
+    ['pushState', { path: 'Module A' }, '', '/training/Module%20A/'],
+    ['replaceState', { path: 'Module A/media' }, '', '/training/Module%20A/media/'],
+  ]);
 });
 
 test('buildFileUrl creates a same-origin train URL with independently encoded segments', async () => {

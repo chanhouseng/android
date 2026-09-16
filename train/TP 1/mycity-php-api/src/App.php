@@ -1,19 +1,21 @@
 <?php
-
 declare(strict_types=1);
 
-final class DuplicateSavedRouteException extends RuntimeException
+final class ApiException extends RuntimeException
 {
+    public int $status;
+    public function __construct(int $status, string $message)
+    {
+        parent::__construct($message);
+        $this->status = $status;
+    }
 }
 
 final class App
 {
     private FileStore $store;
-
     private AuthService $auth;
-
     private string $resourceDirectory;
-
     public function __construct(FileStore $store, string $resourceDirectory)
     {
         $this->store = $store;
@@ -21,520 +23,270 @@ final class App
         $this->resourceDirectory = $resourceDirectory;
     }
 
-    /** @param array<string, mixed> $headers */
     public function handle(string $method, string $uri, array $headers, string $body): Response
     {
-        $path = parse_url($uri, PHP_URL_PATH);
-        $path = is_string($path) ? rawurldecode($path) : '/';
-        $method = strtoupper($method);
-        $headers = $this->normalizeHeaders($headers);
-
         try {
-            if ($path === '/api/users/signin') {
-                if ($method !== 'POST') {
-                    return Response::json(405, 'Method Not Allowed', null);
-                }
-
-                return $this->signIn($body);
+            $parts = parse_url($uri);
+            if ($parts === false) { return Response::json(404, 'Not Found', null); }
+            $path = rawurldecode($parts['path'] ?? '/');
+            parse_str($parts['query'] ?? '', $query);
+            $headers = array_change_key_case($headers, CASE_LOWER);
+            $method = strtoupper($method);
+            $routes = [
+                '/api/users/signin'=>'POST', '/api/transit/routes'=>'GET',
+                '/api/transit/stops/nearby'=>'GET', '/api/weather/current'=>'GET',
+                '/api/alerts'=>'GET', '/api/routes/save'=>'PUT', '/api/routes/saved'=>'GET',
+                '/api/resources/list'=>'GET', '/api/resource'=>'GET', '/api/privacy-policy'=>'GET',
+            ];
+            $singleRoute = preg_match('~^/api/transit/routes/([^/]+)$~', $path, $routeMatch) === 1;
+            $deleteSave = preg_match('~^/api/routes/saved/([^/]+)$~', $path, $saveMatch) === 1;
+            $staticFile = str_starts_with($path, '/api/resources/');
+            $allowed = $routes[$path] ?? ($singleRoute ? 'GET' : ($deleteSave ? 'DELETE' : ($staticFile ? 'GET' : null)));
+            if ($allowed === null) { return Response::json(404, 'Not Found', null); }
+            if ($method !== $allowed) {
+                $response = Response::json(405, 'Method Not Allowed', null);
+                $response->headers['Allow'] = $allowed;
+                return $response;
             }
-
-            if ($path === '/api/transit/routes') {
-                if ($method !== 'GET') {
-                    return Response::json(405, 'Method Not Allowed', null);
-                }
-
-                return $this->getRoutes();
+            if ($singleRoute) {
+                $route = $this->findRoute($routeMatch[1]);
+                return Response::json($route === null ? 404 : 200, $route === null ? 'Route not found' : 'Success', $route);
             }
-
-            if ($path === '/api/weather/current') {
-                if ($method !== 'GET') {
-                    return Response::json(405, 'Method Not Allowed', null);
-                }
-
-                return $this->getWeather();
+            if ($deleteSave) { return $this->deleteSavedRoute($headers, $saveMatch[1]); }
+            switch ($path) {
+                case '/api/users/signin': return $this->signIn($body);
+                case '/api/transit/routes':
+                    return Response::json(200, 'Success', $this->filter($this->records('routes.json'), $query, ['type'=>'route_type', 'status'=>'status']));
+                case '/api/transit/stops/nearby': return $this->nearby($query);
+                case '/api/weather/current': return Response::json(200, 'Success', $this->store->read('weather.json'));
+                case '/api/alerts': return $this->alerts($query);
+                case '/api/routes/save': return $this->saveRoute($headers, $body);
+                case '/api/routes/saved': return $this->savedRoutes($headers);
+                case '/api/resources/list': return Response::json(200, 'Success', $this->store->read('resources.json'));
+                case '/api/resource':
+                    $resource = $query['path'] ?? '';
+                    if (!is_string($resource) || !str_starts_with($resource, 'resources/')) {
+                        return Response::json(404, 'Resource not found', null);
+                    }
+                    return $this->serveResource(substr($resource, strlen('resources/')), 'Resource not found');
+                case '/api/privacy-policy': return $this->privacyPolicy();
             }
-
-            if ($path === '/api/alerts') {
-                if ($method !== 'GET') {
-                    return Response::json(405, 'Method Not Allowed', null);
-                }
-
-                return $this->getAlerts();
-            }
-
-            if ($path === '/api/routes/save') {
-                if ($method !== 'PUT') {
-                    return Response::json(405, 'Method Not Allowed', null);
-                }
-
-                return $this->saveRoute($headers, $body);
-            }
-
-            if ($path === '/api/routes/saved') {
-                if ($method !== 'GET') {
-                    return Response::json(405, 'Method Not Allowed', null);
-                }
-
-                return $this->getSavedRoutes($headers);
-            }
-
-            if ($path === '/api/privacy-policy') {
-                if ($method !== 'GET') {
-                    return Response::json(405, 'Method Not Allowed', null);
-                }
-
-                return $this->privacyPolicy();
-            }
-
-            if (str_starts_with($path, '/api/resources/')) {
-                if ($method !== 'GET') {
-                    return Response::json(405, 'Method Not Allowed', null);
-                }
-
-                return $this->serveResource(substr($path, strlen('/api/resources/')));
-            }
-
-            return Response::json(404, 'Not Found', null);
-        } catch (RuntimeException $error) {
+            return $this->serveResource(substr($path, strlen('/api/resources/')));
+        } catch (ApiException $error) {
+            return Response::json($error->status, $error->getMessage(), null);
+        } catch (Throwable $error) {
             return Response::json(500, 'Internal Server Error', null);
         }
     }
 
+    private function objectBody(string $body): array
+    {
+        try { $value = json_decode($body, false, 512, JSON_THROW_ON_ERROR); }
+        catch (JsonException $error) { throw new ApiException(400, 'Bad Request: invalid JSON body'); }
+        if (!$value instanceof stdClass) { throw new ApiException(400, 'Bad Request: JSON body must be an object'); }
+        return get_object_vars($value);
+    }
+
     private function signIn(string $body): Response
     {
-        try {
-            $decoded = json_decode($body, false, 512, JSON_THROW_ON_ERROR);
-        } catch (JsonException $error) {
-            return Response::json(400, 'Bad Request: invalid JSON body', null);
-        }
-
-        if (!$decoded instanceof stdClass) {
-            return Response::json(400, 'Bad Request: JSON body must be an object', null);
-        }
-
-        $input = get_object_vars($decoded);
+        $input = $this->objectBody($body);
         $email = $input['userEmailAddress'] ?? null;
         $password = $input['userPassword'] ?? null;
         if (!is_string($email) || !is_string($password)) {
-            return Response::json(400, 'Bad Request: userEmailAddress and userPassword are required strings', null);
+            throw new ApiException(400, 'Bad Request: userEmailAddress and userPassword are required strings');
         }
-
         $email = trim($email);
-        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            return Response::json(400, 'Bad Request: invalid email address', null);
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) { throw new ApiException(400, 'Bad Request: Invalid email format'); }
+        if (strlen($password) < 6 || !preg_match('/[A-Za-z]/', $password) || !preg_match('/[0-9]/', $password)) {
+            throw new ApiException(400, 'Bad Request: Password must be at least 6 characters and include letters and numbers');
         }
-
-        if (strlen($password) < 6 || preg_match('/[A-Za-z]/', $password) !== 1 || preg_match('/\d/', $password) !== 1) {
-            return Response::json(400, 'Bad Request: password must be at least 6 characters and contain letters and numbers', null);
+        try { $result = $this->auth->signIn($email, $password); }
+        catch (AuthException $error) {
+            throw new ApiException(401, 'Sign in failed: Incorrect password. Please check your credentials and try again.');
         }
-
-        try {
-            $result = $this->auth->signIn($email, $password);
-        } catch (AuthException $error) {
-            return Response::json(401, 'Unauthorized: invalid email or password', null);
-        }
-
-        return Response::json(
-            $result['created'] ? 201 : 200,
-            'Sign in successful',
-            ['auth_token' => $result['auth_token']],
-        );
+        return Response::json($result['created'] ? 201 : 200, $result['created'] ? 'Sign up successful' : 'Sign in successful', ['auth_token'=>$result['auth_token']]);
     }
 
-    private function getRoutes(): Response
+    private function records(string $file): array
     {
-        $storedRoutes = $this->store->read('routes.json');
-        if (!is_array($storedRoutes) || !self::isList($storedRoutes)) {
-            throw new RuntimeException('Route data is invalid.');
+        $records = $this->store->read($file);
+        if (!is_array($records)) { throw new RuntimeException('Invalid data'); }
+        foreach ($records as $index => $record) {
+            if (!is_int($index) || !is_array($record)) { throw new RuntimeException('Invalid data'); }
         }
-
-        $routes = [];
-        foreach ($storedRoutes as $route) {
-            if (!is_array($route)) {
-                throw new RuntimeException('Route data is invalid.');
-            }
-
-            foreach (['route_id', 'route_name', 'route_type', 'status'] as $field) {
-                if (!isset($route[$field]) || !is_string($route[$field])) {
-                    throw new RuntimeException('Route data is invalid.');
-                }
-            }
-
-            $departures = $route['next_departures'] ?? null;
-            $stops = $route['stops'] ?? null;
-            if (!is_array($departures) || !is_array($stops)) {
-                throw new RuntimeException('Route data is invalid.');
-            }
-
-            usort($stops, static function (mixed $left, mixed $right): int {
-                if (!is_array($left) || !is_array($right)) {
-                    throw new RuntimeException('Route stop data is invalid.');
-                }
-
-                return ($left['sequence'] ?? 0) <=> ($right['sequence'] ?? 0);
-            });
-
-            $stopNames = [];
-            foreach ($stops as $stop) {
-                if (!is_array($stop) || !isset($stop['stop_name']) || !is_string($stop['stop_name'])) {
-                    throw new RuntimeException('Route stop data is invalid.');
-                }
-                $stopNames[] = $stop['stop_name'];
-            }
-
-            $nextDeparture = $departures[0] ?? null;
-            if ($nextDeparture !== null && !is_string($nextDeparture)) {
-                throw new RuntimeException('Route departure data is invalid.');
-            }
-
-            $routes[] = [
-                'route_id' => $route['route_id'],
-                'route_name' => $route['route_name'],
-                'route_type' => $route['route_type'],
-                'status' => $route['status'],
-                'next_departure' => $nextDeparture,
-                'stops' => $stopNames,
-            ];
-        }
-
-        return Response::json(200, 'Success', $routes);
+        return array_values($records);
     }
 
-    private function getWeather(): Response
+    private function filter(array $records, array $query, array $fields): array
     {
-        $weather = $this->store->read('weather.json');
-        if (!is_array($weather)) {
-            throw new RuntimeException('Weather data is invalid.');
+        foreach ($fields as $parameter => $field) {
+            if (!isset($query[$parameter])) { continue; }
+            if (!is_string($query[$parameter])) { throw new ApiException(400, 'Bad Request: invalid ' . $parameter); }
+            $records = array_values(array_filter($records, static fn (array $record): bool => ($record[$field] ?? null) === $query[$parameter]));
         }
-
-        foreach (['city', 'condition'] as $field) {
-            if (!isset($weather[$field]) || !is_string($weather[$field])) {
-                throw new RuntimeException('Weather data is invalid.');
-            }
-        }
-
-        foreach (['temperature_c', 'humidity_pct', 'wind_kmh'] as $field) {
-            if (!isset($weather[$field]) || !is_int($weather[$field]) && !is_float($weather[$field])) {
-                throw new RuntimeException('Weather data is invalid.');
-            }
-        }
-
-        return Response::json(200, 'Success', [
-            'city' => $weather['city'],
-            'temperature_c' => $weather['temperature_c'],
-            'condition' => $weather['condition'],
-            'humidity_pct' => $weather['humidity_pct'],
-            'wind_kmh' => $weather['wind_kmh'],
-        ]);
+        return $records;
     }
 
-    private function getAlerts(): Response
+    private function findRoute(string $id): ?array
     {
-        $storedAlerts = $this->store->read('alerts.json');
-        if (!is_array($storedAlerts) || !self::isList($storedAlerts)) {
-            throw new RuntimeException('Alert data is invalid.');
+        foreach ($this->records('routes.json') as $route) {
+            if (($route['route_id'] ?? null) === $id) { return $route; }
         }
+        return null;
+    }
 
-        $severityRanks = ['high' => 3, 'medium' => 2, 'low' => 1];
-        usort($storedAlerts, static function (mixed $left, mixed $right) use ($severityRanks): int {
-            if (!is_array($left) || !is_array($right)) {
-                throw new RuntimeException('Alert data is invalid.');
-            }
-
-            $leftRank = $severityRanks[$left['severity'] ?? ''] ?? 0;
-            $rightRank = $severityRanks[$right['severity'] ?? ''] ?? 0;
-            if ($leftRank !== $rightRank) {
-                return $rightRank <=> $leftRank;
-            }
-
-            return strcmp((string) ($right['created_at'] ?? ''), (string) ($left['created_at'] ?? ''));
+    private function alerts(array $query): Response
+    {
+        $alerts = $this->filter($this->records('alerts.json'), $query, ['status'=>'status', 'severity'=>'severity']);
+        $rank = ['high'=>3, 'medium'=>2, 'low'=>1];
+        usort($alerts, static function (array $a, array $b) use ($rank): int {
+            return (($rank[$b['severity']] ?? 0) <=> ($rank[$a['severity']] ?? 0)) ?: strcmp($b['created_at'], $a['created_at']);
         });
-
-        $alerts = [];
-        foreach ($storedAlerts as $alert) {
-            if (!is_array($alert)) {
-                throw new RuntimeException('Alert data is invalid.');
-            }
-
-            foreach (['alert_id', 'title', 'status', 'severity', 'description', 'created_at'] as $field) {
-                if (!isset($alert[$field]) || !is_string($alert[$field])) {
-                    throw new RuntimeException('Alert data is invalid.');
-                }
-            }
-            if (!isset($alert['affected_routes']) || !is_array($alert['affected_routes'])) {
-                throw new RuntimeException('Alert data is invalid.');
-            }
-            foreach ($alert['affected_routes'] as $affectedRoute) {
-                if (!is_string($affectedRoute)) {
-                    throw new RuntimeException('Alert data is invalid.');
-                }
-            }
-
-            $alerts[] = [
-                'alert_id' => $alert['alert_id'],
-                'title' => $alert['title'],
-                'affected_routes' => array_values($alert['affected_routes']),
-                'status' => $alert['status'],
-                'severity' => $alert['severity'],
-                'description' => $alert['description'],
-                'created_at' => $alert['created_at'],
-            ];
-        }
-
         return Response::json(200, 'Success', $alerts);
     }
 
-    /** @param array<string, string> $headers */
-    private function saveRoute(array $headers, string $body): Response
+    private function nearby(array $query): Response
     {
-        $user = $this->authenticatedUser($headers);
-        if ($user === null) {
-            return Response::json(401, 'Unauthorized: missing or invalid auth_token', null);
-        }
-
-        try {
-            $decoded = json_decode($body, false, 512, JSON_THROW_ON_ERROR);
-        } catch (JsonException $error) {
-            return Response::json(400, 'Bad Request: invalid JSON body', null);
-        }
-
-        if (!$decoded instanceof stdClass) {
-            return Response::json(400, 'Bad Request: JSON body must be an object', null);
-        }
-
-        $input = get_object_vars($decoded);
-        $routeId = $input['route_id'] ?? null;
-        if (!is_string($routeId) || trim($routeId) === '') {
-            return Response::json(400, 'Bad Request: route_id is required', null);
-        }
-        $routeId = trim($routeId);
-
-        $routes = $this->store->read('routes.json');
-        if (!is_array($routes) || !self::isList($routes)) {
-            throw new RuntimeException('Route data is invalid.');
-        }
-
-        $routeExists = false;
-        foreach ($routes as $route) {
-            if (is_array($route) && ($route['route_id'] ?? null) === $routeId) {
-                $routeExists = true;
-                break;
+        foreach (['lat'=>90, 'lng'=>180] as $key => $bound) {
+            if (!isset($query[$key])) { throw new ApiException(400, 'Bad Request: lat and lng query parameters are required'); }
+            if (!is_string($query[$key]) || !is_numeric($query[$key]) || !is_finite((float) $query[$key]) || abs((float) $query[$key]) > $bound) {
+                throw new ApiException(400, 'Bad Request: invalid ' . $key);
             }
         }
-        if (!$routeExists) {
-            return Response::json(404, 'Not Found: route does not exist', null);
-        }
-
-        $userId = $user['user_id'] ?? null;
-        if (!is_string($userId) || $userId === '') {
-            throw new RuntimeException('User data is invalid.');
-        }
-        $savedAt = date('Y-m-d H:i:s');
-
-        try {
-            $this->store->update('saved_routes.json', static function (mixed $savedRoutes) use ($userId, $routeId, $savedAt): array {
-                if (!is_array($savedRoutes) || !self::isList($savedRoutes)) {
-                    throw new RuntimeException('Saved route data is invalid.');
-                }
-
-                foreach ($savedRoutes as $savedRoute) {
-                    if (
-                        is_array($savedRoute)
-                        && ($savedRoute['user_id'] ?? null) === $userId
-                        && ($savedRoute['route_id'] ?? null) === $routeId
-                    ) {
-                        throw new DuplicateSavedRouteException('Route is already saved.');
-                    }
-                }
-
-                $savedRoutes[] = [
-                    'user_id' => $userId,
-                    'route_id' => $routeId,
-                    'saved_at' => $savedAt,
+        $limit = $query['limit'] ?? '3';
+        if (!is_string($limit) || !ctype_digit($limit) || (int) $limit < 1) { throw new ApiException(400, 'Bad Request: limit must be a positive integer'); }
+        $lat = deg2rad((float) $query['lat']);
+        $lng = deg2rad((float) $query['lng']);
+        $stops = [];
+        foreach ($this->records('routes.json') as $route) {
+            foreach ($route['stops'] as $stop) {
+                $id = $stop['stop_id'];
+                if (isset($stops[$id])) { continue; }
+                $stopLat = deg2rad((float) $stop['latitude']);
+                $stopLng = deg2rad((float) $stop['longitude']);
+                $a = sin(($stopLat - $lat) / 2) ** 2 + cos($lat) * cos($stopLat) * sin(($stopLng - $lng) / 2) ** 2;
+                $distance = 6371000 * 2 * asin(sqrt(max(0.0, min(1.0, $a))));
+                $stops[$id] = $stop + [
+                    'distance_m'=>(int) round($distance), 'route_id'=>$route['route_id'],
+                    'route_number'=>$route['route_number'], 'route_type'=>$route['route_type'],
+                    'next_arrival'=>$stop['arrival_time'],
                 ];
-
-                return $savedRoutes;
-            });
-        } catch (DuplicateSavedRouteException $error) {
-            return Response::json(409, 'Conflict: route is already saved', null);
+            }
         }
-
-        return Response::json(200, 'Success', [
-            'route_id' => $routeId,
-            'saved_at' => $savedAt,
-        ]);
+        $stops = array_values($stops);
+        usort($stops, static fn (array $a, array $b): int => ($a['distance_m'] <=> $b['distance_m']) ?: strcmp($a['stop_id'], $b['stop_id']));
+        return Response::json(200, 'Success', array_slice($stops, 0, (int) $limit));
     }
 
-    /** @param array<string, string> $headers */
-    private function getSavedRoutes(array $headers): Response
+    private function user(array $headers): array
     {
-        $user = $this->authenticatedUser($headers);
-        if ($user === null) {
-            return Response::json(401, 'Unauthorized: missing or invalid auth_token', null);
-        }
+        if (!isset($headers['auth_token']) || $headers['auth_token'] === '') { throw new ApiException(401, 'Unauthorised: auth_token header missing'); }
+        $token = $headers['auth_token'];
+        $user = is_string($token) ? $this->auth->userForToken(trim($token)) : null;
+        if ($user === null) { throw new ApiException(401, 'Unauthorised: invalid auth_token'); }
+        return $user;
+    }
 
-        $userId = $user['user_id'] ?? null;
-        if (!is_string($userId) || $userId === '') {
-            throw new RuntimeException('User data is invalid.');
-        }
+    // Fill only absent fields; existing snapshots and notes keep their source values.
+    private function savedRecord(array $saved, array $route): array
+    {
+        $stops = $route['stops'] ?? [];
+        usort($stops, static fn (array $a, array $b): int => $a['sequence'] <=> $b['sequence']);
+        return $saved + [
+            'save_id'=>'SAV-LEGACY-' . substr(hash('sha256', $saved['user_id'] . '|' . $saved['route_id'] . '|' . $saved['saved_at']), 0, 16),
+            'route_number'=>$route['route_number'] ?? '', 'route_name'=>$route['route_name'] ?? '',
+            'route_type'=>$route['route_type'] ?? '', 'origin_stop'=>$stops[0]['stop_name'] ?? '',
+            'destination_stop'=>count($stops) ? $stops[count($stops)-1]['stop_name'] : '', 'note'=>'',
+        ];
+    }
 
-        $routes = $this->store->read('routes.json');
-        $storedSavedRoutes = $this->store->read('saved_routes.json');
-        if (!is_array($routes) || !self::isList($routes) || !is_array($storedSavedRoutes) || !self::isList($storedSavedRoutes)) {
-            throw new RuntimeException('Saved route data is invalid.');
-        }
-
-        $routeNames = [];
-        foreach ($routes as $route) {
-            if (
-                !is_array($route)
-                || !isset($route['route_id'], $route['route_name'])
-                || !is_string($route['route_id'])
-                || !is_string($route['route_name'])
-            ) {
-                throw new RuntimeException('Route data is invalid.');
+    private function saveRoute(array $headers, string $body): Response
+    {
+        $user = $this->user($headers);
+        $input = $this->objectBody($body);
+        $id = $input['route_id'] ?? null;
+        if (!is_string($id) || trim($id) === '') { throw new ApiException(400, 'Bad Request: route_id is required'); }
+        $route = $this->findRoute(trim($id));
+        if ($route === null) { throw new ApiException(404, 'Route not found'); }
+        $response = null;
+        $this->store->update('saved_routes.json', function (array $records) use ($user, $route, &$response): array {
+            foreach ($records as $record) {
+                if ($record['user_id'] === $user['user_id'] && $record['route_id'] === $route['route_id']) {
+                    $record = $this->savedRecord($record, $route);
+                    $response = Response::json(409, 'Route already saved', ['save_id'=>$record['save_id'], 'saved_at'=>$record['saved_at']]);
+                    return $records;
+                }
             }
-            $routeNames[$route['route_id']] = $route['route_name'];
-        }
+            do { $saveId = 'SAV-' . strtoupper(bin2hex(random_bytes(8))); }
+            while (in_array($saveId, array_column($records, 'save_id'), true));
+            $record = $this->savedRecord(['save_id'=>$saveId, 'user_id'=>$user['user_id'], 'route_id'=>$route['route_id'], 'saved_at'=>date('Y-m-d H:i:s')], $route);
+            $records[] = $record;
+            $response = Response::json(200, 'Success', ['save_id'=>$saveId, 'route_id'=>$record['route_id'], 'saved_at'=>$record['saved_at']]);
+            return $records;
+        });
+        return $response;
+    }
 
+    private function savedRoutes(array $headers): Response
+    {
+        $user = $this->user($headers);
+        $routes = array_column($this->records('routes.json'), null, 'route_id');
         $mine = [];
-        foreach ($storedSavedRoutes as $savedRoute) {
-            if (!is_array($savedRoute) || ($savedRoute['user_id'] ?? null) !== $userId) {
-                continue;
-            }
-
-            $routeId = $savedRoute['route_id'] ?? null;
-            $savedAt = $savedRoute['saved_at'] ?? null;
-            if (!is_string($routeId) || !is_string($savedAt) || !isset($routeNames[$routeId])) {
-                throw new RuntimeException('Saved route data is invalid.');
-            }
-
-            $mine[] = [
-                'route_id' => $routeId,
-                'route_name' => $routeNames[$routeId],
-                'saved_at' => $savedAt,
-            ];
+        foreach ($this->records('saved_routes.json') as $saved) {
+            if ($saved['user_id'] === $user['user_id']) { $mine[] = $this->savedRecord($saved, $routes[$saved['route_id']] ?? []); }
         }
-
-        usort($mine, static fn (array $left, array $right): int => strcmp($right['saved_at'], $left['saved_at']));
-
+        usort($mine, static fn (array $a, array $b): int => strcmp($b['saved_at'], $a['saved_at']));
         return Response::json(200, 'Success', $mine);
     }
 
-    /** @param array<string, string> $headers
-     *  @return array<string, mixed>|null
-     */
-    private function authenticatedUser(array $headers): ?array
+    private function deleteSavedRoute(array $headers, string $id): Response
     {
-        return $this->auth->userForToken($headers['auth_token'] ?? null);
-    }
-
-    /** @param array<string, mixed> $headers
-     *  @return array<string, string>
-     */
-    private function normalizeHeaders(array $headers): array
-    {
-        $normalized = [];
-        foreach ($headers as $name => $value) {
-            if (is_string($name) && (is_string($value) || is_numeric($value))) {
-                $normalized[strtolower($name)] = trim((string) $value);
+        $user = $this->user($headers);
+        $found = false;
+        $this->store->update('saved_routes.json', function (array $records) use ($user, $id, &$found): array {
+            foreach ($records as $index => $record) {
+                if ($record['user_id'] === $user['user_id'] && $this->savedRecord($record, [])['save_id'] === $id) {
+                    unset($records[$index]);
+                    $found = true;
+                    break;
+                }
             }
-        }
-
-        return $normalized;
-    }
-
-    private static function isList(array $values): bool
-    {
-        $expectedKey = 0;
-        foreach ($values as $key => $value) {
-            if ($key !== $expectedKey) {
-                return false;
-            }
-            ++$expectedKey;
-        }
-
-        return true;
+            return array_values($records);
+        });
+        return $found ? Response::json(200, 'Deleted successfully', ['save_id'=>$id]) : Response::json(404, 'Saved route not found', null);
     }
 
     private function privacyPolicy(): Response
     {
         $html = <<<'HTML'
 <!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Privacy Policy</title>
-</head>
-<body>
-    <main>
-        <h1>Privacy Policy</h1>
-        <p>MyCity Transit uses your sign-in information only to identify your account and keep your saved routes.</p>
-        <p>Transit, weather, and service alert information is provided for travel planning. This local practice server does not sell personal information.</p>
-        <p>You may stop using the service at any time. Keep your authentication token private.</p>
-        <button id="closeBtn" type="button" onclick="window.close()">Close</button>
-    </main>
-</body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Privacy Policy</title></head>
+<body><main><h1>Privacy Policy</h1>
+<p>MyCity Transit uses your sign-in information to identify your account and keep your saved routes.</p>
+<p>Transit, weather, and service alert information is provided for travel planning. This local practice server does not sell personal information.</p>
+<p>You may stop using the service at any time. Keep your authentication token private.</p>
+<button id="closeBtn" type="button" style="background:#c62828;color:white;padding:12px 20px;border:0" onclick="window.close()">Close ✕</button>
+</main></body></html>
 HTML;
-
-        return new Response(200, $html, ['Content-Type' => 'text/html; charset=utf-8']);
+        return new Response(200, $html, ['Content-Type'=>'text/html; charset=utf-8']);
     }
 
-    private function serveResource(string $relativePath): Response
+    private function serveResource(string $relativePath, string $missingMessage = 'Not Found'): Response
     {
-        if (
-            $relativePath === ''
-            || str_contains($relativePath, "\0")
-            || str_contains($relativePath, '\\')
-            || str_starts_with($relativePath, '/')
-            || preg_match('/^[A-Za-z]:/', $relativePath) === 1
-        ) {
-            return Response::json(404, 'Not Found', null);
+        if ($relativePath === '' || str_contains($relativePath, "\0") || str_contains($relativePath, '\\') || str_contains($relativePath, ':') || str_starts_with($relativePath, '/')) {
+            return Response::json(404, $missingMessage, null);
         }
-
-        $segments = explode('/', $relativePath);
-        foreach ($segments as $segment) {
-            if ($segment === '' || $segment === '.' || $segment === '..') {
-                return Response::json(404, 'Not Found', null);
-            }
+        foreach (explode('/', $relativePath) as $segment) {
+            if ($segment === '' || $segment === '.' || $segment === '..') { return Response::json(404, $missingMessage, null); }
         }
-
         $root = realpath($this->resourceDirectory);
-        if ($root === false) {
-            throw new RuntimeException('Resource directory is unavailable.');
-        }
-
-        $candidate = $root . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $segments);
-        $file = realpath($candidate);
-        if ($file === false || !is_file($file)) {
-            return Response::json(404, 'Not Found', null);
-        }
-
-        $rootPrefix = rtrim($root, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-        if (strncasecmp($file, $rootPrefix, strlen($rootPrefix)) !== 0) {
-            return Response::json(404, 'Not Found', null);
-        }
-
-        $contents = file_get_contents($file);
-        if ($contents === false) {
-            throw new RuntimeException('Unable to read resource file.');
-        }
-
-        $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-        $mimeTypes = [
-            'png' => 'image/png',
-            'jpg' => 'image/jpeg',
-            'jpeg' => 'image/jpeg',
-            'gif' => 'image/gif',
-            'svg' => 'image/svg+xml',
-            'json' => 'application/json',
-            'mp3' => 'audio/mpeg',
-            'webp' => 'image/webp',
-            'txt' => 'text/plain; charset=utf-8',
-        ];
-
-        return new Response(200, $contents, ['Content-Type' => $mimeTypes[$extension] ?? 'application/octet-stream']);
+        $file = $root === false ? false : realpath($root . DIRECTORY_SEPARATOR . $relativePath);
+        $prefix = $root . DIRECTORY_SEPARATOR;
+        $inside = $file !== false && (DIRECTORY_SEPARATOR === '\\' ? strncasecmp($file, $prefix, strlen($prefix)) === 0 : str_starts_with($file, $prefix));
+        if (!$inside || !is_file($file)) { return Response::json(404, $missingMessage, null); }
+        $body = @file_get_contents($file);
+        if ($body === false) { throw new RuntimeException('Unable to read resource'); }
+        $types = ['png'=>'image/png','jpg'=>'image/jpeg','jpeg'=>'image/jpeg','gif'=>'image/gif','svg'=>'image/svg+xml','json'=>'application/json','mp3'=>'audio/mpeg','webp'=>'image/webp','txt'=>'text/plain; charset=utf-8'];
+        return new Response(200, $body, ['Content-Type'=>$types[strtolower(pathinfo($file, PATHINFO_EXTENSION))] ?? 'application/octet-stream']);
     }
 }

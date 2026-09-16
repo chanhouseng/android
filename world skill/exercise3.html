@@ -1,56 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-Hant" data-site-root="../">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>exercise3｜World Skill 練習</title>
+  <link rel="stylesheet" href="../assets/css/foundation.css">
+  <link rel="stylesheet" href="../assets/css/app-shell.css">
+  <link rel="stylesheet" href="../assets/css/accordion.css">
+  <link rel="stylesheet" href="../assets/css/detail-page.css">
 </head>
 <body>
-    <button class="accordion">AlphaAnimation</button>
-    <div class="panel">
-        <pre>
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="../index.html" aria-label="返回首頁"><span class="brand-mark" aria-hidden="true">AL</span><span class="brand-copy"><strong>Android Learning</strong><span>WORKSPACE</span></span></a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+  <main class="app-main" id="main-content" tabindex="-1">
+    <div class="container detail-page">
+      <nav aria-label="Breadcrumb">
+        <ol class="detail-breadcrumb">
+          <li><a href="../index.html">首頁</a></li>
+          <li><a href="index.html">World Skill 練習</a></li>
+          <li><span aria-current="page">exercise3</span></li>
+        </ol>
+      </nav>
+      <header class="detail-header">
+        <a class="button button--ghost detail-header__back" href="index.html">返回 World Skill 練習</a>
+        <p class="detail-eyebrow">WORLD SKILL · DETAIL</p>
+        <h1>exercise3</h1>
+      </header>
+      <div class="detail-content" data-accordion-root data-original-content>
+    <article class="accordion-item card" data-accordion-item data-title="AlphaAnimation">
+          <h2><button class="accordion-trigger" id="exercise3-trigger-1" type="button" aria-expanded="true" aria-controls="exercise3-panel-1" data-accordion-trigger>AlphaAnimation</button></h2>
+          <div class="accordion-panel" id="exercise3-panel-1" role="region" aria-labelledby="exercise3-trigger-1" data-accordion-panel>
+        <pre class="code-block"><code>
 val anim1 = AlphaAnimation(0f, 1f)
 anim1.duration = 2000
 anim1.repeatCount = Animation.INFINITE
 findViewById&lt;TextView&gt;(R.id.textView).startAnimation(anim1)
 
-        </pre>
+        </code></pre>
     </div>
-    <button class="accordion">RotateAnimation 旋轉</button>
-    <div class="panel">
-        <pre>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="RotateAnimation 旋轉">
+          <h2><button class="accordion-trigger" id="exercise3-trigger-2" type="button" aria-expanded="true" aria-controls="exercise3-panel-2" data-accordion-trigger>RotateAnimation 旋轉</button></h2>
+          <div class="accordion-panel" id="exercise3-panel-2" role="region" aria-labelledby="exercise3-trigger-2" data-accordion-panel>
+        <pre class="code-block"><code>
 val anim2 = RotateAnimation(0f, 720f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
 anim2.duration = 1000
 anim2.fillAfter = true
 findViewById&lt;TextView&gt;(R.id.textView1).startAnimation(anim2)
 
-        </pre>
+        </code></pre>
     </div>
-    <button class="accordion">TranslateAnimation 移動</button>
-    <div class="panel">
-        <pre>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="TranslateAnimation 移動">
+          <h2><button class="accordion-trigger" id="exercise3-trigger-3" type="button" aria-expanded="true" aria-controls="exercise3-panel-3" data-accordion-trigger>TranslateAnimation 移動</button></h2>
+          <div class="accordion-panel" id="exercise3-panel-3" role="region" aria-labelledby="exercise3-trigger-3" data-accordion-panel>
+        <pre class="code-block"><code>
 val anim3 = TranslateAnimation(0f, 100f, 0f, 0f)
 anim3.duration = 3000
 anim3.fillAfter = true
 findViewById&lt;TextView&gt;(R.id.textView2).startAnimation(anim3)
 
-        </pre>
+        </code></pre>
     </div>
-    <button class="accordion">ScaleAnimation 放大</button>
-    <div class="panel">
-        <pre>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="ScaleAnimation 放大">
+          <h2><button class="accordion-trigger" id="exercise3-trigger-4" type="button" aria-expanded="true" aria-controls="exercise3-panel-4" data-accordion-trigger>ScaleAnimation 放大</button></h2>
+          <div class="accordion-panel" id="exercise3-panel-4" role="region" aria-labelledby="exercise3-trigger-4" data-accordion-panel>
+        <pre class="code-block"><code>
 val anim4 = ScaleAnimation(0f, 3f, 0f, 2f, Animation.RELATIVE_TO_SELF, 1f, Animation.RELATIVE_TO_SELF, 0f)
 anim4.duration = 4000
 anim4.fillAfter = true
 findViewById&lt;TextView&gt;(R.id.textView3).startAnimation(anim4)
 
-        </pre>
+        </code></pre>
     </div>
-    <button class="accordion">AnimationSet 向上漸現</button>
-    <div class="panel">
-        <pre>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="AnimationSet 向上漸現">
+          <h2><button class="accordion-trigger" id="exercise3-trigger-5" type="button" aria-expanded="true" aria-controls="exercise3-panel-5" data-accordion-trigger>AnimationSet 向上漸現</button></h2>
+          <div class="accordion-panel" id="exercise3-panel-5" role="region" aria-labelledby="exercise3-trigger-5" data-accordion-panel>
+        <pre class="code-block"><code>
 val animSet = AnimationSet(true)
 animSet.addAnimation(AlphaAnimation(0f, 1f))
 animSet.addAnimation(TranslateAnimation(0f, 0f, 100f, 0f))
@@ -58,8 +90,19 @@ animSet.duration = 3000
 animSet.fillAfter = true
 findViewById&lt;TextView&gt;(R.id.textView4).startAnimation(animSet)
 
-        </pre>
+        </code></pre>
     </div>
-<script src="js.js"></script>
+        </article>
+
+
+      </div>
+      <footer class="detail-footer">
+        <a class="button button--secondary" href="index.html">返回 World Skill 練習</a>
+      </footer>
+    </div>
+  </main>
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+  <script src="../assets/js/site-navigation.js" defer></script>
+  <script src="../assets/js/accordion.js" defer></script>
 </body>
 </html>

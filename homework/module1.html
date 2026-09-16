@@ -8,89 +8,76 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button class="accordion">code</button>
+    <button class="accordion">h2Fragment.kt (按心隱藏升起)</button>
     <div class="panel">
         <pre>
 
+<span>//簡單嚟講.xml的結構就係一層frameLayout包LinearLayout, constraintLayout。LinearLayout係內容，constraintLayout係第二個心心</span>
+
+layout.findViewById&lt;ImageView&gt;(R.id.heart2).setOnClickListener {
+    if(canLike){
+        result.like ++
+        layout.findViewById&lt;ImageView&gt;(R.id.heart1).visibility = View.VISIBLE
+        layout.findViewById&lt;ImageView&gt;(R.id.heart1).startAnimation(createtranslate())
+        layout.findViewById&lt;TextView&gt;(R.id.textView15).text = result.like.toString()
+        save()
+    }
+}
+
+
+fun createtranslate(): Animation{
+    val transformation = TranslateAnimation(0f, 0f, 0f, -170f)
+    val alphaAnimation = AlphaAnimation(1f, 0f)
+    val animationSet = AnimationSet(true)
+    animationSet.addAnimation(transformation)
+    animationSet.addAnimation(alphaAnimation)
+    animationSet.duration = 1700
+    animationSet.fillAfter = false      <span>//fillAfter = false 代表動畫結束後，view會回到原本位置</span>
+    animationSet.setAnimationListener(object : Animation.AnimationListener{
+        override fun onAnimationEnd(animation: Animation?) {
+            canLike = true
+        }
+
+        override fun onAnimationRepeat(animation: Animation?) {
+
+        }
+
+        override fun onAnimationStart(animation: Animation?) {
+            canLike = false
+        }
+
+    })
+}
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">h2Fragment.kt (按讚)</button>
     <div class="panel">
         <pre>
+imageView10.setOnClickListener {
+    result.heart = !result.heart
+    if(result.heart){
+        imageView10.setImageResource(R.drawable.good1)
+        imageView10.startAnimation(createAnimation())
+    }
+    else{
+        imageView10.setImageResource(R.drawable.good2)
+        imageView10.startAnimation(createAnimation())
+    }
+    save()
+}
 
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
 
-        </pre>
-    </div>
-
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
+fun createAnimation(): Animation{
+    val scaleAnimation = ScaleAnimation(1f, 1.1f, 1f, 1.1f, Animation.RELATIVE_TO_SELF, .5f,
+        Animation.RELATIVE_TO_SELF, .5f)
+    val rotateAnimation = RotateAnimation(0f, -20f, Animation.RELATIVE_TO_SELF, .5f, Animation.RELATIVE_TO_SELF, .5f)
+    val animationSet = AnimationSet(true)
+    animationSet.addAnimation(scaleAnimation)
+    animationSet.addAnimation(rotateAnimation)
+    animationSet.duration = 800
+    animationSet.fillAfter = false
+    return animationSet
+}
         </pre>
     </div>
 <script src="js.js"></script>

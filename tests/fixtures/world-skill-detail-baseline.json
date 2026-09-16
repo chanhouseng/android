@@ -1,0 +1,786 @@
+{
+  "schemaVersion": 1,
+  "description": "Pre-migration content baseline for the 29 World Skill detail pages rolled out after the six pilot pages.",
+  "files": {
+    "class1_4.html": {
+      "pageName": "class1_4",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "93113507a775134303298c3f278feb18c341d54fb2cbe9ee875b4f7cd3b2c107"
+      ],
+      "descriptions": [],
+      "marks": [
+        "val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, region)",
+        "spinner2.adapter = adapter",
+        "spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{"
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class1_5.html": {
+      "pageName": "class1_5",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "caa6579fed1166254cb19a6f5151862a4b42d26f625e68f0223fa44082ba6739"
+      ],
+      "descriptions": [
+        "可以再改好啲 用Array包住a,d,f"
+      ],
+      "marks": [],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class2_again.html": {
+      "pageName": "class2_again",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "562b1ef6efd08881a01854e32df1451269432dfac5b10ada51a29dbaeadd271c"
+      ],
+      "descriptions": [],
+      "marks": [
+        "攞id去搵返passowrdsList的id == id 的項，再去修改",
+        "將password InputType 改變(不可見 -> 可見)",
+        "bottomNavigationView 顏色問題",
+        "app:itemIconTint=\"@drawable/bottom_color\"",
+        "app:itemTextColor=\"@drawable/bottom_color\"",
+        "style=\"@style/CustomBottomNavigationView\"",
+        "在themes.xml中設置選中背景樣式",
+        "&lt;item name=\"itemActiveIndicatorStyle\"&gt;@null&lt;/item&gt;",
+        "開drawable設置判斷擊中的顏色"
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class3_1.html": {
+      "pageName": "class3_1",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "9b28c453dcd986d636bdbfbe91e9d8ee67827be5db8dfdd9f4478065257cbfed"
+      ],
+      "descriptions": [],
+      "marks": [
+        "spinner監察獲得所選項目的文字",
+        "val textView:String = parent?.findViewById&lt;TextView&gt;(R.id.name)?.text.toString()",
+        "進度條",
+        "增加進度條",
+        "findViewById&lt;ProgressBar&gt;(R.id.progressBar).progress = progress"
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class3_2.html": {
+      "pageName": "class3_2",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "6460e444a5efb660e07aa817f2496594e5c965ffc6a13e4e8cc5622650ea9a46"
+      ],
+      "descriptions": [],
+      "marks": [
+        "linearLayout.addView(textView, 0)",
+        "scrollView.fullScroll(View.FOCUS_UP)",
+        "scrollView.fullScroll(View.FOCUS_DOWN)"
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class3_4.html": {
+      "pageName": "class3_4",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "5a5bb1fc8f9bccc931d34144fc22edf007df0901f14be0cac953cd75656242a0"
+      ],
+      "descriptions": [],
+      "marks": [
+        "val prefsSet = prefs.getStringSet(\"foodClick\", emptySet&lt;String&gt;()) ?: emptySet()",
+        "editor.putStringSet(\"foodClick\", clickSet)"
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class3_5.html": {
+      "pageName": "class3_5",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "fcbbb657d6fb0a2ea2154bab4ad9ff5a99e07c5c48db0cb53026060bd07c387a"
+      ],
+      "descriptions": [],
+      "marks": [
+        "override fun onResume() {"
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class4_1.html": {
+      "pageName": "class4_1",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "484e4c23ca7b751a9059b7e9a3b8dc9d846b6d0b1ac2daccf0d59b843139f794"
+      ],
+      "descriptions": [],
+      "marks": [],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class4_2.html": {
+      "pageName": "class4_2",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "604cc63897f407e0fcb3afc7f3e65dad99523bc02eadc6541d82bf696850377f"
+      ],
+      "descriptions": [],
+      "marks": [
+        "val requestBody = FormBody.Builder() .add(\"username\", username.text.toString()) .add(\"pw\", password.text.toString()) .build()",
+        ".post(requestBody)",
+        ".addHeader(\"Authorization\", \"Bearer ${token}\")",
+        ".addHeader(\"Authorization\", \"Bearer ${token}\")",
+        "getId()",
+        "val mediaType = \"application/json; charset=utf-8\".toMediaType()",
+        ".post(jsonString.toRequestBody(mediaType))",
+        "goLike(is_like)"
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class5_1.html": {
+      "pageName": "class5_1",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "70369d02a8d342100d45c183ee638c57e6ce262c80a13146e0bf5a21a4198660"
+      ],
+      "descriptions": [],
+      "marks": [
+        "AndroidManifest.xml",
+        "android:screenOrientation=\"portrait\"",
+        "AndroidManifest.xml",
+        "@SerializedName(\"job activity\") var jobactivity:String,"
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class5_3.html": {
+      "pageName": "class5_3",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "8fc288fe938feec62d97b003ae10fd0d2f642e8979e7d3eb91b24be5aee53140"
+      ],
+      "descriptions": [],
+      "marks": [
+        "switch.setOnCheckedChangeListener { _, isChecked -&gt;",
+        "seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{",
+        "val bottomSheetDialog = BottomSheetDialog(this)",
+        "bottomSheetDialog.setContentView(dialogLayout)",
+        "val popupMenu = PopupMenu(this, it)",
+        "popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)",
+        "popupMenu.setOnMenuItemClickListener {"
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class5_4.html": {
+      "pageName": "class5_4",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "02fbd2f2a686bf238335e4be1359f714e46b79c3e9d12e2753a675f632707ce5"
+      ],
+      "descriptions": [],
+      "marks": [
+        "if(lan.setList.containsAll(checkChip)){"
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class5_5.html": {
+      "pageName": "class5_5",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "8bfb6650593d0014cfd2b7994f775b4ab3f624862c1e2bf9539d6d212d5f2108"
+      ],
+      "descriptions": [],
+      "marks": [
+        "val prefsList = Gson().fromJson(prefs.getString(\"dataJson\", Gson().toJson(defaultList).toString()), Array&lt;chipClass&gt;::class.java)",
+        "chipList.remove(chipNew)"
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class6_1.html": {
+      "pageName": "class6_1",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "a2e06c78927b912b4fe10b243266a4b8f1cb14cf32717ee392f0db40503a99ad"
+      ],
+      "descriptions": [],
+      "marks": [
+        "val numberPicker: NumberPicker = findViewById(R.id.numberPicker)",
+        "numberPicker2.displayedValues = arrayOf(\"AM\", \"PM\")",
+        "webView.settings.javaScriptEnabled = true",
+        "webView.loadUrl(\"https://www.library.gov.mo/zh-hant/\")",
+        "valueAnnotation.addUpdateListener {",
+        "要先放音樂檔 res-> new -> folder -> raw resources folder 建立完就拉啲檔入去",
+        "val mediaButton : MediaPlayer = MediaPlayer.create(this, R.raw.coin)",
+        "linear.setOnTouchListener { _, event -&gt;",
+        "val uri = Uri.parse(\"android.resource://$packageName/${R.raw.home}\")",
+        "要先放字型檔 res-> new -> folder -> font folder 建立完就拉啲檔入去",
+        "android:fontFamily=\"@font/playfair_display_regular\""
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class6_2.html": {
+      "pageName": "class6_2",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "71da5f5c11851e55c654b332023f76eda0c7a6281d99e212b0bf2dd46733b2f4"
+      ],
+      "descriptions": [],
+      "marks": [],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class7_1.html": {
+      "pageName": "class7_1",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "cc6f0ce9dc5f4086dfceeecc3d62edd5b9cc637baf2a9cb3db028fb878df8450"
+      ],
+      "descriptions": [],
+      "marks": [
+        "imageMatrix.postScale(scale, scale, detector.focusX, detector.focusY)",
+        "scaleImageView.imageMatrix = imageMatrix",
+        "imageMatrix.postTranslate(-distanceX, -distanceY)",
+        "DragEvent.ACTION_DROP -&gt;",
+        "imgView2.setOnLongClickListener就係移動圖片 但拉入去要增加多一張 所以就有setOnDragListener"
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class8_1.html": {
+      "pageName": "class8_1",
+      "accordionTitles": [
+        "ProButton class",
+        "Table Class",
+        "MainActivity.kt"
+      ],
+      "retainedAccordionTitles": [
+        "ProButton class",
+        "Table Class",
+        "MainActivity.kt"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 3,
+      "nonEmptyPreCount": 3,
+      "preSha256": [
+        "f61df8518122d20cbfeb883e20dfb54c802634a27e5f22e00ca53f33e69985be",
+        "b76cf563b424b2257fde96ca53ed8706a5a7fb51e3717a7eb6c35d912cc65609",
+        "e925e911de6839de6eba9a770a1b8504b99f06fb41782ee6931d161193e1c8a6"
+      ],
+      "descriptions": [],
+      "marks": [],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class8_2.html": {
+      "pageName": "class8_2",
+      "accordionTitles": [
+        "Table Class",
+        "MainActivity.kt"
+      ],
+      "retainedAccordionTitles": [
+        "Table Class",
+        "MainActivity.kt"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 2,
+      "nonEmptyPreCount": 2,
+      "preSha256": [
+        "126f1e21cc88e5374ca21b27f021c000ed16fa6834187a03f6fde7eb44fb09fe",
+        "33da6afd7e1bbf1a688063e5373fd990c8e86ff065b553bf4be230e45f89daff"
+      ],
+      "descriptions": [],
+      "marks": [],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "class9_1.html": {
+      "pageName": "class9_1",
+      "accordionTitles": [
+        "選取文字內容",
+        "拍照片",
+        "選圖片",
+        "畫畫"
+      ],
+      "retainedAccordionTitles": [
+        "選取文字內容",
+        "拍照片",
+        "選圖片",
+        "畫畫"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 4,
+      "nonEmptyPreCount": 4,
+      "preSha256": [
+        "67d50ec5550b55a7ea5ad17e64c93cd160f680363d89c68523ad30dc5b4ea8ec",
+        "d59675d1ab0091e8e2db8f76df4bf938e73f5b2d4911260d53799848690371c1",
+        "8eaa8e18f8f430e1adf1606bcb84f46c210055a5d8291066e249b716ace487c4",
+        "8ab243c22d3134abf53c433daf8993f558d91b02e6042f80076f2c18697bfd18"
+      ],
+      "descriptions": [],
+      "marks": [],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "example.html": {
+      "pageName": "example",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [],
+      "blankAccordionPositions": [
+        1
+      ],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 0,
+      "preSha256": [],
+      "descriptions": [],
+      "marks": [],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "exercise1.html": {
+      "pageName": "exercise1",
+      "accordionTitles": [
+        "Date, Time Picker",
+        "list 定義spinner內容",
+        "countDownTimer, 粗體",
+        "自定義spinner內容",
+        "文字提取",
+        "scrollView上滑"
+      ],
+      "retainedAccordionTitles": [
+        "Date, Time Picker",
+        "list 定義spinner內容",
+        "countDownTimer, 粗體",
+        "自定義spinner內容",
+        "文字提取",
+        "scrollView上滑"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 6,
+      "nonEmptyPreCount": 6,
+      "preSha256": [
+        "7fd3dd1748602bad2de224a40239327f2c3f926ad335a24e8ba1390cc82117a7",
+        "bbda3da0278275224bb6260915cee274d8e529d86429a7ef188608d134bdeb1d",
+        "541ee90a7870c6bedf85c47277be7546c78a571796180c77c65a45505c6e642a",
+        "bf71ca89001271d3505ba2ddf0c2c49992358a96d86a1c03f8e1ee1a7494dfc0",
+        "43306df28dd3cafc69ec5837d4d9f38aa29843f04d51e6a84b9b79f5d808536e",
+        "5660860401c30d059bd5a6b24ff4286dab01e34ea1725744fe73e5e6c6c83320"
+      ],
+      "descriptions": [],
+      "marks": [
+        "spinner1.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list1)",
+        "else -&gt; color.setTypeface(null, Typeface.BOLD)",
+        "spinner5.adapter = spinnerAdapter(this, spinnerList)",
+        "findViewById&lt;ScrollView&gt;(R.id.main).fullScroll(View.FOCUS_UP)"
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "exercise12.html": {
+      "pageName": "exercise12",
+      "accordionTitles": [
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "b219933ee23c226484c18b2f5722a986c05002e59d12d1795ce9e7d532760e5f"
+      ],
+      "descriptions": [],
+      "marks": [],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "exercise2.html": {
+      "pageName": "exercise2",
+      "accordionTitles": [
+        "MainActivity.ky",
+        "oneFragment",
+        "TwoFragment"
+      ],
+      "retainedAccordionTitles": [
+        "MainActivity.ky",
+        "oneFragment",
+        "TwoFragment"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 3,
+      "nonEmptyPreCount": 3,
+      "preSha256": [
+        "c1873e5dc417846db7e561d04f4ce2cd29c2838f20c20397374e1f02e52afea4",
+        "5af1be7c76f89baa7841718cc5cf9ce682009f27cbe32bc1eb84fb5607fce561",
+        "441a7761e5cbcc93d096b98a84a55652e13e3fedaab58bd41dbd3195794b2bb4"
+      ],
+      "descriptions": [],
+      "marks": [],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "exercise21.html": {
+      "pageName": "exercise21",
+      "accordionTitles": [
+        "Circle Progress",
+        "直線progress(可設粗度)",
+        "直線progress(不可設粗度)"
+      ],
+      "retainedAccordionTitles": [
+        "Circle Progress",
+        "直線progress(可設粗度)",
+        "直線progress(不可設粗度)"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 3,
+      "nonEmptyPreCount": 3,
+      "preSha256": [
+        "15260d24f6b3a5c2c11fc4dbe612d495678a43d7a2b7b4de76a3244acdd8f49e",
+        "7678a288e654911f855defe9fdd1ba628329c6b904fd65215331bb6b557a8222",
+        "2e65810ed95f11a8d7e8389347f922795b03638b259fc9caf771e3ba90b61bf2"
+      ],
+      "descriptions": [],
+      "marks": [],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "exercise24.html": {
+      "pageName": "exercise24",
+      "accordionTitles": [
+        "setOnScrollChangeListener",
+        "code",
+        "code",
+        "code",
+        "code",
+        "code",
+        "code",
+        "code",
+        "code",
+        "code",
+        "code",
+        "code",
+        "code",
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "setOnScrollChangeListener"
+      ],
+      "blankAccordionPositions": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "accordionCount": 14,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "c50119425cfd2baef0ad3e5564dd73a50dd1b961bfa8d906d0c21f14225f62ef"
+      ],
+      "descriptions": [],
+      "marks": [
+        "scrollView2.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY -&gt;"
+      ],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "exercise3.html": {
+      "pageName": "exercise3",
+      "accordionTitles": [
+        "AlphaAnimation",
+        "RotateAnimation 旋轉",
+        "TranslateAnimation 移動",
+        "ScaleAnimation 放大",
+        "AnimationSet 向上漸現"
+      ],
+      "retainedAccordionTitles": [
+        "AlphaAnimation",
+        "RotateAnimation 旋轉",
+        "TranslateAnimation 移動",
+        "ScaleAnimation 放大",
+        "AnimationSet 向上漸現"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 5,
+      "nonEmptyPreCount": 5,
+      "preSha256": [
+        "00d0bbc9b818a5f45c6d0b0c4ac16b3b5b57cf3958a959795aa8c3f738eb849d",
+        "6c95a22dd957556f21e898c091dd828b2e27f9700d2a91161d068827944e7af1",
+        "8918fca25cc7c212cf4c249a65e91b1e6302bc93b4488813e64bef7033351762",
+        "babd3f2d9ea656dfa79bae4e3dde1a7d98168ad5477e77499b14355cb6a60203",
+        "7f13ce664b4f968b35769c2f337355fcc4fd51ff6f0573fb68e560d5592ae0b7"
+      ],
+      "descriptions": [],
+      "marks": [],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "exercise6.html": {
+      "pageName": "exercise6",
+      "accordionTitles": [
+        "background"
+      ],
+      "retainedAccordionTitles": [
+        "background"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 1,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "a8b52c17c72957060eedac4f1c48ff7fbc57473246bfe5e2505d09965abd2ea8"
+      ],
+      "descriptions": [],
+      "marks": [],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "exercise7.html": {
+      "pageName": "exercise7",
+      "accordionTitles": [
+        "code",
+        "code"
+      ],
+      "retainedAccordionTitles": [
+        "code"
+      ],
+      "blankAccordionPositions": [
+        1
+      ],
+      "accordionCount": 2,
+      "nonEmptyPreCount": 1,
+      "preSha256": [
+        "e43e275f9da2cad2b78290a1aa02e0cd783906c77ee39cdc859cdab93e1a1b77"
+      ],
+      "descriptions": [],
+      "marks": [],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    },
+    "homework2.html": {
+      "pageName": "homework2",
+      "accordionTitles": [
+        "Test",
+        "tableLayout connect with viewPager2"
+      ],
+      "retainedAccordionTitles": [
+        "Test",
+        "tableLayout connect with viewPager2"
+      ],
+      "blankAccordionPositions": [],
+      "accordionCount": 2,
+      "nonEmptyPreCount": 2,
+      "preSha256": [
+        "c79835dd0edd4e9aff632d8630f6ea8edddd9cd28ca486f7c30be1d99e6aee9a",
+        "6bbceed7c62aa2d41ad602c017b6cbac6d7a71f36ec8e7596cacb95ea99bcd90"
+      ],
+      "descriptions": [],
+      "marks": [],
+      "links": [],
+      "iframes": [],
+      "images": [],
+      "embeds": []
+    }
+  }
+}

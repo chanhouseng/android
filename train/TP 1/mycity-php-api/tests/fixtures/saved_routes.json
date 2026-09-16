@@ -1,0 +1,62 @@
+[
+  {
+    "save_id": "SAV-001",
+    "user_id": "USR-001",
+    "route_id": "RTE-BUS-022",
+    "route_number": "BUS-22",
+    "route_name": "Andheri to Bandra",
+    "route_type": "bus",
+    "origin_stop": "Andheri Bus Stand",
+    "destination_stop": "Bandra Station East",
+    "saved_at": "2025-04-10 08:30:00",
+    "note": "Daily office commute"
+  },
+  {
+    "save_id": "SAV-002",
+    "user_id": "USR-001",
+    "route_id": "RTE-METRO-001",
+    "route_number": "METRO-1",
+    "route_name": "Versova to Ghatkopar",
+    "route_type": "metro",
+    "origin_stop": "Andheri Metro Station",
+    "destination_stop": "Ghatkopar Metro Station",
+    "saved_at": "2025-04-11 18:00:00",
+    "note": "Weekend shopping route"
+  },
+  {
+    "save_id": "SAV-003",
+    "user_id": "USR-001",
+    "route_id": "RTE-BUS-045",
+    "route_number": "BUS-45",
+    "route_name": "Borivali to Dadar",
+    "route_type": "bus",
+    "origin_stop": "Malad Market",
+    "destination_stop": "Dadar TT Circle",
+    "saved_at": "2025-04-12 10:15:00",
+    "note": "Visit to Dadar market"
+  },
+  {
+    "save_id": "SAV-004",
+    "user_id": "USR-002",
+    "route_id": "RTE-RAPID-003",
+    "route_number": "RAPID-3",
+    "route_name": "BKC to Thane Rapid",
+    "route_type": "rapid",
+    "origin_stop": "BKC Bus Terminal",
+    "destination_stop": "Thane Station",
+    "saved_at": "2025-04-09 09:00:00",
+    "note": "Work trips to Thane office"
+  },
+  {
+    "save_id": "SAV-005",
+    "user_id": "USR-002",
+    "route_id": "RTE-BUS-022",
+    "route_number": "BUS-22",
+    "route_name": "Andheri to Bandra",
+    "route_type": "bus",
+    "origin_stop": "Santacruz Depot",
+    "destination_stop": "Bandra Station East",
+    "saved_at": "2025-04-13 16:45:00",
+    "note": ""
+  }
+]

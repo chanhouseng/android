@@ -1,63 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-Hant" data-site-root="../">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>exercise21｜World Skill 練習</title>
+  <link rel="stylesheet" href="../assets/css/foundation.css">
+  <link rel="stylesheet" href="../assets/css/app-shell.css">
+  <link rel="stylesheet" href="../assets/css/accordion.css">
+  <link rel="stylesheet" href="../assets/css/detail-page.css">
 </head>
 <body>
-    <button class="accordion">Circle Progress</button>
-    <div class="panel">
-        <pre>
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="../index.html" aria-label="返回首頁"><span class="brand-mark" aria-hidden="true">AL</span><span class="brand-copy"><strong>Android Learning</strong><span>WORKSPACE</span></span></a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+  <main class="app-main" id="main-content" tabindex="-1">
+    <div class="container detail-page">
+      <nav aria-label="Breadcrumb">
+        <ol class="detail-breadcrumb">
+          <li><a href="../index.html">首頁</a></li>
+          <li><a href="index.html">World Skill 練習</a></li>
+          <li><span aria-current="page">exercise21</span></li>
+        </ol>
+      </nav>
+      <header class="detail-header">
+        <a class="button button--ghost detail-header__back" href="index.html">返回 World Skill 練習</a>
+        <p class="detail-eyebrow">WORLD SKILL · DETAIL</p>
+        <h1>exercise21</h1>
+      </header>
+      <div class="detail-content" data-accordion-root data-original-content>
+    <article class="accordion-item card" data-accordion-item data-title="Circle Progress">
+          <h2><button class="accordion-trigger" id="exercise21-trigger-1" type="button" aria-expanded="true" aria-controls="exercise21-panel-1" data-accordion-trigger>Circle Progress</button></h2>
+          <div class="accordion-panel" id="exercise21-panel-1" role="region" aria-labelledby="exercise21-trigger-1" data-accordion-panel>
+        <pre class="code-block"><code>
 &lt;com.google.android.material.progressindicator.CircularProgressIndicator
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:indicatorSize="100dp"    <span>//設置圓形進度條的直徑大小</span>
-    app:trackColor="#999"      <span>//設置整條的顏色</span>
-    app:indicatorColor="#18abc8"    <span>//設置progress的顏色</span>
+    app:indicatorSize="100dp"    <span class="code-comment">//設置圓形進度條的直徑大小</span>
+    app:trackColor="#999"      <span class="code-comment">//設置整條的顏色</span>
+    app:indicatorColor="#18abc8"    <span class="code-comment">//設置progress的顏色</span>
     android:max="100"
     android:progress="20"
-    app:trackThickness="15dp"    <span>//設置progress的粗度</span>
-    app:trackCornerRadius="0dp"    <span>//自帶會有圖角，可設定圖角</span>
-    app:indicatorInset="0dp"    <span>//設置progress與整個layout間的距離(類似padding) 但不影大小</span>
-    android:indeterminate="false"/&gt;    <span>//false會固定。true是無限旋轉(加載中)</span>
-        </pre>
+    app:trackThickness="15dp"    <span class="code-comment">//設置progress的粗度</span>
+    app:trackCornerRadius="0dp"    <span class="code-comment">//自帶會有圖角，可設定圖角</span>
+    app:indicatorInset="0dp"    <span class="code-comment">//設置progress與整個layout間的距離(類似padding) 但不影大小</span>
+    android:indeterminate="false"/&gt;    <span class="code-comment">//false會固定。true是無限旋轉(加載中)</span>
+        </code></pre>
     </div>
-    <button class="accordion">直線progress(可設粗度)</button>
-    <div class="panel">
-        <pre>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="直線progress(可設粗度)">
+          <h2><button class="accordion-trigger" id="exercise21-trigger-2" type="button" aria-expanded="true" aria-controls="exercise21-panel-2" data-accordion-trigger>直線progress(可設粗度)</button></h2>
+          <div class="accordion-panel" id="exercise21-panel-2" role="region" aria-labelledby="exercise21-trigger-2" data-accordion-panel>
+        <pre class="code-block"><code>
 &lt;com.google.android.material.progressindicator.LinearProgressIndicator
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    app:trackThickness="10dp"    <span>//設置粗度</span>
-    app:trackColor="#999"      <span>//設罝整條的顏色</span>
-    app:indicatorColor="#18abc8"    <span>//設置progress的顏色</span>
+    app:trackThickness="10dp"    <span class="code-comment">//設置粗度</span>
+    app:trackColor="#999"      <span class="code-comment">//設罝整條的顏色</span>
+    app:indicatorColor="#18abc8"    <span class="code-comment">//設置progress的顏色</span>
     android:max="100"
     android:progress="20"
-    app:trackCornerRadius="0dp"    <span>//自帶會有圖角，可設定圖角</span>
-    app:indicatorDirectionLinear="rightToLeft"/&gt;    <span>//設置progress的方向</span>
+    app:trackCornerRadius="0dp"    <span class="code-comment">//自帶會有圖角，可設定圖角</span>
+    app:indicatorDirectionLinear="rightToLeft"/&gt;    <span class="code-comment">//設置progress的方向</span>
 
-        </pre>
+        </code></pre>
     </div>
-    <button class="accordion">直線progress(不可設粗度)</button>
-    <div class="panel">
-        <pre>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="直線progress(不可設粗度)">
+          <h2><button class="accordion-trigger" id="exercise21-trigger-3" type="button" aria-expanded="true" aria-controls="exercise21-panel-3" data-accordion-trigger>直線progress(不可設粗度)</button></h2>
+          <div class="accordion-panel" id="exercise21-panel-3" role="region" aria-labelledby="exercise21-trigger-3" data-accordion-panel>
+        <pre class="code-block"><code>
 &lt;ProgressBar
     android:id="@+id/progressBar"
     style="?android:attr/progressBarStyleHorizontal"
     android:layout_width="match_parent"
     android:layout_margin="10dp"
-    android:progressBackgroundTint="#ff1111"    <span>//設置整條的顏色</span>
+    android:progressBackgroundTint="#ff1111"    <span class="code-comment">//設置整條的顏色</span>
     android:max="100"
     android:progress="20"
-    android:progressTint="#18abc8"    <span>//設置progress的顏色</span>
+    android:progressTint="#18abc8"    <span class="code-comment">//設置progress的顏色</span>
     android:layout_height="wrap_content" /&gt;
 
-        </pre>
+        </code></pre>
     </div>
-<script src="js.js"></script>
+        </article>
+
+
+      </div>
+      <footer class="detail-footer">
+        <a class="button button--secondary" href="index.html">返回 World Skill 練習</a>
+      </footer>
+    </div>
+  </main>
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+  <script src="../assets/js/site-navigation.js" defer></script>
+  <script src="../assets/js/accordion.js" defer></script>
 </body>
 </html>

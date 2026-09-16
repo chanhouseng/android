@@ -8,89 +8,224 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button class="accordion">code</button>
+    <h3>最難嘅就只係各種Boolean要判斷，都埋喺setOnTouchListener要做三種判斷效果</h3>
+    <button class="accordion">MainActivity2.kt (物品的移動function)</button>
     <div class="panel">
         <pre>
+countDownTimer = object : CountDownTimer(60000, 1000){
+    override fun onFinish() {
+        if(!isPause){
+            start()
+        }
+    }
 
+    override fun onTick(millisUntilFinished: Long) {
+        val imageList = listOf("coin", "obstacle")
+        val imageView = ImageView(this@MainActivity2)
+        imageView.tag = imageList.random()
+        val drawable = when(imageView.tag){
+            "coin" -&gt; R.drawable.coin
+            else -&gt; R.drawable.obstacle
+        }
+        imageView.setImageResource(drawable)
+        playLayout.addView(imageView)
+        val params = imageView.layoutParams
+        params.width = (40*resources.displayMetrics.density).toInt()
+        params.height = (40*resources.displayMetrics.density).toInt()
+        val animator = ValueAnimator.ofFloat((resources.displayMetrics.widthPixels).toFloat(),0f)
+        animator.duration = 3000
+        animator.interpolator = LinearInterpolator()
+        animator.addUpdateListener {
+            imageView.translationX = it.animatedValue as Float
+            if(isCatch(imageView)){
+                catchImage(imageView)
+                animatorList.remove(animator)
+                playLayout.removeView(imageView)
+                animator.cancel()
+            }
+        }
+        animator.addListener(object : AnimatorListenerAdapter(){
+            override fun onAnimationEnd(animation: Animator) {
+                super.onAnimationEnd(animation)
+                animatorList.remove(animator)
+                playLayout.removeView(imageView)
+            }
+        })
+        animatorList.add(animator)
+        animator.start()
+        i++
+        textView4.text = "${i}s"    <span>//計時</span>
+    }
+
+}
+countDownTimer.start()
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">MainActivity2.kt (背景樹的移動Animator)</button>
     <div class="panel">
         <pre>
-
+val anim = ValueAnimator.ofFloat(-100f, -100000f)
+animator = anim
+anim.duration = 1000000
+anim.interpolator = LinearInterpolator()
+anim.addUpdateListener {
+    linear.translationX = it.animatedValue as Float
+}
+anim.start()
+anim.addListener(object : AnimatorListenerAdapter(){
+    override fun onAnimationEnd(animation: Animator) {
+        super.onAnimationEnd(animation)
+        anim.start()
+    }
+})
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">MainActivity2.kt (任意地方點擊、長按、滑動效果)</button>
     <div class="panel">
         <pre>
+var statX = 0f
+var statY = 0f
 
+findViewById&lt;FrameLayout&gt;(R.id.main).setOnTouchListener { v, event -&gt;
+    when(event.action){
+        MotionEvent.ACTION_DOWN -&gt; {
+            statY = event.y
+            statX = event.x
+            val countDownTimer2 = object : CountDownTimer(1000, 1000){    <span>//長按按落去就已經始計時，反正點擊會即刻取消</span>
+                override fun onFinish() {
+                    if(!isGood && countCoin &gt; 1){
+                        findViewById&lt;TextView&gt;(R.id.textView16).visibility = View.VISIBLE
+                        countCoin --
+                        textView3.text = countCoin.toString()
+                        start()
+                    }
+                }
+                override fun onTick(millisUntilFinished: Long) {
+                    isGood = false     <span>//判斷是否為無敵狀態</span>
+
+                }
+            }
+            countDownTimer2.start()
+        }
+        MotionEvent.ACTION_UP -&gt; {
+            isGood = true
+            findViewById&lt;TextView&gt;(R.id.textView16).visibility = View.GONE
+            val moveX = event.x
+            val moveY = event.y
+            val deltaX = moveX - statX
+            val deltaY = moveY - statY
+            if(Math.abs(deltaX) &gt; Math.abs(deltaY)){
+                if(deltaY &gt; 0){    <span>//滑動的效果</span>
+                    AlertDialog.Builder(this)
+                        .setTitle("he game is in progress. Are you sure to quit?")
+                        .setNegativeButton("No"){_, _ -&gt;
+                            giveStart()
+                        }
+                        .setPositiveButton("Yes"){_, _ -&gt;
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                        }
+                        .show()
+                    givePause()
+                }
+            }
+            if(deltaX == 0f && deltaY == 0f){     <span>//點擊的效果</span>
+                if(!isTrue){     <span>//判斷是否正在跳躍</span>
+                    isTrue = true 
+                    val media = MediaPlayer.create(this@MainActivity2, R.raw.jump)
+                    media.start()
+                    val animator = ValueAnimator.ofFloat(0f, -450f)
+                    animator.duration = 800
+                    animator.addUpdateListener {
+                        imageView5.translationY = it.animatedValue as Float    <span>//唔可以用x，用x佢個Rect框冇變到</span>
+                    }
+                    animator.addListener(object : AnimatorListenerAdapter(){
+                        override fun onAnimationEnd(animation: Animator) {
+                            super.onAnimationEnd(animation)
+                            val animator2 = ValueAnimator.ofFloat(-450f, 0f)
+                            animator2.duration = 1000
+                            animator2.addUpdateListener {
+                                imageView5.translationY = it.animatedValue as Float
+                            }
+                            animator2.addListener(object : AnimatorListenerAdapter(){
+                                override fun onAnimationEnd(animation: Animator) {
+                                    super.onAnimationEnd(animation)
+                                    isTrue = false
+                                }
+                            })
+                            animator2.start()
+                        }
+                    })
+
+                    animator.start()
+                }
+            }
+        }
+    }
+    true
+}
         </pre>
     </div>
 
-    <button class="accordion">code</button>
+    <button class="accordion">MainActivity2.kt (gameOver)</button>
     <div class="panel">
         <pre>
-
+fun giveOver(){
+    var id = if(Data.rankingArray.size == 0) 0 else Data.rankingArray.last().id + 1
+    Data.rankingArray.add(RankingClass(id, intent.getStringExtra("name").toString(), countCoin, i))
+    save()
+    val layout = layoutInflater.inflate(R.layout.alert, null)
+    val alertDialog = AlertDialog.Builder(this).setView(layout).show()
+    alertDialog.setCanceledOnTouchOutside(false)
+    layout.findViewById&lt;TextView&gt;(R.id.textView8).text = intent.getStringExtra("name")
+    layout.findViewById&lt;TextView&gt;(R.id.textView9).text = countCoin.toString()
+    layout.findViewById&lt;TextView&gt;(R.id.textView10).text = "${i}s"
+    layout.findViewById&lt;Button&gt;(R.id.button4).setOnClickListener {
+        val intent2 = Intent(this, MainActivity2::class.java)
+        intent2.putExtra("name",intent.getStringExtra("name").toString())
+        startActivity(intent2)
+    }
+    layout.findViewById&lt;Button&gt;(R.id.button5).setOnClickListener {
+        val intent = Intent(this, MainActivity4::class.java)
+        intent.putExtra("id",id )
+        startActivity(intent)
+    }
+    mediaPlay.pause()
+    val play = MediaPlayer.create(this, R.raw.game_over)
+    play.start()
+}
         </pre>
     </div>
-    <button class="accordion">code</button>
+    <button class="accordion">MainActivity4.kt (ranking)</button>
     <div class="panel">
         <pre>
+val prefs = getSharedPreferences("data", MODE_PRIVATE)
+val list = Gson().fromJson(prefs.getString("array", Gson().toJson(Data.rankingArray)),
+    Array&lt;RankingClass&gt;::class.java).sortedByDescending { it.time }
+var i = 1
+for(result in list){
+    val layout = layoutInflater.inflate(R.layout.ranking_pro, null)
+    layout.findViewById&lt;TextView&gt;(R.id.textView11).text = i.toString()
+    layout.findViewById&lt;TextView&gt;(R.id.textView12).text = result.name
+    layout.findViewById&lt;TextView&gt;(R.id.textView13).text = result.coin.toString()
+    layout.findViewById&lt;TextView&gt;(R.id.textView14).text = "${result.time}s"
+    if(result.id == intent.getIntExtra("id", -1)){
+        layout.findViewById&lt;TextView&gt;(R.id.textView11).setTextColor(Color.parseColor("#18abc8"))
+        layout.findViewById&lt;TextView&gt;(R.id.textView12).setTextColor(Color.parseColor("#18abc8"))
+        layout.findViewById&lt;TextView&gt;(R.id.textView13).setTextColor(Color.parseColor("#18abc8"))
+        layout.findViewById&lt;TextView&gt;(R.id.textView14).setTextColor(Color.parseColor("#18abc8"))
+    }
+    findViewById&lt;LinearLayout&gt;(R.id.linearLayout).addView(layout)
+    i++
+}
+if(list.size == 0){
+    findViewById&lt;TextView&gt;(R.id.textView15).visibility = View.VISIBLE
+}
 
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
-        </pre>
-    </div>
-    <button class="accordion">code</button>
-    <div class="panel">
-        <pre>
-
+findViewById&lt;Button&gt;(R.id.button7).setOnClickListener {
+    val intent = Intent(this, MainActivity::class.java)
+    startActivity(intent)
+}
         </pre>
     </div>
 <script src="js.js"></script>

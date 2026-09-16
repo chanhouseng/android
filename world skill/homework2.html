@@ -1,16 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-Hant" data-site-root="../">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>homework2｜World Skill 練習</title>
+  <link rel="stylesheet" href="../assets/css/foundation.css">
+  <link rel="stylesheet" href="../assets/css/app-shell.css">
+  <link rel="stylesheet" href="../assets/css/accordion.css">
+  <link rel="stylesheet" href="../assets/css/detail-page.css">
 </head>
 <body>
-    <button class="accordion">Test</button>
-    <div class="panel">
-        <pre>
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="../index.html" aria-label="返回首頁"><span class="brand-mark" aria-hidden="true">AL</span><span class="brand-copy"><strong>Android Learning</strong><span>WORKSPACE</span></span></a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+  <main class="app-main" id="main-content" tabindex="-1">
+    <div class="container detail-page">
+      <nav aria-label="Breadcrumb">
+        <ol class="detail-breadcrumb">
+          <li><a href="../index.html">首頁</a></li>
+          <li><a href="index.html">World Skill 練習</a></li>
+          <li><span aria-current="page">homework2</span></li>
+        </ol>
+      </nav>
+      <header class="detail-header">
+        <a class="button button--ghost detail-header__back" href="index.html">返回 World Skill 練習</a>
+        <p class="detail-eyebrow">WORLD SKILL · DETAIL</p>
+        <h1>homework2</h1>
+      </header>
+      <div class="detail-content" data-accordion-root data-original-content>
+    <article class="accordion-item card" data-accordion-item data-title="Test">
+          <h2><button class="accordion-trigger" id="homework2-trigger-1" type="button" aria-expanded="true" aria-controls="homework2-panel-1" data-accordion-trigger>Test</button></h2>
+          <div class="accordion-panel" id="homework2-panel-1" role="region" aria-labelledby="homework2-trigger-1" data-accordion-panel>
+        <pre class="code-block"><code>
 class ApplicationUITesting {
     private lateinit var device: UiDevice
     private val PACKAGE_NAME = "com.example.homework2"
@@ -128,17 +152,30 @@ class ApplicationUITesting {
     }
 }
 
-        </pre>
+        </code></pre>
     </div>
-    <button class="accordion">tableLayout connect with viewPager2</button>
-    <div class="panel">
-        <pre>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="tableLayout connect with viewPager2">
+          <h2><button class="accordion-trigger" id="homework2-trigger-2" type="button" aria-expanded="true" aria-controls="homework2-panel-2" data-accordion-trigger>tableLayout connect with viewPager2</button></h2>
+          <div class="accordion-panel" id="homework2-panel-2" role="region" aria-labelledby="homework2-trigger-2" data-accordion-panel>
+        <pre class="code-block"><code>
 TabLayoutMediator(tabLayout, viewPager2){ tab, position-&gt;
     tab.text = tabItemList[position]
 }.attach()
 
-        </pre>
+        </code></pre>
     </div>
-<script src="js.js"></script>
+        </article>
+
+
+      </div>
+      <footer class="detail-footer">
+        <a class="button button--secondary" href="index.html">返回 World Skill 練習</a>
+      </footer>
+    </div>
+  </main>
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+  <script src="../assets/js/site-navigation.js" defer></script>
+  <script src="../assets/js/accordion.js" defer></script>
 </body>
 </html>

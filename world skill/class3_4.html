@@ -1,16 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-Hant" data-site-root="../">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>class3_4｜World Skill 練習</title>
+  <link rel="stylesheet" href="../assets/css/foundation.css">
+  <link rel="stylesheet" href="../assets/css/app-shell.css">
+  <link rel="stylesheet" href="../assets/css/accordion.css">
+  <link rel="stylesheet" href="../assets/css/detail-page.css">
 </head>
 <body>
-    <button class="accordion">code</button>
-<div class="panel">
-    <pre>
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="../index.html" aria-label="返回首頁"><span class="brand-mark" aria-hidden="true">AL</span><span class="brand-copy"><strong>Android Learning</strong><span>WORKSPACE</span></span></a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+  <main class="app-main" id="main-content" tabindex="-1">
+    <div class="container detail-page">
+      <nav aria-label="Breadcrumb">
+        <ol class="detail-breadcrumb">
+          <li><a href="../index.html">首頁</a></li>
+          <li><a href="index.html">World Skill 練習</a></li>
+          <li><span aria-current="page">class3_4</span></li>
+        </ol>
+      </nav>
+      <header class="detail-header">
+        <a class="button button--ghost detail-header__back" href="index.html">返回 World Skill 練習</a>
+        <p class="detail-eyebrow">WORLD SKILL · DETAIL</p>
+        <h1>class3_4</h1>
+      </header>
+      <div class="detail-content" data-accordion-root data-original-content>
+    <article class="accordion-item card" data-accordion-item data-title="code">
+          <h2><button class="accordion-trigger" id="class3_4-trigger-1" type="button" aria-expanded="true" aria-controls="class3_4-panel-1" data-accordion-trigger>code</button></h2>
+          <div class="accordion-panel" id="class3_4-panel-1" role="region" aria-labelledby="class3_4-trigger-1" data-accordion-panel>
+    <pre class="code-block"><code>
 val foodList: List<foodClass> = listOf(
     foodClass(1, "One", R.drawable.croissant),
     foodClass(2, "Two", R.drawable.gingerbread),
@@ -25,13 +49,13 @@ val foodList: List<foodClass> = listOf(
 var clickSet = HashSet<String>()
 val linearLayout: LinearLayout = findViewById(R.id.linearLayout)
 val prefs = getSharedPreferences("data", MODE_PRIVATE)
-<mark>val prefsSet = prefs.getStringSet("foodClick", emptySet&lt;String&gt;()) ?: emptySet()</mark>  <span>//攞返本地存嘅clicked List(HashSet)</span>
+<mark>val prefsSet = prefs.getStringSet("foodClick", emptySet&lt;String&gt;()) ?: emptySet()</mark>  <span class="code-comment">//攞返本地存嘅clicked List(HashSet)</span>
 
 for (food in foodList) {
     val layout = layoutInflater.inflate(R.layout.product, null)
     layout.findViewById&lt;TextView&gt;(R.id.textView).text = food.name
     layout.findViewById&lt;ImageView&gt;(R.id.imageView).setImageResource(food.img)
-    if (prefsSet.contains(food.id.toString())) {   <span>//將所有clicked的放入clickSet放便之後存入唔會覆蓋數據</span>
+    if (prefsSet.contains(food.id.toString())) {   <span class="code-comment">//將所有clicked的放入clickSet放便之後存入唔會覆蓋數據</span>
         clickSet.add(food.id.toString())
         food.isClick = true
     }
@@ -51,8 +75,19 @@ for (food in foodList) {
     linearLayout.addView(layout)
 }
 
-    </pre>
+    </code></pre>
 </div>
-<script src="js.js"></script>
+        </article>
+
+
+      </div>
+      <footer class="detail-footer">
+        <a class="button button--secondary" href="index.html">返回 World Skill 練習</a>
+      </footer>
+    </div>
+  </main>
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+  <script src="../assets/js/site-navigation.js" defer></script>
+  <script src="../assets/js/accordion.js" defer></script>
 </body>
 </html>

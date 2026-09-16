@@ -54,7 +54,7 @@ function httpJson(array $response): array
     return $decoded;
 }
 
-test('http', 'all eight documented APIs use the exact HTTP contracts', static function () use ($baseUrl): void {
+test('http', 'original APIs return complete Postman data over HTTP', static function () use ($baseUrl): void {
     $existingSignin = httpRequest(
         $baseUrl,
         'POST',
@@ -79,13 +79,12 @@ test('http', 'all eight documented APIs use the exact HTTP contracts', static fu
     $routesResponse = httpRequest($baseUrl, 'GET', '/api/transit/routes');
     $routes = httpJson($routesResponse)['data'];
     assertSameValue(200, $routesResponse['status'], 'Routes HTTP status is incorrect.');
-    assertSameValue(['route_id', 'route_name', 'route_type', 'status', 'next_departure', 'stops'], array_keys($routes[0]), 'Routes HTTP fields are incorrect.');
-    assertTrue(is_string($routes[0]['stops'][0]), 'Routes HTTP stops are not strings.');
+    assertSameValue(json_decode(file_get_contents(dirname(__DIR__) . '/data/routes.json'), true), $routes, 'Routes HTTP data must retain every source field.');
 
     $weatherResponse = httpRequest($baseUrl, 'GET', '/api/weather/current');
     $weather = httpJson($weatherResponse)['data'];
     assertSameValue(200, $weatherResponse['status'], 'Weather HTTP status is incorrect.');
-    assertSameValue(['city', 'temperature_c', 'condition', 'humidity_pct', 'wind_kmh'], array_keys($weather), 'Weather HTTP fields are incorrect.');
+    assertSameValue(json_decode(file_get_contents(dirname(__DIR__) . '/data/weather.json'), true), $weather, 'Weather HTTP data must retain every source field.');
 
     $saveResponse = httpRequest(
         $baseUrl,
@@ -95,7 +94,7 @@ test('http', 'all eight documented APIs use the exact HTTP contracts', static fu
         json_encode(['route_id' => 'RTE-RAPID-003'], JSON_THROW_ON_ERROR),
     );
     assertSameValue(200, $saveResponse['status'], 'Save HTTP status is incorrect.');
-    assertSameValue(['route_id', 'saved_at'], array_keys(httpJson($saveResponse)['data']), 'Save HTTP fields are incorrect.');
+    assertSameValue(['save_id', 'route_id', 'saved_at'], array_keys(httpJson($saveResponse)['data']), 'Save HTTP fields are incorrect.');
 
     $duplicateResponse = httpRequest(
         $baseUrl,
@@ -105,12 +104,13 @@ test('http', 'all eight documented APIs use the exact HTTP contracts', static fu
         json_encode(['route_id' => 'RTE-RAPID-003'], JSON_THROW_ON_ERROR),
     );
     assertSameValue(409, $duplicateResponse['status'], 'Duplicate HTTP status is incorrect.');
-    assertSameValue(null, httpJson($duplicateResponse)['data'], 'Duplicate HTTP data is not null.');
+    assertSameValue(httpJson($saveResponse)['data']['save_id'], httpJson($duplicateResponse)['data']['save_id'], 'Duplicate must reference the existing save.');
 
     $alertsResponse = httpRequest($baseUrl, 'GET', '/api/alerts');
     $alerts = httpJson($alertsResponse)['data'];
     assertSameValue(200, $alertsResponse['status'], 'Alerts HTTP status is incorrect.');
-    assertSameValue(['alert_id', 'title', 'affected_routes', 'status', 'severity', 'description', 'created_at'], array_keys($alerts[0]), 'Alerts HTTP fields are incorrect.');
+    $originalAlerts = array_column(json_decode(file_get_contents(dirname(__DIR__) . '/data/alerts.json'), true), null, 'alert_id');
+    foreach ($alerts as $alert) { assertSameValue($originalAlerts[$alert['alert_id']], $alert); }
     assertSameValue('high', $alerts[0]['severity'], 'Alerts HTTP severity order is incorrect.');
 
     $mapResponse = httpRequest($baseUrl, 'GET', '/api/resources/maps/mumbai_base.png');
@@ -127,7 +127,10 @@ test('http', 'all eight documented APIs use the exact HTTP contracts', static fu
     $savedResponse = httpRequest($baseUrl, 'GET', '/api/routes/saved', ['auth_token: ' . $token]);
     $savedRoutes = httpJson($savedResponse)['data'];
     assertSameValue(200, $savedResponse['status'], 'Saved-list HTTP status is incorrect.');
-    assertSameValue([['route_id' => 'RTE-RAPID-003', 'route_name' => 'BKC to Thane Rapid', 'saved_at' => $savedRoutes[0]['saved_at']]], $savedRoutes, 'Saved-list HTTP data is incorrect.');
+    assertSameValue(1, count($savedRoutes), 'Saved-list ownership isolation failed.');
+    assertSameValue('BKC to Thane Rapid', $savedRoutes[0]['route_name']);
+    assertSameValue(httpJson($saveResponse)['data']['save_id'], $savedRoutes[0]['save_id']);
+    assertSameValue('BKC Bus Terminal', $savedRoutes[0]['origin_stop']);
 });
 
 test('http', 'HTTP errors use the documented statuses and safe response shape', static function () use ($baseUrl): void {
@@ -143,4 +146,13 @@ test('http', 'HTTP errors use the documented statuses and safe response shape', 
     assertSameValue(404, httpRequest($baseUrl, 'GET', '/api/unknown')['status'], 'Unknown API HTTP status is incorrect.');
 });
 
-runTests('http');
+test('persistence', 'new account and saved route survive a real server restart', static function () use ($baseUrl): void {
+    $login = httpRequest($baseUrl, 'POST', '/api/users/signin', ['Content-Type: application/json'], json_encode(['userEmailAddress'=>'competition@example.com','userPassword'=>'practice123']));
+    assertSameValue(200, $login['status']);
+    $token = httpJson($login)['data']['auth_token'];
+    $saved = httpJson(httpRequest($baseUrl, 'GET', '/api/routes/saved', ['auth_token: ' . $token]))['data'];
+    assertSameValue(1, count($saved));
+    assertSameValue('RTE-RAPID-003', $saved[0]['route_id']);
+    assertTrue(is_string($saved[0]['save_id']), 'Saved identifier did not persist');
+});
+runTests(($argv[2] ?? '') === '--persistence' ? 'persistence' : 'http');

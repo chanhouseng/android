@@ -1,19 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-Hant" data-site-root="../">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>class9_1｜World Skill 練習</title>
+  <link rel="stylesheet" href="../assets/css/foundation.css">
+  <link rel="stylesheet" href="../assets/css/app-shell.css">
+  <link rel="stylesheet" href="../assets/css/accordion.css">
+  <link rel="stylesheet" href="../assets/css/detail-page.css">
 </head>
 <body>
-    <button class="accordion">選取文字內容</button>
-    <div class="panel">
-        <pre>
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <aside class="app-sidebar" aria-label="Android Learning Workspace">
+    <a class="brand-lockup" href="../index.html" aria-label="返回首頁"><span class="brand-mark" aria-hidden="true">AL</span><span class="brand-copy"><strong>Android Learning</strong><span>WORKSPACE</span></span></a>
+    <nav class="desktop-navigation" aria-label="主導覽" data-site-navigation="desktop"></nav>
+    <p class="sidebar-note">LEARNING ROUTE RAIL</p>
+  </aside>
+  <main class="app-main" id="main-content" tabindex="-1">
+    <div class="container detail-page">
+      <nav aria-label="Breadcrumb">
+        <ol class="detail-breadcrumb">
+          <li><a href="../index.html">首頁</a></li>
+          <li><a href="index.html">World Skill 練習</a></li>
+          <li><span aria-current="page">class9_1</span></li>
+        </ol>
+      </nav>
+      <header class="detail-header">
+        <a class="button button--ghost detail-header__back" href="index.html">返回 World Skill 練習</a>
+        <p class="detail-eyebrow">WORLD SKILL · DETAIL</p>
+        <h1>class9_1</h1>
+      </header>
+      <div class="detail-content" data-accordion-root data-original-content>
+    <article class="accordion-item card" data-accordion-item data-title="選取文字內容">
+          <h2><button class="accordion-trigger" id="class9_1-trigger-1" type="button" aria-expanded="true" aria-controls="class9_1-panel-1" data-accordion-trigger>選取文字內容</button></h2>
+          <div class="accordion-panel" id="class9_1-panel-1" role="region" aria-labelledby="class9_1-trigger-1" data-accordion-panel>
+        <pre class="code-block"><code>
 android:textIsSelectable="true"
 
-<span>--- MainActivity.kt ---</span>
+<span class="code-comment">--- MainActivity.kt ---</span>
 val textView = findViewById&lt;TextView&gt;(R.id.textView)
 findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
     val start = textView.selectionStart
@@ -23,14 +47,16 @@ findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
     }
 }
 
-        </pre>
+        </code></pre>
     </div>
-    <button class="accordion">拍照片</button>
-    <div class="panel">
-        <pre>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="拍照片">
+          <h2><button class="accordion-trigger" id="class9_1-trigger-2" type="button" aria-expanded="true" aria-controls="class9_1-panel-2" data-accordion-trigger>拍照片</button></h2>
+          <div class="accordion-panel" id="class9_1-panel-2" role="region" aria-labelledby="class9_1-trigger-2" data-accordion-panel>
+        <pre class="code-block"><code>
     private lateinit var imageView: ImageView
-    private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicturePreview()){bitmap -&gt;    <span>//告訴系統我要使用「拍照預覽」這個功能（會直接返回一張 Bitmap 圖片）。</span>
-        if(bitmap != null){     <span>//當相機拍完照、返回結果時，這個區塊就會被執行。</span>
+    private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicturePreview()){bitmap -&gt;    <span class="code-comment">//告訴系統我要使用「拍照預覽」這個功能（會直接返回一張 Bitmap 圖片）。</span>
+        if(bitmap != null){     <span class="code-comment">//當相機拍完照、返回結果時，這個區塊就會被執行。</span>
             imageView.setImageBitmap(bitmap)
         }
     }
@@ -40,24 +66,28 @@ findViewById&lt;Button&gt;(R.id.button).setOnClickListener {
         takePicture.launch(null)
     }
 
-        </pre>
+        </code></pre>
     </div>
-    <button class="accordion">選圖片</button>
-    <div class="panel">
-        <pre>
-    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()){uri -&gt;    <span>//系統會把圖片的 Uri(位置資訊)傳回來。</span>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="選圖片">
+          <h2><button class="accordion-trigger" id="class9_1-trigger-3" type="button" aria-expanded="true" aria-controls="class9_1-panel-3" data-accordion-trigger>選圖片</button></h2>
+          <div class="accordion-panel" id="class9_1-panel-3" role="region" aria-labelledby="class9_1-trigger-3" data-accordion-panel>
+        <pre class="code-block"><code>
+    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()){uri -&gt;    <span class="code-comment">//系統會把圖片的 Uri(位置資訊)傳回來。</span>
         imageView.setImageURI(uri)
     }
 
     findViewById&lt;Button&gt;(R.id.button3).setOnClickListener {
-        pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))    <span>//只允許選擇圖片，不讓使用者選影片。</span>
+        pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))    <span class="code-comment">//只允許選擇圖片，不讓使用者選影片。</span>
     }
 
-        </pre>
+        </code></pre>
     </div>
-    <button class="accordion">畫畫</button>
-    <div class="panel">
-        <pre>
+        </article>
+    <article class="accordion-item card" data-accordion-item data-title="畫畫">
+          <h2><button class="accordion-trigger" id="class9_1-trigger-4" type="button" aria-expanded="true" aria-controls="class9_1-panel-4" data-accordion-trigger>畫畫</button></h2>
+          <div class="accordion-panel" id="class9_1-panel-4" role="region" aria-labelledby="class9_1-trigger-4" data-accordion-panel>
+        <pre class="code-block"><code>
 import android.graphics.Path
         
 class MainActivity2 : AppCompatActivity() {
@@ -79,27 +109,27 @@ class MainActivity2 : AppCompatActivity() {
         main = findViewById(R.id.main)
         imageView = findViewById(R.id.imageView)
 
-        val paint = Paint().apply{    <span>//建立畫筆設定</span>
+        val paint = Paint().apply{    <span class="code-comment">//建立畫筆設定</span>
             color = Color.WHITE
-            style = Paint.Style.STROKE    <span>//「只畫邊框線條」，不填滿內部。畫一個圓時，只會看到白色圓圈，圓心是空的（透明的）；如果是 FILL 就會塗滿白色。</span>
-            strokeWidth = 30f    <span>//線條寬度設為 30 像素。</span>
-            isAntiAlias = true    <span>//讓斜線或圓弧的邊緣不會有鋸齒狀的馬賽克。</span>
-            strokeJoin = Paint.Join.ROUND    <span>//線條轉角和結尾都是圓滑的</span>
-            strokeCap = Paint.Cap.ROUND     <span>//「線條的頭尾」是圓弧的。</span>
+            style = Paint.Style.STROKE    <span class="code-comment">//「只畫邊框線條」，不填滿內部。畫一個圓時，只會看到白色圓圈，圓心是空的（透明的）；如果是 FILL 就會塗滿白色。</span>
+            strokeWidth = 30f    <span class="code-comment">//線條寬度設為 30 像素。</span>
+            isAntiAlias = true    <span class="code-comment">//讓斜線或圓弧的邊緣不會有鋸齒狀的馬賽克。</span>
+            strokeJoin = Paint.Join.ROUND    <span class="code-comment">//線條轉角和結尾都是圓滑的</span>
+            strokeCap = Paint.Cap.ROUND     <span class="code-comment">//「線條的頭尾」是圓弧的。</span>
         }
 
-        val path = Path()    <span>//用來記錄手指移動的軌跡</span>
+        val path = Path()    <span class="code-comment">//用來記錄手指移動的軌跡</span>
         var lastX = 0f
         var lastY = 0f
 
         val width = resources.displayMetrics.widthPixels
         val height = resources.displayMetrics.heightPixels
 
-        originalBitmap = BitmapFactory.decodeResource(resources, R.drawable.croissant)    <span>//從專案的資料夾裡讀取名為 croissant 的圖片，並轉成 Bitmap 格式。這是原始版本的圖片，程式後面會把它當作「模板」使用。</span>
-        mutableBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true)    <span>//把剛剛載入的 originalBitmap 放大或縮小，變成一張新的 Bitmap。這是可修改版本的 Bitmap。之後畫畫的所有線條都會畫在這張圖片上。</span>
+        originalBitmap = BitmapFactory.decodeResource(resources, R.drawable.croissant)    <span class="code-comment">//從專案的資料夾裡讀取名為 croissant 的圖片，並轉成 Bitmap 格式。這是原始版本的圖片，程式後面會把它當作「模板」使用。</span>
+        mutableBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true)    <span class="code-comment">//把剛剛載入的 originalBitmap 放大或縮小，變成一張新的 Bitmap。這是可修改版本的 Bitmap。之後畫畫的所有線條都會畫在這張圖片上。</span>
 
-        canvas = Canvas(mutableBitmap)    <span>//建立一個畫布，並把它綁定到 mutableBitmap 這張圖片上。以後都會直接畫在這張 mutableBitmap 上面。</span>
-        imageView.setImageBitmap(mutableBitmap)    <span>//之後所有用畫筆（paint）畫的線條，都會直接留在這張 mutableBitmap 紙上，永遠改變這張紙。再把這張紙顯示在 ImageView 上，讓你看到。</span>
+        canvas = Canvas(mutableBitmap)    <span class="code-comment">//建立一個畫布，並把它綁定到 mutableBitmap 這張圖片上。以後都會直接畫在這張 mutableBitmap 上面。</span>
+        imageView.setImageBitmap(mutableBitmap)    <span class="code-comment">//之後所有用畫筆（paint）畫的線條，都會直接留在這張 mutableBitmap 紙上，永遠改變這張紙。再把這張紙顯示在 ImageView 上，讓你看到。</span>
 
         imageView.setOnTouchListener { v, event -&gt;
             val x = event.x
@@ -107,25 +137,25 @@ class MainActivity2 : AppCompatActivity() {
 
             when(event.action){
                 MotionEvent.ACTION_DOWN -&gt; {
-                    path.moveTo(x, y)    <span>//把畫筆的起點放在手指位置。</span>
+                    path.moveTo(x, y)    <span class="code-comment">//把畫筆的起點放在手指位置。</span>
                     lastX = x
                     lastY = y
                     true
                 }
 
                 MotionEvent.ACTION_MOVE -&gt; {
-                    path.quadTo(lastX, lastY, (lastX+x) / 2, (lastY + y) /2 )     <span>//讓線條更平滑</span>
+                    path.quadTo(lastX, lastY, (lastX+x) / 2, (lastY + y) /2 )     <span class="code-comment">//讓線條更平滑</span>
                     lastX = x
                     lastY = y
-                    canvas.drawPath(path, paint)    <span>//把這段路徑用白色畫筆畫在紙上。</span>
-                    imageView.invalidate()    <span>//紙變了，快點重新顯示！</span>
+                    canvas.drawPath(path, paint)    <span class="code-comment">//把這段路徑用白色畫筆畫在紙上。</span>
+                    imageView.invalidate()    <span class="code-comment">//紙變了，快點重新顯示！</span>
                     true
                 }
 
                 MotionEvent.ACTION_UP -&gt; { 
-                    path.lineTo(x, y)     <span>//把線條完整接到手指離開的位置。</span>
-                    canvas.drawPath(path, paint)    <span>再一次把最終線條畫上去。</span>
-                    path.reset()    <span>//清空這條路徑，下一筆不會跟上一筆連在一起</span>
+                    path.lineTo(x, y)     <span class="code-comment">//把線條完整接到手指離開的位置。</span>
+                    canvas.drawPath(path, paint)    <span class="code-comment">再一次把最終線條畫上去。</span>
+                    path.reset()    <span class="code-comment">//清空這條路徑，下一筆不會跟上一筆連在一起</span>
                     imageView.invalidate()
                     true
                 }
@@ -146,16 +176,16 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 
-    fun saveLayoutToGallery(view: View){    <span>//把屏幕上的某個區域（View）截取下來，變成一張數碼照片（Bitmap）</span>
+    fun saveLayoutToGallery(view: View){    <span class="code-comment">//把屏幕上的某個區域（View）截取下來，變成一張數碼照片（Bitmap）</span>
         try {
-            val bitmap = Bitmap.createBitmap(    <span>//生成空白點陣圖。</span>
+            val bitmap = Bitmap.createBitmap(    <span class="code-comment">//生成空白點陣圖。</span>
                 view.width,
                 view.height,
-                Bitmap.Config.ARGB_8888    <span>//設定色彩模式。</span>
+                Bitmap.Config.ARGB_8888    <span class="code-comment">//設定色彩模式。</span>
             )
 
-            val canvas = Canvas(bitmap)    <span>//將畫布綁定到剛剛生成的空白點陣圖</span>
-            view.draw(canvas)     <span>//強制該元件將自身及所有子元件的內容（包含背景、圖片、按鈕、疊加的線條等）繪製到傳入的 canvas 上。</span>
+            val canvas = Canvas(bitmap)    <span class="code-comment">//將畫布綁定到剛剛生成的空白點陣圖</span>
+            view.draw(canvas)     <span class="code-comment">//強制該元件將自身及所有子元件的內容（包含背景、圖片、按鈕、疊加的線條等）繪製到傳入的 canvas 上。</span>
 
             saveImageToGallery(bitmap)
         }catch (e: Exception){
@@ -163,23 +193,23 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 
-    fun saveImageToGallery(bitmap: Bitmap){    <span>//把圖片存進相簿</span>
+    fun saveImageToGallery(bitmap: Bitmap){    <span class="code-comment">//把圖片存進相簿</span>
         try {
-            val fileName = "drawing_${System.currentTimeMillis()}.png"    <span>//建立檔案名稱。</span>
+            val fileName = "drawing_${System.currentTimeMillis()}.png"    <span class="code-comment">//建立檔案名稱。</span>
 
-            val contentValues = ContentValues().apply {      <span>//儲存媒體檔案的元資料</span>
-                put(MediaStore.Images.Media.DISPLAY_NAME, fileName)    <span>//設定檔案在系統相簿中顯示的名稱。</span>
-                put(MediaStore.Images.Media.MIME_TYPE, "image/png")    <span>//設定檔案的 MIME 類型（標示為 PNG 圖片）</span>
-                put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)    <span>//設定儲存的相對路徑</span>
+            val contentValues = ContentValues().apply {      <span class="code-comment">//儲存媒體檔案的元資料</span>
+                put(MediaStore.Images.Media.DISPLAY_NAME, fileName)    <span class="code-comment">//設定檔案在系統相簿中顯示的名稱。</span>
+                put(MediaStore.Images.Media.MIME_TYPE, "image/png")    <span class="code-comment">//設定檔案的 MIME 類型（標示為 PNG 圖片）</span>
+                put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)    <span class="code-comment">//設定儲存的相對路徑</span>
             }
 
-            val uri = contentResolver.insert(     <span>//插入一筆新記錄並取得系統分配給該檔案的 Uri</span>
+            val uri = contentResolver.insert(     <span class="code-comment">//插入一筆新記錄並取得系統分配給該檔案的 Uri</span>
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 contentValues
             )
 
             uri?.let {
-                contentResolver.openOutputStream(it)?.use { stream -&gt;     <span>//開啟輸出位元組串流（用於寫入檔案資料）</span>
+                contentResolver.openOutputStream(it)?.use { stream -&gt;     <span class="code-comment">//開啟輸出位元組串流（用於寫入檔案資料）</span>
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
                 }
                 true
@@ -192,8 +222,19 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 }
-        </pre>
+        </code></pre>
     </div>
-<script src="js.js"></script>
+        </article>
+
+
+      </div>
+      <footer class="detail-footer">
+        <a class="button button--secondary" href="index.html">返回 World Skill 練習</a>
+      </footer>
+    </div>
+  </main>
+  <nav class="mobile-navigation" aria-label="手機主導覽" data-site-navigation="mobile"></nav>
+  <script src="../assets/js/site-navigation.js" defer></script>
+  <script src="../assets/js/accordion.js" defer></script>
 </body>
 </html>
