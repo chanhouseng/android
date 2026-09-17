@@ -3,6 +3,7 @@ import path from 'node:path';
 import { parseFragment } from 'parse5';
 import {
   HOMEWORK_ID_PATTERN,
+  HOMEWORK_PUBLISH_LIMITS,
   contentImagePath,
   isSafeContentImageFilename,
 } from '../shared/homework-preview-contract.mjs';
@@ -54,7 +55,8 @@ async function resolveExistingImage({ rootDirectory, id, filename }) {
   if (!homeworkDetails.isDirectory() || homeworkDetails.isSymbolicLink()
     || !imageRootDetails.isDirectory() || imageRootDetails.isSymbolicLink()
     || !directoryDetails.isDirectory() || directoryDetails.isSymbolicLink()
-    || !fileDetails.isFile() || fileDetails.isSymbolicLink()) {
+    || !fileDetails.isFile() || fileDetails.isSymbolicLink()
+    || fileDetails.size > HOMEWORK_PUBLISH_LIMITS.imageBytes) {
     throw new HomeworkContentImageError();
   }
   const [realDirectory, realImage] = await Promise.all([realpath(imageDirectory), realpath(imagePath)]);
@@ -84,7 +86,7 @@ export async function validateExistingHomeworkImageReferences({ rootDirectory, i
   return { ok: true, images };
 }
 
-function collectImageSourceLocations(node, id, imageBaseUrl, replacements) {
+function collectImageSourceLocations(node, id, imageBaseUrl, imageUrls, replacements) {
   if (node.tagName === 'img') {
     const source = (node.attrs ?? []).find(({ name }) => name === 'src')?.value;
     const prefix = `img/${id}/`;
@@ -92,23 +94,25 @@ function collectImageSourceLocations(node, id, imageBaseUrl, replacements) {
     const location = node.sourceCodeLocation?.attrs?.src;
     if (isSafeContentImageFilename(filename) && source === contentImagePath(id, filename)
       && Number.isInteger(location?.startOffset) && Number.isInteger(location?.endOffset)) {
+      const replacementUrl = imageUrls ? imageUrls.get(filename) : `${imageBaseUrl}${encodeURIComponent(filename)}`;
+      if (typeof replacementUrl !== 'string') throw new HomeworkContentImageError();
       replacements.push({
         startOffset: location.startOffset,
         endOffset: location.endOffset,
-        attribute: `src="${imageBaseUrl}${encodeURIComponent(filename)}"`,
+        attribute: `src="${replacementUrl}"`,
       });
     }
   }
   for (const child of node.childNodes ?? []) {
-    collectImageSourceLocations(child, id, imageBaseUrl, replacements);
+    collectImageSourceLocations(child, id, imageBaseUrl, imageUrls, replacements);
   }
-  if (node.content) collectImageSourceLocations(node.content, id, imageBaseUrl, replacements);
+  if (node.content) collectImageSourceLocations(node.content, id, imageBaseUrl, imageUrls, replacements);
 }
 
-export function rewriteContentImageSources({ id, contentHtml, imageBaseUrl } = {}) {
+export function rewriteContentImageSources({ id, contentHtml, imageBaseUrl, imageUrls } = {}) {
   const fragment = parseFragment(contentHtml, { sourceCodeLocationInfo: true });
   const replacements = [];
-  collectImageSourceLocations(fragment, id, imageBaseUrl, replacements);
+  collectImageSourceLocations(fragment, id, imageBaseUrl, imageUrls, replacements);
   let rewritten = contentHtml;
   for (const replacement of replacements.sort((left, right) => right.startOffset - left.startOffset)) {
     rewritten = `${rewritten.slice(0, replacement.startOffset)}${replacement.attribute}${rewritten.slice(replacement.endOffset)}`;

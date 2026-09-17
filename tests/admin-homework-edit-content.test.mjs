@@ -237,6 +237,25 @@ test('existing image validation rejects an ancestor image-directory symlink', as
   assert.equal(result.ok, false);
 });
 
+test('content preview rejects an existing image replaced with an oversized file', async (t) => {
+  const rootDirectory = await contentTransactionRoot(t);
+  await writeFile(
+    path.join(rootDirectory, 'homework', 'img', 'module-f', 'screen-1.png'),
+    Buffer.alloc(5 * 1024 * 1024 + 1),
+  );
+  const { previewHomeworkContent } = await import('../admin/server/homework-content-editor.mjs');
+  await assert.rejects(
+    previewHomeworkContent({
+      rootDirectory,
+      id: 'module-f',
+      contentHtml: UPDATED_CONTENT,
+      assetBase: 'http://127.0.0.1:3000/private/assets/',
+    }),
+    (error) => error.status === 422 && error.code === 'validation_failed'
+      && error.fields.some(({ code }) => code === 'invalid_existing_image'),
+  );
+});
+
 test('preview rewriting changes only existing image source values and not stored HTML', async () => {
   const { rewriteContentImageSources } = await import('../admin/server/homework-content-images.mjs');
   const original = '<figure class="shot"><img alt="畫面" src="img/module-f/screen-1.png"><figcaption>保留</figcaption></figure>';
@@ -294,7 +313,7 @@ test('content loader distinguishes missing and legacy Homework without leaking p
   );
 });
 
-test('content preview reuses current metadata, safe HTML validation and protected image URLs', async (t) => {
+test('content preview reuses current metadata and embeds validated images for the opaque sandbox', async (t) => {
   const rootDirectory = await contentTransactionRoot(t);
   const { previewHomeworkContent } = await import('../admin/server/homework-content-editor.mjs');
   const result = await previewHomeworkContent({
@@ -308,7 +327,8 @@ test('content preview reuses current metadata, safe HTML validation and protecte
   assert.match(result.previewHtml, /<title>Module F｜Homework 預覽<\/title>/);
   assert.match(result.previewHtml, /<p>原簡介<\/p>/);
   assert.match(result.previewHtml, /script-src 'none'/);
-  assert.match(result.previewHtml, /src="http:\/\/127\.0\.0\.1:3000\/private\/api\/homeworks\/module-f\/images\/screen-1\.png"/);
+  assert.match(result.previewHtml, /src="data:image\/png;base64,c2NyZWVuLWltYWdlLWJ5dGVz"/);
+  assert.doesNotMatch(result.previewHtml, /src="http:\/\/127\.0\.0\.1:3000\/private\/api\/homeworks\/module-f\/images\//);
   assert.doesNotMatch(result.previewHtml, /<script\b/i);
   assert.equal(UPDATED_CONTENT.includes('/private/api/'), false);
 
@@ -476,6 +496,14 @@ function assertContentApiError(result, status, code) {
   assert.equal(result.json().error.code, code);
   assert.doesNotMatch(result.text, /admin-homework-content-transaction-|[A-Z]:\\|stack|injected/i);
 }
+
+test('admin CSP permits validated inline preview images in its sandboxed frame', async (t) => {
+  const api = await contentApiHarness(t);
+  const session = api.issueSession();
+  const result = await api.send('api/homeworks/module-f/content', { method: 'GET', session, requestOrigin: null, contentType: null });
+  assert.equal(result.response.status, 200);
+  assert.match(result.response.headers.get('content-security-policy'), /img-src 'self' data:/);
+});
 
 test('content GET requires a live Session and returns exact content without CSRF', async (t) => {
   const api = await contentApiHarness(t);

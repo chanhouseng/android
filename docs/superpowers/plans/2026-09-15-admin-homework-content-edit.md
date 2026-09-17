@@ -83,7 +83,7 @@ Test arrays, null, extra keys, uppercase／short revision, non-string HTML, and 
 
 **Interfaces:**
 - Consumes: `extractImageSources()`、`isSafeContentImageFilename()`、`contentImagePath()`、`resolveInside()`、`lstat()`、`realpath()`.
-- Produces: `validateExistingHomeworkImageReferences({rootDirectory,id,contentHtml}): Promise<{ok:true,images:Array}|{ok:false,errors:Array}>`、`rewriteContentImageSources({id,contentHtml,imageBaseUrl}): string`、`readHomeworkContentImage({rootDirectory,id,filename}): Promise<{bytes,mimeType}>`.
+- Produces: `validateExistingHomeworkImageReferences({rootDirectory,id,contentHtml}): Promise<{ok:true,images:Array}|{ok:false,errors:Array}>`、`rewriteContentImageSources({id,contentHtml,imageUrls}): string`、`readHomeworkContentImage({rootDirectory,id,filename}): Promise<{bytes,mimeType}>`.
 
 - [x] **Step 1: Write failing valid-image and cross-Homework tests**
 
@@ -141,7 +141,7 @@ Expected: valid existing files pass, every unsafe or absent reference fails, and
 
 **Interfaces:**
 - Consumes: `inspectHomeworkEditability()`、`readJson()`、`withFileLock()`、`writeTextAtomic()`、`validateHomeworkPreviewInput()`、`validateHtmlFragment()`、`validateContent()`、`buildContentIndexes({check:true})`、`renderHomeworkPage()`、Task 2 image functions.
-- Produces: `loadHomeworkContent({rootDirectory,id})`、`previewHomeworkContent({rootDirectory,id,contentHtml,assetBase,imageBaseUrl})`、`updateHomeworkContent({rootDirectory,id,contentHtml,revision,dependencies,logger})`、`HomeworkContentEditError`.
+- Produces: `loadHomeworkContent({rootDirectory,id})`、`previewHomeworkContent({rootDirectory,id,contentHtml,assetBase})`、`updateHomeworkContent({rootDirectory,id,contentHtml,revision,dependencies,logger})`、`HomeworkContentEditError`.
 
 - [x] **Step 1: Write failing content-load behavior**
 
@@ -158,7 +158,7 @@ Add separate 404 and 409 assertions for missing and renderer-incompatible pages.
 
 - [x] **Step 2: Write failing safe-preview behavior**
 
-Assert that a valid fragment produces a script-free `previewHtml` with preview CSP and protected rewritten image URL. Assert title and description come from the current manifest, not request data. Add 400 KiB, script, event handler, unsafe URL, missing image and cross-ID image cases with exact `validation_failed` field codes.
+Assert that a valid fragment produces a script-free `previewHtml` with preview CSP and validated image bytes embedded as a `data:` URL. Assert title and description come from the current manifest, not request data. Add 400 KiB, script, event handler, unsafe URL, missing image and cross-ID image cases with exact `validation_failed` field codes.
 
 - [x] **Step 3: Implement preview pipeline in the required order**
 
@@ -172,7 +172,7 @@ const images = fragment.ok && await validateExistingHomeworkImageReferences({
 });
 ```
 
-Only after all three checks pass, rewrite preview image URLs and call `renderHomeworkPage({ preview: true })`. Return field errors without paths.
+Only after all three checks pass, re-read validated ordinary image files within the existing size bound, rewrite preview image URLs to `data:` URLs, and call `renderHomeworkPage({ preview: true })`. The parent CSP must permit image `data:` URLs in the script-disabled sandbox iframe. Return field errors without paths.
 
 - [x] **Step 4: Write successful update test and verify RED**
 
@@ -247,7 +247,7 @@ node --test tests/admin-auth.test.mjs
 - Modify: `tests/admin-publish.test.mjs`
 
 **Interfaces:**
-- Consumes: list `editable` boolean、content GET／preview POST／PATCH contracts、existing Session and Blob preview helpers.
+- Consumes: list `editable` boolean、content GET／preview POST／PATCH contracts、existing Session handling and sandbox preview styles.
 - Produces: list action `編輯主要內容` and an isolated load/edit/preview/save/success dialog.
 
 - [x] **Step 1: Add failing semantic markup tests**
@@ -273,7 +273,7 @@ await contentPreview.dispatch('click');
 assert.equal(contentSave.disabled, false);
 ```
 
-Also cover UTF-8 byte count, 400 KiB boundary, preview Blob replacement/revocation, identical-content gating, and the fact that preview URL rewriting never changes textarea value.
+Also cover UTF-8 byte count, 400 KiB boundary, clearing/replacing iframe `srcdoc`, identical-content gating, and the fact that preview URL rewriting never changes textarea value.
 
 - [x] **Step 4: Add guarded request and failure tests**
 

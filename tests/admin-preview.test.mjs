@@ -557,12 +557,12 @@ test('admin assets avoid persistence, service workers, unsafe DOM insertion, and
   }
 });
 
-test('management CSP adds only the Blob frame permission needed by preview', async (t) => {
+test('management CSP permits Blob frames and validated data images for preview', async (t) => {
   const app = await previewHarness(t);
   const result = await app.send('/api/session');
   const policy = result.headers.get('content-security-policy');
-  assert.equal(policy, "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; object-src 'none'; frame-src blob:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'");
-  assert.doesNotMatch(policy, /unsafe-inline|unsafe-eval|data:|script:\s|(?:^|;)\s*\*(?:\s|;|$)/);
+  assert.equal(policy, "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; frame-src blob:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'");
+  assert.doesNotMatch(policy, /unsafe-inline|unsafe-eval|script:\s|(?:^|;)\s*\*(?:\s|;|$)/);
 });
 
 test('browser can load only the fixed shared preview contract module', async (t) => {

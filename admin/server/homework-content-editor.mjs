@@ -14,6 +14,7 @@ import { validateHtmlFragment } from './html-fragment-validator.mjs';
 import { inspectHomeworkEditability } from './homework-metadata-editor.mjs';
 import { renderHomeworkPage } from './homework-page-renderer.mjs';
 import {
+  readHomeworkContentImage,
   rewriteContentImageSources,
   validateExistingHomeworkImageReferences,
 } from './homework-content-images.mjs';
@@ -104,21 +105,28 @@ export async function previewHomeworkContent({
   id,
   contentHtml,
   assetBase,
-  imageBaseUrl,
 } = {}) {
   const locations = pathsFor(rootDirectory);
   try {
     return await withFileLock(locations.lockPath, async () => {
       const { item } = await loadEditableRecord({ ...locations, id });
-      const { fragment } = await validateContentInput({
+      const { fragment, images: imageValidation } = await validateContentInput({
         projectRoot: locations.projectRoot,
         item,
         contentHtml,
       });
+      const imageUrls = new Map(await Promise.all(imageValidation.images.map(async ({ filename }) => {
+        const { bytes, mimeType } = await readHomeworkContentImage({
+          rootDirectory: locations.projectRoot,
+          id: item.id,
+          filename,
+        });
+        return [filename, `data:${mimeType};base64,${bytes.toString('base64')}`];
+      })));
       const previewContent = rewriteContentImageSources({
         id: item.id,
         contentHtml: fragment.html,
-        imageBaseUrl,
+        imageUrls,
       });
       return {
         previewHtml: renderHomeworkPage({

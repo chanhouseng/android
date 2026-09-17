@@ -391,7 +391,6 @@ export function createAdminServer({
         id: route.id,
         contentHtml: body.contentHtml,
         assetBase: `${base}assets/`,
-        imageBaseUrl: `${base}api/homeworks/${route.id}/images/`,
       }));
     } else if (route.kind === 'homework-content-image') {
       if (!session) throw new RequestError(401, 'not_authenticated');

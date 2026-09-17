@@ -23,13 +23,13 @@
    - 在讀取 JSON 前依序驗證 Origin、有效 Session 與 CSRF。
    - body 只接受 `{ "contentHtml": "..." }`。
    - 伺服器以 manifest 最新標題和簡介組合完整 preview input，依序執行 `validateHomeworkPreviewInput()`、`validateHtmlFragment()`、現有圖片引用驗證及 `renderHomeworkPage()`。
-   - 回傳 sandbox iframe 使用的 `previewHtml`；只把預覽文件內的既有圖片 `src` 改寫為受保護圖片端點，textarea 原值保持不變。
+   - 回傳 sandbox iframe 使用的 `previewHtml`；伺服器在驗證既有圖片後，把預覽文件中的 `src` 改寫為該圖片 bytes 的 `data:` URL，textarea 原值保持不變。管理頁 CSP 只額外允許 `img-src data:`；script 仍禁止。
 3. `PATCH <ADMIN_PATH>/api/homeworks/:id/content`
    - 在讀取 JSON 前依序驗證 Origin、有效 Session 與 CSRF。
    - body 必須恰好是 `{ "contentHtml": "...", "revision": "..." }`。
    - 成功回傳新的 `revision` 與可信任公開網址。
 4. `GET <ADMIN_PATH>/api/homeworks/:id/images/:filename`
-   - 只供安全預覽載入既有內容圖片，需要有效 Session，不需要 CSRF。
+   - 供已登入管理者讀取既有內容圖片，需要有效 Session，不需要 CSRF；隔離預覽不依賴 iframe 傳送 Session cookie。
    - 僅接受既有安全圖片檔名規則，且只回傳目前 Homework 的圖片。
 
 動態路由只接受未編碼的既有 Homework ID／圖片檔名格式；查詢、fragment、額外斜線、反斜線、編碼別名及路徑穿越一律拒絕。錯誤沿用統一 JSON 格式：`400 invalid_request`、`401 not_authenticated`、`403 invalid_origin`／`invalid_csrf`、`404 homework_not_found`、`409 homework_not_editable`／`content_changed`、`415 unsupported_media_type`、`422 validation_failed`、`500 internal_error`。不回傳實體路徑、stack trace 或底層錯誤。
