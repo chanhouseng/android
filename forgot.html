@@ -345,6 +345,24 @@ findViewById&lt;TextView&gt;(R.id.textView17).isSelected = true    <span class="
         loadAlert(skils, Ki, keyNew)      <span class="code-comment">//按鍵值、skills Map, 第幾個值去loadAlert</span></code></pre>
           </div>
         </article>
+        <article class="card accordion-item" data-accordion-item data-title="substring的使用">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-13" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-13" data-accordion-trigger>日曆</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-13" role="region" aria-labelledby="forgot-trigger-13"
+            data-accordion-panel>
+            <pre
+              class="code-block"><code>val calendarView: CalendarView = findViewById(R.id.calendarView)
+        calendarView.minDate = System.currentTimeMillis()     <span>//設定最小日期</span>
+        val calendar = Calendar.getInstance()     <span>//可以理解為日期的暫存器</span>
+        calendar.add(Calendar.YEAR, 1)
+        calendarView.maxDate = calendar.timeInMillis
+        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+            Toast.makeText(this, "${year}-${month+1}-${dayOfMonth}", Toast.LENGTH_SHORT).show()
+        }</code></pre>
+          </div>
+        </article>
       </div>
 
       <div class="state state--empty accordion-empty" data-accordion-empty hidden>
