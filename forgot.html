@@ -363,6 +363,177 @@ findViewById&lt;TextView&gt;(R.id.textView17).isSelected = true    <span class="
         }</code></pre>
           </div>
         </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="substring的使用">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-13" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-13" data-accordion-trigger>驗證碼功能</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-13" role="region" aria-labelledby="forgot-trigger-13"
+            data-accordion-panel>
+            <pre
+              class="code-block"><code>
+                <span>//檢查他的x與view.x的差值</span>
+                imageView2.setOnLongClickListener {
+            val drag = ClipData.newPlainText("drag_data", "data")
+            val dragShadowBuilder = View.DragShadowBuilder(it)
+            it.startDragAndDrop(drag, dragShadowBuilder, it, 0)
+            it.visibility = View.INVISIBLE
+            true
+        }
+        var isGood = false
+        frameLayout.setOnDragListener { it, event ->
+            when(event.action){
+                DragEvent.ACTION_DRAG_STARTED -> true
+                DragEvent.ACTION_DRAG_EXITED -> true
+                DragEvent.ACTION_DROP -> {
+                    val x = event.x
+                    val y = event.y
+                    var deltaX = view.x - x
+                    var deltaY = view.y - y
+                    println(view.y.toString()+"123132123")
+                    println(y.toString()+"asdasdasd")
+                    if(deltaX in (-40f..40f) && deltaY in (-38f..-18f)){
+                        isGood = true
+                        val myView = ImageView(this)
+                        myView.setImageResource(R.drawable._2026_09_21_002105)
+                        frameLayout.addView(myView)
+                        myView.layoutParams = FrameLayout.LayoutParams((30*resources.displayMetrics.density).toInt(), (30*resources.displayMetrics.density).toInt())
+                        myView.x = x - 33f
+                        myView.y = y - 33f
+                        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+                        Thread.sleep(200)
+                        val intent = Intent(this, MainActivity2::class.java)
+                        startActivity(intent)
+
+                    }
+                    else{
+                        Toast.makeText(this, "please do it again", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                DragEvent.ACTION_DRAG_ENDED -> {
+                    var v = event.localState as ImageView
+                    if(isGood){
+                        v.visibility = View.INVISIBLE
+                    }
+                    else{
+                        v.visibility = View.VISIBLE
+                    }
+
+                }
+            }
+            true
+        }
+      
+      
+      ------------------------------------------------------------------------------------------
+    &lt;TextView
+    android:id="@+id/textView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textStyle="bold"
+    android:textSize="40dp"
+    android:text="我不是機械人" /&gt;
+
+&lt;FrameLayout
+    android:layout_width="150dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginLeft="90dp"
+    android:id="@+id/frameLayout"
+    android:layout_height="100dp"&gt;
+
+    &lt;ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:scaleType="centerCrop"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/_2026_09_21_002055" /&gt;
+    &lt;View
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:translationX="92dp"
+        android:id="@+id/view"
+        android:alpha="0"
+        android:translationY="40dp"
+        android:background="#fff"/&gt;
+&lt;/FrameLayout&gt;
+
+&lt;ImageView
+    android:id="@+id/imageView2"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:layout_marginTop="10dp"
+    android:scaleType="centerCrop"
+    app:srcCompat="@drawable/_2026_09_21_002105" /&gt;</code></pre>
+          </div>
+        </article>
+
+        <article class="card accordion-item" data-accordion-item data-title="substring的使用">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-13" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-13" data-accordion-trigger>驗證碼最新</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-13" role="region" aria-labelledby="forgot-trigger-13"
+            data-accordion-panel>
+            <pre
+              class="code-block"><code>val piece = findViewById&lt;ImageView&gt;(R.id.puzzlePiece)
+
+        var downX = 0f
+        var oldX = 0f
+
+        piece.setOnTouchListener { v, e ->
+
+            val parent = v.parent as View
+            val maxX = parent.width - v.width
+            val targetX = maxX * 0.65f
+
+            when (e.action) {
+
+                MotionEvent.ACTION_DOWN -> {
+                    downX = e.rawX
+                    oldX = v.translationX
+                }
+
+                MotionEvent.ACTION_MOVE -> {
+                    v.translationX =
+                        (oldX + e.rawX - downX)
+                            .coerceIn(0f, maxX.toFloat())
+                }
+
+                MotionEvent.ACTION_UP -> {
+
+                    if (kotlin.math.abs(v.translationX - targetX) &lt; 20) {
+
+                        v.animate()
+                            .translationX(targetX)
+                            .start()
+
+                        Toast.makeText(
+                            this,
+                            "驗證成功",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    } else {
+
+                        v.animate()
+                            .translationX(0f)
+                            .start()
+
+                        Toast.makeText(
+                            this,
+                            "驗證失敗",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+
+            true
+        }</code></pre>
+          </div>
+        </article>
       </div>
 
       <div class="state state--empty accordion-empty" data-accordion-empty hidden>
