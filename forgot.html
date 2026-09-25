@@ -534,6 +534,78 @@ findViewById&lt;TextView&gt;(R.id.textView17).isSelected = true    <span class="
         }</code></pre>
           </div>
         </article>
+        <article class="card accordion-item" data-accordion-item data-title="substring的使用">
+          <h2>
+            <button class="accordion-trigger" id="forgot-trigger-13" type="button" aria-expanded="true"
+              aria-controls="forgot-panel-13" data-accordion-trigger>測試所有內容</button>
+          </h2>
+          <div class="accordion-panel" id="forgot-panel-13" role="region" aria-labelledby="forgot-trigger-13"
+            data-accordion-panel>
+            <pre
+              class="code-block"><code>fun startTest(){
+    val context = ApplicationProvider.getApplicationContext&lt;Context&gt;()
+    val intent = context.packageManager.getLaunchIntentForPackage(PACKAGE_NAME)
+
+    val scon = ActivityScenario.launch(MainActivity::class.java)    <span>//開機</span>
+    scon.onActivity { activity -&gt;
+        activity.findViewById&lt;SeekBar&gt;(R.id.seekBar).progress = 40    <span>//可以直接揾acitivty的內容再更改，但fragment不行</span>
+    }
+    Thread.sleep(1000)
+    scon.onActivity { activity -&gt;
+        activity.findViewById&lt;SeekBar&gt;(R.id.seekBar).progress = 80
+    }
+    Thread.sleep(1000)
+    val seekBar = device.findObject(By.res(PACKAGE_NAME, "seekBar"))     <span>//可以手動滑動</span>
+    val bounds = seekBar.visibleBounds
+    val left = bounds.left
+    val right = bounds.right
+    val width = right-left
+    var startX = left + (width * 0.8).toInt()
+    var endX = left + (width * 0.4).toInt()
+    var y = bounds.centerY()
+    device.drag(startX,y, endX, y , 50)
+    Thread.sleep(1000)
+    startX = left+ (width * .4).toInt()
+    endX = left
+    device.drag(startX,y, endX, y , 50)
+    Thread.sleep(1000)
+    val button = device.findObject(By.res(PACKAGE_NAME, "button"))
+    button.click()
+    Thread.sleep(1000)
+    val button2 = device.findObject(UiSelector().className("android.widget.Button").instance(0))
+    button2.click()
+    Thread.sleep(1000)
+    val scro2 = device.findObject(By.res(PACKAGE_NAME, "scrollView2"))
+    scro2.scroll(Direction.RIGHT, 1f, 100)
+    Thread.sleep(1000)
+
+    val scro1 = device.findObject(By.res(PACKAGE_NAME, "scrollView1"))    <span>//以scrollView id去scroll</span>
+    scro1.scroll(Direction.DOWN, 1f, 100)
+    Thread.sleep(1000)
+
+    val button3 = device.findObject(By.res(PACKAGE_NAME, "button3"))
+    button3.click()
+    Thread.sleep(1000)
+
+    scon.onActivity { activity -&gt;
+        val fragment = activity.supportFragmentManager.findFragmentById(R.id.frameLayout)    <span>//fragment要攞返個fragment的內容</span>
+        val seek2 = fragment?.requireView()?.findViewById&lt;SeekBar&gt;(R.id.seekBar2)
+        seek2?.progress = 30
+    }
+    Thread.sleep(1000)
+
+    val seek2 = device.findObject(By.res(PACKAGE_NAME, "seekBar2"))   <span>//因為係以屏幕顯示來攞，所以没有限制fragment</span>
+    val bounds2 = seek2.visibleBounds
+    val left2 = bounds2.left
+    val right2 = bounds2.right
+    val width2 = right2-left2
+    val startX2 = left + (width2 * 0.3).toInt()
+    val endX2 = left + (width2 * 0.8).toInt()
+    var y2 = bounds2.centerY()
+    device.drag(startX2,y2, endX2, y2, 50 )
+    Thread.sleep(3000)
+}</code></pre>
+          </div>
       </div>
 
       <div class="state state--empty accordion-empty" data-accordion-empty hidden>
